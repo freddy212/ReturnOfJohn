@@ -1,13 +1,14 @@
-package com.mygdx.game
+package com.mygdx.game.GameObjects
 
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch
 import com.badlogic.gdx.graphics.g2d.Sprite
-import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.math.Polygon
+import com.badlogic.gdx.math.Vector2
+import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.TerrainManager.Companion.collitionPolygons
 
-class House(x:Float,y:Float,width:Float,height:Float) {
+class House(x:Float,y:Float,width:Float,height:Float): GameObject(Vector2(x,y), Vector2(width,height)) {
     private val sprite = Sprite(Texture("House.png"))
     private val DoorS = Sprite(Texture("Door.png"))
     val housePolygon = Polygon()
@@ -26,8 +27,7 @@ class House(x:Float,y:Float,width:Float,height:Float) {
                                 DoorS.x, DoorS.y)
         collitionPolygons.add(housePolygon)
     }
-    fun render(batch: PolygonSpriteBatch){
-        sprite.draw(batch)
-        DoorS.draw(batch)
-    }
+
+    override val spritesToRender: List<Sprite>
+        get() = listOf(sprite,DoorS)
 }

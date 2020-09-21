@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.math.Polygon
 import com.badlogic.gdx.math.Vector3
 
-class ROJInputAdapter(private val camera : OrthographicCamera) : InputAdapter(){
+class ROJInputAdapter(private val camera : OrthographicCamera, val player: Player) : InputAdapter(){
 
      override fun keyDown(keycode: Int): Boolean {
          handleInput(keycode)
@@ -21,11 +21,17 @@ class ROJInputAdapter(private val camera : OrthographicCamera) : InputAdapter(){
             println("x is :   ${vec3.x} y is : ${vec3.y}")
         }
 
-        if(Gdx.input.isButtonPressed(Input.Buttons.RIGHT)){
-            println("right mouse click!")
+        /*if(Gdx.input.isButtonPressed(Input.Buttons.RIGHT)){
+            println("hello")
+            val direction = getUnitVectorTowardsPoint(Vector2(Gdx.input.x.toFloat(),Gdx.input.y.toFloat()),
+                    Vector2(player.sprite.x,player.sprite.y)).scl(player.speed)
+            player.move(direction)*/
+
+
+            /*  println("right mouse click!")
             TerrainManager.addTerrain(Polygon(entrancePoly.vertices))
             gateOpened = true
-        }
+        }*/
 
         return super.touchDown(screenX, screenY, pointer, button)
     }
