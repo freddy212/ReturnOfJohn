@@ -7,7 +7,7 @@ import com.mygdx.game.AbstractClasses.MoveableEntity
 
 class Player : MoveableEntity(){
     override val sprite =  Sprite(Texture("man.png"))
-    override var speed = 5f
+    override var speed = 15f
     var direction = Vector2(0f,0f)
     init {
         val scale = 0.3f

@@ -5,23 +5,15 @@ import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch
 import com.badlogic.gdx.graphics.g2d.Sprite
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.AbstractClasses.GameObject
+import kotlin.math.floor
 
-class Location(floor: Texture, size: Vector2, Position: Vector2): GameObject(Position,size){
-    val locationSprite  = Sprite(floor)
+class Location(val floor: Texture, size: Vector2, Position: Vector2): GameObject(Position,size){
     var locationName = ""
-    private val GameObjects = mutableListOf<GameObject>()
     val gameObjects: List<GameObject>
-    get() = GameObjects.toList()
-    init{
-        locationSprite.setSize(size.x,size.y)
-        locationSprite.setPosition(Position.x,Position.y)
-    }
+      get() = ChildrenGameObjects.toList()
 
-    override val spritesToRender: List<Sprite>
-        get() = listOf(locationSprite)
-    fun addGameObject(gameObject: GameObject){
-        GameObjects.add(gameObject)
-    }
+    override val spriteToRender: Sprite
+        get() = InitSprite(floor)
     override fun render(batch: PolygonSpriteBatch){
         super.render(batch)
         gameObjects.forEach{x -> x.render(batch)}
