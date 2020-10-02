@@ -17,34 +17,25 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer
 import com.badlogic.gdx.math.Polygon
 import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.math.Vector2
-import com.mygdx.game.GameObjects.House
+import com.mygdx.game.GameObjects.InventoryObjects.GenericInventoryObject
 
-val entrancePoly = RectanglePolygon(Vector2(650f,500f), 100f,100f)
-var gateOpened = false
+val camera: OrthographicCamera = OrthographicCamera()
 class MainGame : ApplicationAdapter() {
     lateinit internal var batch: PolygonSpriteBatch
     lateinit var firstpoly: RectanglePolygon
     lateinit var secondpoly: RectanglePolygon
     lateinit var thirdpoly: RectanglePolygon
-    lateinit var orgPoly: Polygon
     lateinit var shapeRenderer: ShapeRenderer
     lateinit var player: Player
-    lateinit var gateSprite: Sprite
     lateinit var testRect: Rectangle
-    lateinit var gateSpriteOpen: Sprite
-    lateinit var mainPolygonRegion: PolygonRegion
-    val camera: OrthographicCamera = OrthographicCamera()
-    lateinit var tiledMap: TiledMap;
-    lateinit var tiledMapRenderer:TiledMapRenderer;
+    lateinit var inventory: Inventory
+    lateinit var inputAdapter: ROJInputAdapter
 
     override fun create() {
 
         Gdx.gl.glClearColor(7/255f,82/255f,82/255f,1f)
-        val floor = Texture("MainB.jpg")
         //Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT or GL20.GL_DEPTH_BUFFER_BIT)
         batch = PolygonSpriteBatch()
-        tiledMap = TmxMapLoader().load("TileMap.tmx")
-        tiledMapRenderer = OrthogonalTiledMapRenderer(tiledMap,batch)
         firstpoly = RectanglePolygon(Vector2(50f,0f),500f,500f)
         firstpoly.vertices = firstpoly.vertices.map { x -> x * 1f }.toFloatArray()
         secondpoly = RectanglePolygon(
@@ -53,20 +44,20 @@ class MainGame : ApplicationAdapter() {
                 100f
         )
         testRect = Rectangle(0f,0f,200f,200f)
-        floor.setFilter(Texture.TextureFilter.Linear,Texture.TextureFilter.Linear)
-        floor.setWrap(Texture.TextureWrap.Repeat,Texture.TextureWrap.MirroredRepeat)
         thirdpoly = RectanglePolygon(Vector2(1000f,800f),100f,100f)
-        mainPolygonRegion = PolygonRegion(TextureRegion(floor),firstpoly.vertices, shortArrayOf(0,1,2,0,2,3) )
-        addTerrains(floor)
+        addTerrains()
         shapeRenderer = ShapeRenderer()
         player = Player()
-        initInputAdapter()
         camera.setToOrtho(
                 false,
                 Gdx.graphics.width.toFloat(),
                 Gdx.graphics.height.toFloat())
         player.sprite.setPosition(Center.x, Center.y)
         font.data.setScale(2f)
+        inventory = Inventory()
+        inventory.addInventoryObject(GenericInventoryObject("WorldLeaf"))
+        inputAdapter = ROJInputAdapter(camera,player)
+        initInputAdapter()
     }
 
     override fun render() {
@@ -74,14 +65,11 @@ class MainGame : ApplicationAdapter() {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT)
         batch.projectionMatrix = camera.combined
         batch.begin()
-        //batch.draw(mainPolygonRegion,0f,0f)
-        TerrainManager.drawTerrain(batch)
-        batch.end()
-        tiledMapRenderer.render();
-        batch.begin()
+        LocationManager.drawTerrain(batch)
         player.render(batch)
+        LocationManager.drawObjects(batch)
         batch.end()
-        InputHandler.handleInput(player,camera)
+        inputAdapter.handleInput(player)
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line)
         //TerrainManager.drawTerrain(shapeRenderer, Vector2(camera.position.x, camera.position.y))
         //shapeRenderer.rect(10f + testRect.x,testRect.y,testRect.width,testRect.height)
@@ -90,13 +78,12 @@ class MainGame : ApplicationAdapter() {
         shapeRenderer.end()
         camera.position.set(player.sprite.x,player.sprite.y,0f)
         camera.update()
-        tiledMapRenderer.setView(camera);
     }
 
     override fun dispose() {
         batch.dispose()
     }
     fun initInputAdapter(){
-        Gdx.input.inputProcessor = ROJInputAdapter(camera,player)
+        Gdx.input.inputProcessor = inputAdapter
     }
 }

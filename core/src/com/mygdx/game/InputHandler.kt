@@ -10,7 +10,7 @@ import com.badlogic.gdx.math.Vector3
 class InputHandler {
     companion object {
         val ClickPosVector = Vector3(0f,0f,0f)
-        fun handleInput(player: Player, camera: Camera) {
+        fun handleInput(player: Player) {
             when {
                 Gdx.input.isKeyPressed(Input.Keys.W) -> {
                     player.move(Direction.UP)

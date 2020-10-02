@@ -22,7 +22,7 @@ abstract class MoveableEntity() {
                 sprite.boundingRectangle.width, sprite.boundingRectangle.height)
         for(point in getPolygonPoints(nextPolygonPos)){
             canMove = false
-            for(rectangle in TerrainManager.locationSprites.map { x -> x.spriteToRender.boundingRectangle }){
+            for(rectangle in LocationManager.locations.map { x -> x.sprite.boundingRectangle }){
                 if(rectangle.contains(point)){
                     canMove = true
                     break
@@ -33,8 +33,8 @@ abstract class MoveableEntity() {
             }
         }
         if(canMove) {
-            val Collitions = TerrainManager.collitionPolygons.filter { p -> intersectPolygonEdges(FloatArray(nextPolygonPos.vertices), FloatArray(p.first.vertices))}
-            handleCollitions(Collitions.map { x-> x.second },this, Vector2(nextPos.x,nextPos.y))
+            val collidingObjects: List<GameObject> = LocationManager.ActiveGameObjects.filter { p -> intersectPolygonEdges(FloatArray(nextPolygonPos.vertices), FloatArray(p.polygon.vertices))}
+            handleCollitions(collidingObjects,this, Vector2(nextPos.x,nextPos.y))
                 /*if (intersectingPolygons.isEmpty()) {
                 sprite.setPosition(nextPos.x, nextPos.y)
             }else{

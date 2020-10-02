@@ -7,5 +7,5 @@ import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.InitSprite
 
 class Door(Position: Vector2, size: Vector2): GameObject(Position,size) {
-    override val spriteToRender = InitSprite(Texture("Door.png"))
+    override val sprite = InitSprite(Texture("Door.png"))
 }

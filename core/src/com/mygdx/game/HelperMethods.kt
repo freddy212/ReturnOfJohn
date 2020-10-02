@@ -5,16 +5,17 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.g2d.Sprite
 import com.badlogic.gdx.math.Intersector.intersectSegments
 import com.badlogic.gdx.math.Polygon
-import com.badlogic.gdx.math.Vector
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.utils.FloatArray
 import com.mygdx.game.AbstractClasses.GameObject
+import com.mygdx.game.AbstractClasses.GenericGameObject
 import com.mygdx.game.AbstractClasses.MoveableEntity
 import com.mygdx.game.Collitions.NoCollition
-import com.mygdx.game.GameObjects.Abyss
-import com.mygdx.game.GameObjects.Bridge
-import com.mygdx.game.GameObjects.Fence
-import com.mygdx.game.GameObjects.House
+import com.mygdx.game.GameObjects.*
+import com.mygdx.game.GameObjects.GameEntities.getLocationFourObjects
+import com.mygdx.game.GameObjects.GameEntities.getLocationGraveyard
+import com.mygdx.game.GameObjects.GameEntities.getLocationOneObjects
+import com.mygdx.game.GameObjects.GameEntities.getWorldTreeObjects
 import com.mygdx.game.Interfaces.Collition
 
 
@@ -34,7 +35,7 @@ fun getUnitVectorTowardsPoint(position: Vector2, point: Vector2): Vector2{
 }
 
 enum class InsertDirection{LEFT,UP,RIGHT,DOWN,MIDDLE}
-fun GetPositionRelativeToLocation(location: Location, size: Vector2, direction: InsertDirection, directionOnPlane:InsertDirection): Vector2{
+fun GetPositionRelativeToLocation(location: LocationImpl, size: Vector2, direction: InsertDirection, directionOnPlane:InsertDirection): Vector2{
 
         val DirectionOnPlane = when(direction){
                 InsertDirection.LEFT, InsertDirection.RIGHT ->
@@ -94,53 +95,70 @@ fun intersectPolygonEdges(polygon1: FloatArray, polygon2: FloatArray): Boolean {
         return false
 }
 
-fun addTerrains(texture: Texture){
-        val location1 = addTerrain(texture,Vector2(1024f,1024f),Vector2(0f,0f))
-        location1.addGameObject(House(location1.middle.x,location1.middle.y, 150f, 200f))
-        val horizontalHallway = Vector2(1500f,500f)
+fun addTerrains(){
+        val location1 = LocationImpl(Vector2(1024f,1024f),Vector2(0f,0f), ::getLocationOneObjects)
+        addLocation(location1)
+        val horizontalHallway = Vector2(1500f,300f)
         val verticalHallway = Vector2(300f,800f)
-        val location2 = addTerrainRelative(location1,horizontalHallway,InsertDirection.LEFT,InsertDirection.UP,texture)
-        val location3 = addTerrainRelative(location1,verticalHallway,InsertDirection.UP,InsertDirection.MIDDLE,texture)
-        val location4 = addTerrainRelative(location1,horizontalHallway,InsertDirection.RIGHT,InsertDirection.MIDDLE,texture)
-        val bridge = Bridge(Vector2(location4.middle.x,location4.middle.y - 100f), Vector2(500f, 200f))
-        location4.addGameObject(bridge)
-        location4.addGameObject(Abyss(Vector2(location4.middle.x,location4.bottomleft.y), Vector2(bridge.bottomright.x - bridge.bottomleft.x
-                ,bridge.bottomleft.y - location4.bottomleft.y)))
-        val location5 = addTerrainRelative(location1,verticalHallway,InsertDirection.DOWN,InsertDirection.MIDDLE,texture)
-        val locationSprite2 = addTerrainRelative(location2,verticalHallway,InsertDirection.UP,InsertDirection.MIDDLE,texture)
-
-        val graveyardLoc = addTerrainRelative(location4,Vector2(1000f,2000f),InsertDirection.RIGHT,InsertDirection.MIDDLE,texture)
-        val fence = Fence(Vector2(location4.bottomright.x,location4.bottomright.y - 100f), Vector2(graveyardLoc.middle.x - location4.bottomright.x,100f))
-        graveyardLoc.addGameObject(fence)
-
-        val leftDown = addTerrainRelative(location1, Vector2(horizontalHallway.x / 2,horizontalHallway.y / 2),
-                                          InsertDirection.LEFT,InsertDirection.DOWN,texture)
+        val location2 = addLocationRelative(location1,horizontalHallway,InsertDirection.LEFT,InsertDirection.MIDDLE)
+        val location3 = addLocationRelative(location1,verticalHallway,InsertDirection.UP,InsertDirection.MIDDLE)
+        val location4 = addLocationRelative(location1,horizontalHallway,InsertDirection.RIGHT,InsertDirection.MIDDLE, ::getLocationFourObjects)
+        val location5 = addLocationRelative(location1,verticalHallway,InsertDirection.DOWN,InsertDirection.MIDDLE)
+        val location6 = addLocationRelative(location2,verticalHallway,InsertDirection.UP,InsertDirection.MIDDLE)
+        val graveyardLoc = addLocationRelative(location4,Vector2(1000f,2000f),InsertDirection.RIGHT,InsertDirection.MIDDLE, ::getLocationGraveyard)
+        val worldTreeLoc = addLocationRelative(location6, Vector2(1000f,1000f), InsertDirection.UP, InsertDirection.MIDDLE, ::getWorldTreeObjects)
+        addGameObjectsToWorld()
+        
 }
 
-fun addTerrain(texture: Texture, size: Vector2, position: Vector2 ): Location{
-        val location = Location(texture,size,position)
-        TerrainManager.addTerrain(location)
+fun addLocation(location: LocationImpl): LocationImpl{
+        LocationManager.addLocation(location)
         return location
 }
-fun addTerrainRelative(location: Location,size:Vector2,direction:InsertDirection,directionOnPlane:InsertDirection,texture: Texture):Location{
+fun addLocationRelative(location: LocationImpl, size:Vector2, direction:InsertDirection,
+                        directionOnPlane:InsertDirection,objectCreationMethod: () -> List<GameObject> = {listOf()}):LocationImpl{
         val pos1 = GetPositionRelativeToLocation(location,size,direction,directionOnPlane)
-        return addTerrain(texture,size,pos1)
+        val newLocation = LocationImpl(size,pos1, objectCreationMethod)
+        location.addAdjacentLocation(newLocation)
+        newLocation.addAdjacentLocation(location)
+        return addLocation(newLocation)
 }
 
-fun handleCollitions(intersectingPolygons: List<Collition>, moveableEntity: MoveableEntity, collitionPosition: Vector2) {
-        var nocollition = NoCollition()
-        if(intersectingPolygons.isEmpty()){
-                NoCollition().collitionHappened(moveableEntity,collitionPosition)
+fun addGameObjectsToWorld(){
+        LocationManager.locations.forEach{x -> x.initLocation()}
+}
+
+fun handleCollitions(intersectingObjects: List<GameObject>, moveableEntity: MoveableEntity, collitionPosition: Vector2) {
+        if(intersectingObjects.isEmpty()){
+                moveableEntity.sprite.setPosition(collitionPosition.x,collitionPosition.y)
         }
         else{
-                intersectingPolygons.forEach{x -> x.collitionHappened(moveableEntity,collitionPosition)}
+                intersectingObjects.forEach{x -> x.collition.collitionHappened(moveableEntity,collitionPosition,x)}
         }
 }
 
-fun GameObject.InitSprite(Texture: Texture): Sprite{
-        val sprite = Sprite(Texture)
+fun GameObject.InitSprite(texture: Texture): Sprite{
+        val sprite = Sprite(texture)
         sprite.setSize(size.x,size.y)
         sprite.setOriginCenter()
         sprite.setPosition(Position.x,Position.y)
         return sprite
+}
+
+inline fun ConstructObjects(gameobjectFactory: (Position: Vector2, Size: Vector2) -> GameObject , fromx: Int, incrementx: Int, endx: Int,
+                     fromy: Int, incrementy: Int, endy: Int): List<GameObject>{
+        val objects = mutableListOf<GameObject>()
+        for(y in fromy downTo endy step incrementy){
+                for(x in fromx..endx step incrementx){
+                        val gameObject = gameobjectFactory(Vector2(x.toFloat(),y.toFloat()), Vector2(128f,128f))
+                        objects.add(gameObject)
+                }
+        }
+        return objects.toList()
+}
+
+fun constructTombs(location: LocationImpl): List<GameObject>{
+        val tombFactory = {Position : Vector2, Size: Vector2 -> Tomb(Position,Size) }
+        return ConstructObjects(tombFactory,location.bottomleft.x.toInt() + 20, 200, location.bottomright.x.toInt(),
+                location.bottomleft.y.toInt() + 400, 201, location.bottomleft.y.toInt())
 }
