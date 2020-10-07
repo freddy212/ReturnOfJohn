@@ -1,15 +1,25 @@
 package com.mygdx.game
 
-import com.mygdx.game.AbstractClasses.InventoryObject
+import com.mygdx.game.Enums.Item
 
 class Inventory {
-    private val inventoryList: MutableList<InventoryObject> = mutableListOf()
-    val InventoryList : List<InventoryObject>
-        get() = inventoryList.toList()
-    fun addInventoryObject(inventoryObject: InventoryObject){
-        inventoryList.add(inventoryObject)
+    private val InventoryList: MutableMap<Item,Int> = mutableMapOf()
+    val inventoryList : Map<Item,Int>
+        get() = InventoryList.toMap()
+    fun addItem(item: Item, amount: Int = 1){
+        InventoryList.putIfAbsent(item, 0)
+        InventoryList[item] = getItemCount(item) + amount
     }
-    fun getObject(objectName: String): InventoryObject{
-        return InventoryList.find { x -> x.name == objectName }!!
+    fun getItemCount(item: Item): Int{
+        return InventoryList.getValue(item)
+    }
+    fun useItems(item: Item, amountToUse: Int): Boolean{
+
+        val itemCount = getItemCount(item)
+        if(amountToUse <= itemCount){
+            InventoryList[item] = amountToUse - itemCount
+            return true
+        }
+        return false
     }
 }

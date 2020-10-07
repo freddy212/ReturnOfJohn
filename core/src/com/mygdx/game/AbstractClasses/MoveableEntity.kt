@@ -1,15 +1,18 @@
 package com.mygdx.game.AbstractClasses
 
 import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch
-import com.badlogic.gdx.graphics.g2d.Sprite
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.utils.FloatArray
 import com.mygdx.game.*
+import com.mygdx.game.Enums.Direction
+import com.mygdx.game.Interfaces.Renderable
+import com.mygdx.game.Managers.LocationManager
 
-abstract class MoveableEntity() {
-    abstract val sprite:Sprite
+abstract class MoveableEntity: Renderable {
     abstract var speed : Float
+    abstract var direction: Direction
     fun move(d: Direction){
+        direction = d
         var canMove = false
         val currentPos = Vector2(sprite.x, sprite.y)
         val nextPos = when(d){
@@ -42,9 +45,10 @@ abstract class MoveableEntity() {
             }*/
         }
     }
-
-
-    fun render(batch: PolygonSpriteBatch){
+    fun frameAction(){
+        RenderGraph.addToSceneGraph(this)
+    }
+    override fun render(batch: PolygonSpriteBatch){
         sprite.draw(batch)
     }
 }

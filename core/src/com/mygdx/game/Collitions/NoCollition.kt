@@ -7,6 +7,6 @@ import com.mygdx.game.Interfaces.Collition
 
 object NoCollition: Collition {
     override fun collitionHappened(entity: MoveableEntity, collitionPosition: Vector2, collidedObject:GameObject) {
-        entity.sprite.setPosition(collitionPosition.x,collitionPosition.y)
+
     }
 }

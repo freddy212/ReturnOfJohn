@@ -4,22 +4,17 @@ import com.badlogic.gdx.ApplicationAdapter
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.GL20
 import com.badlogic.gdx.graphics.OrthographicCamera
-import com.badlogic.gdx.graphics.Texture
-import com.badlogic.gdx.graphics.g2d.PolygonRegion
 import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch
-import com.badlogic.gdx.graphics.g2d.Sprite
-import com.badlogic.gdx.graphics.g2d.TextureRegion
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
-import com.badlogic.gdx.maps.tiled.TiledMap
-import com.badlogic.gdx.maps.tiled.TiledMapRenderer
-import com.badlogic.gdx.maps.tiled.TmxMapLoader
-import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer
-import com.badlogic.gdx.math.Polygon
 import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.math.Vector2
-import com.mygdx.game.GameObjects.InventoryObjects.GenericInventoryObject
+import com.mygdx.game.Areas.DungeonArea.initializeDungeon
+import com.mygdx.game.Areas.MainArea.initializeMainArea
+import com.mygdx.game.Managers.LocationManager
 
 val camera: OrthographicCamera = OrthographicCamera()
+
+lateinit var playerSize: Vector2
 class MainGame : ApplicationAdapter() {
     lateinit internal var batch: PolygonSpriteBatch
     lateinit var firstpoly: RectanglePolygon
@@ -45,9 +40,11 @@ class MainGame : ApplicationAdapter() {
         )
         testRect = Rectangle(0f,0f,200f,200f)
         thirdpoly = RectanglePolygon(Vector2(1000f,800f),100f,100f)
-        addTerrains()
-        shapeRenderer = ShapeRenderer()
         player = Player()
+        playerSize = Vector2(player.sprite.width,player.sprite.height)
+        initializeMainArea()
+        initializeDungeon()
+        shapeRenderer = ShapeRenderer()
         camera.setToOrtho(
                 false,
                 Gdx.graphics.width.toFloat(),
@@ -55,7 +52,6 @@ class MainGame : ApplicationAdapter() {
         player.sprite.setPosition(Center.x, Center.y)
         font.data.setScale(2f)
         inventory = Inventory()
-        inventory.addInventoryObject(GenericInventoryObject("WorldLeaf"))
         inputAdapter = ROJInputAdapter(camera,player)
         initInputAdapter()
     }
@@ -64,20 +60,25 @@ class MainGame : ApplicationAdapter() {
 
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT)
         batch.projectionMatrix = camera.combined
+        LocationManager.frameAction()
+        player.frameAction()
         batch.begin()
-        LocationManager.drawTerrain(batch)
-        player.render(batch)
-        LocationManager.drawObjects(batch)
+        RenderGraph.render(batch)
         batch.end()
         inputAdapter.handleInput(player)
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line)
-        //TerrainManager.drawTerrain(shapeRenderer, Vector2(camera.position.x, camera.position.y))
-        //shapeRenderer.rect(10f + testRect.x,testRect.y,testRect.width,testRect.height)
         val rectangle = player.sprite.boundingRectangle
         shapeRenderer.rect(rectangle.x + (Center.x - player.sprite.x), rectangle.y + (Center.y - player.sprite.y),rectangle.width,rectangle.height)
         shapeRenderer.end()
+        drawrects()
         camera.position.set(player.sprite.x,player.sprite.y,0f)
         camera.update()
+    }
+
+    fun drawrects(){
+        val gameObjects = LocationManager.ActiveGameObjects
+        gameObjects.forEach{x -> drawPolygonShape(x.polygon,player,shapeRenderer)}
+
     }
 
     override fun dispose() {

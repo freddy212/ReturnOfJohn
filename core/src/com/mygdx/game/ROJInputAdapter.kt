@@ -3,10 +3,9 @@ package com.mygdx.game
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.Input
 import com.badlogic.gdx.InputAdapter
-import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.graphics.OrthographicCamera
-import com.badlogic.gdx.math.Polygon
 import com.badlogic.gdx.math.Vector3
+import com.mygdx.game.Enums.Direction
 
 class ROJInputAdapter(private val camera : OrthographicCamera, val player: Player) : InputAdapter(){
 

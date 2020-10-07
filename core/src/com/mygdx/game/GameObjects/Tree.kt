@@ -1,18 +1,18 @@
 package com.mygdx.game.GameObjects
 
 import com.badlogic.gdx.graphics.Texture
-import com.badlogic.gdx.graphics.g2d.Sprite
 import com.badlogic.gdx.math.Polygon
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.Collitions.IllegalMoveCollition
-import com.mygdx.game.InitSprite
-import com.mygdx.game.LocationManager
-class Tree(Position: Vector2, size: Vector2) : GameObject(Position, size) {
-    val texture = Texture("World Tree.png")
-    override val sprite = InitSprite(texture)
+import com.mygdx.game.Enums.Layer
+import com.mygdx.game.middleOfObject
+
+class Tree(Position: Vector2, size: Vector2) : GameObject(middleOfObject(Position, size), size) {
+    override val texture = Texture("World Tree.png")
     override val polygon = Polygon()
     override val collition = IllegalMoveCollition
+    override val layer = Layer.AIR
 
     init {
         polygon.vertices = floatArrayOf(x + (21f * 2),  y + ((128 - 118).toFloat() * 2),
