@@ -10,6 +10,7 @@ import com.mygdx.game.Enums.Layer
 class LocationImpl(size: Vector2, Position: Vector2, private val objectCreationMethod: () -> List<GameObject> = {listOf()},
                    texture: Texture = Texture("MainB.jpg")): GameObject(Position,size),Location{
     private val AdjacentLocations = mutableListOf<LocationImpl>()
+    private val ChildrenGameObjects: MutableList<GameObject> = mutableListOf()
     val adjacentLocations : List<LocationImpl>
         get() = AdjacentLocations.toList()
     val gameObjects: List<GameObject>
@@ -28,9 +29,12 @@ class LocationImpl(size: Vector2, Position: Vector2, private val objectCreationM
         font.draw(batch,this.locationName, this.topleft.x + 50f, this.topleft.y - 50f)
     }
 
-    /*fun renderObjects(batch: PolygonSpriteBatch){
-        gameObjects.forEach{x -> x.render(batch)}
-    }*/
+    fun addGameObject(gameObject: GameObject){
+        ChildrenGameObjects.add(gameObject)
+    }
+    fun removeGameObject(gameObject: GameObject){
+        ChildrenGameObjects.remove(gameObject)
+    }
     override fun initLocation() {
         val objects = objectCreationMethod()
         objects.forEach{x -> addGameObject(x)}

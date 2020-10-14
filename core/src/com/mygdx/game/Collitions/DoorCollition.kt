@@ -1,33 +1,43 @@
 package com.mygdx.game.Collitions
 
 import com.badlogic.gdx.math.Vector2
+import com.mygdx.game.*
 import com.mygdx.game.AbstractClasses.GameObject
-import com.mygdx.game.AbstractClasses.MoveableEntity
-import com.mygdx.game.Center
 import com.mygdx.game.Enums.Direction
 import com.mygdx.game.GameObjects.Door
 import com.mygdx.game.Interfaces.AreaIdentifier
 import com.mygdx.game.Interfaces.Collition
 import com.mygdx.game.Managers.AreaManager
 import com.mygdx.game.Managers.LocationManager
-import com.mygdx.game.Player
-import com.mygdx.game.camera
-import com.mygdx.game.counter
+import com.mygdx.game.GameObjects.MoveableEntities.Player
+import com.mygdx.game.Interfaces.MoveableEntity
 
-class DoorCollition(val areaId: AreaIdentifier, val playerPosAfter: Vector2): Collition {
+class DoorCollition(val areaId: AreaIdentifier, val connection: DoorConnection,
+                    val triggerDirection: Direction): Collition{
+
+    override var canMoveAfterCollition = true
     override fun collitionHappened(entity: MoveableEntity, collitionPosition: Vector2, collidedObject: GameObject) {
-        val door = collidedObject as Door
-        if(entity is Player)
+        println("triggered!")
+        canMoveAfterCollition = true
+        if(entity is Player && collidedObject is Door)
         {
-            if(entity.direction == Direction.UP){
-                counter++
-                println("Doorcolltion is finally achieved" + counter)
+            if(entity.direction == triggerDirection){
+                val playerPosAfter = getPlayerPos(connection,triggerDirection)
                 if(areaId != AreaIdentifier.NOTIMPLEMENTED){
-                    entity.sprite.setPosition(playerPosAfter.x, playerPosAfter.y)
+                    val playerPosMiddle = Vector2(playerPosAfter.x - playerSize.x / 2, playerPosAfter.y)
+                    entity.setPosition(playerPosMiddle)
                     camera.position.set(playerPosAfter.x,playerPosAfter.y,0f)
                     LocationManager.activeArea = AreaManager.getArea(areaId)
+                    canMoveAfterCollition = false
                 }
             }
+        }
+    }
+    fun getPlayerPos(connection: DoorConnection,triggerDirection: Direction): Vector2{
+        return when(triggerDirection){
+            Direction.UP -> connection.secondEntrance
+            Direction.DOWN-> Vector2(connection.firstEntrance.x,connection.firstEntrance.y - playerSize.y)
+            else -> Vector2(0f,0f)
         }
     }
 }

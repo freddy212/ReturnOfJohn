@@ -6,9 +6,10 @@ import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.Collitions.IllegalMoveCollition
 import com.mygdx.game.Enums.Layer
+import com.mygdx.game.LocationImpl
 import com.mygdx.game.middleOfObject
 
-class Tree(Position: Vector2, size: Vector2) : GameObject(middleOfObject(Position, size), size) {
+class Tree(Position: Vector2, size: Vector2,location: LocationImpl) : GameObject(middleOfObject(Position, size), size,location) {
     override val texture = Texture("World Tree.png")
     override val polygon = Polygon()
     override val collition = IllegalMoveCollition

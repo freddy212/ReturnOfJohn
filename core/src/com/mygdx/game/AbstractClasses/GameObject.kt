@@ -5,14 +5,15 @@ import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch
 import com.badlogic.gdx.graphics.g2d.Sprite
 import com.badlogic.gdx.math.Polygon
 import com.badlogic.gdx.math.Vector2
-import com.mygdx.game.Collitions.NoCollition
-import com.mygdx.game.GameObjects.House
+import com.mygdx.game.Collitions.CanMoveCollition
 import com.mygdx.game.InitSprite
 import com.mygdx.game.Interfaces.Collition
 import com.mygdx.game.Interfaces.Renderable
+import com.mygdx.game.LocationImpl
 import com.mygdx.game.RectanglePolygon
+import com.mygdx.game.RenderGraph.Companion.addToSceneGraph
 
-abstract class GameObject (val Position: Vector2, val size: Vector2): Renderable {
+abstract class GameObject (val Position: Vector2, val size: Vector2,val location: LocationImpl?): Renderable {
     val topleft = Vector2(Position.x,Position.y + size.y)
     val topright = Vector2(Position.x + size.x,Position.y + size.y)
     val bottomright =  Vector2(Position.x + size.x,Position.y)
@@ -28,20 +29,12 @@ abstract class GameObject (val Position: Vector2, val size: Vector2): Renderable
     abstract val texture: Texture
     override val sprite: Sprite by lazy { InitSprite(texture)}
     open val polygon: Polygon by lazy { RectanglePolygon(sprite.boundingRectangle) }
-    open val collition: Collition = NoCollition
-
-    protected val ChildrenGameObjects = mutableListOf<GameObject>()
+    open val collition: Collition = CanMoveCollition
     override fun render(batch: PolygonSpriteBatch){
         sprite.draw(batch)
     }
-    fun addGameObject(gameObject: GameObject){
-        ChildrenGameObjects.add(gameObject)
-        val gameObjectsToAdd = gameObject.ChildrenGameObjects
-        gameObjectsToAdd.forEach{ x -> addGameObject(x)}
+    open fun frameTask(){
+        addToSceneGraph(this)
     }
-    fun removeGameObject(gameObject: GameObject){
-        ChildrenGameObjects.remove(gameObject)
-        val gameObjectsToRemove = gameObject.ChildrenGameObjects
-        gameObjectsToRemove.forEach{x -> removeGameObject(x)}
-    }
+    constructor(Position: Vector2, size: Vector2): this(Position,size,null)
 }

@@ -11,7 +11,7 @@ class RenderGraph {
             RenderList.add(renderable)
         }
         fun render(batch: PolygonSpriteBatch){
-            RenderList.sortBy { it.layer }
+            RenderList.sortBy {it.layer}
             RenderList.forEach{it.render(batch)}
             RenderList.clear()
         }

@@ -6,14 +6,16 @@ import com.badlogic.gdx.graphics.GL20
 import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
+import com.badlogic.gdx.math.Polygon
 import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.Areas.DungeonArea.initializeDungeon
 import com.mygdx.game.Areas.MainArea.initializeMainArea
 import com.mygdx.game.Managers.LocationManager
+import com.mygdx.game.GameObjects.MoveableEntities.Player
 
 val camera: OrthographicCamera = OrthographicCamera()
-
+val player = Player(Vector2(0f, 0f), Vector2(32f,64f))
 lateinit var playerSize: Vector2
 class MainGame : ApplicationAdapter() {
     lateinit internal var batch: PolygonSpriteBatch
@@ -21,14 +23,13 @@ class MainGame : ApplicationAdapter() {
     lateinit var secondpoly: RectanglePolygon
     lateinit var thirdpoly: RectanglePolygon
     lateinit var shapeRenderer: ShapeRenderer
-    lateinit var player: Player
     lateinit var testRect: Rectangle
     lateinit var inventory: Inventory
     lateinit var inputAdapter: ROJInputAdapter
 
     override fun create() {
 
-        Gdx.gl.glClearColor(7/255f,82/255f,82/255f,1f)
+        Gdx.gl.glClearColor(0f,0f,0f,0f)
         //Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT or GL20.GL_DEPTH_BUFFER_BIT)
         batch = PolygonSpriteBatch()
         firstpoly = RectanglePolygon(Vector2(50f,0f),500f,500f)
@@ -40,7 +41,6 @@ class MainGame : ApplicationAdapter() {
         )
         testRect = Rectangle(0f,0f,200f,200f)
         thirdpoly = RectanglePolygon(Vector2(1000f,800f),100f,100f)
-        player = Player()
         playerSize = Vector2(player.sprite.width,player.sprite.height)
         initializeMainArea()
         initializeDungeon()
@@ -49,7 +49,7 @@ class MainGame : ApplicationAdapter() {
                 false,
                 Gdx.graphics.width.toFloat(),
                 Gdx.graphics.height.toFloat())
-        player.sprite.setPosition(Center.x, Center.y)
+        player.setPosition(Vector2(Center.x, Center.y))
         font.data.setScale(2f)
         inventory = Inventory()
         inputAdapter = ROJInputAdapter(camera,player)
@@ -61,14 +61,13 @@ class MainGame : ApplicationAdapter() {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT)
         batch.projectionMatrix = camera.combined
         LocationManager.frameAction()
-        player.frameAction()
+       // player.frameAction()
         batch.begin()
         RenderGraph.render(batch)
         batch.end()
         inputAdapter.handleInput(player)
+        LocationManager.ActiveMoveableEntities.forEach{ x -> x.frameTask()}
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line)
-        val rectangle = player.sprite.boundingRectangle
-        shapeRenderer.rect(rectangle.x + (Center.x - player.sprite.x), rectangle.y + (Center.y - player.sprite.y),rectangle.width,rectangle.height)
         shapeRenderer.end()
         drawrects()
         camera.position.set(player.sprite.x,player.sprite.y,0f)
@@ -77,8 +76,8 @@ class MainGame : ApplicationAdapter() {
 
     fun drawrects(){
         val gameObjects = LocationManager.ActiveGameObjects
-        gameObjects.forEach{x -> drawPolygonShape(x.polygon,player,shapeRenderer)}
 
+        gameObjects.forEach{x -> drawPolygonShape(x.polygon,player,shapeRenderer)}
     }
 
     override fun dispose() {

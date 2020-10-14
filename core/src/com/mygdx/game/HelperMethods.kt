@@ -8,7 +8,6 @@ import com.badlogic.gdx.math.Polygon
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.utils.FloatArray
 import com.mygdx.game.AbstractClasses.*
-import com.mygdx.game.Collitions.IllegalMoveCollition
 import com.mygdx.game.GameObjects.*
 import com.mygdx.game.Interfaces.Area
 
@@ -22,6 +21,35 @@ fun getPolygonPoints(polygon: Polygon): List<Vector2>{
         val yValues = floatArray.filterIndexed{index, y -> index % 2f == 1f}
         val listOfVectors = xValues.zip(yValues).map{ (xvalue,yvalue) -> Vector2(xvalue,yvalue) }
         return listOfVectors
+}
+
+fun intersectPolygonEdges(polygon1: FloatArray, polygon2: FloatArray): Boolean {
+        val last1 = polygon1.size - 2
+        val last2 = polygon2.size - 2
+        val p1 = polygon1.items
+        val p2 = polygon2.items
+        var x1 = p1[last1]
+        var y1 = p1[last1 + 1]
+        var i = 0
+        while (i <= last1) {
+                val x2 = p1[i]
+                val y2 = p1[i + 1]
+                var x3 = p2[last2]
+                var y3 = p2[last2 + 1]
+                var j = 0
+                while (j <= last2) {
+                        val x4 = p2[j]
+                        val y4 = p2[j + 1]
+                        if (intersectSegments(x1, y1, x2, y2, x3, y3, x4, y4, null)) return true
+                        x3 = x4
+                        y3 = y4
+                        j += 2
+                }
+                x1 = x2
+                y1 = y2
+                i += 2
+        }
+        return false
 }
 
 fun getUnitVectorTowardsPoint(position: Vector2, point: Vector2): Vector2{
@@ -60,35 +88,6 @@ fun GetPositionRelativeToLocation(location: LocationImpl, size: Vector2, directi
         }
 }
 
-fun intersectPolygonEdges(polygon1: FloatArray, polygon2: FloatArray): Boolean {
-        val last1 = polygon1.size - 2
-        val last2 = polygon2.size - 2
-        val p1 = polygon1.items
-        val p2 = polygon2.items
-        var x1 = p1[last1]
-        var y1 = p1[last1 + 1]
-        var i = 0
-        while (i <= last1) {
-                val x2 = p1[i]
-                val y2 = p1[i + 1]
-                var x3 = p2[last2]
-                var y3 = p2[last2 + 1]
-                var j = 0
-                while (j <= last2) {
-                        val x4 = p2[j]
-                        val y4 = p2[j + 1]
-                        if (intersectSegments(x1, y1, x2, y2, x3, y3, x4, y4, null)) return true
-                        x3 = x4
-                        y3 = y4
-                        j += 2
-                }
-                x1 = x2
-                y1 = y2
-                i += 2
-        }
-        return false
-}
-
 fun addLocation(location: LocationImpl,area: Area): LocationImpl{
         area.addLocation(location)
         return location
@@ -103,16 +102,14 @@ fun addLocationRelative(location: LocationImpl, size:Vector2, direction:InsertDi
         return addLocation(newLocation,area)
 }
 
-fun addGameObjectsToWorld(area: Area){
+fun addLocationsToArea(area: Area){
         area.locations.forEach{x -> x.initLocation()}
 }
 
-fun handleCollitions(intersectingObjects: List<GameObject>, moveableEntity: MoveableEntity, collitionPosition: Vector2) {
+fun handleCollitions(intersectingObjects: List<GameObject>, moveableObject: MoveableObject, collitionPosition: Vector2):Boolean {
         val collitions = intersectingObjects.map { x -> x.collition }
-        if(IllegalMoveCollition !in collitions){
-                moveableEntity.sprite.setPosition(collitionPosition.x,collitionPosition.y)
-                intersectingObjects.forEach { x -> x.collition.collitionHappened(moveableEntity, collitionPosition, x) }
-        }
+        intersectingObjects.forEach { x -> x.collition.collitionHappened(moveableObject, collitionPosition, x) }
+        return collitions.all { x -> x.canMoveAfterCollition }
 }
 
 fun GameObject.InitSprite(texture: Texture): Sprite{
@@ -137,14 +134,11 @@ inline fun ConstructObjects(gameobjectFactory: (Position: Vector2, Size: Vector2
                         objects.add(gameObject)
                 }
         }
-
-        //objects.map { x -> testRects.add(x.sprite.boundingRectangle) }
-
         return objects.toList()
 }
 
 fun constructTombs(location: LocationImpl): List<GameObject>{
-        val tombFactory = {Position : Vector2, Size: Vector2 -> Tomb(Position,Size) }
+        val tombFactory = {Position : Vector2, Size: Vector2 -> Tomb(Position,Size,location) }
         return ConstructObjects(tombFactory,location.bottomleft.x.toInt() + 20, 200, location.bottomright.x.toInt(),
                 location.bottomleft.y.toInt() + 400, 201, location.bottomleft.y.toInt())
 }
@@ -153,4 +147,10 @@ fun middleOfObject(Position: Vector2,size: Vector2): Vector2{
         return Vector2(Position.x - (size.x / 2), Position.y - (size.y / 2))
 }
 
-var counter = 0
+fun startPoint(polygon: Polygon): Vector2 {
+        return Vector2(polygon.vertices[0],polygon.vertices[1])
+}
+
+fun AddToObjectLocation(gameObject: GameObject){
+        gameObject.location!!.addGameObject(gameObject)
+}

@@ -6,7 +6,8 @@ import com.badlogic.gdx.backends.headless.HeadlessApplication
 
 import com.badlogic.gdx.backends.headless.HeadlessApplicationConfiguration
 import com.badlogic.gdx.graphics.GL20
-import com.mygdx.game.Player
+import com.badlogic.gdx.math.Vector2
+import com.mygdx.game.GameObjects.MoveableEntities.Player
 import org.junit.jupiter.api.BeforeEach
 import org.mockito.Mockito
 
@@ -24,6 +25,6 @@ open class TestGame :ApplicationAdapter() {
     }
     @BeforeEach
     fun init(){
-        player = Player()
+        player = Player(Vector2(0f,0f),Vector2(32f,64f))
     }
 }

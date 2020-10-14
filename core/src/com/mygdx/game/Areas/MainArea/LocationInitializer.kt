@@ -19,6 +19,6 @@ fun initializeMainArea(){
     val graveyardLoc = addLocationRelative(location4, Vector2(1000f,2000f), InsertDirection.RIGHT,area, InsertDirection.MIDDLE, ::getLocationGraveyard)
     val worldTreeLoc = addLocationRelative(location6, Vector2(1000f,1000f), InsertDirection.UP,area, InsertDirection.MIDDLE, ::getWorldTreeObjects)
     LocationManager.SetArea(area)
-    addGameObjectsToWorld(area)
+    addLocationsToArea(area)
 
 }

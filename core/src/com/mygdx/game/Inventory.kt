@@ -14,7 +14,6 @@ class Inventory {
         return InventoryList.getValue(item)
     }
     fun useItems(item: Item, amountToUse: Int): Boolean{
-
         val itemCount = getItemCount(item)
         if(amountToUse <= itemCount){
             InventoryList[item] = amountToUse - itemCount

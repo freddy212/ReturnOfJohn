@@ -8,7 +8,7 @@ import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.Collitions.IllegalMoveCollition
 import com.mygdx.game.Enums.Layer
 
-class Fence(Position: Vector2, size: Vector2): GameObject(Position,size) {
+class Fence(Position: Vector2, size: Vector2,location: com.mygdx.game.LocationImpl): GameObject(Position,size,location) {
     override val texture = Texture("Fence-Start.png")
     var textureRegion: TextureRegion
 
