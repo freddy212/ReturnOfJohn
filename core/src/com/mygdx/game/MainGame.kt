@@ -13,6 +13,7 @@ import com.mygdx.game.Areas.DungeonArea.initializeDungeon
 import com.mygdx.game.Areas.MainArea.initializeMainArea
 import com.mygdx.game.Managers.LocationManager
 import com.mygdx.game.GameObjects.MoveableEntities.Player
+import com.mygdx.game.Managers.MovableObjectManager
 
 val camera: OrthographicCamera = OrthographicCamera()
 val player = Player(Vector2(0f, 0f), Vector2(32f,64f))
@@ -66,7 +67,7 @@ class MainGame : ApplicationAdapter() {
         RenderGraph.render(batch)
         batch.end()
         inputAdapter.handleInput(player)
-        LocationManager.ActiveMoveableEntities.forEach{ x -> x.frameTask()}
+        MovableObjectManager.moveableObjects.forEach{ x -> x.frameTask()}
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line)
         shapeRenderer.end()
         drawrects()

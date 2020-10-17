@@ -2,6 +2,7 @@ package com.mygdx.game
 
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.BitmapFont
+import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch
 import com.badlogic.gdx.graphics.g2d.Sprite
 import com.badlogic.gdx.math.Intersector.intersectSegments
 import com.badlogic.gdx.math.Polygon
@@ -17,8 +18,8 @@ var font: BitmapFont = BitmapFont()
 
 fun getPolygonPoints(polygon: Polygon): List<Vector2>{
         val floatArray = polygon.transformedVertices
-        val xValues = floatArray.filterIndexed{index, x -> index.toFloat() % 2f == 0f}
-        val yValues = floatArray.filterIndexed{index, y -> index % 2f == 1f}
+        val xValues = floatArray.filterIndexed{ index, _ -> index.toFloat() % 2f == 0f}
+        val yValues = floatArray.filterIndexed{ index, _ -> index % 2f == 1f}
         val listOfVectors = xValues.zip(yValues).map{ (xvalue,yvalue) -> Vector2(xvalue,yvalue) }
         return listOfVectors
 }
@@ -153,4 +154,7 @@ fun startPoint(polygon: Polygon): Vector2 {
 
 fun AddToObjectLocation(gameObject: GameObject){
         gameObject.location!!.addGameObject(gameObject)
+}
+fun renderRepeatedTexture(batch: PolygonSpriteBatch,texture: Texture,position: Vector2,size: Vector2){
+        batch.draw(texture,position.x,position.y,0,0,size.x.toInt(),size.y.toInt())
 }

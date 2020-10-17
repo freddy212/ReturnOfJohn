@@ -14,7 +14,7 @@ import com.mygdx.game.Interfaces.AreaIdentifier
 class House(Position: Vector2, size: Vector2,location: LocationImpl): GameObject(middleOfObject(Position, size), size,location) {
     override val texture = Texture("House.png")
     override val polygon = Polygon()
-    lateinit var door: Door
+    var door: Door
     override val collition = IllegalMoveCollition
     override val layer = Layer.AIR
     init {

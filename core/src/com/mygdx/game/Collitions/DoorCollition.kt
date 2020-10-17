@@ -26,7 +26,6 @@ class DoorCollition(val areaId: AreaIdentifier, val connection: DoorConnection,
                 if(areaId != AreaIdentifier.NOTIMPLEMENTED){
                     val playerPosMiddle = Vector2(playerPosAfter.x - playerSize.x / 2, playerPosAfter.y)
                     entity.setPosition(playerPosMiddle)
-                    camera.position.set(playerPosAfter.x,playerPosAfter.y,0f)
                     LocationManager.activeArea = AreaManager.getArea(areaId)
                     canMoveAfterCollition = false
                 }

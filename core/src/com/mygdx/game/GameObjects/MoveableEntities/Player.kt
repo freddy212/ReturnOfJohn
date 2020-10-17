@@ -11,6 +11,7 @@ import com.mygdx.game.Enums.Item
 import com.mygdx.game.Enums.Layer
 import com.mygdx.game.Inventory
 import com.mygdx.game.LocationImpl
+import com.mygdx.game.camera
 
 class Player(Position: Vector2, size: Vector2) : MoveableObject(Position, size,null){
     override val texture = Texture("man.png")
@@ -23,4 +24,8 @@ class Player(Position: Vector2, size: Vector2) : MoveableObject(Position, size,n
         inventory.addItem(item)
     }
     override val collition = BoulderPlayerCollition()
+    override fun setPosition(position:Vector2){
+        super.setPosition(position)
+        camera.position.set(position.x,position.y,0f)
+    }
 }

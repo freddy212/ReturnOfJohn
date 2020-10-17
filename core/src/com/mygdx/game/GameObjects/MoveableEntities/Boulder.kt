@@ -25,9 +25,6 @@ class Boulder(directionGiven: Direction, Position: Vector2, size: Vector2,locati
     override fun frameTask() {
         super.frameTask()
         this.move(direction)
-        if(!(location!!.polygon.contains(Vector2(polygon.x + polygon.vertices[0],polygon.y + polygon.vertices[1])))){
-            location.removeGameObject(this)
-        }
     }
 
     override val collition = BoulderPlayerCollition()

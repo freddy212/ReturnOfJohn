@@ -13,7 +13,7 @@ abstract class MoveableObject(Position: Vector2, size: Vector2, location: Locati
     override fun move(d: Direction){
         movementStrategy.moveEntity(d,this)
     }
-    fun setPosition(position: Vector2){
+    open fun setPosition(position: Vector2){
         this.sprite.setPosition(position.x,position.y)
         polygon.setPosition(position.x - polygon.vertices[0],position.y - polygon.vertices[1])
     }

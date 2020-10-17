@@ -13,7 +13,7 @@ object ItemCollition: Collition by CanMoveCollition {
         if(entity is Player && collidedObject is ItemObject){
             val item = collidedObject.item
             entity.addToInventory(item)
-            LocationManager.currentLocation.removeGameObject(collidedObject)
+            LocationManager.oldLocation.removeGameObject(collidedObject)
        }
     }
 }

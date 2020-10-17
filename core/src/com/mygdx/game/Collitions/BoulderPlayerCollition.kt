@@ -6,6 +6,7 @@ import com.mygdx.game.GameObjects.MoveableEntities.Boulder
 import com.mygdx.game.GameObjects.MoveableEntities.Player
 import com.mygdx.game.Interfaces.Collition
 import com.mygdx.game.Interfaces.MoveableEntity
+import com.mygdx.game.Managers.MovableObjectManager
 
 class BoulderPlayerCollition: Collition {
     override fun collitionHappened(entity: MoveableEntity, collitionPosition: Vector2, collidedObject: GameObject) {
@@ -14,7 +15,7 @@ class BoulderPlayerCollition: Collition {
                 /*collidedObject.sprite.setPosition(50f,50f)
                 entity.location.removeGameObject(entity)*/
                 println("collition happened")
-                entity.location!!.removeGameObject(entity)
+                MovableObjectManager.removeMoveableObject(entity)
             }
         }
     }

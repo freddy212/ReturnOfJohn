@@ -9,14 +9,17 @@ import com.mygdx.game.Enums.Direction
 import com.mygdx.game.Enums.Layer
 import com.mygdx.game.GameObjects.MoveableEntities.Boulder
 import com.mygdx.game.LocationImpl
+import com.mygdx.game.Managers.MovableObjectManager
 import com.mygdx.game.Timer.Timer
+import com.mygdx.game.Trimer.DelayTimer
 
-class BoulderGenerator(Position: Vector2, size: Vector2, val direction: Direction,location: LocationImpl): GameObject(Position, size,location) {
+class BoulderGenerator(Position: Vector2, size: Vector2, val direction: Direction,location: LocationImpl,
+                       timeUntilFire: Float = 0f): GameObject(Position, size,location) {
     override val texture = Texture("BoulderGenerator.png")
     override val layer = Layer.ONGROUND
     override val collition = IllegalMoveCollition
     val BoulderTimer = Timer(3f)
-
+    val delayTimer = DelayTimer(timeUntilFire)
     init {
         sprite.rotation = when (direction) {
             Direction.RIGHT -> 0f
@@ -27,9 +30,16 @@ class BoulderGenerator(Position: Vector2, size: Vector2, val direction: Directio
     }
     override fun frameTask(){
         super.frameTask()
-        if(BoulderTimer.tryUseCooldown()){
-            generateBoulder()
+        if(delayTimer.getTimeHasPassed()){
+            if(BoulderTimer.tryUseCooldown()){
+                generateBoulder()
+            }
         }
+    }
+
+    override fun initOnLocation() {
+        super.initOnLocation()
+        delayTimer.resetDelay()
     }
     fun generateBoulder(){
         val Position = when(direction){
@@ -39,6 +49,6 @@ class BoulderGenerator(Position: Vector2, size: Vector2, val direction: Directio
             Direction.DOWN -> Vector2(this.middle.x, this.bottomleft.y - 96f)
         }
         val boulder = Boulder(direction,Position,Vector2( 64 * 2f,64f * 2),location)
-        AddToObjectLocation(boulder)
+        MovableObjectManager.addMoveableObject(boulder)
     }
 }

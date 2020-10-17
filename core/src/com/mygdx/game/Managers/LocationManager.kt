@@ -14,21 +14,32 @@ class LocationManager {
     companion object{
         lateinit var activeArea: Area
         lateinit var locations : List<LocationImpl>
-        lateinit var currentLocation: LocationImpl
+        var oldLocation: LocationImpl
         lateinit var ActiveLocations: List<LocationImpl>
-        lateinit var  ActiveGameObjects: List<GameObject>
-        lateinit var ActiveMoveableEntities: List<MoveableObject>
+        var  ActiveGameObjects: List<GameObject>
+        init {
+            oldLocation = LocationImpl(Vector2(0f,0f),Vector2(0f,0f))
+            ActiveGameObjects = listOf()
+        }
         fun frameAction(){
             LocationFrameTasks()
             ActiveGameObjects.forEach{it.frameTask()}
         }
         fun LocationFrameTasks(){
             locations = activeArea.locations
-            var findPlayerLocation = locations.find{ x -> x.sprite.boundingRectangle.contains(Vector2(camera.position.x, camera.position.y)) }
-            currentLocation = findPlayerLocation ?: throw PlayerOutOfBoundsException()
-            ActiveLocations = (listOf(currentLocation) + currentLocation.adjacentLocations)
-            ActiveGameObjects = ActiveLocations.flatMap { x -> x.gameObjects } + ActiveLocations + player
-            ActiveMoveableEntities =  ActiveGameObjects.filter {it is MoveableObject}.map { it as MoveableObject}
+            val findPlayerLocation = locations.find{ x -> x.sprite.boundingRectangle.contains(Vector2(camera.position.x, camera.position.y)) }
+
+            val newLocation = findPlayerLocation ?: throw PlayerOutOfBoundsException()
+            if(oldLocation != newLocation) {
+                oldLocation = newLocation
+                ActiveLocations = (listOf(oldLocation) + oldLocation.adjacentLocations)
+                val oldGameObjects = ActiveGameObjects
+                ActiveGameObjects = ActiveLocations.flatMap { x -> x.gameObjects } + ActiveLocations + player + MovableObjectManager.moveableObjects
+                val newGameObjects = ActiveGameObjects - oldGameObjects
+                newGameObjects.forEach{x -> x.initOnLocation()}
+            }
+            ActiveGameObjects = ActiveLocations.flatMap { x -> x.gameObjects } + ActiveLocations + player + MovableObjectManager.moveableObjects
+            //Can be optimized at some point
         }
         fun SetArea(area: Area){
             activeArea = area
