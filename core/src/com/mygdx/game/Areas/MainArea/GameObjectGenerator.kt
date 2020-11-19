@@ -8,6 +8,7 @@ import com.mygdx.game.AbstractClasses.GenericGameObject
 import com.mygdx.game.Enums.Direction
 import com.mygdx.game.Enums.Layer
 import com.mygdx.game.GameObjects.*
+import com.mygdx.game.GameObjects.MoveableEntities.NPC
 import com.mygdx.game.Interfaces.AreaIdentifier
 import com.mygdx.game.Managers.LocationManager
 import com.mygdx.game.Utils.door1PlayerPos
@@ -16,7 +17,8 @@ import com.mygdx.game.Utils.door2PlayerPos
 
 fun getLocationOneObjects(): List<GameObject>{
     val location = LocationManager.findLocation("location1",AreaIdentifier.MAINAREA)
-    return listOf((House(location.middle.x ,location.middle.y, 150f, 200f,location)))
+    val firstNPC = NPC(Vector2(0f,0f) + Vector2(100f,100f),Vector2(128f,128f),location)
+    return listOf((House(location.middle.x ,location.middle.y, 150f, 200f,location)),firstNPC)
 }
 
 fun getLocationGraveyard(): List<GameObject>{

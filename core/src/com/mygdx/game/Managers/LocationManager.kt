@@ -6,6 +6,8 @@ import com.mygdx.game.AbstractClasses.MoveableObject
 import com.mygdx.game.Exceptions.PlayerOutOfBoundsException
 import com.mygdx.game.Interfaces.Area
 import com.mygdx.game.Interfaces.AreaIdentifier
+import com.mygdx.game.Interfaces.ButtonPressedCollition
+import com.mygdx.game.Interfaces.MoveCollition
 import com.mygdx.game.LocationImpl
 import com.mygdx.game.camera
 import com.mygdx.game.player
@@ -16,6 +18,8 @@ class LocationManager {
         lateinit var locations : List<LocationImpl>
         var oldLocation: LocationImpl
         lateinit var ActiveLocations: List<LocationImpl>
+        lateinit var MoveCollitionGameObjects: List<GameObject>
+        lateinit var ButtonCollitionGameObjects: List<GameObject>
         var  ActiveGameObjects: List<GameObject>
         init {
             oldLocation = LocationImpl(Vector2(0f,0f),Vector2(0f,0f))
@@ -34,11 +38,13 @@ class LocationManager {
                 oldLocation = newLocation
                 ActiveLocations = (listOf(oldLocation) + oldLocation.adjacentLocations)
                 val oldGameObjects = ActiveGameObjects
-                ActiveGameObjects = ActiveLocations.flatMap { x -> x.gameObjects } + ActiveLocations + player + MovableObjectManager.moveableObjects
+                ActiveGameObjects = ActiveLocations.flatMap { x -> x.gameObjects } + ActiveLocations + player
+                MoveCollitionGameObjects = ActiveGameObjects.filter{x -> x.collition is MoveCollition}
+                ButtonCollitionGameObjects = ActiveGameObjects.filter { x -> x.collition is ButtonPressedCollition }
                 val newGameObjects = ActiveGameObjects - oldGameObjects
                 newGameObjects.forEach{x -> x.initOnLocation()}
             }
-            ActiveGameObjects = ActiveLocations.flatMap { x -> x.gameObjects } + ActiveLocations + player + MovableObjectManager.moveableObjects
+            ActiveGameObjects = ActiveLocations.flatMap { x -> x.gameObjects } + ActiveLocations + player
             //Can be optimized at some point
         }
         fun SetArea(area: Area){

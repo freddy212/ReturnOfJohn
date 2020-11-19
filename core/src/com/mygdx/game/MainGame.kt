@@ -6,14 +6,12 @@ import com.badlogic.gdx.graphics.GL20
 import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
-import com.badlogic.gdx.math.Polygon
 import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.Areas.DungeonArea.initializeDungeon
 import com.mygdx.game.Areas.MainArea.initializeMainArea
 import com.mygdx.game.Managers.LocationManager
 import com.mygdx.game.GameObjects.MoveableEntities.Player
-import com.mygdx.game.Managers.MovableObjectManager
 
 val camera: OrthographicCamera = OrthographicCamera()
 val player = Player(Vector2(0f, 0f), Vector2(32f,64f))
@@ -50,7 +48,7 @@ class MainGame : ApplicationAdapter() {
                 false,
                 Gdx.graphics.width.toFloat(),
                 Gdx.graphics.height.toFloat())
-        player.setPosition(Vector2(Center.x, Center.y))
+        player.setPosition(Vector2(Center.x, Center.y), player)
         font.data.setScale(2f)
         inventory = Inventory()
         inputAdapter = ROJInputAdapter(camera,player)
@@ -67,7 +65,6 @@ class MainGame : ApplicationAdapter() {
         RenderGraph.render(batch)
         batch.end()
         inputAdapter.handleInput(player)
-        MovableObjectManager.moveableObjects.forEach{ x -> x.frameTask()}
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line)
         shapeRenderer.end()
         drawrects()
@@ -77,7 +74,6 @@ class MainGame : ApplicationAdapter() {
 
     fun drawrects(){
         val gameObjects = LocationManager.ActiveGameObjects
-
         gameObjects.forEach{x -> drawPolygonShape(x.polygon,player,shapeRenderer)}
     }
 

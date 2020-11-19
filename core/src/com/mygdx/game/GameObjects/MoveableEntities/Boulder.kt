@@ -3,14 +3,11 @@ package com.mygdx.game.GameObjects.MoveableEntities
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.AbstractClasses.DefaultMovement
-import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.AbstractClasses.MoveableObject
 import com.mygdx.game.Collitions.BoulderPlayerCollition
 import com.mygdx.game.EdgeOfLocationStrategies.RemoveObject
 import com.mygdx.game.Enums.Direction
 import com.mygdx.game.Enums.Layer
-import com.mygdx.game.Interfaces.MoveableEntity
-import com.mygdx.game.Interfaces.MovementStrategy
 import com.mygdx.game.LocationImpl
 import com.mygdx.game.middleOfObject
 

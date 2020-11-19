@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.Collitions.CanMoveCollition
 import com.mygdx.game.InitSprite
 import com.mygdx.game.Interfaces.Collition
+import com.mygdx.game.Interfaces.MoveCollition
 import com.mygdx.game.Interfaces.Renderable
 import com.mygdx.game.LocationImpl
 import com.mygdx.game.RectanglePolygon

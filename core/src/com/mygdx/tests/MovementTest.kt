@@ -27,7 +27,7 @@ class MovementTest: TestGame() {
         player.move(Direction.DOWN)
         Assertions.assertEquals(originalPosition,playerPos)
 
-        player.setPosition(Vector2(location.bottomright.x - player.size.x,location.bottomright.y))
+        player.setPosition(Vector2(location.bottomright.x - player.size.x,location.bottomright.y),player)
         originalPosition = playerPos
         player.move(Direction.LEFT)
         Assertions.assertEquals(originalPosition - Vector2(player.speed,0f),playerPos)

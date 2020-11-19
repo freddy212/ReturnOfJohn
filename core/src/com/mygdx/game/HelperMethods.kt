@@ -9,8 +9,12 @@ import com.badlogic.gdx.math.Polygon
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.utils.FloatArray
 import com.mygdx.game.AbstractClasses.*
+import com.mygdx.game.Enums.Direction
 import com.mygdx.game.GameObjects.*
+import com.mygdx.game.GameObjects.MoveableEntities.Player
 import com.mygdx.game.Interfaces.Area
+import com.mygdx.game.Interfaces.DirectionalObject
+import com.mygdx.game.Interfaces.MoveCollition
 
 
 var font: BitmapFont = BitmapFont()
@@ -107,10 +111,10 @@ fun addLocationsToArea(area: Area){
         area.locations.forEach{x -> x.initLocation()}
 }
 
-fun handleCollitions(intersectingObjects: List<GameObject>, moveableObject: MoveableObject, collitionPosition: Vector2):Boolean {
+fun handleCollitions(intersectingObjects: List<GameObject>, moveableObject: MoveableObject):Boolean {
         val collitions = intersectingObjects.map { x -> x.collition }
-        intersectingObjects.forEach { x -> x.collition.collitionHappened(moveableObject, collitionPosition, x) }
-        return collitions.all { x -> x.canMoveAfterCollition }
+        intersectingObjects.forEach { x -> x.collition.collitionHappened(moveableObject, x) }
+        return collitions.filterIsInstance<MoveCollition>().all { x -> x.canMoveAfterCollition }
 }
 
 fun GameObject.InitSprite(texture: Texture): Sprite{
@@ -118,11 +122,6 @@ fun GameObject.InitSprite(texture: Texture): Sprite{
         sprite.setSize(size.x,size.y)
         sprite.setOriginCenter()
         sprite.setPosition(Position.x,Position.y)
-        /*if(this is Location){
-                sprite.setPosition(Position.x,Position.y)
-        }else{
-                sprite.setPosition(Position.x - (size.x / 2), Position.y - (size.y / 2))
-        }*/
         return sprite
 }
 
@@ -147,14 +146,30 @@ fun constructTombs(location: LocationImpl): List<GameObject>{
 fun middleOfObject(Position: Vector2,size: Vector2): Vector2{
         return Vector2(Position.x - (size.x / 2), Position.y - (size.y / 2))
 }
-
-fun startPoint(polygon: Polygon): Vector2 {
-        return Vector2(polygon.vertices[0],polygon.vertices[1])
-}
-
-fun AddToObjectLocation(gameObject: GameObject){
-        gameObject.location!!.addGameObject(gameObject)
-}
 fun renderRepeatedTexture(batch: PolygonSpriteBatch,texture: Texture,position: Vector2,size: Vector2){
         batch.draw(texture,position.x,position.y,0,0,size.x.toInt(),size.y.toInt())
+}
+
+fun checkOpposingDirections(player: Player , directionalObject: DirectionalObject): Boolean{
+        return when(player.direction){
+                Direction.UP -> directionalObject.direction == Direction.DOWN
+                Direction.LEFT -> directionalObject.direction == Direction.RIGHT
+                Direction.RIGHT -> directionalObject.direction == Direction.LEFT
+                Direction.DOWN -> directionalObject.direction == Direction.UP
+        }
+}
+
+var counter = 0
+
+fun GetNextStep(d: Direction, speed: Float): Vector2{
+        return when(d){
+                Direction.UP -> Vector2(0f,  speed)
+                Direction.LEFT -> Vector2(- speed, 0f)
+                Direction.RIGHT -> Vector2(speed, 0f)
+                Direction.DOWN -> Vector2(0f,-speed)
+        }
+}
+fun GetCollidingObjects(gameObjects: List<GameObject>,polygon: Polygon): List<GameObject>{
+        return gameObjects.filter { p -> intersectPolygonEdges(FloatArray(polygon.transformedVertices), FloatArray(p.polygon.transformedVertices))
+                || polygon.anyPointInPolygon(p.polygon)}
 }

@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.math.Vector3
 import com.mygdx.game.Enums.Direction
 import com.mygdx.game.GameObjects.MoveableEntities.Player
+import com.mygdx.game.Managers.LocationManager
 
 class ROJInputAdapter(private val camera : OrthographicCamera, val player: Player) : InputAdapter(){
 
@@ -17,8 +18,14 @@ class ROJInputAdapter(private val camera : OrthographicCamera, val player: Playe
             println("x is :   ${vec3.x} y is : ${vec3.y}")
             println("player polygonPosition is : " + transformedVertices[0] + " " + transformedVertices[1])
         }
-
         return super.touchDown(screenX, screenY, pointer, button)
+    }
+    override fun keyDown(keycode: Int): Boolean {
+        if(Gdx.input.isKeyPressed(Input.Keys.SPACE)){
+            val collidingSensors = GetCollidingObjects(LocationManager.ButtonCollitionGameObjects,player.polygon)
+            handleCollitions(collidingSensors,player)
+        }
+        return super.keyDown(keycode)
     }
     fun handleInput(player: Player) {
         when {

@@ -33,7 +33,7 @@ open class TestGame :ApplicationAdapter() {
     @BeforeEach
     fun init(){
         player = Player(Vector2(0f,0f),Vector2(32f,64f))
-        player.setPosition(Center)
+        player.setPosition(Center,player)
         val area = DefaultArea(AreaIdentifier.NOTIMPLEMENTED)
         location = LocationImpl(Vector2(1024f,1024f), Vector2(0f,0f))
         area.addLocation(location)

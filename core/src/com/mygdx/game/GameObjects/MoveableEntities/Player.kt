@@ -3,6 +3,7 @@ package com.mygdx.game.GameObjects.MoveableEntities
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.AbstractClasses.DefaultMovement
+import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.AbstractClasses.MoveableObject
 import com.mygdx.game.Collitions.BoulderPlayerCollition
 import com.mygdx.game.EdgeOfLocationStrategies.NoAction
@@ -11,6 +12,7 @@ import com.mygdx.game.Enums.Item
 import com.mygdx.game.Enums.Layer
 import com.mygdx.game.Inventory
 import com.mygdx.game.LocationImpl
+import com.mygdx.game.RenderGraph.Companion.addToSceneGraph
 import com.mygdx.game.camera
 
 class Player(Position: Vector2, size: Vector2) : MoveableObject(Position, size,null){
@@ -24,8 +26,12 @@ class Player(Position: Vector2, size: Vector2) : MoveableObject(Position, size,n
         inventory.addItem(item)
     }
     override val collition = BoulderPlayerCollition()
-    override fun setPosition(position:Vector2){
-        super.setPosition(position)
+    override fun setPosition(position:Vector2, gameObject: GameObject){
+        super.setPosition(position,gameObject)
         camera.position.set(position.x,position.y,0f)
+    }
+
+    override fun frameTask() {
+        addToSceneGraph(this)
     }
 }

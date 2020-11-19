@@ -6,17 +6,17 @@ import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.Enums.Direction
 import com.mygdx.game.GameObjects.Door
 import com.mygdx.game.Interfaces.AreaIdentifier
-import com.mygdx.game.Interfaces.Collition
+import com.mygdx.game.Interfaces.MoveCollition
 import com.mygdx.game.Managers.AreaManager
 import com.mygdx.game.Managers.LocationManager
 import com.mygdx.game.GameObjects.MoveableEntities.Player
-import com.mygdx.game.Interfaces.MoveableEntity
+import com.mygdx.game.Interfaces.DynamicEntity
 
 class DoorCollition(val areaId: AreaIdentifier, val connection: DoorConnection,
-                    val triggerDirection: Direction): Collition{
+                    val triggerDirection: Direction): MoveCollition{
 
     override var canMoveAfterCollition = true
-    override fun collitionHappened(entity: MoveableEntity, collitionPosition: Vector2, collidedObject: GameObject) {
+    override fun collitionHappened(entity: DynamicEntity, collidedObject: GameObject) {
         println("triggered!")
         canMoveAfterCollition = true
         if(entity is Player && collidedObject is Door)
@@ -24,8 +24,10 @@ class DoorCollition(val areaId: AreaIdentifier, val connection: DoorConnection,
             if(entity.direction == triggerDirection){
                 val playerPosAfter = getPlayerPos(connection,triggerDirection)
                 if(areaId != AreaIdentifier.NOTIMPLEMENTED){
+
                     val playerPosMiddle = Vector2(playerPosAfter.x - playerSize.x / 2, playerPosAfter.y)
-                    entity.setPosition(playerPosMiddle)
+                    entity.setPosition(playerPosMiddle,entity)
+
                     LocationManager.activeArea = AreaManager.getArea(areaId)
                     canMoveAfterCollition = false
                 }
