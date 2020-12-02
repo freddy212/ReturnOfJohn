@@ -2,7 +2,7 @@ package com.mygdx.game.Interfaces
 
 import com.mygdx.game.LocationImpl
 
-enum class AreaIdentifier{MAINAREA,DUNGEONAREA,NOTIMPLEMENTED}
+enum class AreaIdentifier{MAINAREA,DUNGEONAREA,NOTIMPLEMENTED,SHOP}
 
 interface Area {
     fun addLocation(location: LocationImpl)

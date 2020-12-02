@@ -20,8 +20,12 @@ class Door(Position: Vector2, size: Vector2, texture: Texture,areaId: AreaIdenti
 
     init {
         polygon.vertices = floatArrayOf(x + size.x / 4, y, x + size.x - size.x / 4, y, x + size.x - size.x / 4, y - 20f, x + size.x / 4, y - 20f)
-        if(triggerDirection == Direction.DOWN){
+        if(triggerDirection == Direction.DOWN || triggerDirection == Direction.LEFT){
             sprite.setAlpha(0.5f)
+            connection.secondEntrance = Vector2(this.middle.x,this.bottomleft.y)
+        }
+        else{
+            connection.firstEntrance = Vector2(this.middle.x,this.bottomleft.y)
         }
     }
 

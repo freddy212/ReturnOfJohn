@@ -14,6 +14,7 @@ import com.mygdx.game.GameObjects.MoveableEntities.Player
 import com.mygdx.game.Interfaces.AreaIdentifier
 import com.mygdx.game.LocationImpl
 import com.mygdx.game.Managers.LocationManager
+import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.BeforeEach
 import org.mockito.Mockito
 
@@ -26,6 +27,7 @@ open class TestGame :ApplicationAdapter() {
         config.renderInterval = 1f/60f
         HeadlessApplication(this,config)
         Gdx.gl = Mockito.mock(GL20::class.java)
+        init()
     }
     override fun create() {
 

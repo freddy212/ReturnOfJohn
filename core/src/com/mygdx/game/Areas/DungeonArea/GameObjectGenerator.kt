@@ -8,17 +8,13 @@ import com.mygdx.game.GameObjects.BoulderGenerator
 import com.mygdx.game.GameObjects.Door
 import com.mygdx.game.Interfaces.AreaIdentifier
 import com.mygdx.game.Managers.LocationManager
-import com.mygdx.game.Utils.door1PlayerPos
-import com.mygdx.game.Utils.door2PlayerPos
 import com.mygdx.game.doorMainAreaAndDungeonConnection
 import com.mygdx.game.playerSize
 
 fun getLocationOneCaveObjects(): List<GameObject>{
     val location1 = LocationManager.findLocation("location1",AreaIdentifier.DUNGEONAREA)
-    println(location1.bottomleft)
     val door = Door(Vector2(location1.middle.x -  (playerSize.x / 2),location1.bottomleft.y), Vector2(32f * 2, 64f * 2), Texture("CaveDoor.png"), AreaIdentifier.MAINAREA,
             doorMainAreaAndDungeonConnection,Direction.DOWN,location1)
-    doorMainAreaAndDungeonConnection.secondEntrance = Vector2(door.middle.x,door.bottomleft.y)
 
     return listOf(door)
 }

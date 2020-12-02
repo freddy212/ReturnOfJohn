@@ -4,21 +4,21 @@ import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.*
 import com.mygdx.game.AbstractClasses.GameObject
-import com.mygdx.game.AbstractClasses.GenericGameObject
+import com.mygdx.game.GameObjects.GenericGameObject
 import com.mygdx.game.Enums.Direction
 import com.mygdx.game.Enums.Layer
 import com.mygdx.game.GameObjects.*
 import com.mygdx.game.GameObjects.MoveableEntities.NPC
 import com.mygdx.game.Interfaces.AreaIdentifier
 import com.mygdx.game.Managers.LocationManager
-import com.mygdx.game.Utils.door1PlayerPos
-import com.mygdx.game.Utils.door2PlayerPos
-
+import com.mygdx.game.UI.Dialogue.GetFirstConversation
 
 fun getLocationOneObjects(): List<GameObject>{
     val location = LocationManager.findLocation("location1",AreaIdentifier.MAINAREA)
     val firstNPC = NPC(Vector2(0f,0f) + Vector2(100f,100f),Vector2(128f,128f),location)
-    return listOf((House(location.middle.x ,location.middle.y, 150f, 200f,location)),firstNPC)
+    val firstConversation = GetFirstConversation(firstNPC)
+    firstNPC.conversationsHandler.addConversation("first",firstConversation)
+    return listOf((House(location.middle.x ,location.middle.y, 150f, 200f,location, doorMainAreaAndShop,AreaIdentifier.SHOP)),firstNPC)
 }
 
 fun getLocationGraveyard(): List<GameObject>{
@@ -26,11 +26,9 @@ fun getLocationGraveyard(): List<GameObject>{
     val graveyardLoc = LocationManager.findLocation("location7",AreaIdentifier.MAINAREA)
     val fence = Fence(Vector2(location4.bottomright.x,location4.bottomright.y - 100f), Vector2(graveyardLoc.middle.x - 50f - location4.bottomright.x,100f),graveyardLoc)
     val fence2 = Fence(Vector2(graveyardLoc.middle.x + 20f,location4.bottomright.y - 100f), Vector2(graveyardLoc.bottomright.x - graveyardLoc.middle.x - 20f,100f),graveyardLoc)
-    val cave = GenericGameObject(Vector2(graveyardLoc.middle.x - 256f,graveyardLoc.topleft.y), Vector2(256f * 2,283f * 2), "Cave.png", Layer.ONGROUND,graveyardLoc)
+    val cave = GenericGameObject(Vector2(graveyardLoc.middle.x - 256f, graveyardLoc.topleft.y), Vector2(256f * 2, 283f * 2), "Cave.png", Layer.ONGROUND, graveyardLoc)
     val door = Door(Vector2(cave.middle.x - 64 / 2,cave.bottomleft.y), Vector2(32f * 2,64f * 2),Texture("CaveDoor.png"),AreaIdentifier.DUNGEONAREA,
             doorMainAreaAndDungeonConnection,Direction.UP,graveyardLoc)
-    doorMainAreaAndDungeonConnection.firstEntrance = Vector2(door.middle.x,door.bottomleft.y)
-    //doorToCaveEnd = door.playerPosAfter
     return constructTombs(graveyardLoc) + listOf(fence, fence2,cave,door)
 
 }

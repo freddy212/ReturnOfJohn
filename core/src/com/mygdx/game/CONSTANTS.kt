@@ -11,7 +11,7 @@ val Center = Vector2(Gdx.graphics.width.toFloat() / 2, Gdx.graphics.height.toFlo
 
 val cameraPos = {player: Player -> Vector2((Center.x - player.sprite.x), (Center.y - player.sprite.y))}
 
-fun drawPolygonShape(polygon: Polygon, player: Player, shapeRenderer: ShapeRenderer){
+fun drawPolygonShape(polygon: Polygon, shapeRenderer: ShapeRenderer){
     val Position = cameraPos(player)
     shapeRenderer.begin(ShapeRenderer.ShapeType.Line)
 

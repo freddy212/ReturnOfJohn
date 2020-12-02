@@ -10,8 +10,10 @@ import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.Areas.DungeonArea.initializeDungeon
 import com.mygdx.game.Areas.MainArea.initializeMainArea
+import com.mygdx.game.Areas.ShopArea.initializeShop
 import com.mygdx.game.Managers.LocationManager
 import com.mygdx.game.GameObjects.MoveableEntities.Player
+import com.mygdx.game.Managers.EventManager
 
 val camera: OrthographicCamera = OrthographicCamera()
 val player = Player(Vector2(0f, 0f), Vector2(32f,64f))
@@ -43,6 +45,7 @@ class MainGame : ApplicationAdapter() {
         playerSize = Vector2(player.sprite.width,player.sprite.height)
         initializeMainArea()
         initializeDungeon()
+        initializeShop()
         shapeRenderer = ShapeRenderer()
         camera.setToOrtho(
                 false,
@@ -68,13 +71,14 @@ class MainGame : ApplicationAdapter() {
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line)
         shapeRenderer.end()
         drawrects()
+        EventManager.executeEvents()
         camera.position.set(player.sprite.x,player.sprite.y,0f)
         camera.update()
     }
 
     fun drawrects(){
         val gameObjects = LocationManager.ActiveGameObjects
-        gameObjects.forEach{x -> drawPolygonShape(x.polygon,player,shapeRenderer)}
+        gameObjects.forEach{x -> drawPolygonShape(x.polygon,shapeRenderer)}
     }
 
     override fun dispose() {
