@@ -3,6 +3,7 @@ package com.mygdx.game.Areas.ShopArea
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.AbstractClasses.GameObject
+import com.mygdx.game.Collitions.DoorCollition
 import com.mygdx.game.Collitions.IllegalMoveCollition
 import com.mygdx.game.Collitions.WaterGunItemCollition
 import com.mygdx.game.Enums.Direction
@@ -18,8 +19,12 @@ import com.mygdx.game.playerSize
 
 fun getShopObjects(): List<GameObject>{
     val location1 = LocationManager.findLocation("location1", AreaIdentifier.SHOP)
-    val door = Door(Vector2(location1.middle.x -  (playerSize.x / 2),location1.bottomleft.y), Vector2(32f * 2, 64f * 2), Texture("CaveDoor.png"), AreaIdentifier.MAINAREA,
-            doorMainAreaAndShop, Direction.DOWN,location1)
+
+    val doorPosition = Vector2(location1.middle.x -  (playerSize.x / 2),location1.bottomleft.y)
+
+    val doorCollition = DoorCollition(doorPosition,AreaIdentifier.MAINAREA, doorMainAreaAndShop,Direction.DOWN)
+
+    val door = Door(doorPosition, Vector2(32f * 2, 64f), Texture("Door.png"), location1,Direction.DOWN,doorCollition)
     val size = Vector2(120f,60f)
     val position = location1.middle
     val itemTable = GenericGameObject(middleOfObject(position,size),size,"ItemTable.png",Layer.ONGROUND,location1,IllegalMoveCollition)

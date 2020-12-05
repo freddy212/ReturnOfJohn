@@ -111,9 +111,9 @@ fun addLocationsToArea(area: Area){
         area.locations.forEach{x -> x.initLocation()}
 }
 
-fun handleCollitions(intersectingObjects: List<GameObject>, moveableObject: MoveableObject):Boolean {
+fun handleCollitions(intersectingObjects: List<GameObject>, gameObject: GameObject):Boolean {
         val collitions = intersectingObjects.map { x -> x.collition }
-        intersectingObjects.forEach { x -> x.collition.collitionHappened(moveableObject, x) }
+        intersectingObjects.forEach { x -> x.collition.collitionHappened(gameObject, x) }
         return collitions.filterIsInstance<MoveCollition>().all { x -> x.canMoveAfterCollition }
 }
 

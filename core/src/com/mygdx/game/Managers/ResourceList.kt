@@ -1,6 +1,6 @@
 package com.mygdx.game.Managers
 
-class GenericList<T> {
+class ResourceList<T> {
     private val mutableList: MutableList<T> = mutableListOf()
     val List : List<T>
         get() = mutableList.toList()

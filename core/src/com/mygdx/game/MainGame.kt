@@ -4,6 +4,7 @@ import com.badlogic.gdx.ApplicationAdapter
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.GL20
 import com.badlogic.gdx.graphics.OrthographicCamera
+import com.badlogic.gdx.graphics.g2d.ParticleEffect
 import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.math.Rectangle
@@ -11,9 +12,10 @@ import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.Areas.DungeonArea.initializeDungeon
 import com.mygdx.game.Areas.MainArea.initializeMainArea
 import com.mygdx.game.Areas.ShopArea.initializeShop
-import com.mygdx.game.Managers.LocationManager
 import com.mygdx.game.GameObjects.MoveableEntities.Player
 import com.mygdx.game.Managers.EventManager
+import com.mygdx.game.Managers.LocationManager
+
 
 val camera: OrthographicCamera = OrthographicCamera()
 val player = Player(Vector2(0f, 0f), Vector2(32f,64f))
@@ -27,6 +29,7 @@ class MainGame : ApplicationAdapter() {
     lateinit var testRect: Rectangle
     lateinit var inventory: Inventory
     lateinit var inputAdapter: ROJInputAdapter
+    lateinit var pe: ParticleEffect
 
     override fun create() {
 
@@ -56,6 +59,10 @@ class MainGame : ApplicationAdapter() {
         inventory = Inventory()
         inputAdapter = ROJInputAdapter(camera,player)
         initInputAdapter()
+
+        pe = ParticleEffect()
+        pe.load(Gdx.files.internal("ParticleEmitters/Fire.p"), Gdx.files.internal(""))
+        pe.start()
     }
 
     override fun render() {
@@ -68,12 +75,18 @@ class MainGame : ApplicationAdapter() {
         RenderGraph.render(batch)
         batch.end()
         inputAdapter.handleInput(player)
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Line)
-        shapeRenderer.end()
         drawrects()
         EventManager.executeEvents()
         camera.position.set(player.sprite.x,player.sprite.y,0f)
         camera.update()
+        pe.update(Gdx.graphics.deltaTime);
+        batch.begin();
+        pe.draw(batch);
+        batch.end()
+
+        //if(pe.isComplete){
+        //    pe.reset()
+        //}
     }
 
     fun drawrects(){

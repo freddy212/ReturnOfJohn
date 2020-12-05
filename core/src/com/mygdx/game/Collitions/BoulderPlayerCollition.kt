@@ -7,7 +7,7 @@ import com.mygdx.game.Interfaces.MoveCollition
 import com.mygdx.game.Interfaces.DynamicEntity
 
 class BoulderPlayerCollition: MoveCollition {
-    override fun collitionHappened(entity: DynamicEntity, collidedObject: GameObject) {
+    override fun collitionHappened(entity: GameObject, collidedObject: GameObject) {
         if(entity is Boulder){
             if(collidedObject is Player){
                 println("collition happened")

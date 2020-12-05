@@ -5,7 +5,7 @@ import com.mygdx.game.Interfaces.MoveCollition
 import com.mygdx.game.Interfaces.DynamicEntity
 
 object AbyssCollition: MoveCollition by CanMoveCollition {
-    override fun collitionHappened(entity: DynamicEntity, collidedObject: GameObject) {
+    override fun collitionHappened(entity: GameObject, collidedObject: GameObject) {
         println("you fell into the abyss")
     }
 }

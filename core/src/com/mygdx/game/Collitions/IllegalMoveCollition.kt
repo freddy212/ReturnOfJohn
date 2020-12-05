@@ -5,7 +5,7 @@ import com.mygdx.game.Interfaces.MoveCollition
 import com.mygdx.game.Interfaces.DynamicEntity
 
 object IllegalMoveCollition: MoveCollition {
-    override fun collitionHappened(entity: DynamicEntity, collidedObject: GameObject) {
+    override fun collitionHappened(entity: GameObject, collidedObject: GameObject) {
 
     }
 

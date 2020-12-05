@@ -5,14 +5,12 @@ import com.mygdx.game.Interfaces.AreaIdentifier
 
 class AreaManager{
     companion object{
-        private val Areas: MutableList<Area> = mutableListOf()
-        val areas : List<Area>
-            get() = Areas.toList()
+        private val areaManager  = ResourceList<Area>()
         fun addArea(area:Area){
-            Areas.add(area)
+            areaManager.add(area)
         }
         fun getArea(areaIdentifier: AreaIdentifier): Area{
-            return areas.find { x -> x.identifier == areaIdentifier }!!
+            return areaManager.List.find { x -> x.identifier == areaIdentifier }!!
         }
     }
 }

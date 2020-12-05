@@ -3,6 +3,7 @@ package com.mygdx.game.Areas.DungeonArea
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.AbstractClasses.GameObject
+import com.mygdx.game.Collitions.DoorCollition
 import com.mygdx.game.Enums.Direction
 import com.mygdx.game.GameObjects.BoulderGenerator
 import com.mygdx.game.GameObjects.Door
@@ -13,8 +14,9 @@ import com.mygdx.game.playerSize
 
 fun getLocationOneCaveObjects(): List<GameObject>{
     val location1 = LocationManager.findLocation("location1",AreaIdentifier.DUNGEONAREA)
-    val door = Door(Vector2(location1.middle.x -  (playerSize.x / 2),location1.bottomleft.y), Vector2(32f * 2, 64f * 2), Texture("CaveDoor.png"), AreaIdentifier.MAINAREA,
-            doorMainAreaAndDungeonConnection,Direction.DOWN,location1)
+    val doorPosition = Vector2(location1.middle.x -  (playerSize.x / 2),location1.bottomleft.y)
+    val doorCollition = DoorCollition(doorPosition,AreaIdentifier.MAINAREA, doorMainAreaAndDungeonConnection,Direction.DOWN)
+    val door = Door(doorPosition, Vector2(32f * 2, 64f * 2), Texture("CaveDoor.png"),location1,Direction.DOWN,doorCollition)
 
     return listOf(door)
 }

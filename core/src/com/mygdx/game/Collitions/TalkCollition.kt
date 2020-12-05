@@ -10,7 +10,7 @@ import com.mygdx.game.checkOpposingDirections
 import com.mygdx.game.counter
 
 class TalkCollition(private val conversationEvent: ConversationEvent): ButtonPressedCollition{
-    override fun collitionHappened(entity: DynamicEntity, collidedObject: GameObject) {
+    override fun collitionHappened(entity: GameObject, collidedObject: GameObject) {
         if(entity is Player && collidedObject is TalkSensor){
             if(checkOpposingDirections(entity, collidedObject)){
                 counter += 1

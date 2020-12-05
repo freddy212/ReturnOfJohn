@@ -9,8 +9,10 @@ import com.mygdx.game.Collitions.CanMoveCollition
 import com.mygdx.game.InitSprite
 import com.mygdx.game.Interfaces.Collition
 import com.mygdx.game.Interfaces.MoveCollition
+import com.mygdx.game.Interfaces.ObjectProperty
 import com.mygdx.game.Interfaces.Renderable
 import com.mygdx.game.LocationImpl
+import com.mygdx.game.Managers.ResourceList
 import com.mygdx.game.RectanglePolygon
 import com.mygdx.game.RenderGraph.Companion.addToSceneGraph
 
@@ -28,14 +30,18 @@ abstract class GameObject (val Position: Vector2, val size: Vector2,val location
 
     //Remember this. Temporary solution. texture must be overriden before polygon is called
     abstract val texture: Texture
-    override val sprite: Sprite by lazy { InitSprite(texture)}
+    val sprite: Sprite by lazy { InitSprite(texture)}
     open val polygon: Polygon by lazy { RectanglePolygon(sprite.boundingRectangle) }
     open val collition: Collition = CanMoveCollition
+    val properties = ResourceList<ObjectProperty>()
     override fun render(batch: PolygonSpriteBatch){
         sprite.draw(batch)
     }
     open fun frameTask(){
         addToSceneGraph(this)
+        for(property in properties.List){
+            property.frameTask()
+        }
     }
     open fun initOnLocation(){
 

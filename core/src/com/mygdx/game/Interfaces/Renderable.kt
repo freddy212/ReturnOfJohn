@@ -6,6 +6,5 @@ import com.mygdx.game.Enums.Layer
 
 interface Renderable {
     val layer: Layer
-    val sprite: Sprite
     fun render(batch: PolygonSpriteBatch)
 }

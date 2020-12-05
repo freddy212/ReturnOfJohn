@@ -9,10 +9,12 @@ import com.mygdx.game.DoorConnection
 import com.mygdx.game.Enums.Direction
 import com.mygdx.game.Enums.Layer
 import com.mygdx.game.Interfaces.AreaIdentifier
+import com.mygdx.game.Interfaces.DirectionalObject
+import com.mygdx.game.Interfaces.MoveCollition
 import com.mygdx.game.LocationImpl
 
-class Door(Position: Vector2, size: Vector2, texture: Texture,areaId: AreaIdentifier,
-           val connection: DoorConnection,triggerDirection:Direction,location:LocationImpl): GameObject(Position,size,location) {
+class Door(Position: Vector2, size: Vector2, texture: Texture, location:LocationImpl,
+           override var direction: Direction, override val collition: MoveCollition): GameObject(Position,size,location),DirectionalObject {
     override val texture = texture
     override val layer = Layer.AIR
 
@@ -20,14 +22,8 @@ class Door(Position: Vector2, size: Vector2, texture: Texture,areaId: AreaIdenti
 
     init {
         polygon.vertices = floatArrayOf(x + size.x / 4, y, x + size.x - size.x / 4, y, x + size.x - size.x / 4, y - 20f, x + size.x / 4, y - 20f)
-        if(triggerDirection == Direction.DOWN || triggerDirection == Direction.LEFT){
+        if(direction == Direction.DOWN || direction == Direction.LEFT) {
             sprite.setAlpha(0.5f)
-            connection.secondEntrance = Vector2(this.middle.x,this.bottomleft.y)
-        }
-        else{
-            connection.firstEntrance = Vector2(this.middle.x,this.bottomleft.y)
         }
     }
-
-    override val collition = DoorCollition(areaId,connection,triggerDirection)
 }
