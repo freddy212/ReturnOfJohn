@@ -20,10 +20,6 @@ abstract class MoveableObject(Position: Vector2, size: Vector2, location: Locati
     abstract val movementStrategy: MovementStrategy
     private var canAct = true
 
-    override fun frameTask() {
-        super.frameTask()
-        this.move(this.direction)
-    }
     fun freezeObject(){
         canAct = false
     }

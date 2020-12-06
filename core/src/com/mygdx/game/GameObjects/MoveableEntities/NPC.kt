@@ -34,7 +34,7 @@ class NPC(Position: Vector2, size: Vector2 = Vector2(128f,128f), location: Locat
     }
 
     override fun frameTask() {
-        RenderGraph.addToSceneGraph(this)
+        super.frameTask()
         this.move(Direction.RIGHT)
     }
     override fun move(d: Direction): Boolean {

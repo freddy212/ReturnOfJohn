@@ -25,7 +25,6 @@ class DoorCollition(doorPosition: Vector2,val areaId: AreaIdentifier, val connec
         }
     }
     override fun collitionHappened(entity: GameObject, collidedObject: GameObject) {
-        println("triggered!")
         canMoveAfterCollition = true
         if(entity is Player && collidedObject is Door)
         {

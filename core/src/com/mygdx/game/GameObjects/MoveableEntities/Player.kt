@@ -32,8 +32,4 @@ class Player(Position: Vector2, size: Vector2) : MoveableObject(Position, size,n
         super.setPosition(position,gameObject)
         camera.position.set(position.x,position.y,0f)
     }
-
-    override fun frameTask() {
-        addToSceneGraph(this)
-    }
 }

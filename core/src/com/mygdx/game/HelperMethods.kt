@@ -15,6 +15,7 @@ import com.mygdx.game.GameObjects.MoveableEntities.Player
 import com.mygdx.game.Interfaces.Area
 import com.mygdx.game.Interfaces.DirectionalObject
 import com.mygdx.game.Interfaces.MoveCollition
+import com.mygdx.game.Managers.LocationManager
 
 
 var font: BitmapFont = BitmapFont()
@@ -111,9 +112,11 @@ fun addLocationsToArea(area: Area){
         area.locations.forEach{x -> x.initLocation()}
 }
 
-fun handleCollitions(intersectingObjects: List<GameObject>, gameObject: GameObject):Boolean {
-        val collitions = intersectingObjects.map { x -> x.collition }
-        intersectingObjects.forEach { x -> x.collition.collitionHappened(gameObject, x) }
+fun handleCollitions(gameObject: GameObject,polygonToCheck: Polygon):Boolean {
+        val collidingObjects = GetCollidingObjects(LocationManager.MoveCollitionGameObjects - gameObject,polygonToCheck)
+        val collitions = collidingObjects.map { x -> x.collition }
+        collidingObjects.forEach { x -> x.collition.collitionHappened(gameObject, x);
+                                        gameObject.collition.collitionHappened(gameObject,x)}
         return collitions.filterIsInstance<MoveCollition>().all { x -> x.canMoveAfterCollition }
 }
 

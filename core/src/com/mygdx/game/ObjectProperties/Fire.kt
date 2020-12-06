@@ -25,11 +25,12 @@ class Fire(val position:Vector2, val size: Vector2,val extinguishFireEvent: Even
         fireEffect.load(Gdx.files.internal("ParticleEmitters/Fire.p"), Gdx.files.internal(""))
         fireEffect.emitters.first().setPosition(position.x, position.y)
         fireEffect.emitters.first().xOffsetValue.setLow(0f,size.x)
-        fireEffect.emitters.first().yOffsetValue.setLow(-size.y / 2,0f)
+        fireEffect.emitters.first().yOffsetValue.setLow(- 10f,size.y /2)
 
         fireEffect.start()
 }
     override fun render(batch: PolygonSpriteBatch) {
+        fireEffect.emitters.first().setPosition(objectOnFire.sprite.x,objectOnFire.sprite.y)
         fireEffect.update(Gdx.graphics.deltaTime)
         fireEffect.draw(batch)
     }

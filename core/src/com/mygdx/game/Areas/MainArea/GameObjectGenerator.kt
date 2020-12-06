@@ -10,9 +10,11 @@ import com.mygdx.game.Collitions.ToggleCollition
 import com.mygdx.game.GameObjects.GenericGameObject
 import com.mygdx.game.Enums.Direction
 import com.mygdx.game.Enums.Layer
+import com.mygdx.game.Events.DefaultEvent
 import com.mygdx.game.Events.ToggleCollitionEvent
 import com.mygdx.game.GameObjects.*
 import com.mygdx.game.GameObjects.MoveableEntities.NPC
+import com.mygdx.game.GameObjects.MoveableEntities.WaterGunSpray
 import com.mygdx.game.Interfaces.AreaIdentifier
 import com.mygdx.game.Managers.LocationManager
 import com.mygdx.game.ObjectProperties.Fire
@@ -23,7 +25,15 @@ fun getLocationOneObjects(): List<GameObject>{
     val firstNPC = NPC(Vector2(0f,0f) + Vector2(100f,100f),Vector2(128f,128f),location)
     val firstConversation = GetFirstConversation(firstNPC)
     firstNPC.conversationsHandler.addConversation("first",firstConversation)
-    return listOf((House(location.middle.x ,location.middle.y, 150f, 200f,location, doorMainAreaAndShop,AreaIdentifier.SHOP)),firstNPC)
+
+    val fire = Fire(firstNPC.Position,firstNPC.size,DefaultEvent(),firstNPC)
+
+    firstNPC.properties.add(fire)
+
+
+    val waterGunTest = WaterGunSpray(Vector2(0f,0f),Vector2(20f,200f),location)
+
+    return listOf((House(location.middle.x ,location.middle.y, 150f, 200f,location, doorMainAreaAndShop,AreaIdentifier.SHOP)),firstNPC,waterGunTest)
 }
 
 fun getLocationGraveyard(): List<GameObject>{
@@ -46,8 +56,9 @@ fun getLocationGraveyard(): List<GameObject>{
 
     door.properties.add(fire)
 
-    fire.fireExtinguised()
-    return constructTombs(graveyardLoc) + listOf(fence, fence2,cave,door)
+    val waterGunTest = WaterGunSpray(Vector2(0f,0f),Vector2(20f,200f),graveyardLoc)
+
+    return constructTombs(graveyardLoc) + listOf(fence, fence2,cave,door,waterGunTest)
 
 }
 

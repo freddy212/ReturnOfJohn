@@ -22,8 +22,7 @@ class ROJInputAdapter(private val camera : OrthographicCamera, val player: Playe
     }
     override fun keyDown(keycode: Int): Boolean {
         if(Gdx.input.isKeyPressed(Input.Keys.SPACE)){
-            val collidingSensors = GetCollidingObjects(LocationManager.ButtonCollitionGameObjects,player.polygon)
-            handleCollitions(collidingSensors,player)
+            handleCollitions(player,player.polygon)
         }
         return super.keyDown(keycode)
     }
