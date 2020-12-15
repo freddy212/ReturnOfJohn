@@ -1,6 +1,8 @@
 package com.mygdx.game.Timer
 
-class Timer (private val CooldownTime: Float){
+import com.mygdx.game.Interfaces.Timer
+
+class DefaultTimer (private val CooldownTime: Float): Timer {
     private var lastUsedTime = 0L
     var coolDownAvailable = true
         private set
@@ -12,12 +14,13 @@ class Timer (private val CooldownTime: Float){
             coolDownAvailable = true
         }
     }
-    fun tryUseCooldown() :Boolean{
-        UpdateTimer()
+    override fun tryUseCooldown():Boolean{
         if(coolDownAvailable){
+            UpdateTimer()
             reset()
             return true
         }
+        UpdateTimer()
         return false
     }
     fun reset(){

@@ -10,6 +10,7 @@ import com.mygdx.game.GameObjects.Door
 import com.mygdx.game.Interfaces.AreaIdentifier
 import com.mygdx.game.Managers.LocationManager
 import com.mygdx.game.doorMainAreaAndDungeonConnection
+import com.mygdx.game.minus
 import com.mygdx.game.playerSize
 
 fun getLocationOneCaveObjects(): List<GameObject>{
@@ -28,10 +29,20 @@ fun getLocationThreeCaveObjects(): List<GameObject>{
     val boulderGenerator4 = BoulderGenerator(Vector2(location2.middle.x +400f,location2.topleft.y), Vector2(64f * 2,64f * 2),Direction.DOWN,location2)
     return listOf(boulderGenerator1,boulderGenerator2,boulderGenerator3,boulderGenerator4)
 }
+fun getLocationNineCaveObjects():List<GameObject>{
+    val location = LocationManager.findLocation("location9",AreaIdentifier.DUNGEONAREA)
+    val boulderGenerator1 = BoulderGenerator(Vector2(location.middle.x - 64f,location.middle.y - 64f), Vector2(64f * 2,64f * 2),Direction.DOWN,location,1f)
+    return listOf()
+}
 fun getLocationSixCaveObjects(): List<GameObject>{
     val location = LocationManager.findLocation("location6",AreaIdentifier.DUNGEONAREA)
     val boulderGenerator1 = BoulderGenerator(Vector2(location.bottomleft.x,location.topright.y), Vector2(64f * 2,64f * 2),Direction.DOWN,location,1f)
     val boulderGenerator2  = BoulderGenerator(Vector2(location.bottomright.x - 128f,location.topright.y), Vector2(64f * 2,64f * 2),Direction.DOWN,location,2f)
     val boulderGenerator3 = BoulderGenerator(Vector2(location.middle.x - 64f,location.topright.y), Vector2(64f * 2,64f * 2),Direction.DOWN,location,3f)
     return listOf(boulderGenerator1,boulderGenerator2,boulderGenerator3)
+}
+fun getLocationTenCaveObjects():List<GameObject>{
+    val location = LocationManager.findLocation("location10",AreaIdentifier.DUNGEONAREA)
+    val boulderGenerator1 = BoulderGenerator(Vector2(location.middle.x - 64f,location.middle.y - 64f), Vector2(64f * 2,64f * 2),Direction.LEFT,location,1f)
+    return listOf()
 }

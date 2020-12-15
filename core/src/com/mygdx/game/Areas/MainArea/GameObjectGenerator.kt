@@ -30,10 +30,10 @@ fun getLocationOneObjects(): List<GameObject>{
 
     firstNPC.properties.add(fire)
 
+    val shop = House(location.middle.x ,location.middle.y, 150f, 200f,location, doorMainAreaAndShop,AreaIdentifier.SHOP)
+    val dojo = House(location.topleft.x + 300f,location.topleft.y - 200f,300f,200f,location, doorMainAreaAndDojo,AreaIdentifier.DOJO)
 
-    val waterGunTest = WaterGunSpray(Vector2(0f,0f),Vector2(20f,200f),location)
-
-    return listOf((House(location.middle.x ,location.middle.y, 150f, 200f,location, doorMainAreaAndShop,AreaIdentifier.SHOP)),firstNPC,waterGunTest)
+    return listOf(shop,dojo,firstNPC)
 }
 
 fun getLocationGraveyard(): List<GameObject>{
@@ -56,9 +56,7 @@ fun getLocationGraveyard(): List<GameObject>{
 
     door.properties.add(fire)
 
-    val waterGunTest = WaterGunSpray(Vector2(0f,0f),Vector2(20f,200f),graveyardLoc)
-
-    return constructTombs(graveyardLoc) + listOf(fence, fence2,cave,door,waterGunTest)
+    return constructTombs(graveyardLoc) + listOf(fence, fence2,cave,door)
 
 }
 

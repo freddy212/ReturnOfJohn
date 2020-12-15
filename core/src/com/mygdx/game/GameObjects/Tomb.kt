@@ -5,7 +5,9 @@ import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.Collitions.IllegalMoveCollition
 import com.mygdx.game.Enums.Layer
+import com.mygdx.game.Events.DefaultEvent
 import com.mygdx.game.LocationImpl
+import com.mygdx.game.ObjectProperties.Fire
 
 class Tomb(Position: Vector2, size: Vector2,location: LocationImpl) : GameObject(Position, size,location) {
     override val texture = Texture("Tomb.png")
@@ -14,6 +16,7 @@ class Tomb(Position: Vector2, size: Vector2,location: LocationImpl) : GameObject
     override val layer = Layer.ONGROUND
 
     init {
+        graveyardGrass.properties.add(Fire(graveyardGrass.Position,graveyardGrass.size,DefaultEvent(),graveyardGrass))
         location.addGameObject(graveyardGrass)
     }
 }

@@ -9,12 +9,14 @@ import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.math.Vector2
+import com.mygdx.game.Areas.DojoArea.initializeDojo
 import com.mygdx.game.Areas.DungeonArea.initializeDungeon
 import com.mygdx.game.Areas.MainArea.initializeMainArea
 import com.mygdx.game.Areas.ShopArea.initializeShop
 import com.mygdx.game.GameObjects.MoveableEntities.Player
 import com.mygdx.game.Managers.EventManager
 import com.mygdx.game.Managers.LocationManager
+import com.mygdx.game.UI.UIRenderer
 
 
 val camera: OrthographicCamera = OrthographicCamera()
@@ -29,13 +31,14 @@ class MainGame : ApplicationAdapter() {
     lateinit var testRect: Rectangle
     lateinit var inventory: Inventory
     lateinit var inputAdapter: ROJInputAdapter
-    lateinit var pe: ParticleEffect
+    lateinit var uiRenderer: UIRenderer
 
     override fun create() {
 
         Gdx.gl.glClearColor(0f,0f,0f,0f)
         //Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT or GL20.GL_DEPTH_BUFFER_BIT)
         batch = PolygonSpriteBatch()
+        uiRenderer = UIRenderer()
         firstpoly = RectanglePolygon(Vector2(50f,0f),500f,500f)
         firstpoly.vertices = firstpoly.vertices.map { x -> x * 1f }.toFloatArray()
         secondpoly = RectanglePolygon(
@@ -49,6 +52,7 @@ class MainGame : ApplicationAdapter() {
         initializeMainArea()
         initializeDungeon()
         initializeShop()
+        initializeDojo()
         shapeRenderer = ShapeRenderer()
         camera.setToOrtho(
                 false,
@@ -59,10 +63,6 @@ class MainGame : ApplicationAdapter() {
         inventory = Inventory()
         inputAdapter = ROJInputAdapter(camera,player)
         initInputAdapter()
-
-        pe = ParticleEffect()
-        pe.load(Gdx.files.internal("ParticleEmitters/Fire.p"), Gdx.files.internal(""))
-        pe.start()
     }
 
     override fun render() {
@@ -71,22 +71,15 @@ class MainGame : ApplicationAdapter() {
         batch.projectionMatrix = camera.combined
         LocationManager.frameAction()
        // player.frameAction()
+        inputAdapter.handleInput(player)
         batch.begin()
         RenderGraph.render(batch)
         batch.end()
-        inputAdapter.handleInput(player)
         drawrects()
         EventManager.executeEvents()
         camera.position.set(player.sprite.x,player.sprite.y,0f)
         camera.update()
-        pe.update(Gdx.graphics.deltaTime);
-        batch.begin();
-        pe.draw(batch);
-        batch.end()
-
-        //if(pe.isComplete){
-        //    pe.reset()
-        //}
+        uiRenderer.render()
     }
 
     fun drawrects(){

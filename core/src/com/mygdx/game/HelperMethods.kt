@@ -112,8 +112,8 @@ fun addLocationsToArea(area: Area){
         area.locations.forEach{x -> x.initLocation()}
 }
 
-fun handleCollitions(gameObject: GameObject,polygonToCheck: Polygon):Boolean {
-        val collidingObjects = GetCollidingObjects(LocationManager.MoveCollitionGameObjects - gameObject,polygonToCheck)
+fun handleCollitions(gameObject: GameObject,polygonToCheck: Polygon, objectsToCheck: List<GameObject>):Boolean {
+        val collidingObjects = GetCollidingObjects(objectsToCheck - gameObject,polygonToCheck)
         val collitions = collidingObjects.map { x -> x.collition }
         collidingObjects.forEach { x -> x.collition.collitionHappened(gameObject, x);
                                         gameObject.collition.collitionHappened(gameObject,x)}

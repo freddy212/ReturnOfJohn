@@ -4,11 +4,11 @@ import com.badlogic.gdx.math.Polygon
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.*
 import com.mygdx.game.Enums.Direction
-import com.mygdx.game.Interfaces.EdgeOfLocationStrategy
+import com.mygdx.game.Interfaces.CannotMoveStrategy
 import com.mygdx.game.Interfaces.MovementStrategy
 import com.mygdx.game.Managers.LocationManager
 
-class DefaultMovement(private val edgeOfLocationStrategy: EdgeOfLocationStrategy): MovementStrategy{
+class DefaultMovement(private val edgeOfLocationStrategy: CannotMoveStrategy): MovementStrategy{
 
     override fun moveEntity(d: Direction, moveableObject: MoveableObject): Boolean{
         moveableObject.direction = d
@@ -18,7 +18,7 @@ class DefaultMovement(private val edgeOfLocationStrategy: EdgeOfLocationStrategy
 
         val nextPos = GetNextStep(d,speed)
         val polygonToCheck = Polygon(moveableObject.polygon.transformedVertices + nextPos)
-        val canMove = handleCollitions(moveableObject,polygonToCheck)
+        val canMove = handleCollitions(moveableObject,polygonToCheck,LocationManager.MoveCollitionGameObjects)
         for(point in getPolygonPoints(polygonToCheck)){
             inLocation = false
             for(rectangle in LocationManager.ActiveLocations.map { x -> x.sprite.boundingRectangle }){
@@ -35,7 +35,7 @@ class DefaultMovement(private val edgeOfLocationStrategy: EdgeOfLocationStrategy
             moveableObject.setPosition(Vector2(sprite.x,sprite.y) + nextPos,moveableObject)
             return true
         }else{
-            edgeOfLocationStrategy.handleEdgeOfLocation(moveableObject)
+            edgeOfLocationStrategy.CannotMoveAction(moveableObject)
             return false
         }
     }

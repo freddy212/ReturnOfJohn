@@ -7,7 +7,7 @@ import com.mygdx.game.Managers.LocationManager
 
 fun initializeMainArea(){
     val area = DefaultArea(AreaIdentifier.MAINAREA)
-    val location1 = LocationImpl(Vector2(1024f,1024f), Vector2(0f,0f), ::getLocationOneObjects)
+    val location1 = LocationImpl(Vector2(1500f,1500f), Vector2(0f,0f), ::getLocationOneObjects)
     addLocation(location1,area)
     val horizontalHallway = Vector2(1500f,300f)
     val verticalHallway = Vector2(300f,800f)

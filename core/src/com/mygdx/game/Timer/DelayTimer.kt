@@ -1,9 +1,9 @@
 package com.mygdx.game.Trimer
 
-import com.mygdx.game.Timer.Timer
+import com.mygdx.game.Timer.DefaultTimer
 
 class DelayTimer (timeUntilExecute: Float){
-    private val timer = Timer(timeUntilExecute)
+    private val timer = DefaultTimer(timeUntilExecute)
     init {
         timer.tryUseCooldown()
     }
