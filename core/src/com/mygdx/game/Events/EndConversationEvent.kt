@@ -15,7 +15,8 @@ class EndConversationEvent(val npc: NPC, val readSentenceEvent: DrawSentenceEven
 
         conversationEvent.resetConversation()
 
-        npc.enableObject()
-        player.enableObject()
+        npc.enableMoving()
+        player.enableMoving()
+        player.enableChangingDirection()
     }
 }

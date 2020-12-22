@@ -17,6 +17,7 @@ class TalkSensor(Position: Vector2, size: Vector2, npc: NPC, override var direct
 DynamicEntity by DefaultPositionChange{
     override val texture = Texture("sensor.png")
     override val layer = Layer.ONGROUND
+    override var canChangeDirection = false
     override fun render(batch: PolygonSpriteBatch){
         sprite.draw(batch)
     }

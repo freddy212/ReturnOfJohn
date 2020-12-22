@@ -10,7 +10,8 @@ class StartConversationEvent(val identifier: String,val npc: NPC,val readSentenc
     override fun execute() {
         conversationHandler.startConversation(identifier)
         EventManager.eventManager.add(readSentenceEvent)
-        npc.freezeObject()
-        player.freezeObject()
+        npc.freezeMoving()
+        player.freezeMoving()
+        player.freezeChangingDirection()
     }
 }

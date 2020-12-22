@@ -161,6 +161,14 @@ fun checkOpposingDirections(player: Player , directionalObject: DirectionalObjec
                 Direction.DOWN -> directionalObject.direction == Direction.UP
         }
 }
+fun getOpposingDirection(direction: Direction): Direction{
+        return when(direction){
+                Direction.UP -> Direction.DOWN
+                Direction.LEFT -> Direction.RIGHT
+                Direction.DOWN -> Direction.UP
+                Direction.RIGHT -> Direction.LEFT
+        }
+}
 
 var counter = 0
 

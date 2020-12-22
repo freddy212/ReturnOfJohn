@@ -75,7 +75,7 @@ class MainGame : ApplicationAdapter() {
         batch.begin()
         RenderGraph.render(batch)
         batch.end()
-        drawrects()
+        //drawrects()
         EventManager.executeEvents()
         camera.position.set(player.sprite.x,player.sprite.y,0f)
         camera.update()

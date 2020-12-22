@@ -30,7 +30,7 @@ abstract class GameObject (val Position: Vector2, val size: Vector2,val location
 
     //Remember this. Temporary solution. texture must be overriden before polygon is called
     abstract val texture: Texture
-    val sprite: Sprite by lazy { InitSprite(texture)}
+    open val sprite: Sprite by lazy { InitSprite(texture)}
     open val polygon: Polygon by lazy { RectanglePolygon(sprite.boundingRectangle) }
     open val collition: Collition = CanMoveCollition
     val properties = ResourceList<ObjectProperty>()

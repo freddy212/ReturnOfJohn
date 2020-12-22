@@ -20,8 +20,7 @@ class WaterGunSpray(Position: Vector2, size: Vector2, location: LocationImpl?): 
     override val texture = Texture("Sensor.png")
     override val layer = Layer.AIR
 
-    lateinit var waterEffect: ParticleEffect
-
+    var waterEffect: ParticleEffect
     init {
         sprite.setOrigin(0f + size.x / 2,0f)
         polygon.setOrigin(0f + size.x / 2,0f)
@@ -32,7 +31,7 @@ class WaterGunSpray(Position: Vector2, size: Vector2, location: LocationImpl?): 
       //  waterEffect.emitters.first().yOffsetValue.setLow(- 10f,size.y /2)
     }
     override val collition = WaterGunCollition()
-    fun changeDirection(direction: Direction){
+    private fun setDirection(direction: Direction){
         val rotation = when(direction){
             Direction.UP -> 0f
             Direction.LEFT -> 90f
@@ -59,7 +58,7 @@ class WaterGunSpray(Position: Vector2, size: Vector2, location: LocationImpl?): 
 
     override fun frameTask() {
         super.frameTask()
-        changeDirection(player.direction)
+        setDirection(player.direction)
         setPosition(Vector2(player.sprite.x + ((player.size.x - size.x) / 2), player.sprite.y + player.size.y / 2),this)
         //waterEffect.update(Gdx.graphics.deltaTime)
         handleCollitions(this,polygon,LocationManager.MoveCollitionGameObjects)

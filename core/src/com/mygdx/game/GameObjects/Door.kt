@@ -17,6 +17,7 @@ class Door(Position: Vector2, size: Vector2, texture: Texture, location:Location
            override var direction: Direction, override val collition: MoveCollition): GameObject(Position,size,location),DirectionalObject {
     override val texture = texture
     override val layer = Layer.AIR
+    override var canChangeDirection = false
 
     override val polygon = Polygon()
 

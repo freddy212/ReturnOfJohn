@@ -10,13 +10,12 @@ import com.mygdx.game.Managers.LocationManager
 
 class DefaultMovement(private val edgeOfLocationStrategy: CannotMoveStrategy): MovementStrategy{
 
-    override fun moveEntity(d: Direction, moveableObject: MoveableObject): Boolean{
-        moveableObject.direction = d
+    override fun moveEntity(moveableObject: MoveableObject): Boolean{
         val sprite = moveableObject.sprite
         val speed = moveableObject.speed
         var inLocation = false
 
-        val nextPos = GetNextStep(d,speed)
+        val nextPos = GetNextStep(moveableObject.direction,speed)
         val polygonToCheck = Polygon(moveableObject.polygon.transformedVertices + nextPos)
         val canMove = handleCollitions(moveableObject,polygonToCheck,LocationManager.MoveCollitionGameObjects)
         for(point in getPolygonPoints(polygonToCheck)){
