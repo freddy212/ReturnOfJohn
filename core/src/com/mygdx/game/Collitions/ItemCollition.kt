@@ -11,7 +11,7 @@ object ItemCollition: MoveCollition by CanMoveCollition {
     override fun collitionHappened(entity: GameObject, collidedObject: GameObject) {
         if(entity is Player && collidedObject is ItemObject){
             val item = collidedObject.item
-            entity.addToInventory(item)
+            entity.inventory.addItem(item)
             LocationManager.oldLocation.removeGameObject(collidedObject)
        }
     }

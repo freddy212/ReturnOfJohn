@@ -1,28 +1,30 @@
 package com.mygdx.game.GameObjects.ItemAbilities
 
 import com.badlogic.gdx.graphics.Texture
-import com.badlogic.gdx.graphics.g2d.Sprite
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.*
+import com.mygdx.game.AbstractClasses.ItemAbility
 import com.mygdx.game.AbstractClasses.DefaultPositionChange
-import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.Collitions.ShieldCollition
 import com.mygdx.game.Enums.Direction
 import com.mygdx.game.Enums.Layer
-import com.mygdx.game.Interfaces.DirectionalObject
 import com.mygdx.game.Interfaces.DynamicEntity
 import com.mygdx.game.Managers.LocationManager
 
-class Shield(Position: Vector2, size: Vector2, location: LocationImpl?): GameObject(Position, size, location),DynamicEntity by DefaultPositionChange{
+class Shield(Position: Vector2, size: Vector2): ItemAbility(Position, size),DynamicEntity by DefaultPositionChange{
 
+    override val triggerKey = com.badlogic.gdx.Input.Keys.NUM_2
     val textureFront = Texture("shield-front.png")
     val textureSide = Texture("shield-side.png")
+    var activeTexture = textureFront
 
     val frontSprite = InitSprite(textureFront)
     val sideSprite = InitSprite(textureSide)
     var activeSprite = frontSprite
 
     override val collition = ShieldCollition()
+
+
 
     init {
         sideSprite.setSize(sideSprite.width / 4, sideSprite.height)
@@ -33,10 +35,7 @@ class Shield(Position: Vector2, size: Vector2, location: LocationImpl?): GameObj
     var activePolygon = frontPolygon
 
     override val texture
-    get() = when(player.direction){
-        Direction.UP,Direction.DOWN -> textureFront
-        Direction.RIGHT,Direction.LEFT -> textureSide
-    }
+    get() = activeTexture
     override val sprite
     get() = activeSprite
     override val polygon
@@ -55,6 +54,10 @@ class Shield(Position: Vector2, size: Vector2, location: LocationImpl?): GameObj
     }
 
     fun setActiveSide(){
+        activeTexture = when(player.direction){
+            Direction.UP,Direction.DOWN -> textureFront
+            Direction.RIGHT,Direction.LEFT -> textureSide
+        }
         activeSprite = when(player.direction){
             Direction.UP,Direction.DOWN -> frontSprite
             Direction.RIGHT,Direction.LEFT -> sideSprite }
@@ -80,5 +83,14 @@ class Shield(Position: Vector2, size: Vector2, location: LocationImpl?): GameObj
             sprite.rotation = 0f
         }
         handleCollitions(this,polygon, LocationManager.MoveCollitionGameObjects)
+    }
+    override fun activeAction(){
+        super.activeAction()
+        player.freezeMoving()
+    }
+
+    override fun InactiveAction() {
+        super.InactiveAction()
+        player.enableMoving()
     }
 }

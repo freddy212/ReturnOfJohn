@@ -4,23 +4,23 @@ import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch
 import com.mygdx.game.UI.QuestPanel.QuestContainer
 import com.mygdx.game.UI.QuestPanel.QuestPanel
+import com.mygdx.game.UI.ToolTipPanel.ToolTipPanel
 
 class UIRenderer {
     val uiBatch = PolygonSpriteBatch()
 
     lateinit var questPanel: QuestPanel
-
+    lateinit var toolTipPanel: ToolTipPanel
     init {
-        val firstQuest = QuestContainer(Texture("sensor.png"),uiBatch)
-        val secondQuest = QuestContainer(Texture("sensor.png"),uiBatch)
-        val thirdQuest = QuestContainer(Texture("sensor.png"),uiBatch)
+        questPanel = QuestPanel(uiBatch)
+        toolTipPanel = ToolTipPanel(uiBatch)
 
-        questPanel = QuestPanel(listOf(firstQuest,secondQuest,thirdQuest))
     }
 
     fun render(){
         uiBatch.begin()
         questPanel.renderQuestIcons()
+        toolTipPanel.renderToolTips()
         uiBatch.end()
     }
 }

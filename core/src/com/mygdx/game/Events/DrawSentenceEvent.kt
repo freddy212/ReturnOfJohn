@@ -8,5 +8,5 @@ class DrawSentenceEvent(val conversationHandler: ConversationHandler): Event {
     override fun execute() {
        val sentence = conversationHandler.GetSentence()
        UIController.drawSentence(sentence,sentence.character)
-       }
+    }
 }

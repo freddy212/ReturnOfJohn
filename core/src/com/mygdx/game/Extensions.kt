@@ -19,6 +19,11 @@ fun Polygon.anyPointInPolygon(polygon: Polygon):Boolean{
             return true
         }
     }
+    for (point in getPolygonPoints(this)){
+        if(polygon.contains(point)){
+            return true
+        }
+    }
     return false
 }
 operator fun Vector2.plus(other: Vector2): Vector2{

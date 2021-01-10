@@ -5,19 +5,22 @@ import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.Collitions.DoorCollition
 import com.mygdx.game.Collitions.IllegalMoveCollition
-import com.mygdx.game.Collitions.WaterGunItemCollition
+import com.mygdx.game.DefaultQuest
 import com.mygdx.game.Enums.Direction
 import com.mygdx.game.Enums.Layer
+import com.mygdx.game.Enums.QuestIdentifier
 import com.mygdx.game.Events.DojoEvent
 import com.mygdx.game.GameObjects.Door
 import com.mygdx.game.GameObjects.GenericGameObject
+import com.mygdx.game.GameObjects.MoveableEntities.DojoAttackObject
 import com.mygdx.game.GameObjects.MoveableEntities.NPC
 import com.mygdx.game.Interfaces.AreaIdentifier
+import com.mygdx.game.Interfaces.Quest
 import com.mygdx.game.Managers.EventManager
 import com.mygdx.game.Managers.LocationManager
 import com.mygdx.game.Timer.DefaultTimer
+import com.mygdx.game.UI.Dialogue.Conversations.GetDojoConversation
 import com.mygdx.game.doorMainAreaAndDojo
-import com.mygdx.game.doorMainAreaAndShop
 import com.mygdx.game.middleOfObject
 import com.mygdx.game.playerSize
 
@@ -33,8 +36,17 @@ fun getDojoObjects(): List<GameObject>{
     val position = location1.middle
     val itemTable = GenericGameObject(middleOfObject(position,size),size,"ItemTable.png",Layer.ONGROUND,location1,IllegalMoveCollition)
     val dojoNPC = NPC(middleOfObject(Vector2(itemTable.middle.x,itemTable.middle.y + 200f),Vector2(128f,128f)), Vector2(128f,128f),location1)
-
-    val dojoEvent = DojoEvent(location1,DefaultTimer(1f))
-    EventManager.eventManager.add(dojoEvent)
+    dojoNPC.conversationsHandler.addConversation("first", GetDojoConversation(dojoNPC))
+    val quest = DefaultQuest(dojoNPC,QuestIdentifier.DOJO)
+    quest.StartQuest()
+    location1.onLocationExit = {
+        val dojoEvent= EventManager.eventManager.List.find {it is DojoEvent} as DojoEvent?
+        if(dojoEvent!= null){
+            dojoNPC.add()
+            EventManager.eventManager.remove(dojoEvent)
+            val dojoAttackObject:DojoAttackObject? = location1.gameObjects.find{ it is DojoAttackObject } as DojoAttackObject?
+            dojoAttackObject?.location?.removeGameObject(dojoAttackObject!!)
+        }
+    }
     return listOf(door,dojoNPC)
 }

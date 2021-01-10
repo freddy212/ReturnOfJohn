@@ -31,7 +31,7 @@ class UIController {
             box.setPosition(position.x, position.y)
             drawPolygonShape(box, shapeRenderer)
             dialogueBatch.begin()
-            font.draw(dialogueBatch, text, box.x + box.vertices[0] +25f,box.y + box.vertices[1] +  50f)
+            sentence.draw(dialogueBatch,font,box.x + box.vertices[0] +25f,box.y + box.vertices[1] +  50f)
             dialogueBatch.end()
         }
     }

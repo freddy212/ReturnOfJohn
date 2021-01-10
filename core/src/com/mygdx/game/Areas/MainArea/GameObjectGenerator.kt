@@ -9,27 +9,28 @@ import com.mygdx.game.Collitions.IllegalMoveCollition
 import com.mygdx.game.Collitions.ToggleCollition
 import com.mygdx.game.GameObjects.GenericGameObject
 import com.mygdx.game.Enums.Direction
+import com.mygdx.game.Enums.Item
 import com.mygdx.game.Enums.Layer
+import com.mygdx.game.Enums.QuestIdentifier
 import com.mygdx.game.Events.DefaultEvent
 import com.mygdx.game.Events.ToggleCollitionEvent
 import com.mygdx.game.GameObjects.*
+import com.mygdx.game.GameObjects.ItemObjects.GenericItemObject
 import com.mygdx.game.GameObjects.MoveableEntities.NPC
-import com.mygdx.game.GameObjects.MoveableEntities.WaterGunSpray
 import com.mygdx.game.Interfaces.AreaIdentifier
+import com.mygdx.game.Interfaces.Quest
 import com.mygdx.game.Managers.LocationManager
 import com.mygdx.game.ObjectProperties.Fire
-import com.mygdx.game.UI.Dialogue.GetFirstConversation
+import com.mygdx.game.UI.Dialogue.Conversations.GetFireConversation
+import com.mygdx.game.UI.Dialogue.Conversations.GetFireFixedConversation
+import com.mygdx.game.UI.Dialogue.Conversations.GetFireNotFixedConversation
+import com.mygdx.game.UI.Dialogue.Conversations.GetFirstConversation
 
 fun getLocationOneObjects(): List<GameObject>{
     val location = LocationManager.findLocation("location1",AreaIdentifier.MAINAREA)
     val firstNPC = NPC(Vector2(0f,0f) + Vector2(100f,100f),Vector2(128f,128f),location)
     val firstConversation = GetFirstConversation(firstNPC)
     firstNPC.conversationsHandler.addConversation("first",firstConversation)
-
-    val fire = Fire(firstNPC.Position,firstNPC.size,DefaultEvent(),firstNPC)
-
-    firstNPC.properties.add(fire)
-
     val shop = House(location.middle.x ,location.middle.y, 150f, 200f,location, doorMainAreaAndShop,AreaIdentifier.SHOP)
     val dojo = House(location.topleft.x + 300f,location.topleft.y - 200f,300f,200f,location, doorMainAreaAndDojo,AreaIdentifier.DOJO)
 
@@ -56,7 +57,16 @@ fun getLocationGraveyard(): List<GameObject>{
 
     door.properties.add(fire)
 
-    return constructTombs(graveyardLoc) + listOf(fence, fence2,cave,door)
+    val npc = NPC(middleOfObject(graveyardLoc.middle,Vector2(120f,120f)) - Vector2(0f,450f),Vector2(120f,120f),graveyardLoc)
+
+    val quest = DefaultQuest(npc,QuestIdentifier.FIRE)
+    quest.StartQuest()
+
+    npc.conversationsHandler.addConversation("first", GetFireConversation(npc))
+    npc.conversationsHandler.addConversation("firefixed", GetFireFixedConversation(npc))
+    npc.conversationsHandler.addConversation("firenotfixed", GetFireNotFixedConversation(npc))
+
+    return constructTombs(graveyardLoc) + listOf(fence, fence2,cave,door,npc)
 
 }
 
@@ -71,7 +81,7 @@ fun getLocationFourObjects(): List<GameObject>{
 fun getWorldTreeObjects(): List<GameObject>{
     val location = LocationManager.findLocation("location8",AreaIdentifier.MAINAREA)
     val tree = Tree(location.middle, Vector2(64f * 2, 128f * 2),location)
-    val WorldLeaf = WorldLeaf(tree.topleft + Vector2(0f,0f), Vector2(64f,32f),location)
-    val WorldLeaf2 = WorldLeaf(tree.bottomright + Vector2(0f,0f), Vector2(64f,32f),location)
+    val WorldLeaf = GenericItemObject(tree.topleft + Vector2(0f, 0f), Vector2(64f, 32f), location,Item.WORLDLEAF,Texture("WorldLeaf.png"))
+    val WorldLeaf2 = GenericItemObject(tree.bottomright + Vector2(0f, 0f), Vector2(64f, 32f), location,Item.WORLDLEAF,Texture("WorldLeaf.png"))
     return listOf(tree,WorldLeaf,WorldLeaf2)
 }

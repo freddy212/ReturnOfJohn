@@ -2,11 +2,10 @@ package com.mygdx.game.Managers
 
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.AbstractClasses.GameObject
-import com.mygdx.game.AbstractClasses.MoveableObject
 import com.mygdx.game.Exceptions.PlayerOutOfBoundsException
 import com.mygdx.game.Interfaces.Area
 import com.mygdx.game.Interfaces.AreaIdentifier
-import com.mygdx.game.Interfaces.ButtonPressedCollition
+import com.mygdx.game.Interfaces.KeyPressedCollition
 import com.mygdx.game.Interfaces.MoveCollition
 import com.mygdx.game.LocationImpl
 import com.mygdx.game.camera
@@ -39,14 +38,16 @@ class LocationManager {
             if(oldLocation != newLocation) {
                 oldLocation = newLocation
                 ActiveLocations = (listOf(oldLocation) + oldLocation.adjacentLocations)
-                val oldGameObjects = ActiveGameObjects
+                val oldActiveGameObjects = ActiveGameObjects
                 ActiveGameObjects = ActiveLocations.flatMap { x -> x.gameObjects } + ActiveLocations + crossLocationGameObjects.List
-                val newGameObjects = ActiveGameObjects - oldGameObjects
-                newGameObjects.forEach{x -> x.initOnLocation()}
+                val newGameObjects = ActiveGameObjects - oldActiveGameObjects
+                val oldGameObjects = oldActiveGameObjects - ActiveGameObjects
+                newGameObjects.forEach{it.onLocationEnter()}
+                oldGameObjects.forEach {it.onLocationExit() }
             }
             ActiveGameObjects = ActiveLocations.flatMap { x -> x.gameObjects } + ActiveLocations + crossLocationGameObjects.List
             MoveCollitionGameObjects = ActiveGameObjects.filter{x -> x.collition is MoveCollition}
-            ButtonCollitionGameObjects = ActiveGameObjects.filter { x -> x.collition is ButtonPressedCollition }
+            ButtonCollitionGameObjects = ActiveGameObjects.filter { x -> x.collition is KeyPressedCollition }
             //Can be optimized at some point
         }
         fun SetArea(area: Area){

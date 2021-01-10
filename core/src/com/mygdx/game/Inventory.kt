@@ -11,7 +11,7 @@ class Inventory {
         InventoryList[item] = getItemCount(item) + amount
     }
     fun getItemCount(item: Item): Int{
-        return InventoryList.getValue(item)
+        return InventoryList.getOrDefault(item,0)
     }
     fun useItems(item: Item, amountToUse: Int): Boolean{
         val itemCount = getItemCount(item)

@@ -17,14 +17,14 @@ import com.mygdx.game.LocationImpl
 import com.mygdx.game.Timer.DefaultTimer
 import com.mygdx.game.middleOfObject
 
-class DojoAttackObject(directionGiven: Direction, Position: Vector2, location: LocationImpl?,size: Vector2 = Vector2(128f,128f)):
+class DojoAttackObject(directionGiven: Direction, Position: Vector2, location: LocationImpl?,dojoEvent: DojoEvent,size: Vector2 = Vector2(128f,128f)):
         MoveableObject(middleOfObject(Position,size),size,location) {
     override var speed = 5f
     override var direction = directionGiven
     override val movementStrategy = DefaultMovement(MoveRegardless())
     override val texture = Texture("DefaultPerson.png")
     override val layer = Layer.PERSON
-    override val collition = DojoMasterCollition(DojoEvent(location!!,DefaultTimer(1f)))
+    override val collition = DojoMasterCollition(dojoEvent)
 
     override fun frameTask() {
         super.frameTask()

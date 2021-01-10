@@ -7,13 +7,15 @@ import com.mygdx.game.GameObjects.MoveableEntities.Player
 import com.mygdx.game.Interfaces.MoveCollition
 import com.mygdx.game.player
 
-class DojoMasterCollition(val dojoEvent: DojoEvent): MoveCollition by IllegalMoveCollition {
+class DojoMasterCollition(val dojoEvent: DojoEvent): MoveCollition by CanMoveCollition {
 
     override fun collitionHappened(entity: GameObject, collidedObject: GameObject) {
         if(collidedObject is Player){
             player.die()
+            dojoEvent.resetCounter()
         }
         if(collidedObject is Shield){
+            entity.location!!.removeGameObject(entity)
             dojoEvent.blockedWithShield()
         }
     }

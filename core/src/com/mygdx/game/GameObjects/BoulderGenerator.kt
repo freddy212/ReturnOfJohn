@@ -37,10 +37,7 @@ class BoulderGenerator(Position: Vector2, size: Vector2, val direction: Directio
         }
     }
 
-    override fun initOnLocation() {
-        super.initOnLocation()
-        delayTimer.resetDelay()
-    }
+    override var onLocationEnter = {delayTimer.resetDelay()}
     fun generateBoulder(){
         val Position = when(direction){
             Direction.RIGHT -> Vector2(this.bottomright.x + 96f,this.middle.y)
@@ -49,7 +46,6 @@ class BoulderGenerator(Position: Vector2, size: Vector2, val direction: Directio
             Direction.DOWN -> Vector2(this.middle.x, this.bottomleft.y - 96f)
         }
         val boulder = Boulder(direction,Position,Vector2( 64 * 2f,64f * 2),location)
-        boulder.properties.add(Fire(boulder.Position,boulder.size,DefaultEvent(),boulder))
         location!!.addGameObject(boulder)
     }
 }

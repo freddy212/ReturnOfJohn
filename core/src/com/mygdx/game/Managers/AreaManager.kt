@@ -2,6 +2,7 @@ package com.mygdx.game.Managers
 
 import com.mygdx.game.Interfaces.Area
 import com.mygdx.game.Interfaces.AreaIdentifier
+import com.mygdx.game.ResourceList
 
 class AreaManager{
     companion object{

@@ -1,4 +1,6 @@
-package com.mygdx.game.Managers
+package com.mygdx.game
+
+import java.util.function.Predicate
 
 class ResourceList<T> {
     private val mutableList: MutableList<T> = mutableListOf()
@@ -9,6 +11,9 @@ class ResourceList<T> {
     }
     fun remove(t:T){
         mutableList.remove(t)
+    }
+    fun removeIf(p:Predicate<T>){
+        mutableList.removeIf(p)
     }
 
 }

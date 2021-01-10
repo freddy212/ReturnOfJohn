@@ -1,4 +1,4 @@
-package com.mygdx.game.GameObjects
+package com.mygdx.game.GameObjects.ItemObjects
 
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.math.Vector2
@@ -9,9 +9,9 @@ import com.mygdx.game.Interfaces.ItemObject
 import com.mygdx.game.Enums.Layer
 import com.mygdx.game.LocationImpl
 
-class WorldLeaf(Position: Vector2, size: Vector2,location: LocationImpl) : GameObject(Position, size,location),ItemObject {
-    override val texture = Texture("WorldLeaf.png")
+class GenericItemObject(Position: Vector2, size: Vector2, location: LocationImpl, item: Item, texture: Texture) : GameObject(Position, size,location),ItemObject {
+    override val texture = texture
     override val collition = ItemCollition
-    override val item = Item.WORLDLEAF
+    override val item = item
     override val layer = Layer.ONGROUND
 }

@@ -1,7 +1,10 @@
 package com.mygdx.game.UI.Dialogue
 
+import com.mygdx.game.Events.ContinueConversationEvent
+import com.mygdx.game.GameObjects.MoveableEntities.NPC
 import com.mygdx.game.Interfaces.Character
+import com.mygdx.game.Interfaces.Event
 
-class DialogueText(val text: String) {
+open class DialogueText(val text: String, npc: NPC, open var event:Event = ContinueConversationEvent(npc)) {
 
 }

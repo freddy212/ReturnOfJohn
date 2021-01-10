@@ -7,49 +7,55 @@ import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.math.Vector3
 import com.mygdx.game.Enums.Direction
+import com.mygdx.game.Events.DrawSentenceEvent
 import com.mygdx.game.GameObjects.ItemAbilities.Shield
 import com.mygdx.game.GameObjects.MoveableEntities.Player
 import com.mygdx.game.GameObjects.MoveableEntities.WaterGunSpray
+import com.mygdx.game.Interfaces.KeyPressedCollition
+import com.mygdx.game.Managers.EventManager
 import com.mygdx.game.Managers.LocationManager
+import com.mygdx.game.UI.Dialogue.OptionSentence
 
 class ROJInputAdapter(private val camera : OrthographicCamera, val player: Player) : InputAdapter(){
-    val waterSpray = WaterGunSpray(Vector2(0f,0f), Vector2(20f,200f),null)
-    val shield = Shield(Vector2(0f,0f), Vector2(40f,40f),null)
     override fun touchDown(screenX: Int, screenY: Int, pointer: Int, button: Int): Boolean {
         if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)){
             val vec3 = camera.unproject(Vector3(screenX.toFloat(),screenY.toFloat(),0f))
             val transformedVertices = player.polygon.transformedVertices
             println("x is :   ${vec3.x} y is : ${vec3.y}")
             println("player polygonPosition is : " + transformedVertices[0] + " " + transformedVertices[1])
-            if(shield !in crossLocationGameObjects.List && player.canMove()){
-                player.freezeMoving()
-                crossLocationGameObjects.add(shield)
-            }
-        }
-        if(button == Input.Buttons.RIGHT){
-            if(waterSpray !in crossLocationGameObjects.List && player.canMove()){
-                crossLocationGameObjects.add(waterSpray)
-            }
         }
         return super.touchDown(screenX, screenY, pointer, button)
     }
 
-    override fun touchUp(screenX: Int, screenY: Int, pointer: Int, button: Int): Boolean {
-        if(button == Input.Buttons.RIGHT){
-            crossLocationGameObjects.remove(waterSpray)
-        }
-        if(button == Input.Buttons.LEFT && shield in crossLocationGameObjects.List){
-            player.enableMoving()
-            crossLocationGameObjects.remove(shield)
-        }
-        return super.touchUp(screenX, screenY, pointer, button)
-    }
-
     override fun keyDown(keycode: Int): Boolean {
-        if(Gdx.input.isKeyPressed(Input.Keys.SPACE)){
-            handleCollitions(player,player.polygon,LocationManager.ButtonCollitionGameObjects)
+        if (keycode ==Input.Keys.SPACE) {
+            handleCollitions(player, player.polygon, LocationManager.ButtonCollitionGameObjects.filter {(it.collition as KeyPressedCollition).specificButton == Input.Keys.SPACE })
+        }
+
+
+        for (itemAbility in player.itemAbilities.List){
+            if(keycode == itemAbility.triggerKey){
+                itemAbility.activeAction()
+            }
+        }
+        if(keycode == Input.Keys.LEFT || keycode == Input.Keys.RIGHT || keycode == Input.Keys.A || keycode == Input.Keys.D){
+            val readSentenceEvent = EventManager.eventManager.List.find {it is DrawSentenceEvent} as DrawSentenceEvent?
+            if(readSentenceEvent != null){
+                if(readSentenceEvent.conversationHandler.GetSentence() is OptionSentence){
+                    (readSentenceEvent.conversationHandler.GetSentence() as OptionSentence).textChoice.changeActive()
+                }
+            }
         }
         return super.keyDown(keycode)
+    }
+
+    override fun keyUp(keycode: Int): Boolean {
+        for (itemAbility in player.itemAbilities.List){
+            if(keycode == itemAbility.triggerKey && itemAbility in crossLocationGameObjects.List){
+                itemAbility.InactiveAction()
+            }
+        }
+        return super.keyUp(keycode)
     }
     fun handleInput(player: Player) {
         when {
@@ -66,6 +72,7 @@ class ROJInputAdapter(private val camera : OrthographicCamera, val player: Playe
                 player.move(Direction.DOWN)
             }
         }
+
     }
 
 }

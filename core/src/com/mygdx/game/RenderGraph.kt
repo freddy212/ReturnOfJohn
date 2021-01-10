@@ -11,9 +11,11 @@ class RenderGraph {
             RenderList.add(renderable)
         }
         fun render(batch: PolygonSpriteBatch){
+            batch.begin()
             RenderList.sortBy {it.layer}
             RenderList.forEach{it.render(batch)}
             RenderList.clear()
+            batch.end()
         }
     }
 }

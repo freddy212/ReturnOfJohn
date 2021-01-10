@@ -8,4 +8,5 @@ import com.mygdx.game.Enums.Direction
 
 interface DynamicEntity {
     fun setPosition(nextPosition: Vector2,gameObject: GameObject)
+    fun setRotation(direction: Direction, directionalObject: DirectionalObject)
 }

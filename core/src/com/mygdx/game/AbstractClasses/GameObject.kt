@@ -8,11 +8,10 @@ import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.Collitions.CanMoveCollition
 import com.mygdx.game.InitSprite
 import com.mygdx.game.Interfaces.Collition
-import com.mygdx.game.Interfaces.MoveCollition
 import com.mygdx.game.Interfaces.ObjectProperty
 import com.mygdx.game.Interfaces.Renderable
 import com.mygdx.game.LocationImpl
-import com.mygdx.game.Managers.ResourceList
+import com.mygdx.game.ResourceList
 import com.mygdx.game.RectanglePolygon
 import com.mygdx.game.RenderGraph.Companion.addToSceneGraph
 
@@ -43,8 +42,7 @@ abstract class GameObject (val Position: Vector2, val size: Vector2,val location
             property.frameTask()
         }
     }
-    open fun initOnLocation(){
-
-    }
+    open var onLocationEnter: ()-> Unit = {}
+    open var onLocationExit: ()->Unit = {}
     constructor(Position: Vector2, size: Vector2): this(Position,size,null)
 }

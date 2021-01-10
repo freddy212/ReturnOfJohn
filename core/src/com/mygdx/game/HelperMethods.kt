@@ -1,9 +1,11 @@
 package com.mygdx.game
 
+import com.badlogic.gdx.assets.AssetManager
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch
 import com.badlogic.gdx.graphics.g2d.Sprite
+import com.badlogic.gdx.graphics.g3d.Model
 import com.badlogic.gdx.math.Intersector.intersectSegments
 import com.badlogic.gdx.math.Polygon
 import com.badlogic.gdx.math.Vector2
@@ -181,6 +183,15 @@ fun GetNextStep(d: Direction, speed: Float): Vector2{
         }
 }
 fun GetCollidingObjects(gameObjects: List<GameObject>,polygon: Polygon): List<GameObject>{
-        return gameObjects.filter { p -> intersectPolygonEdges(FloatArray(polygon.transformedVertices), FloatArray(p.polygon.transformedVertices))
+        val collidingObjects =  gameObjects.filter { p -> intersectPolygonEdges(FloatArray(polygon.transformedVertices), FloatArray(p.polygon.transformedVertices))
                 || polygon.anyPointInPolygon(p.polygon)}
+        val filteredCollitions = collidingObjects.fold(collidingObjects, {objects,nextObject -> nextObject.collition.filterCollitions(objects)})
+        return filteredCollitions
+}
+
+fun InitAssets(): AssetManager {
+        val assetManager = AssetManager()
+        assetManager.load("ManBlender.g3db", Model::class.java)
+        assetManager.finishLoading()
+        return assetManager
 }

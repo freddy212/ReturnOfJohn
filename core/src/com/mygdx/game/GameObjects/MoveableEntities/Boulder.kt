@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.AbstractClasses.DefaultMovement
 import com.mygdx.game.AbstractClasses.MoveableObject
-import com.mygdx.game.Collitions.BoulderPlayerCollition
+import com.mygdx.game.Collitions.BoulderCollition
 import com.mygdx.game.EdgeOfLocationStrategies.RemoveObject
 import com.mygdx.game.Enums.Direction
 import com.mygdx.game.Enums.Layer
@@ -15,7 +15,7 @@ class Boulder(directionGiven: Direction, Position: Vector2, size: Vector2,locati
         MoveableObject(middleOfObject(Position,size),size,location){
     override val movementStrategy = DefaultMovement(RemoveObject())
     override val texture = Texture("Boulder.png")
-    override var speed = 2f
+    override var speed = 5f
     override var direction = directionGiven
     override val layer = Layer.AIR
 
@@ -24,5 +24,5 @@ class Boulder(directionGiven: Direction, Position: Vector2, size: Vector2,locati
         this.move(direction)
     }
 
-    override val collition = BoulderPlayerCollition()
+    override val collition = BoulderCollition()
 }

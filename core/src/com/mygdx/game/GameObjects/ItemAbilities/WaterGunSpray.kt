@@ -1,23 +1,24 @@
 package com.mygdx.game.GameObjects.MoveableEntities
 
 import com.badlogic.gdx.Gdx
+import com.badlogic.gdx.Input
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.ParticleEffect
 import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch
 import com.badlogic.gdx.math.Vector2
+import com.mygdx.game.AbstractClasses.ItemAbility
 import com.mygdx.game.AbstractClasses.DefaultPositionChange
-import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.Collitions.WaterGunCollition
 import com.mygdx.game.Enums.Direction
 import com.mygdx.game.Enums.Layer
 import com.mygdx.game.Interfaces.DynamicEntity
-import com.mygdx.game.LocationImpl
 import com.mygdx.game.Managers.LocationManager
 import com.mygdx.game.handleCollitions
 import com.mygdx.game.player
 
-class WaterGunSpray(Position: Vector2, size: Vector2, location: LocationImpl?): GameObject(Position, size, location),DynamicEntity by DefaultPositionChange {
-    override val texture = Texture("Sensor.png")
+class WaterGunSpray(Position: Vector2, size: Vector2): ItemAbility(Position, size),DynamicEntity by DefaultPositionChange {
+    override val triggerKey = Input.Keys.NUM_1
+    override val texture = Texture("WaterGun.png")
     override val layer = Layer.AIR
 
     var waterEffect: ParticleEffect

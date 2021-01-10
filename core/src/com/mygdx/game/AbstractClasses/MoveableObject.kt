@@ -11,7 +11,7 @@ abstract class MoveableObject(Position: Vector2, size: Vector2, location: Locati
         DynamicEntity by DefaultPositionChange{
     open fun move(d: Direction): Boolean{
         if(canChangeDirection()){
-            this.direction = d
+            setRotation(d,this)
         }
         if(canMove){
             return movementStrategy.moveEntity(this)
