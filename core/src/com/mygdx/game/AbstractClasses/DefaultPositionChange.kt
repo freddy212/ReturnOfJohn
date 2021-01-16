@@ -5,6 +5,7 @@ import com.mygdx.game.Enums.Direction
 import com.mygdx.game.Interfaces.DirectionalObject
 import com.mygdx.game.Interfaces.DynamicEntity
 import com.mygdx.game.UI.Dialogue.DefaultCharacter
+import com.mygdx.game.angleBetweenPoints
 
 object DefaultPositionChange: DynamicEntity {
     override fun setPosition(position: Vector2, gameObject: GameObject) {
@@ -12,12 +13,6 @@ object DefaultPositionChange: DynamicEntity {
         val polygon = gameObject.polygon
         sprite.setPosition(position.x,position.y)
         polygon.setPosition(position.x - polygon.vertices[0],position.y - polygon.vertices[1])
-
-
-    }
-
-    override fun setRotation(direction: Direction, directionalObject: DirectionalObject) {
-        directionalObject.direction = direction
     }
 
 }

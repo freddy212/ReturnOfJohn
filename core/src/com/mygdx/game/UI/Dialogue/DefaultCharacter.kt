@@ -3,64 +3,83 @@ package com.mygdx.game.UI.Dialogue
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch
-import com.badlogic.gdx.graphics.g3d.Model
-import com.badlogic.gdx.graphics.g3d.ModelInstance
-import com.badlogic.gdx.math.Quaternion
 import com.badlogic.gdx.math.Vector2
+import com.badlogic.gdx.math.Vector3
 import com.mygdx.game.*
+import com.mygdx.game.AbstractClasses.DefaultRotationalObject
 import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.AbstractClasses.MoveableObject
-import com.mygdx.game.Enums.Direction
-import com.mygdx.game.GameObjects.MoveableEntities.Player
+import com.mygdx.game.AbstractClasses.RotationalObject
+import com.mygdx.game.Enums.CharacterState
+import com.mygdx.game.Enums.getDirectionUnitVector
 import com.mygdx.game.Interfaces.Character
 import com.mygdx.game.Interfaces.DirectionalObject
+import com.mygdx.game.Interfaces.ModelInstanceHandler
 
-abstract class DefaultCharacter(Position: Vector2, size: Vector2, location: LocationImpl?) : Character,MoveableObject(Position, size, location) {
+abstract class DefaultCharacter(Position: Vector2, size: Vector2, location: LocationImpl?,
+                                val modelHandler: ModelInstanceHandler) : Character,MoveableObject(Position, size, location),
+                                RotationalObject by DefaultRotationalObject(),DirectionalObject{
     override val font = BitmapFont()
-    val model = assets.get("ManBlender.g3db", Model::class.java)
-    lateinit var modelInstance: ModelInstance
+    val speedDecrease = 0.90f
+    var characterState: CharacterState = CharacterState.FREE
+        private set
+    var originalSpeed: Float? = null
+    var stunDuration = 4
+    lateinit var launchUnitVector: Vector2
+    override var canChangeDirection = true
 
     init {
         font.data.setScale(2f)
         font.color = Color.WHITE
-        modelInstance = ModelInstance(model)
-        modelInstance.transform.setTranslation(Position.x + size.x / 2,Position.y + size.y / 2,-150f)
-        modelInstance.nodes.get(0).rotation.setEulerAngles(0f,-20f,0f)
-        modelInstance.nodes.get(0).scale.set(20f,20f,20f);
-        modelInstance.calculateTransforms()
-        //instances.add(modelInstance)
     }
 
     override fun setPosition(nextPosition: Vector2, gameObject: GameObject) {
-        val rotation = when(direction){
-            Direction.UP -> 180f
-            Direction.RIGHT -> 90f
-            Direction.DOWN -> 0f
-            Direction.LEFT -> 270f
-        }
-        modelInstance.transform.setTranslation(nextPosition.x + sprite.width / 2, nextPosition.y + sprite.height / 2,-150f)
-       // modelInstance.transform.set(Quaternion().setEulerAngles(0f,0f,rotation))
+        modelHandler.setPosition(Vector3(nextPosition.x + sprite.width / 2, nextPosition.y + sprite.height / 2,-150f))
         super.setPosition(nextPosition, gameObject)
     }
 
-    override fun setRotation(direction: Direction, directionalObject: DirectionalObject) {
-        super.setRotation(direction, directionalObject)
-        val rotation = when(direction){
-            Direction.UP -> 180f
-            Direction.RIGHT -> 90f
-            Direction.DOWN -> 0f
-            Direction.LEFT -> 270f
+    fun setCharacterRotation(unitVectorDirection: Vector2) {
+        this.setRotation(unitVectorDirection,this,90f)
+        direction = getDirectionFromAngle(angle)
+        modelHandler.setRotation(angle,Vector3(sprite.x + sprite.width / 2, sprite.y + sprite.height / 2,-150f))
+    }
+    override fun move(unitVectorDirection: Vector2): Boolean {
+        var moveSuccessfull = false
+        if(canChangeDirection()){
+            setCharacterRotation(unitVectorDirection)
         }
-        modelInstance.transform.set(Quaternion().setEulerAngles(0f,0f,rotation))
-        modelInstance.transform.setTranslation(sprite.x + sprite.width / 2, sprite.y + sprite.height / 2,-150f)
+        if(characterState == CharacterState.FREE){
+           moveSuccessfull = super.move(unitVectorDirection)
+           if(!moveSuccessfull){
+              moveSuccessfull = super.move(getDirectionUnitVector(direction))
+           }
+        }
+        return moveSuccessfull
     }
 
     override fun render(batch: PolygonSpriteBatch) {
-            batch.end()
-            modelBatch.begin(camera)
-            modelBatch.render(modelInstance,environment)
-            modelBatch.end()
-            batch.begin()
-            camera.update()
+            modelHandler.render(batch)
+    }
+
+    override fun frameTask() {
+        if(characterState == CharacterState.HIT){
+            handleStunned(launchUnitVector)
+        }
+        super.frameTask()
+    }
+    fun isHit(launchUnitVector: Vector2){
+        originalSpeed = originalSpeed ?: currentSpeed
+        characterState = CharacterState.HIT
+        this.launchUnitVector = launchUnitVector
+        currentSpeed = stunDuration * originalSpeed!!
+        setCharacterRotation(launchUnitVector)
+    }
+    private fun handleStunned(directionUnitVector: Vector2){
+        currentSpeed *= speedDecrease
+        if(currentSpeed <= originalSpeed!!){
+            currentSpeed = originalSpeed!!
+            characterState = CharacterState.FREE
+        }
+        super.move(directionUnitVector)
     }
 }

@@ -1,22 +1,27 @@
 package com.mygdx.game.GameObjects.MoveableEntities
 
-import com.badlogic.gdx.graphics.Texture
+import com.mygdx.game.DefaultTextureHandler
+import com.badlogic.gdx.graphics.g3d.Model
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.*
 import com.mygdx.game.AbstractClasses.DefaultMovement
-import com.mygdx.game.AbstractClasses.MoveableObject
 import com.mygdx.game.Collitions.IllegalMoveCollition
 import com.mygdx.game.EdgeOfLocationStrategies.NoAction
 import com.mygdx.game.Enums.Direction
 import com.mygdx.game.Enums.Layer
 import com.mygdx.game.GameObjects.Sensors.TalkSensor
-import com.mygdx.game.Interfaces.Character
+import com.mygdx.game.Interfaces.ModelInstanceHandler
+import com.mygdx.game.Managers.DefaultAssetHandler.assets
 import com.mygdx.game.UI.Dialogue.DefaultCharacter
 
-class NPC(Position: Vector2, size: Vector2 = Vector2(128f,128f), location: LocationImpl?) : DefaultCharacter(Position, size, location){
-    override val texture = Texture("DefaultPerson.png")
-    override val layer = Layer.PERSON
-    override var speed = 2f
+class NPC(Position: Vector2, size: Vector2 = Vector2(128f,128f), location: LocationImpl?,
+          modelHandler: ModelInstanceHandler = DefaultModelInstanceHandler(
+                  assets.get("ManBlender.g3db", Model::class.java),
+                  Position,size))
+    : DefaultCharacter(Position, size, location,modelHandler){
+    override val texture = DefaultTextureHandler.getTexture("DefaultPerson.png")
+    override val layer = Layer.ONGROUND
+    override var currentSpeed = 2f
     override var direction = Direction.UP
     override val movementStrategy = DefaultMovement(NoAction())
     val conversationsHandler = ConversationHandler()
@@ -29,12 +34,13 @@ class NPC(Position: Vector2, size: Vector2 = Vector2(128f,128f), location: Locat
     init {
         sensors.forEach{location!!.addGameObject(it)}
     }
-    override fun move(d: Direction): Boolean {
-        val sucessfullMove = super.move(d)
+    override fun move(directionUnitVector: Vector2): Boolean {
+        /*val sucessfullMove = super.move(getDirectionUnitVector(this.direction))
         if(sucessfullMove){
-            sensors.forEach{it.setPosition(Vector2(it.sprite.x,it.sprite.y) + GetNextStep(d,this.speed),it)}
+            sensors.forEach{it.setPosition(Vector2(it.sprite.x,it.sprite.y) + getDirectionUnitVector(direction) * this.currentSpeed,it)}
         }
-        return sucessfullMove
+        return sucessfullMove*/
+        return true
     }
     fun add(){
         sensors.forEach {this.location!!.addGameObject(it)}

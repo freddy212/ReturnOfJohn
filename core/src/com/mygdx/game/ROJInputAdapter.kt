@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.math.Vector3
 import com.mygdx.game.Enums.Direction
+import com.mygdx.game.Enums.getDirectionUnitVector
 import com.mygdx.game.Events.DrawSentenceEvent
 import com.mygdx.game.GameObjects.ItemAbilities.Shield
 import com.mygdx.game.GameObjects.MoveableEntities.Player
@@ -17,13 +18,8 @@ import com.mygdx.game.Managers.LocationManager
 import com.mygdx.game.UI.Dialogue.OptionSentence
 
 class ROJInputAdapter(private val camera : OrthographicCamera, val player: Player) : InputAdapter(){
+    var clickPosition = Vector3(0f,0f,0f)
     override fun touchDown(screenX: Int, screenY: Int, pointer: Int, button: Int): Boolean {
-        if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)){
-            val vec3 = camera.unproject(Vector3(screenX.toFloat(),screenY.toFloat(),0f))
-            val transformedVertices = player.polygon.transformedVertices
-            println("x is :   ${vec3.x} y is : ${vec3.y}")
-            println("player polygonPosition is : " + transformedVertices[0] + " " + transformedVertices[1])
-        }
         return super.touchDown(screenX, screenY, pointer, button)
     }
 
@@ -58,18 +54,22 @@ class ROJInputAdapter(private val camera : OrthographicCamera, val player: Playe
         return super.keyUp(keycode)
     }
     fun handleInput(player: Player) {
+        if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)){
+            clickPosition = camera.unproject(Vector3(Gdx.input.x.toFloat(), Gdx.input.y.toFloat(), 0f))
+            player.move(getUnitVectorTowardsPoint(Vector2(player.sprite.x,player.sprite.y),Vector2(clickPosition.x,clickPosition.y)))
+        }
         when {
             Gdx.input.isKeyPressed(Input.Keys.W) -> {
-                player.move(Direction.UP)
+                player.move(getDirectionUnitVector(Direction.UP))
             }
             Gdx.input.isKeyPressed(Input.Keys.A) -> {
-                player.move(Direction.LEFT)
+                player.move(getDirectionUnitVector(Direction.LEFT))
             }
             Gdx.input.isKeyPressed(Input.Keys.D) -> {
-                player.move(Direction.RIGHT)
+                player.move(getDirectionUnitVector(Direction.RIGHT))
             }
             Gdx.input.isKeyPressed(Input.Keys.S) -> {
-                player.move(Direction.DOWN)
+                player.move(getDirectionUnitVector(Direction.DOWN))
             }
         }
 

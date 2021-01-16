@@ -1,6 +1,6 @@
 package com.mygdx.game.Areas.DojoArea
 
-import com.badlogic.gdx.graphics.Texture
+import com.mygdx.game.DefaultTextureHandler
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.Collitions.DoorCollition
@@ -15,10 +15,8 @@ import com.mygdx.game.GameObjects.GenericGameObject
 import com.mygdx.game.GameObjects.MoveableEntities.DojoAttackObject
 import com.mygdx.game.GameObjects.MoveableEntities.NPC
 import com.mygdx.game.Interfaces.AreaIdentifier
-import com.mygdx.game.Interfaces.Quest
 import com.mygdx.game.Managers.EventManager
 import com.mygdx.game.Managers.LocationManager
-import com.mygdx.game.Timer.DefaultTimer
 import com.mygdx.game.UI.Dialogue.Conversations.GetDojoConversation
 import com.mygdx.game.doorMainAreaAndDojo
 import com.mygdx.game.middleOfObject
@@ -31,7 +29,7 @@ fun getDojoObjects(): List<GameObject>{
 
     val doorCollition = DoorCollition(doorPosition,AreaIdentifier.MAINAREA, doorMainAreaAndDojo ,Direction.DOWN)
 
-    val door = Door(doorPosition, Vector2(32f * 2, 64f), Texture("Door.png"), location1,Direction.DOWN,doorCollition)
+    val door = Door(doorPosition, Vector2(32f * 2, 64f), DefaultTextureHandler.getTexture("Door.png"), location1,Direction.DOWN,doorCollition)
     val size = Vector2(120f,60f)
     val position = location1.middle
     val itemTable = GenericGameObject(middleOfObject(position,size),size,"ItemTable.png",Layer.ONGROUND,location1,IllegalMoveCollition)

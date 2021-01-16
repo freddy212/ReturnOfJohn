@@ -1,6 +1,6 @@
 package com.mygdx.game.Areas.MainArea
 
-import com.badlogic.gdx.graphics.Texture
+import com.mygdx.game.DefaultTextureHandler
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.*
 import com.mygdx.game.AbstractClasses.GameObject
@@ -12,13 +12,11 @@ import com.mygdx.game.Enums.Direction
 import com.mygdx.game.Enums.Item
 import com.mygdx.game.Enums.Layer
 import com.mygdx.game.Enums.QuestIdentifier
-import com.mygdx.game.Events.DefaultEvent
 import com.mygdx.game.Events.ToggleCollitionEvent
 import com.mygdx.game.GameObjects.*
 import com.mygdx.game.GameObjects.ItemObjects.GenericItemObject
 import com.mygdx.game.GameObjects.MoveableEntities.NPC
 import com.mygdx.game.Interfaces.AreaIdentifier
-import com.mygdx.game.Interfaces.Quest
 import com.mygdx.game.Managers.LocationManager
 import com.mygdx.game.ObjectProperties.Fire
 import com.mygdx.game.UI.Dialogue.Conversations.GetFireConversation
@@ -50,7 +48,7 @@ fun getLocationGraveyard(): List<GameObject>{
 
     val toggleCollition = ToggleCollition(IllegalMoveCollition,doorCollition)
 
-    val door = Door(doorPosition, Vector2(32f * 2,64f * 2),Texture("CaveDoor.png"),graveyardLoc,Direction.UP,toggleCollition)
+    val door = Door(doorPosition, Vector2(32f * 2,64f * 2),DefaultTextureHandler.getTexture("CaveDoor.png"),graveyardLoc,Direction.UP,toggleCollition)
 
     val fireExtinguishedEvent = ToggleCollitionEvent(toggleCollition)
     val fire = Fire(door.Position,door.size,fireExtinguishedEvent,door)
@@ -81,7 +79,7 @@ fun getLocationFourObjects(): List<GameObject>{
 fun getWorldTreeObjects(): List<GameObject>{
     val location = LocationManager.findLocation("location8",AreaIdentifier.MAINAREA)
     val tree = Tree(location.middle, Vector2(64f * 2, 128f * 2),location)
-    val WorldLeaf = GenericItemObject(tree.topleft + Vector2(0f, 0f), Vector2(64f, 32f), location,Item.WORLDLEAF,Texture("WorldLeaf.png"))
-    val WorldLeaf2 = GenericItemObject(tree.bottomright + Vector2(0f, 0f), Vector2(64f, 32f), location,Item.WORLDLEAF,Texture("WorldLeaf.png"))
+    val WorldLeaf = GenericItemObject(tree.topleft + Vector2(0f, 0f), Vector2(64f, 32f), location,Item.WORLDLEAF,DefaultTextureHandler.getTexture("WorldLeaf.png"))
+    val WorldLeaf2 = GenericItemObject(tree.bottomright + Vector2(0f, 0f), Vector2(64f, 32f), location,Item.WORLDLEAF,DefaultTextureHandler.getTexture("WorldLeaf.png"))
     return listOf(tree,WorldLeaf,WorldLeaf2)
 }

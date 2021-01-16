@@ -32,9 +32,9 @@ class LocationManager {
         }
         fun LocationFrameTasks(){
             locations = activeArea.locations
-            val findPlayerLocation = locations.find{ x -> x.sprite.boundingRectangle.contains(Vector2(camera.position.x, camera.position.y)) }
+            val findPlayerLocation = locations.find{ x -> x.sprite.boundingRectangle.contains(Vector2(camera.position.x, camera.position.y)) } ?: oldLocation
+            val newLocation = findPlayerLocation
 
-            val newLocation = findPlayerLocation ?: throw PlayerOutOfBoundsException()
             if(oldLocation != newLocation) {
                 oldLocation = newLocation
                 ActiveLocations = (listOf(oldLocation) + oldLocation.adjacentLocations)

@@ -15,5 +15,8 @@ class ResourceList<T> {
     fun removeIf(p:Predicate<T>){
         mutableList.removeIf(p)
     }
+    fun clear(){
+        mutableList.clear()
+    }
 
 }

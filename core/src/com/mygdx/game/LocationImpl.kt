@@ -9,7 +9,7 @@ import com.mygdx.game.Enums.Layer
 import com.mygdx.game.GameObjects.Wall
 
 class LocationImpl(size: Vector2, Position: Vector2, private val objectCreationMethod: () -> List<GameObject> = {listOf()},
-                   override val texture: Texture = Texture("MainB.jpg")): GameObject(Position,size),Location{
+                   override val texture: Texture = DefaultTextureHandler.getTexture("MainB.jpg")): GameObject(Position,size),Location{
     private val AdjacentLocations = mutableListOf<LocationImpl>()
     private val ChildrenGameObjects: MutableList<GameObject> = mutableListOf()
     val adjacentLocations : List<LocationImpl>

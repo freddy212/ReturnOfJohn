@@ -11,6 +11,7 @@ import com.mygdx.game.Trimer.DelayTimer
 import com.mygdx.game.checkOpposingDirections
 import com.mygdx.game.getOpposingDirection
 import com.mygdx.game.player
+import com.mygdx.game.unaryMinus
 
 class ShieldCollition: MoveCollition by CanMoveCollition{
     val boulderDelay = mutableMapOf<Boulder,DelayTimer>()
@@ -26,7 +27,7 @@ class ShieldCollition: MoveCollition by CanMoveCollition{
                 if(fire == null) {
                     val delayTimer = DelayTimer(1f)
                     boulderDelay.put(entity, delayTimer)
-                    entity.direction = getOpposingDirection(entity.direction)
+                    entity.directionGiven = - entity.directionGiven
                 }else{
                     player.die()
                 }

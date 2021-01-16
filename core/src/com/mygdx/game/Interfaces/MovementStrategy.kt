@@ -7,5 +7,5 @@ import com.mygdx.game.Enums.Direction
 import java.util.*
 
 interface MovementStrategy {
-    fun moveEntity(moveableObject: MoveableObject): Boolean
+    fun moveEntity(moveableObject: MoveableObject,directionUnitVector: Vector2): Boolean
 }

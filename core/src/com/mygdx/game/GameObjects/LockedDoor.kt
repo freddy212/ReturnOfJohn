@@ -1,6 +1,6 @@
 package com.mygdx.game.GameObjects
 
-import com.badlogic.gdx.graphics.Texture
+import com.mygdx.game.DefaultTextureHandler
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.Collitions.IllegalMoveCollition
@@ -9,7 +9,7 @@ import com.mygdx.game.GameObjects.Sensors.KeySensor
 import com.mygdx.game.LocationImpl
 
 class LockedDoor(Position: Vector2, size: Vector2, location: LocationImpl?) : GameObject(Position, size, location) {
-    override val texture = Texture("LockedDoor.png")
+    override val texture = DefaultTextureHandler.getTexture("LockedDoor.png")
     override val layer = Layer.ONGROUND
 
     override val collition = IllegalMoveCollition

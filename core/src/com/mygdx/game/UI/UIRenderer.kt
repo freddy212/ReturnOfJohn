@@ -1,8 +1,6 @@
 package com.mygdx.game.UI
 
-import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch
-import com.mygdx.game.UI.QuestPanel.QuestContainer
 import com.mygdx.game.UI.QuestPanel.QuestPanel
 import com.mygdx.game.UI.ToolTipPanel.ToolTipPanel
 

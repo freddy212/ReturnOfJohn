@@ -1,6 +1,6 @@
 package com.mygdx.game.GameObjects.ItemAbilities
 
-import com.badlogic.gdx.graphics.Texture
+import com.mygdx.game.DefaultTextureHandler
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.*
 import com.mygdx.game.AbstractClasses.ItemAbility
@@ -14,8 +14,8 @@ import com.mygdx.game.Managers.LocationManager
 class Shield(Position: Vector2, size: Vector2): ItemAbility(Position, size),DynamicEntity by DefaultPositionChange{
 
     override val triggerKey = com.badlogic.gdx.Input.Keys.NUM_2
-    val textureFront = Texture("shield-front.png")
-    val textureSide = Texture("shield-side.png")
+    val textureFront = DefaultTextureHandler.getTexture("shield-front.png")
+    val textureSide = DefaultTextureHandler.getTexture("shield-side.png")
     var activeTexture = textureFront
 
     val frontSprite = InitSprite(textureFront)

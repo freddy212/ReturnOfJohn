@@ -18,6 +18,8 @@ import com.mygdx.game.Interfaces.Area
 import com.mygdx.game.Interfaces.DirectionalObject
 import com.mygdx.game.Interfaces.MoveCollition
 import com.mygdx.game.Managers.LocationManager
+import kotlin.math.PI
+import kotlin.math.atan2
 
 
 var font: BitmapFont = BitmapFont()
@@ -63,6 +65,19 @@ fun intersectPolygonEdges(polygon1: FloatArray, polygon2: FloatArray): Boolean {
 fun getUnitVectorTowardsPoint(position: Vector2, point: Vector2): Vector2{
         return point.sub(position).nor()
 }
+fun getOppositeUnitVector(position: Vector2, point: Vector2): Vector2{
+        val unitvector = getUnitVectorTowardsPoint(position,point)
+        return Vector2(-unitvector.x, -unitvector.y)
+}
+
+fun angleBetweenPoints(from: Vector2, to: Vector2): Float{
+        val atanresult = (Math.atan2(from.y - to.y.toDouble(), from.x - to.x.toDouble()))
+        return (atanresult * 180.0/ Math.PI).toFloat()
+}
+fun unitVectorToAngle(unitVector: Vector2):Float{
+        return (atan2(unitVector.y,unitVector.x)*180/PI).toFloat()
+}
+
 
 enum class InsertDirection{LEFT,UP,RIGHT,DOWN,MIDDLE}
 fun GetPositionRelativeToLocation(location: LocationImpl, size: Vector2, direction: InsertDirection, directionOnPlane:InsertDirection): Vector2{
@@ -102,7 +117,7 @@ fun addLocation(location: LocationImpl,area: Area): LocationImpl{
 }
 fun addLocationRelative(location: LocationImpl, size:Vector2, direction:InsertDirection, area: Area,
                         directionOnPlane:InsertDirection,objectCreationMethod: () -> List<GameObject> = {listOf()},
-                        texture: Texture = Texture("MainB.jpg")):LocationImpl{
+                        texture: Texture = DefaultTextureHandler.getTexture("MainB.jpg")):LocationImpl{
         val pos1 = GetPositionRelativeToLocation(location,size,direction,directionOnPlane)
         val newLocation = LocationImpl(size,pos1, objectCreationMethod,texture)
         location.addAdjacentLocation(newLocation)
@@ -194,4 +209,32 @@ fun InitAssets(): AssetManager {
         assetManager.load("ManBlender.g3db", Model::class.java)
         assetManager.finishLoading()
         return assetManager
+}
+fun entityWithinLocations(polygonToCheck: Polygon): Boolean {
+        var inLocation1 = false
+        for (point in getPolygonPoints(polygonToCheck)) {
+                inLocation1 = false
+                for (rectangle in LocationManager.ActiveLocations.map { x -> x.sprite.boundingRectangle }) {
+                        if (rectangle.contains(point)) {
+                                inLocation1 = true
+                                break
+                        }
+                }
+                if (!inLocation1) {
+                        break
+                }
+        }
+        //val locationsAsPoligons:List<Polygon> = LocationManager.ActiveLocations.map { x -> RectanglePolygon(x.sprite.boundingRectangle) }
+        //val entityNoIntersection = locationsAsPoligons.none { intersectPolygonEdges(FloatArray(polygonToCheck.transformedVertices),
+               // FloatArray(it.transformedVertices))}
+        return inLocation1
+}
+fun getDirectionFromAngle(angleToCheck: Float):Direction{
+
+        return when(angleToCheck){
+                in 45f..135f -> Direction.RIGHT
+                in 135f..225f -> Direction.UP
+                in 225f..315f -> Direction.LEFT
+                else -> Direction.DOWN
+        }
 }

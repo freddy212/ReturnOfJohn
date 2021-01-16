@@ -1,6 +1,6 @@
 package com.mygdx.game.GameObjects
 
-import com.badlogic.gdx.graphics.Texture
+import com.mygdx.game.DefaultTextureHandler
 import com.badlogic.gdx.math.Polygon
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.AbstractClasses.GameObject
@@ -10,7 +10,7 @@ import com.mygdx.game.LocationImpl
 import com.mygdx.game.middleOfObject
 
 class Tree(Position: Vector2, size: Vector2,location: LocationImpl) : GameObject(middleOfObject(Position, size), size,location) {
-    override val texture = Texture("World Tree.png")
+    override val texture = DefaultTextureHandler.getTexture("World Tree.png")
     override val polygon = Polygon()
     override val collition = IllegalMoveCollition
     override val layer = Layer.AIR

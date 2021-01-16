@@ -13,29 +13,21 @@ import com.badlogic.gdx.graphics.g3d.ModelBatch
 import com.badlogic.gdx.graphics.g3d.ModelInstance
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight
-import com.badlogic.gdx.graphics.g3d.utils.CameraInputController
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
-import com.badlogic.gdx.math.Quaternion
 import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.math.Vector2
-import com.badlogic.gdx.math.Vector3
-import com.mygdx.game.Areas.DojoArea.initializeDojo
-import com.mygdx.game.Areas.DungeonArea.initializeDungeon
-import com.mygdx.game.Areas.MainArea.initializeMainArea
-import com.mygdx.game.Areas.ShopArea.initializeShop
-import com.mygdx.game.Enums.Direction
+import com.mygdx.game.GameObjects.ItemAbilities.Shield
 import com.mygdx.game.GameObjects.MoveableEntities.Player
+import com.mygdx.game.Managers.AreaInitializerManager
+import com.mygdx.game.Managers.DefaultAssetHandler
 import com.mygdx.game.Managers.EventManager
 import com.mygdx.game.Managers.LocationManager
 import com.mygdx.game.UI.UIRenderer
 
-
-val assets by lazy{InitAssets()}
-
 val modelBatch by lazy{ModelBatch()}
 val environment by lazy{Environment()}
 val camera: OrthographicCamera = OrthographicCamera()
-val player by lazy{Player(Vector2(0f, 0f), Vector2(32f,40f))}
+lateinit var player: Player
 lateinit var playerSize: Vector2
 class MainGame : ApplicationAdapter() {
     lateinit internal var batch: PolygonSpriteBatch
@@ -51,7 +43,9 @@ class MainGame : ApplicationAdapter() {
     override fun create() {
 
         Gdx.gl.glClearColor(0f,0f,0f,0f)
+        DefaultAssetHandler.setAssetManager(InitAssets())
         batch = PolygonSpriteBatch()
+        player =  Player(Vector2(0f, 0f), Vector2(32f,40f))
         uiRenderer = UIRenderer()
         firstpoly = RectanglePolygon(Vector2(50f,0f),500f,500f)
         firstpoly.vertices = firstpoly.vertices.map { x -> x * 1f }.toFloatArray()
@@ -63,10 +57,7 @@ class MainGame : ApplicationAdapter() {
         testRect = Rectangle(0f,0f,200f,200f)
         thirdpoly = RectanglePolygon(Vector2(1000f,800f),100f,100f)
         playerSize = Vector2(player.sprite.width,player.sprite.height)
-        initializeMainArea()
-        initializeDungeon()
-        initializeShop()
-        initializeDojo()
+        AreaInitializerManager.init()
         shapeRenderer = ShapeRenderer()
         camera.setToOrtho(
                 false,
@@ -76,8 +67,8 @@ class MainGame : ApplicationAdapter() {
         font.data.setScale(2f)
         inventory = Inventory()
         inputAdapter = ROJInputAdapter(camera,player)
-       // val shield = Shield(Vector2(0f,0f), Vector2(40f,40f))
-       // player.addItemAbility(shield)
+        val shield = Shield(Vector2(0f,0f), Vector2(60f,40f))
+        player.addItemAbility(shield)
         initInputAdapter()
 
         environment.set(ColorAttribute(ColorAttribute.AmbientLight, 0.4f, 0.4f, 0.4f, 1f))
@@ -97,11 +88,11 @@ class MainGame : ApplicationAdapter() {
        // player.frameAction()
         inputAdapter.handleInput(player)
         camera.position.set(player.sprite.x, player.sprite.y,4f)
-        camera.update()
         RenderGraph.render(batch)
         drawrects()
         EventManager.executeEvents()
         uiRenderer.render()
+        camera.update()
     }
 
     fun drawrects(){

@@ -2,7 +2,7 @@ package com.mygdx.game.GameObjects.MoveableEntities
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.Input
-import com.badlogic.gdx.graphics.Texture
+import com.mygdx.game.DefaultTextureHandler
 import com.badlogic.gdx.graphics.g2d.ParticleEffect
 import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch
 import com.badlogic.gdx.math.Vector2
@@ -18,7 +18,7 @@ import com.mygdx.game.player
 
 class WaterGunSpray(Position: Vector2, size: Vector2): ItemAbility(Position, size),DynamicEntity by DefaultPositionChange {
     override val triggerKey = Input.Keys.NUM_1
-    override val texture = Texture("WaterGun.png")
+    override val texture = DefaultTextureHandler.getTexture("WaterGun.png")
     override val layer = Layer.AIR
 
     var waterEffect: ParticleEffect

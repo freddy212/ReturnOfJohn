@@ -5,10 +5,10 @@ import com.mygdx.game.AbstractClasses.MoveableObject
 import com.mygdx.game.GetNextStep
 import com.mygdx.game.Interfaces.CannotMoveStrategy
 import com.mygdx.game.plus
+import com.mygdx.game.times
 
 class MoveRegardless: CannotMoveStrategy {
     override fun CannotMoveAction(moveableObject: MoveableObject) {
-        val nextPos = GetNextStep(moveableObject.direction,moveableObject.speed)
-        moveableObject.setPosition(Vector2(moveableObject.sprite.x,moveableObject.sprite.y) + nextPos,moveableObject)
+        moveableObject.setPosition(Vector2(moveableObject.sprite.x,moveableObject.sprite.y) + moveableObject.unitVectorDirection * moveableObject.currentSpeed,moveableObject)
     }
 }
