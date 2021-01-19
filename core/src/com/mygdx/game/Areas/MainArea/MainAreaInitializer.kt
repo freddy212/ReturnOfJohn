@@ -2,10 +2,11 @@ package com.mygdx.game.Areas.MainArea
 
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.*
-import com.mygdx.game.Areas.DungeonArea.getLocationNineCaveObjects
+import com.mygdx.game.GameObjects.Fence
 import com.mygdx.game.Interfaces.Area
 import com.mygdx.game.Interfaces.AreaIdentifier
 import com.mygdx.game.Interfaces.AreaInitializer
+import com.mygdx.game.Locations.DamageLocation
 import com.mygdx.game.Managers.LocationManager
 class MainAreaInitializer: AreaInitializer {
     override fun initializeArea(): Area {
@@ -26,7 +27,13 @@ class MainAreaInitializer: AreaInitializer {
         return area
     }
     private fun createFireLands(location2: LocationImpl, area: Area){
-        val location1 = addLocationRelative(location2, Vector2(1200f, 128f), InsertDirection.LEFT, area, InsertDirection.MIDDLE)
-        val location2 = addLocationRelative(location1, Vector2(500f, 500f), InsertDirection.DOWN, area, InsertDirection.LEFT)
+        /*val location9 = addLocationRelative(location2, Vector2(1200f, 128f), InsertDirection.LEFT, area, InsertDirection.MIDDLE)
+        val location10 = addLocationRelative(location9, Vector2(500f, 500f), InsertDirection.DOWN, area, InsertDirection.LEFT,::getFireLandsLocationTwo)
+        location10.onLocationEnter = {
+            val deadBoulderGenerators = getFireLandsLocationTwo()
+            deadBoulderGenerators.forEach { location10.addGameObject(it) }
+        }*/
+        val fireLandsMainGround = DefaultTextureHandler.getTexture("MainB.jpg")
+        val location9 = addLocationRelative(location2, Vector2(1000f, 2000f), InsertDirection.LEFT, area, InsertDirection.MIDDLE,::getFireLandsLocationTwo,DamageLocation())
     }
 }

@@ -9,7 +9,7 @@ import com.mygdx.game.Enums.Layer
 import com.mygdx.game.GameObjects.LockedDoor
 import com.mygdx.game.LocationImpl
 
-class KeySensor(Position: Vector2, size: Vector2, location: LocationImpl,val lockedDoor: LockedDoor) : GameObject(Position, size,location){
+class KeySensor(Position: Vector2, size: Vector2, location: LocationImpl, val lockedDoor: LockedDoor) : GameObject(Position, size,location){
     override val texture = DefaultTextureHandler.getTexture("sensor.png")
     override val layer = Layer.ONGROUND
     override fun render(batch: PolygonSpriteBatch){

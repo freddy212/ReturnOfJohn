@@ -7,12 +7,13 @@ import com.mygdx.game.Interfaces.Area
 import com.mygdx.game.Interfaces.AreaIdentifier
 import com.mygdx.game.Interfaces.AreaInitializer
 import com.mygdx.game.LocationImpl
+import com.mygdx.game.Locations.DefaultLocation
 import com.mygdx.game.addLocation
 
 class ShopAreaInitializer():AreaInitializer {
     override fun initializeArea(): Area {
         val area = DefaultArea(AreaIdentifier.SHOP)
-        val location1 = LocationImpl(Vector2(600f, 600f), Vector2(0f, 0f), ::getShopObjects, DefaultTextureHandler.getTexture("HouseFloor.jpg"))
+        val location1 = LocationImpl(Vector2(600f, 600f), Vector2(0f, 0f), ::getShopObjects, DefaultLocation(DefaultTextureHandler.getTexture("HouseFloor.jpg")))
         addLocation(location1, area)
         return area
     }

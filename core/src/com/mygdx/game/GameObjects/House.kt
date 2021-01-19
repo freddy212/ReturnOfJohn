@@ -12,7 +12,7 @@ import com.mygdx.game.Enums.Direction
 import com.mygdx.game.Enums.Layer
 import com.mygdx.game.Interfaces.AreaIdentifier
 
-class House(Position: Vector2, size: Vector2,location: LocationImpl,doorConnection: DoorConnection,areaIdentifier: AreaIdentifier): GameObject(middleOfObject(Position, size), size,location) {
+class House(Position: Vector2, size: Vector2, location: LocationImpl, doorConnection: DoorConnection, areaIdentifier: AreaIdentifier): GameObject(middleOfObject(Position, size), size,location) {
     override val texture = DefaultTextureHandler.getTexture("House.png")
     override val polygon = Polygon()
     var door: Door
@@ -31,7 +31,7 @@ class House(Position: Vector2, size: Vector2,location: LocationImpl,doorConnecti
                                 this.door.x, this.door.y)
         location.addGameObject(door)
     }
-    constructor(x:Float,y:Float,width:Float,height:Float,location: LocationImpl,doorConnection: DoorConnection,areaIdentifier: AreaIdentifier): this(Vector2(x,y),Vector2(width,height),location,
+    constructor(x:Float, y:Float, width:Float, height:Float, location: LocationImpl, doorConnection: DoorConnection, areaIdentifier: AreaIdentifier): this(Vector2(x,y),Vector2(width,height),location,
                                                                                                                                                 doorConnection,areaIdentifier)
     override fun render(batch: PolygonSpriteBatch) {
         sprite.draw(batch)

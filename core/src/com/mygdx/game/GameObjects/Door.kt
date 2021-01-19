@@ -10,7 +10,7 @@ import com.mygdx.game.Interfaces.DirectionalObject
 import com.mygdx.game.Interfaces.MoveCollition
 import com.mygdx.game.LocationImpl
 
-class Door(Position: Vector2, size: Vector2, texture: Texture, location:LocationImpl,
+class Door(Position: Vector2, size: Vector2, texture: Texture, location: LocationImpl,
            override var direction: Direction, override val collition: MoveCollition): GameObject(Position,size,location),DirectionalObject {
     override val texture = texture
     override val layer = Layer.AIR

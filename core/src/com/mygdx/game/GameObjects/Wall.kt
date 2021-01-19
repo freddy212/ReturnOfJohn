@@ -9,7 +9,7 @@ import com.mygdx.game.Enums.Layer
 import com.mygdx.game.LocationImpl
 import com.mygdx.game.renderRepeatedTexture
 
-class Wall(Position: Vector2, size: Vector2,location:LocationImpl) : GameObject(Position, size) {
+class Wall(Position: Vector2, size: Vector2,location: LocationImpl) : GameObject(Position, size) {
     override val texture = DefaultTextureHandler.getTexture("Brick.png")
     override val layer = Layer.BEFORELOCATION
     init {

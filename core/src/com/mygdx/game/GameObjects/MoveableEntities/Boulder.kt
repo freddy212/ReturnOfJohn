@@ -6,11 +6,8 @@ import com.mygdx.game.AbstractClasses.DefaultMovement
 import com.mygdx.game.AbstractClasses.MoveableObject
 import com.mygdx.game.Collitions.BoulderCollition
 import com.mygdx.game.EdgeOfLocationStrategies.RemoveObject
-import com.mygdx.game.Enums.Direction
 import com.mygdx.game.Enums.Layer
-import com.mygdx.game.Enums.getDirectionUnitVector
 import com.mygdx.game.LocationImpl
-import com.mygdx.game.getDirectionFromAngle
 import com.mygdx.game.middleOfObject
 
 class Boulder(var directionGiven: Vector2, Position: Vector2, size: Vector2,location: LocationImpl?):

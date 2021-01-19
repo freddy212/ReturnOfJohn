@@ -5,14 +5,11 @@ import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch
 import com.badlogic.gdx.graphics.g2d.Sprite
 import com.badlogic.gdx.math.Polygon
 import com.badlogic.gdx.math.Vector2
+import com.mygdx.game.*
 import com.mygdx.game.Collitions.CanMoveCollition
-import com.mygdx.game.InitSprite
 import com.mygdx.game.Interfaces.Collition
 import com.mygdx.game.Interfaces.ObjectProperty
 import com.mygdx.game.Interfaces.Renderable
-import com.mygdx.game.LocationImpl
-import com.mygdx.game.ResourceList
-import com.mygdx.game.RectanglePolygon
 import com.mygdx.game.RenderGraph.Companion.addToSceneGraph
 
 abstract class GameObject (val Position: Vector2, val size: Vector2,val location: LocationImpl?): Renderable {
@@ -30,7 +27,7 @@ abstract class GameObject (val Position: Vector2, val size: Vector2,val location
     //Remember this. Temporary solution. texture must be overriden before polygon is called
     abstract val texture: Texture
     open val sprite: Sprite by lazy { InitSprite(texture)}
-    open val polygon: Polygon by lazy { RectanglePolygon(sprite.boundingRectangle) }
+    open val polygon: Polygon by lazy {InitPolygon(sprite)}
     open val collition: Collition = CanMoveCollition
     val properties = ResourceList<ObjectProperty>()
     override fun render(batch: PolygonSpriteBatch){

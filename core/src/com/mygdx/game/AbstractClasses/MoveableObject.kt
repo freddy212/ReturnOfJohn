@@ -2,8 +2,6 @@ package com.mygdx.game.AbstractClasses
 
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.*
-import com.mygdx.game.Enums.Direction
-import com.mygdx.game.Interfaces.DirectionalObject
 import com.mygdx.game.Interfaces.DynamicEntity
 import com.mygdx.game.Interfaces.MovementStrategy
 
@@ -16,7 +14,11 @@ abstract class MoveableObject(Position: Vector2, size: Vector2, location: Locati
 
     open fun move(unitVectorDirection: Vector2): Boolean{
         if(canMove){
-            return movementStrategy.moveEntity(this,unitVectorDirection)
+            val moveSuccessfull = movementStrategy.moveEntity(this,unitVectorDirection)
+            if(moveSuccessfull){
+                this.unitVectorDirection = unitVectorDirection
+            }
+            return moveSuccessfull
         }else{
             return false
         }

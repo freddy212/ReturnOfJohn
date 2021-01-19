@@ -33,9 +33,6 @@ class Player(Position: Vector2, size: Vector2, modelHandler: ModelInstanceHandle
     override var direction = Direction.UP
     val itemAbilities = ResourceList<ItemAbility>()
     override val collition = IllegalMoveCollition
-    init {
-        polygon.setOrigin(sprite.originX,sprite.originY)
-    }
     /*override fun setPosition(position:Vector2, gameObject: GameObject){
         super.setPosition(position,gameObject)
     }*/
@@ -51,5 +48,9 @@ class Player(Position: Vector2, size: Vector2, modelHandler: ModelInstanceHandle
     //For test
     fun move(direction: Direction){
         player.move(getDirectionUnitVector(direction))
+    }
+    override fun isHit(launchUnitVector:Vector2){
+        itemAbilities.List.forEach { x -> x.InactiveAction() }
+        super.isHit(launchUnitVector)
     }
 }

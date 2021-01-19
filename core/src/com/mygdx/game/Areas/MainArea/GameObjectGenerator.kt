@@ -4,9 +4,7 @@ import com.mygdx.game.DefaultTextureHandler
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.*
 import com.mygdx.game.AbstractClasses.GameObject
-import com.mygdx.game.Collitions.DoorCollition
-import com.mygdx.game.Collitions.IllegalMoveCollition
-import com.mygdx.game.Collitions.ToggleCollition
+import com.mygdx.game.Collitions.*
 import com.mygdx.game.GameObjects.GenericGameObject
 import com.mygdx.game.Enums.Direction
 import com.mygdx.game.Enums.Item
@@ -17,6 +15,7 @@ import com.mygdx.game.GameObjects.*
 import com.mygdx.game.GameObjects.ItemObjects.GenericItemObject
 import com.mygdx.game.GameObjects.MoveableEntities.NPC
 import com.mygdx.game.Interfaces.AreaIdentifier
+import com.mygdx.game.Interfaces.MoveCollition
 import com.mygdx.game.Managers.LocationManager
 import com.mygdx.game.ObjectProperties.Fire
 import com.mygdx.game.UI.Dialogue.Conversations.GetFireConversation
@@ -82,4 +81,37 @@ fun getWorldTreeObjects(): List<GameObject>{
     val WorldLeaf = GenericItemObject(tree.topleft + Vector2(0f, 0f), Vector2(64f, 32f), location,Item.WORLDLEAF,DefaultTextureHandler.getTexture("WorldLeaf.png"))
     val WorldLeaf2 = GenericItemObject(tree.bottomright + Vector2(0f, 0f), Vector2(64f, 32f), location,Item.WORLDLEAF,DefaultTextureHandler.getTexture("WorldLeaf.png"))
     return listOf(tree,WorldLeaf,WorldLeaf2)
+}
+fun getFireLandsLocationTwo(): List<GameObject> {
+    /*val listOfBoulderGenerator = mutableListOf<BoulderGenerator>()
+    val location = LocationManager.findLocation("location10",AreaIdentifier.MAINAREA)
+    val firstBoulderGenerator = BoulderGenerator(location.bottomleft, Vector2(128f,128f), Vector2(0.5f,0.5f),location)
+    val secondBoulderGenerator = BoulderGenerator(location.bottomright - Vector2(128f,0f), Vector2(128f,128f),Vector2(-0.5f,0.5f),location)
+
+    listOf(firstBoulderGenerator,secondBoulderGenerator).forEach { if(it !in location.gameObjects) listOfBoulderGenerator.add(it) }
+    return listOfBoulderGenerator.toList()*/
+    val location2 = LocationManager.findLocation("location2", AreaIdentifier.MAINAREA)
+    val location9 = LocationManager.findLocation("location9", AreaIdentifier.MAINAREA)
+    val removeDamageCollition = object : MoveCollition by CanMoveCollition {
+        override fun filterCollitions(gameObjects: List<GameObject>): List<GameObject> {
+            return gameObjects.filter { it !is LocationImpl }
+        }
+    }
+    val walkableTerrain = GenericGameObject(location2.bottomleft - Vector2(500f, 0f), Vector2(500f, location2.topleft.y - location2.bottomleft.y),
+            "MainB.jpg", Layer.ONGROUND, location9, removeDamageCollition)
+
+    /*val bridge = GenericGameObject(Vector2(genericGameObject.x,genericGameObject.middle.y), Vector2(60f, 400f),
+            "BridgeSideways.png",Layer.AIR,location9,IllegalMoveCollition)*/
+    val texture = DefaultTextureHandler.getTexture("LavaFence.png")
+    val fence = Fence(Vector2(walkableTerrain.x - texture.width, location9.bottomright.y), Vector2(texture.width.toFloat(), walkableTerrain.bottomleft.y - location9.bottomright.y), location9, texture)
+    val fence2 = Fence(Vector2(walkableTerrain.x - texture.width, walkableTerrain.topleft.y), Vector2(texture.width.toFloat(),location9.topright.y - walkableTerrain.topleft.y ), location9, texture)
+
+    val gateTexture = DefaultTextureHandler.getTexture("FireGate.png")
+
+    val fireGate = GenericGameObject(Vector2(fence.x,walkableTerrain.bottomleft.y),Vector2(gateTexture.width.toFloat(),walkableTerrain.topleft.y-
+                                    walkableTerrain.bottomleft.y),"FireGate.png",Layer.ONGROUND,location9,IllegalMoveCollition)
+    val walkableTerrain2 = GenericGameObject(Vector2(location9.bottomleft.x,fireGate.y),Vector2(fireGate.x - location9.bottomleft.x, location2.topleft.y - location2.bottomleft.y),
+            "MainB.jpg", Layer.ONGROUND, location9, removeDamageCollition)
+
+    return listOf(walkableTerrain, fence,fence2,fireGate,walkableTerrain2)
 }

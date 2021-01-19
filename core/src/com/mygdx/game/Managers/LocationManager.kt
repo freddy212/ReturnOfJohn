@@ -1,16 +1,12 @@
 package com.mygdx.game.Managers
 
 import com.badlogic.gdx.math.Vector2
+import com.mygdx.game.*
 import com.mygdx.game.AbstractClasses.GameObject
-import com.mygdx.game.Exceptions.PlayerOutOfBoundsException
 import com.mygdx.game.Interfaces.Area
 import com.mygdx.game.Interfaces.AreaIdentifier
 import com.mygdx.game.Interfaces.KeyPressedCollition
 import com.mygdx.game.Interfaces.MoveCollition
-import com.mygdx.game.LocationImpl
-import com.mygdx.game.camera
-import com.mygdx.game.crossLocationGameObjects
-import com.mygdx.game.player
 
 class LocationManager {
     companion object{

@@ -67,7 +67,7 @@ class MainGame : ApplicationAdapter() {
         font.data.setScale(2f)
         inventory = Inventory()
         inputAdapter = ROJInputAdapter(camera,player)
-        val shield = Shield(Vector2(0f,0f), Vector2(60f,40f))
+        val shield = Shield(Vector2(0f,0f), Vector2(15f,40f))
         player.addItemAbility(shield)
         initInputAdapter()
 

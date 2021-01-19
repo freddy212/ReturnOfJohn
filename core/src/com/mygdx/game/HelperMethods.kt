@@ -16,7 +16,9 @@ import com.mygdx.game.GameObjects.*
 import com.mygdx.game.GameObjects.MoveableEntities.Player
 import com.mygdx.game.Interfaces.Area
 import com.mygdx.game.Interfaces.DirectionalObject
+import com.mygdx.game.Interfaces.LocationStrategy
 import com.mygdx.game.Interfaces.MoveCollition
+import com.mygdx.game.Locations.DefaultLocation
 import com.mygdx.game.Managers.LocationManager
 import kotlin.math.PI
 import kotlin.math.atan2
@@ -111,15 +113,14 @@ fun GetPositionRelativeToLocation(location: LocationImpl, size: Vector2, directi
         }
 }
 
-fun addLocation(location: LocationImpl,area: Area): LocationImpl{
+fun addLocation(location: LocationImpl, area: Area): LocationImpl{
         area.addLocation(location)
         return location
 }
 fun addLocationRelative(location: LocationImpl, size:Vector2, direction:InsertDirection, area: Area,
-                        directionOnPlane:InsertDirection,objectCreationMethod: () -> List<GameObject> = {listOf()},
-                        texture: Texture = DefaultTextureHandler.getTexture("MainB.jpg")):LocationImpl{
+                        directionOnPlane:InsertDirection, objectCreationMethod: () -> List<GameObject> = {listOf()},locationStrategy:LocationStrategy = DefaultLocation()):LocationImpl{
         val pos1 = GetPositionRelativeToLocation(location,size,direction,directionOnPlane)
-        val newLocation = LocationImpl(size,pos1, objectCreationMethod,texture)
+        val newLocation = LocationImpl(size,pos1, objectCreationMethod,locationStrategy)
         location.addAdjacentLocation(newLocation)
         newLocation.addAdjacentLocation(location)
         return addLocation(newLocation,area)
@@ -143,6 +144,12 @@ fun GameObject.InitSprite(texture: Texture): Sprite{
         sprite.setOriginCenter()
         sprite.setPosition(Position.x,Position.y)
         return sprite
+}
+fun GameObject.InitPolygon(sprite: Sprite): Polygon{
+        val polygon = RectanglePolygon(sprite.boundingRectangle)
+        polygon.setOrigin(sprite.originX,sprite.originY)
+        polygon.setPosition(sprite.x - polygon.vertices[0],sprite.y - polygon.vertices[1])
+        return polygon
 }
 
 inline fun ConstructObjects(gameobjectFactory: (Position: Vector2, Size: Vector2) -> GameObject , fromx: Int, incrementx: Int, endx: Int,

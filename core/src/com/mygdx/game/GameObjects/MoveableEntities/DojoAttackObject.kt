@@ -13,7 +13,7 @@ import com.mygdx.game.Events.DojoEvent
 import com.mygdx.game.LocationImpl
 import com.mygdx.game.middleOfObject
 
-class DojoAttackObject(directionGiven: Direction, Position: Vector2, location: LocationImpl?,dojoEvent: DojoEvent,size: Vector2 = Vector2(128f,128f)):
+class DojoAttackObject(directionGiven: Direction, Position: Vector2, location: LocationImpl?, dojoEvent: DojoEvent, size: Vector2 = Vector2(128f,128f)):
         MoveableObject(middleOfObject(Position,size),size,location) {
     override var currentSpeed = 5f
     override var unitVectorDirection = getDirectionUnitVector(directionGiven)

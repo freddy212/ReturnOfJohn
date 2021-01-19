@@ -1,22 +1,17 @@
 package com.mygdx.game.Events
 
 import com.badlogic.gdx.math.Vector2
-import com.mygdx.game.AbstractClasses.Location
 import com.mygdx.game.Enums.Direction
 import com.mygdx.game.GameObjects.MoveableEntities.DojoAttackObject
 import com.mygdx.game.Interfaces.Event
-import com.mygdx.game.Interfaces.Timer
 import com.mygdx.game.LocationImpl
 import com.mygdx.game.Managers.EventManager
-import com.mygdx.game.Managers.LocationManager
 import com.mygdx.game.Timer.DefaultTimer
-import com.mygdx.game.Trimer.DelayTimer
-import com.mygdx.game.font
 import com.mygdx.game.player
 import com.mygdx.game.plus
 import kotlin.random.Random
 
-class DojoEvent(val location: LocationImpl,val eventCompletedEvent: Event):Event{
+class DojoEvent(val location: LocationImpl, val eventCompletedEvent: Event):Event{
     var counter = 0
     val timer = DefaultTimer(1f)
 

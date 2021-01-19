@@ -1,10 +1,7 @@
 package com.mygdx.game.UI.Dialogue.Conversations
 
-import com.mygdx.game.DefaultQuest
-import com.mygdx.game.Enums.QuestIdentifier
 import com.mygdx.game.Events.*
 import com.mygdx.game.GameObjects.MoveableEntities.NPC
-import com.mygdx.game.LocationImpl
 import com.mygdx.game.UI.Dialogue.*
 import com.mygdx.game.player
 

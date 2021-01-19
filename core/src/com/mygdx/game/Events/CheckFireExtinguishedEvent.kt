@@ -4,7 +4,6 @@ import com.mygdx.game.Enums.QuestIdentifier
 import com.mygdx.game.GameObjects.MoveableEntities.NPC
 import com.mygdx.game.Interfaces.Event
 import com.mygdx.game.Interfaces.ObjectProperty
-import com.mygdx.game.LocationImpl
 import com.mygdx.game.ObjectProperties.Fire
 
 class CheckFireExtinguishedEvent(val npc: NPC) : Event {

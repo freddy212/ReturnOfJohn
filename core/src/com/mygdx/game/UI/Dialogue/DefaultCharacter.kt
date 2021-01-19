@@ -1,5 +1,7 @@
 package com.mygdx.game.UI.Dialogue
 
+import com.badlogic.gdx.Gdx
+import com.badlogic.gdx.Input
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch
@@ -20,7 +22,7 @@ abstract class DefaultCharacter(Position: Vector2, size: Vector2, location: Loca
                                 val modelHandler: ModelInstanceHandler) : Character,MoveableObject(Position, size, location),
                                 RotationalObject by DefaultRotationalObject(),DirectionalObject{
     override val font = BitmapFont()
-    val speedDecrease = 0.90f
+    val speedDecrease = 0.95f
     var characterState: CharacterState = CharacterState.FREE
         private set
     var originalSpeed: Float? = null
@@ -42,18 +44,19 @@ abstract class DefaultCharacter(Position: Vector2, size: Vector2, location: Loca
         this.setRotation(unitVectorDirection,this,90f)
         direction = getDirectionFromAngle(angle)
         modelHandler.setRotation(angle,Vector3(sprite.x + sprite.width / 2, sprite.y + sprite.height / 2,-150f))
+        this.unitVectorDirection = unitVectorDirection
     }
     override fun move(unitVectorDirection: Vector2): Boolean {
         var moveSuccessfull = false
         if(canChangeDirection()){
             setCharacterRotation(unitVectorDirection)
         }
-        if(characterState == CharacterState.FREE){
-           moveSuccessfull = super.move(unitVectorDirection)
-           if(!moveSuccessfull){
-              moveSuccessfull = super.move(getDirectionUnitVector(direction))
-           }
-        }
+            if (characterState == CharacterState.FREE) {
+                moveSuccessfull = super.move(unitVectorDirection)
+                if (!moveSuccessfull) {
+                    moveSuccessfull = super.move(getDirectionUnitVector(direction))
+                }
+            }
         return moveSuccessfull
     }
 
@@ -67,7 +70,7 @@ abstract class DefaultCharacter(Position: Vector2, size: Vector2, location: Loca
         }
         super.frameTask()
     }
-    fun isHit(launchUnitVector: Vector2){
+    open fun isHit(launchUnitVector: Vector2){
         originalSpeed = originalSpeed ?: currentSpeed
         characterState = CharacterState.HIT
         this.launchUnitVector = launchUnitVector
