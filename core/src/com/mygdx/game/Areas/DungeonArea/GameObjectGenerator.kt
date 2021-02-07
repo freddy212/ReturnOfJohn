@@ -43,8 +43,9 @@ fun getLocationFourCaveObjects():List<GameObject>{
 }
 fun getLocationNineCaveObjects():List<GameObject>{
     val location = LocationManager.findLocation("location9",AreaIdentifier.DUNGEONAREA)
-    val boulderGenerator1 = BoulderGenerator(Vector2(location.middle.x - 64f,location.middle.y - 64f), Vector2(64f * 2,64f * 2), getDirectionUnitVector(Direction.DOWN),location,1f)
-    return listOf(boulderGenerator1)
+    val boulderGenerator1 = BoulderGenerator(Vector2(location.bottomleft.x + 10f,location.middle.y), Vector2(64f * 2,64f * 2), getDirectionUnitVector(Direction.DOWN),location,1f,3f)
+    val boulderGenerator2 = BoulderGenerator(Vector2(location.bottomleft.x + 128f + 20f,location.middle.y), Vector2(64f * 2,64f * 2), getDirectionUnitVector(Direction.DOWN),location,1f,6f)
+    return listOf(boulderGenerator1,boulderGenerator2)
 }
 fun getLocationSixCaveObjects(): List<GameObject>{
     val location = LocationManager.findLocation("location6",AreaIdentifier.DUNGEONAREA)

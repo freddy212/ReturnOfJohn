@@ -6,6 +6,7 @@ import com.badlogic.gdx.InputAdapter
 import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.math.Vector3
+import com.mygdx.game.Enums.CharacterState
 import com.mygdx.game.Enums.Direction
 import com.mygdx.game.Enums.getDirectionUnitVector
 import com.mygdx.game.Events.DrawSentenceEvent
@@ -28,10 +29,11 @@ class ROJInputAdapter(private val camera : OrthographicCamera, val player: Playe
             handleCollitions(player, player.polygon, LocationManager.ButtonCollitionGameObjects.filter {(it.collition as KeyPressedCollition).specificButton == Input.Keys.SPACE })
         }
 
-
-        for (itemAbility in player.itemAbilities.List){
-            if(keycode == itemAbility.triggerKey){
-                itemAbility.activeAction()
+        if(player.characterState == CharacterState.FREE && player.canMove()) {
+            for (itemAbility in player.itemAbilities.List) {
+                if (keycode == itemAbility.triggerKey) {
+                    itemAbility.activeAction()
+                }
             }
         }
         if(keycode == Input.Keys.LEFT || keycode == Input.Keys.RIGHT || keycode == Input.Keys.A || keycode == Input.Keys.D){

@@ -29,7 +29,7 @@ class HitTest: TestGame() {
         player.move(Right)
         assertEquals(playerPosition,Vector2(player.sprite.x, player.sprite.y))
        // assertEquals(playerPosition + (Right * player.currentSpeed), Vector2(player.sprite.x,player.sprite.y))
-        assertTrue(player.characterState == CharacterState.HIT)
+        assertTrue(player.characterState == CharacterState.STUNNED)
 
         while (player.currentSpeed != speedBeforeHit){
             assertTrue(player.currentSpeed > speedBeforeHit)

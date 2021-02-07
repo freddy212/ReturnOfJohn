@@ -34,6 +34,6 @@ class MainAreaInitializer: AreaInitializer {
             deadBoulderGenerators.forEach { location10.addGameObject(it) }
         }*/
         val fireLandsMainGround = DefaultTextureHandler.getTexture("MainB.jpg")
-        val location9 = addLocationRelative(location2, Vector2(1000f, 2000f), InsertDirection.LEFT, area, InsertDirection.MIDDLE,::getFireLandsLocationTwo,DamageLocation())
+        val location9 = addLocationRelative(location2, Vector2(2000f, 2000f), InsertDirection.LEFT, area, InsertDirection.MIDDLE,::getFireLandsLocationTwo,DamageLocation())
     }
 }

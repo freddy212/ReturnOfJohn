@@ -28,7 +28,7 @@ class LocationManager {
         }
         fun LocationFrameTasks(){
             locations = activeArea.locations
-            val findPlayerLocation = locations.find{ x -> x.sprite.boundingRectangle.contains(Vector2(camera.position.x, camera.position.y)) } ?: oldLocation
+            val findPlayerLocation = locations.find{ x -> x.sprite.boundingRectangle.contains(Vector2(player.sprite.x, player.sprite.y)) } ?: oldLocation
             val newLocation = findPlayerLocation
 
             if(oldLocation != newLocation) {
@@ -38,8 +38,8 @@ class LocationManager {
                 ActiveGameObjects = ActiveLocations.flatMap { x -> x.gameObjects } + ActiveLocations + crossLocationGameObjects.List
                 val newGameObjects = ActiveGameObjects - oldActiveGameObjects
                 val oldGameObjects = oldActiveGameObjects - ActiveGameObjects
-                newGameObjects.forEach{it.onLocationEnter()}
-                oldGameObjects.forEach {it.onLocationExit() }
+                newGameObjects.forEach{it.onLocationEnterActions.forEach { it() }}
+                oldGameObjects.forEach {it.onLocationExitActions.forEach { it() }}
             }
             ActiveGameObjects = ActiveLocations.flatMap { x -> x.gameObjects } + ActiveLocations + crossLocationGameObjects.List
             MoveCollitionGameObjects = ActiveGameObjects.filter{x -> x.collition is MoveCollition}

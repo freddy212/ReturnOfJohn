@@ -18,8 +18,9 @@ class BoulderCollition: MoveCollition {
             val oppositeDirection = getOppositeUnitVector(centerPointPlayer,centerPointBoulder)
             collidedObject.isHit(oppositeDirection)
         }
-        if(entity is Boulder && collidedObject is BoulderGenerator){
+        if(entity is Boulder && (collidedObject is BoulderGenerator || collidedObject is Boulder)){
             collidedObject.location!!.removeGameObject(collidedObject)
+            entity.location!!.removeGameObject(entity)
         }
     }
 

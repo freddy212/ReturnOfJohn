@@ -2,33 +2,31 @@ package com.mygdx.game
 
 import com.badlogic.gdx.ApplicationAdapter
 import com.badlogic.gdx.Gdx
-import com.badlogic.gdx.assets.AssetManager
 import com.badlogic.gdx.graphics.GL20
 import com.badlogic.gdx.graphics.OrthographicCamera
-import com.badlogic.gdx.graphics.PerspectiveCamera
 import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch
 import com.badlogic.gdx.graphics.g3d.Environment
-import com.badlogic.gdx.graphics.g3d.Model
 import com.badlogic.gdx.graphics.g3d.ModelBatch
-import com.badlogic.gdx.graphics.g3d.ModelInstance
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.math.Vector2
+import com.mygdx.game.FileHandling.FileHandler
 import com.mygdx.game.GameObjects.ItemAbilities.Shield
 import com.mygdx.game.GameObjects.MoveableEntities.Player
-import com.mygdx.game.Managers.AreaInitializerManager
-import com.mygdx.game.Managers.DefaultAssetHandler
-import com.mygdx.game.Managers.EventManager
-import com.mygdx.game.Managers.LocationManager
+import com.mygdx.game.Managers.*
+import com.mygdx.game.SaveState.PlayerSaveState
 import com.mygdx.game.UI.UIRenderer
+import kotlinx.serialization.json.*
+import kotlinx.serialization.*
 
 val modelBatch by lazy{ModelBatch()}
 val environment by lazy{Environment()}
 val camera: OrthographicCamera = OrthographicCamera()
 lateinit var player: Player
 lateinit var playerSize: Vector2
+lateinit var playerSaveState: PlayerSaveState
 class MainGame : ApplicationAdapter() {
     lateinit internal var batch: PolygonSpriteBatch
     lateinit var firstpoly: RectanglePolygon
@@ -39,6 +37,7 @@ class MainGame : ApplicationAdapter() {
     lateinit var inventory: Inventory
     lateinit var inputAdapter: ROJInputAdapter
     lateinit var uiRenderer: UIRenderer
+    lateinit var previousCameraPos: Vector2
 
     override fun create() {
 
@@ -63,7 +62,12 @@ class MainGame : ApplicationAdapter() {
                 false,
                 Gdx.graphics.width.toFloat(),
                 Gdx.graphics.height.toFloat())
-        player.setPosition(Vector2(Center.x, Center.y), player)
+
+        val savedState:String = FileHandler.readFromFile()[0]
+
+        playerSaveState = Json.decodeFromString(savedState)
+        LocationManager.activeArea = AreaManager.getArea(playerSaveState.areaIdentifier)
+        player.setPosition(Vector2(playerSaveState.playerXPos, playerSaveState.playerYPos), player)
         font.data.setScale(2f)
         inventory = Inventory()
         inputAdapter = ROJInputAdapter(camera,player)
@@ -87,11 +91,11 @@ class MainGame : ApplicationAdapter() {
         LocationManager.frameAction()
        // player.frameAction()
         inputAdapter.handleInput(player)
-        camera.position.set(player.sprite.x, player.sprite.y,4f)
         RenderGraph.render(batch)
-        drawrects()
+        //drawrects()
         EventManager.executeEvents()
         uiRenderer.render()
+        camera.position.set(player.sprite.x, player.sprite.y,4f)
         camera.update()
     }
 

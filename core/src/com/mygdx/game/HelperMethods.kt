@@ -147,7 +147,7 @@ fun GameObject.InitSprite(texture: Texture): Sprite{
 }
 fun GameObject.InitPolygon(sprite: Sprite): Polygon{
         val polygon = RectanglePolygon(sprite.boundingRectangle)
-        polygon.setOrigin(sprite.originX,sprite.originY)
+        polygon.setOrigin(sprite.x + sprite.originX, sprite.y + sprite.originY)
         polygon.setPosition(sprite.x - polygon.vertices[0],sprite.y - polygon.vertices[1])
         return polygon
 }

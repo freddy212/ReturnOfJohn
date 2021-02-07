@@ -21,7 +21,7 @@ class DungeonAreaInitializer():AreaInitializer{
                 ::getLocationThreeCaveObjects, DefaultLocation(DefaultTextureHandler.getTexture("dungeonFloor.jpg")))
         val location4 = addLocationRelative(location1, verticalHallway, InsertDirection.UP, dungeonArea, InsertDirection.MIDDLE,
                 ::getLocationFourCaveObjects, DefaultLocation(DefaultTextureHandler.getTexture("dungeonFloor.jpg")))
-        val location5 = addLocationRelative(location1, Vector2(1500f, 128f), InsertDirection.RIGHT, dungeonArea, InsertDirection.MIDDLE,
+        val location5 = addLocationRelative(location1, Vector2(600f, 128f), InsertDirection.RIGHT, dungeonArea, InsertDirection.MIDDLE,
                 { listOf() }, DefaultLocation(DefaultTextureHandler.getTexture("dungeonFloor.jpg")))
         val location6 = addLocationRelative(location3, verticalHallway + Vector2(100f, 0f), InsertDirection.UP, dungeonArea, InsertDirection.LEFT,
                 ::getLocationSixCaveObjects, DefaultLocation(DefaultTextureHandler.getTexture("dungeonFloor.jpg")))
@@ -29,9 +29,9 @@ class DungeonAreaInitializer():AreaInitializer{
                 { listOf() }, DefaultLocation(DefaultTextureHandler.getTexture("dungeonFloor.jpg")))
         val location8 = addLocationRelative(location7, Vector2(600f, 600f), InsertDirection.LEFT, dungeonArea, InsertDirection.MIDDLE,
                 ::getLocationEightCaveObjects, DefaultLocation(DefaultTextureHandler.getTexture("dungeonFloor.jpg")))
-        val location9 = addLocationRelative(location5, Vector2(128f, 1500f), InsertDirection.RIGHT, dungeonArea, InsertDirection.DOWN, ::getLocationNineCaveObjects, DefaultLocation(DefaultTextureHandler.getTexture("dungeonFloor.jpg")))
-        val location10 = addLocationRelative(location9, Vector2(1500f, 128f), InsertDirection.RIGHT, dungeonArea, InsertDirection.UP,
-                ::getLocationTenCaveObjects, DefaultLocation(DefaultTextureHandler.getTexture("dungeonFloor.jpg")))
+        val location9 = addLocationRelative(location5, Vector2(300f, 1000f), InsertDirection.RIGHT, dungeonArea, InsertDirection.DOWN, ::getLocationNineCaveObjects, DefaultLocation(DefaultTextureHandler.getTexture("dungeonFloor.jpg")))
+        val location10 = addLocationRelative(location9, Vector2(600f, 128f), InsertDirection.RIGHT, dungeonArea, InsertDirection.UP,
+                { listOf()}, DefaultLocation(DefaultTextureHandler.getTexture("dungeonFloor.jpg")))
         val location11 = addLocationRelative(location10, Vector2(600f, 600f), InsertDirection.RIGHT, dungeonArea, InsertDirection.MIDDLE,
                 ::getLocationElevenCaveObjects, DefaultLocation(DefaultTextureHandler.getTexture("dungeonFloor.jpg")))
         return dungeonArea

@@ -10,8 +10,8 @@ import com.mygdx.game.LocationImpl
 
 class DefaultLocation(textureGiven: Texture = DefaultTextureHandler.getTexture("MainB.jpg")): LocationStrategy {
     override val texture = textureGiven
-    override val initialization = {x:LocationImpl -> x.addGameObject(Wall(x.Position, x.size, x))}
-
+    override val initialization = {
+        x:LocationImpl -> x.addGameObject(Wall(x.Position, x.size, x))
+    }
     override val collition = CanMoveCollition
-
 }

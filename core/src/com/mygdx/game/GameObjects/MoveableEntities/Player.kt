@@ -2,10 +2,12 @@ package com.mygdx.game.GameObjects.MoveableEntities
 
 import ToolTip
 import com.badlogic.gdx.Input
+import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch
 import com.mygdx.game.DefaultTextureHandler
 import com.badlogic.gdx.graphics.g2d.Sprite
 import com.badlogic.gdx.graphics.g3d.Model
 import com.badlogic.gdx.math.Vector2
+import com.badlogic.gdx.math.Vector3
 import com.mygdx.game.*
 import com.mygdx.game.AbstractClasses.ItemAbility
 import com.mygdx.game.AbstractClasses.DefaultMovement
@@ -19,6 +21,7 @@ import com.mygdx.game.Managers.DefaultAssetHandler.assets
 import com.mygdx.game.Managers.LocationManager
 import com.mygdx.game.Managers.TooltipManager
 import com.mygdx.game.UI.Dialogue.DefaultCharacter
+import kotlinx.serialization.Serializable
 
 class Player(Position: Vector2, size: Vector2, modelHandler: ModelInstanceHandler = DefaultModelInstanceHandler(
         assets.get("ManBlender.g3db", Model::class.java),
@@ -33,9 +36,6 @@ class Player(Position: Vector2, size: Vector2, modelHandler: ModelInstanceHandle
     override var direction = Direction.UP
     val itemAbilities = ResourceList<ItemAbility>()
     override val collition = IllegalMoveCollition
-    /*override fun setPosition(position:Vector2, gameObject: GameObject){
-        super.setPosition(position,gameObject)
-    }*/
     fun die(){
         val playerLocation = LocationManager.locations.find{ x -> x.sprite.boundingRectangle.contains(Vector2(camera.position.x, camera.position.y))}!!
         player.setPosition(playerLocation.Position, player)
@@ -52,5 +52,14 @@ class Player(Position: Vector2, size: Vector2, modelHandler: ModelInstanceHandle
     override fun isHit(launchUnitVector:Vector2){
         itemAbilities.List.forEach { x -> x.InactiveAction() }
         super.isHit(launchUnitVector)
+    }
+
+    override fun render(batch: PolygonSpriteBatch) {
+        var oldCameraPos = camera.position
+        camera.position.set(Vector3(player.sprite.x,player.sprite.y, 4f))
+        camera.update()
+        super.render(batch)
+        camera.position.set(oldCameraPos)
+        camera.update()
     }
 }

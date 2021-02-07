@@ -1,7 +1,5 @@
 package com.mygdx.game.UI.Dialogue
 
-import com.badlogic.gdx.Gdx
-import com.badlogic.gdx.Input
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch
@@ -61,18 +59,18 @@ abstract class DefaultCharacter(Position: Vector2, size: Vector2, location: Loca
     }
 
     override fun render(batch: PolygonSpriteBatch) {
-            modelHandler.render(batch)
+        modelHandler.render(batch)
     }
 
     override fun frameTask() {
-        if(characterState == CharacterState.HIT){
+        if(characterState == CharacterState.STUNNED){
             handleStunned(launchUnitVector)
         }
         super.frameTask()
     }
     open fun isHit(launchUnitVector: Vector2){
         originalSpeed = originalSpeed ?: currentSpeed
-        characterState = CharacterState.HIT
+        characterState = CharacterState.STUNNED
         this.launchUnitVector = launchUnitVector
         currentSpeed = stunDuration * originalSpeed!!
         setCharacterRotation(launchUnitVector)

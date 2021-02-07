@@ -1,5 +1,5 @@
 buildscript {
-    
+
 
     repositories {
         mavenLocal()
@@ -10,10 +10,10 @@ buildscript {
         google()
     }
     dependencies {
-        
 
     }
 }
+
 
 allprojects {
     apply plugin: "eclipse"

@@ -37,12 +37,12 @@ fun getDojoObjects(): List<GameObject>{
     dojoNPC.conversationsHandler.addConversation("first", GetDojoConversation(dojoNPC))
     val quest = DefaultQuest(dojoNPC,QuestIdentifier.DOJO)
     quest.StartQuest()
-    location1.onLocationExit = {
-        val dojoEvent= EventManager.eventManager.List.find {it is DojoEvent} as DojoEvent?
-        if(dojoEvent!= null){
+    location1.onLocationExitActions.add {
+        val dojoEvent = EventManager.eventManager.List.find { it is DojoEvent } as DojoEvent?
+        if (dojoEvent != null) {
             dojoNPC.add()
             EventManager.eventManager.remove(dojoEvent)
-            val dojoAttackObject:DojoAttackObject? = location1.gameObjects.find{ it is DojoAttackObject } as DojoAttackObject?
+            val dojoAttackObject: DojoAttackObject? = location1.gameObjects.find { it is DojoAttackObject } as DojoAttackObject?
             dojoAttackObject?.location?.removeGameObject(dojoAttackObject!!)
         }
     }

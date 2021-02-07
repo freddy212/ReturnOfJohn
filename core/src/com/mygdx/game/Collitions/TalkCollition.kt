@@ -2,6 +2,7 @@ package com.mygdx.game.Collitions
 
 import com.badlogic.gdx.Input
 import com.mygdx.game.AbstractClasses.GameObject
+import com.mygdx.game.Enums.getDirectionUnitVector
 import com.mygdx.game.Events.ConversationEvent
 import com.mygdx.game.GameObjects.MoveableEntities.Player
 import com.mygdx.game.GameObjects.Sensors.TalkSensor
@@ -16,6 +17,8 @@ class TalkCollition(private val conversationEvent: ConversationEvent): KeyPresse
             if(checkOpposingDirections(entity, collidedObject)){
                 counter += 1
                 println("Collition is successfull " + counter)
+                val characterRotation = getDirectionUnitVector(collidedObject.direction)
+                collidedObject.npc.setCharacterRotation(characterRotation)
                 conversationEvent.execute()
             }
         }
