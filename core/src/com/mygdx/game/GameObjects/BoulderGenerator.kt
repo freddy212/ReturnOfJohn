@@ -8,11 +8,14 @@ import com.mygdx.game.AbstractClasses.RotationalObject
 import com.mygdx.game.Collitions.IllegalMoveCollition
 import com.mygdx.game.Enums.Layer
 import com.mygdx.game.GameObjects.MoveableEntities.Boulder
+import com.mygdx.game.SaveHandling.DefaultRemoveObjectSaveState
+import com.mygdx.game.SaveState.SaveStateEntity
 import com.mygdx.game.Timer.DefaultTimer
 import com.mygdx.game.Trimer.DelayTimer
 
 class BoulderGenerator(Position: Vector2, size: Vector2, val unitVectorDirection: Vector2, location: LocationImpl,
-                       timeUntilFire: Float = 0f, shootCoolDown:Float = 3f): GameObject(Position, size,location),RotationalObject by DefaultRotationalObject() {
+                       timeUntilFire: Float = 0f, shootCoolDown:Float = 3f): GameObject(Position, size,location),RotationalObject by DefaultRotationalObject(),
+                                                                             SaveStateEntity by DefaultRemoveObjectSaveState(){
     override val texture = DefaultTextureHandler.getTexture("BoulderGenerator.png")
     override val layer = Layer.ONGROUND
     override val collition = IllegalMoveCollition
@@ -33,7 +36,7 @@ class BoulderGenerator(Position: Vector2, size: Vector2, val unitVectorDirection
     }
 
     fun generateBoulder(){
-        val Position = Vector2(this.sprite.x + this.sprite.width/2,this.sprite.y + this.sprite.height /2) + (unitVectorDirection * 160f)
+        val Position = Vector2(this.sprite.x + this.sprite.width/2,this.sprite.y + this.sprite.height /2) + (unitVectorDirection * 240f)
         val boulder = Boulder(unitVectorDirection,Position,Vector2( 64 * 2f,64f * 2),location)
         location!!.addGameObject(boulder)
     }

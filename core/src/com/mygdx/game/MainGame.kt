@@ -12,11 +12,14 @@ import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.math.Vector2
-import com.mygdx.game.FileHandling.FileHandler
+import com.mygdx.game.SaveHandling.FileHandler
 import com.mygdx.game.GameObjects.ItemAbilities.Shield
 import com.mygdx.game.GameObjects.MoveableEntities.Player
+import com.mygdx.game.Interfaces.AreaIdentifier
 import com.mygdx.game.Managers.*
+import com.mygdx.game.SaveHandling.DefaultSaveableObject
 import com.mygdx.game.SaveState.PlayerSaveState
+import com.mygdx.game.SaveState.SaveStateEntity
 import com.mygdx.game.UI.UIRenderer
 import kotlinx.serialization.json.*
 import kotlinx.serialization.*
@@ -63,16 +66,21 @@ class MainGame : ApplicationAdapter() {
                 Gdx.graphics.width.toFloat(),
                 Gdx.graphics.height.toFloat())
 
-        val savedState:String = FileHandler.readFromFile()[0]
-
-        playerSaveState = Json.decodeFromString(savedState)
+        if(!FileHandler.SaveFileEmpty()){
+            val savedState:String = FileHandler.readFromFile()[0]
+            val savedPlayerSaveState:PlayerSaveState = Json.decodeFromString(savedState)
+            playerSaveState = PlayerSaveState(savedPlayerSaveState.playerXPos,savedPlayerSaveState.playerYPos,
+                savedPlayerSaveState.areaIdentifier, player.entityId)
+        }else{
+            playerSaveState = PlayerSaveState(Center.x, Center.y,AreaIdentifier.MAINAREA, player.entityId)
+        }
         LocationManager.activeArea = AreaManager.getArea(playerSaveState.areaIdentifier)
         player.setPosition(Vector2(playerSaveState.playerXPos, playerSaveState.playerYPos), player)
         font.data.setScale(2f)
         inventory = Inventory()
         inputAdapter = ROJInputAdapter(camera,player)
         val shield = Shield(Vector2(0f,0f), Vector2(15f,40f))
-        player.addItemAbility(shield)
+        //player.addAbility(shield)
         initInputAdapter()
 
         environment.set(ColorAttribute(ColorAttribute.AmbientLight, 0.4f, 0.4f, 0.4f, 1f))
@@ -80,6 +88,15 @@ class MainGame : ApplicationAdapter() {
         camera.near = 1f
         camera.far = 300f
         camera.update()
+        LocationManager.frameAction()
+
+        val ogfile = FileHandler.readFromFile()
+        val saves = ogfile.subList(1,ogfile.size)
+        val savedStates:List<DefaultSaveableObject> = saves.map { x -> Json.decodeFromString(x) }
+        val savedEntities:List<SaveStateEntity> = AreaManager.getAllGameObjects()
+            .filter {it is SaveStateEntity}.map { it as SaveStateEntity }.filter {savedStates.map {it.entityId}.contains(it.entityId)}
+        println("size of saved elements is : + " + savedStates.size + " and size of matching elements is : " + savedEntities.size)
+        savedEntities.forEach { it.onLoadAction() }
     }
 
 

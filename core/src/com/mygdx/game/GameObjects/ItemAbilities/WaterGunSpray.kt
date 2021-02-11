@@ -6,7 +6,7 @@ import com.mygdx.game.DefaultTextureHandler
 import com.badlogic.gdx.graphics.g2d.ParticleEffect
 import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch
 import com.badlogic.gdx.math.Vector2
-import com.mygdx.game.AbstractClasses.ItemAbility
+import com.mygdx.game.AbstractClasses.CharacterAbility
 import com.mygdx.game.AbstractClasses.DefaultPositionChange
 import com.mygdx.game.Collitions.WaterGunCollition
 import com.mygdx.game.Enums.Direction
@@ -16,7 +16,7 @@ import com.mygdx.game.Managers.LocationManager
 import com.mygdx.game.handleCollitions
 import com.mygdx.game.player
 
-class WaterGunSpray(Position: Vector2, size: Vector2): ItemAbility(Position, size),DynamicEntity by DefaultPositionChange {
+class WaterGunSpray(Position: Vector2, size: Vector2): CharacterAbility(Position, size),DynamicEntity by DefaultPositionChange {
     override val triggerKey = Input.Keys.NUM_1
     override val texture = DefaultTextureHandler.getTexture("WaterGun.png")
     override val layer = Layer.AIR

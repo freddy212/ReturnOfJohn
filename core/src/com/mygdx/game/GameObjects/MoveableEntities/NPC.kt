@@ -12,13 +12,19 @@ import com.mygdx.game.Enums.Layer
 import com.mygdx.game.GameObjects.Sensors.TalkSensor
 import com.mygdx.game.Interfaces.ModelInstanceHandler
 import com.mygdx.game.Managers.DefaultAssetHandler.assets
+import com.mygdx.game.SaveHandling.DefaultRemoveObjectSaveState
+import com.mygdx.game.SaveHandling.DefaultSaveableObject
+import com.mygdx.game.SaveHandling.FileHandler
+import com.mygdx.game.SaveState.SaveStateEntity
 import com.mygdx.game.UI.Dialogue.DefaultCharacter
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 
 class NPC(Position: Vector2, size: Vector2 = Vector2(128f,128f), location: LocationImpl?,
           modelHandler: ModelInstanceHandler = DefaultModelInstanceHandler(
                   assets.get("ManBlender.g3db", Model::class.java),
                   Position,size))
-    : DefaultCharacter(Position, size, location,modelHandler){
+    : DefaultCharacter(Position, size, location,modelHandler), SaveStateEntity by DefaultRemoveObjectSaveState(){
     override val texture = DefaultTextureHandler.getTexture("DefaultPerson.png")
     override val layer = Layer.ONGROUND
     override var currentSpeed = 2f
@@ -46,8 +52,9 @@ class NPC(Position: Vector2, size: Vector2 = Vector2(128f,128f), location: Locat
         sensors.forEach {this.location!!.addGameObject(it)}
         this.location!!.addGameObject(this)
     }
-    fun remove(){
-        sensors.forEach {this.location!!.removeGameObject(it)}
-        this.location!!.removeGameObject(this)
+    override fun removeFromLocation(){
+        sensors.forEach {it.removeFromLocation()}
+        super.removeFromLocation()
+        FileHandler.writeSaveStateEntity(this)
     }
 }

@@ -15,7 +15,7 @@ class DojoMasterCollition(val dojoEvent: DojoEvent): MoveCollition by CanMoveCol
             dojoEvent.resetCounter()
         }
         if(collidedObject is Shield){
-            entity.location!!.removeGameObject(entity)
+            entity.removeFromLocation()
             dojoEvent.blockedWithShield()
         }
     }

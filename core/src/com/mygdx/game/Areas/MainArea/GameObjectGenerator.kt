@@ -16,10 +16,16 @@ import com.mygdx.game.Interfaces.AreaIdentifier
 import com.mygdx.game.Interfaces.MoveCollition
 import com.mygdx.game.Managers.LocationManager
 import com.mygdx.game.ObjectProperties.Fire
+import com.mygdx.game.SaveHandling.DefaultRemoveObjectSaveState
+import com.mygdx.game.SaveHandling.DefaultSaveableObject
+import com.mygdx.game.SaveHandling.FileHandler
+import com.mygdx.game.SaveState.SaveStateEntity
 import com.mygdx.game.UI.Dialogue.Conversations.GetFireConversation
 import com.mygdx.game.UI.Dialogue.Conversations.GetFireFixedConversation
 import com.mygdx.game.UI.Dialogue.Conversations.GetFireNotFixedConversation
 import com.mygdx.game.UI.Dialogue.Conversations.GetFirstConversation
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 
 fun getLocationOneObjects(): List<GameObject>{
     val location = LocationManager.findLocation("location1",AreaIdentifier.MAINAREA)
@@ -98,8 +104,11 @@ fun getFireLandsLocationTwo(): List<GameObject> {
     val fireGateCollition = object : MoveCollition by IllegalMoveCollition{
         override fun collitionHappened(entity: GameObject, collidedObject: GameObject) {
             if(entity is Boulder){
-                entity.location!!.removeGameObject(entity)
-                collidedObject.location!!.removeGameObject(collidedObject)
+                entity.removeFromLocation()
+                collidedObject.removeFromLocation()
+                if(collidedObject is SaveStateEntity){
+                    FileHandler.writeSaveStateEntity(collidedObject)
+                }
             }
         }
     }
@@ -114,8 +123,8 @@ fun getFireLandsLocationTwo(): List<GameObject> {
 
     val gateTexture = DefaultTextureHandler.getTexture("FireGate.png")
 
-    val fireGate = GenericGameObject(Vector2(fence.x,walkableTerrain.bottomleft.y),Vector2(gateTexture.width.toFloat(),walkableTerrain.topleft.y-
-                                    walkableTerrain.bottomleft.y),"FireGate.png",Layer.ONGROUND,location9,fireGateCollition)
+    val fireGate = object : GenericGameObject(Vector2(fence.x,walkableTerrain.bottomleft.y),Vector2(gateTexture.width.toFloat(),walkableTerrain.topleft.y-
+                                    walkableTerrain.bottomleft.y),"FireGate.png",Layer.ONGROUND,location9,fireGateCollition), SaveStateEntity by DefaultRemoveObjectSaveState() {}
     val walkableTerrain2 = GenericGameObject(Vector2(location9.bottomleft.x,fireGate.y),Vector2(fireGate.x - location9.bottomleft.x, location2.topleft.y - location2.bottomleft.y) + Vector2(fireGate.size.x,0f),
             "MainB.jpg", Layer.ONGROUND, location9, removeDamageCollition)
 

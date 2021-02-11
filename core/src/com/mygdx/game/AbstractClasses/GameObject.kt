@@ -42,4 +42,8 @@ abstract class GameObject (val Position: Vector2, val size: Vector2,val location
     open val onLocationEnterActions: MutableList<()-> Unit> = mutableListOf({})
     open val onLocationExitActions: MutableList<()->Unit> = mutableListOf({})
     constructor(Position: Vector2, size: Vector2): this(Position,size,null)
+
+    open fun removeFromLocation(){
+        location?.removeGameObject(this)
+    }
 }

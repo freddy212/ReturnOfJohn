@@ -9,7 +9,7 @@ import com.mygdx.game.Enums.Direction
 import com.mygdx.game.Enums.Layer
 import com.mygdx.game.GameObjects.Door
 import com.mygdx.game.GameObjects.GenericGameObject
-import com.mygdx.game.GameObjects.ItemObjects.WaterGunItem
+import com.mygdx.game.GameObjects.ItemObjects.WaterGunItemObject
 import com.mygdx.game.GameObjects.MoveableEntities.NPC
 import com.mygdx.game.Interfaces.AreaIdentifier
 import com.mygdx.game.Managers.LocationManager
@@ -30,6 +30,6 @@ fun getShopObjects(): List<GameObject>{
     val itemTable = GenericGameObject(middleOfObject(position,size),size,"ItemTable.png",Layer.ONGROUND,location1,IllegalMoveCollition)
     val shopNPC = NPC(middleOfObject(Vector2(itemTable.middle.x,itemTable.middle.y + 200f),Vector2(128f,128f)), Vector2(128f,128f),location1)
     val waterGunSize = Vector2(60f,40f)
-    val waterGun = WaterGunItem(middleOfObject(itemTable.middle,waterGunSize),waterGunSize,Layer.AIR,location1)
+    val waterGun = WaterGunItemObject(middleOfObject(itemTable.middle,waterGunSize),waterGunSize,Layer.AIR,location1)
     return listOf(door,itemTable,shopNPC,waterGun)
 }

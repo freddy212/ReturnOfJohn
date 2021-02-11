@@ -5,6 +5,6 @@ import com.mygdx.game.Interfaces.CannotMoveStrategy
 
 class RemoveObject: CannotMoveStrategy {
     override fun CannotMoveAction(moveableObject: MoveableObject) {
-        moveableObject.location!!.removeGameObject(moveableObject)
+        moveableObject.removeFromLocation()
     }
 }

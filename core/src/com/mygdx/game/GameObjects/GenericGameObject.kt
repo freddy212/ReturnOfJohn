@@ -8,6 +8,6 @@ import com.mygdx.game.Enums.Layer
 import com.mygdx.game.Interfaces.Collition
 import com.mygdx.game.LocationImpl
 
-class GenericGameObject(Position: Vector2, size: Vector2, textureName: String, override val layer: Layer, location: LocationImpl?, override val collition:Collition = CanMoveCollition): GameObject(Position, size,location) {
+open class GenericGameObject(Position: Vector2, size: Vector2, textureName: String, override val layer: Layer, location: LocationImpl?, override val collition:Collition = CanMoveCollition): GameObject(Position, size,location) {
     override val texture = DefaultTextureHandler.getTexture(textureName)
 }

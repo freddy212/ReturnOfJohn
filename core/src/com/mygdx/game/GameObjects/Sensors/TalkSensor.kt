@@ -13,7 +13,7 @@ import com.mygdx.game.GameObjects.MoveableEntities.NPC
 import com.mygdx.game.Interfaces.DynamicEntity
 import com.mygdx.game.Interfaces.DirectionalObject
 
-class TalkSensor(Position: Vector2, size: Vector2,val npc: NPC, override var direction: Direction) : GameObject(Position, size),DirectionalObject,
+class TalkSensor(Position: Vector2, size: Vector2,val npc: NPC, override var direction: Direction) : GameObject(Position, size,npc.location),DirectionalObject,
 DynamicEntity by DefaultPositionChange{
     override val texture = DefaultTextureHandler.getTexture("sensor.png")
     override val layer = Layer.ONGROUND

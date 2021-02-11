@@ -5,14 +5,8 @@ import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.Enums.Layer
-import com.mygdx.game.FileHandling.FileHandler
-import com.mygdx.game.GameObjects.Wall
-import com.mygdx.game.Interfaces.Collition
 import com.mygdx.game.Interfaces.LocationStrategy
 import com.mygdx.game.Locations.DefaultLocation
-import com.mygdx.game.Managers.AreaManager
-import com.mygdx.game.Managers.LocationManager
-import com.mygdx.game.SaveState.PlayerSaveState
 
 class LocationImpl(size: Vector2, Position: Vector2, private val objectCreationMethod: () -> List<GameObject> = {listOf()},
                          val locationStrategy: LocationStrategy = DefaultLocation()): GameObject(Position,size){
@@ -30,10 +24,6 @@ class LocationImpl(size: Vector2, Position: Vector2, private val objectCreationM
         texture.setFilter(Texture.TextureFilter.Linear,Texture.TextureFilter.Linear)
         texture.setWrap(Texture.TextureWrap.Repeat,Texture.TextureWrap.MirroredRepeat)
         locationStrategy.initialization(this)
-        onLocationExitActions.add {
-            playerSaveState = PlayerSaveState(player.sprite.x, player.sprite.y,LocationManager.activeArea.identifier)
-            FileHandler.writeToFile(playerSaveState.encode())
-        }
     }
     override fun render(batch: PolygonSpriteBatch){
         this.sprite.draw(batch)

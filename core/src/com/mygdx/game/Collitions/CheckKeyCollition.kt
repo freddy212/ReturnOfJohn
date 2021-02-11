@@ -17,8 +17,8 @@ class CheckKeyCollition(val lockedDoor: LockedDoor): KeyPressedCollition {
         if(entity is Player && collidedObject is KeySensor){
             if(player.inventory.getItemCount(Item.KEY) > 0 && player.direction == Direction.UP){
                 player.inventory.useItems(Item.KEY,1)
-                lockedDoor.location!!.removeGameObject(lockedDoor)
-                collidedObject.location!!.removeGameObject(collidedObject)
+                lockedDoor.removeFromLocation()
+                collidedObject.removeFromLocation()
             }
         }
     }
