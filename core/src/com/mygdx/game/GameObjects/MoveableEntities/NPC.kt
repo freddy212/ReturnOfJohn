@@ -31,11 +31,13 @@ class NPC(Position: Vector2, size: Vector2 = Vector2(128f,128f), location: Locat
     override var direction = Direction.UP
     override val movementStrategy = DefaultMovement(NoAction())
     val conversationsHandler = ConversationHandler()
+
     private val sensorUp = TalkSensor(this.topleft, Vector2(128f, 62f), this, Direction.UP)
     private val sensorLeft = TalkSensor(this.bottomleft - Vector2(128f, 0f), Vector2(128f, 62f), this, Direction.LEFT)
     private val sensorRight = TalkSensor(this.bottomright, Vector2(128f, 62f), this, Direction.RIGHT)
     private val sensorDown = TalkSensor(this.bottomleft - Vector2(0f, 62f), Vector2(128f, 62f), this, Direction.DOWN)
     private val sensors = listOf(sensorUp,sensorDown,sensorLeft,sensorRight)
+
     override val collition = IllegalMoveCollition
     init {
         sensors.forEach{location!!.addGameObject(it)}

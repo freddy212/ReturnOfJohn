@@ -3,14 +3,11 @@ package com.mygdx.game.Collitions
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.GameObjects.BoulderGenerator
-import com.mygdx.game.GameObjects.MoveableEntities.Boulder
+import com.mygdx.game.GameObjects.MoveableEntities.Projectiles.Boulder
 import com.mygdx.game.GameObjects.MoveableEntities.Player
 import com.mygdx.game.Interfaces.MoveCollition
-import com.mygdx.game.SaveHandling.DefaultSaveableObject
 import com.mygdx.game.SaveHandling.FileHandler
 import com.mygdx.game.getOppositeUnitVector
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.encodeToString
 
 
 class BoulderCollition: MoveCollition {

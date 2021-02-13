@@ -152,12 +152,12 @@ fun GameObject.InitPolygon(sprite: Sprite): Polygon{
         return polygon
 }
 
-inline fun ConstructObjects(gameobjectFactory: (Position: Vector2, Size: Vector2) -> GameObject , fromx: Int, incrementx: Int, endx: Int,
-                     fromy: Int, incrementy: Int, endy: Int): List<GameObject>{
+inline fun ConstructObjects(gameobjectFactory: (Position: Vector2, Size: Vector2,location:LocationImpl) -> GameObject, fromx: Int, incrementx: Int, endx: Int,
+                     fromy: Int, incrementy: Int, endy: Int, location: LocationImpl): List<GameObject>{
         val objects = mutableListOf<GameObject>()
         for(y in fromy downTo endy step incrementy){
                 for(x in fromx..endx step incrementx){
-                        val gameObject = gameobjectFactory(Vector2(x.toFloat(),y.toFloat()), Vector2(128f,128f))
+                        val gameObject = gameobjectFactory(Vector2(x.toFloat(),y.toFloat()), Vector2(incrementx.toFloat(),incrementy.toFloat()),location)
                         objects.add(gameObject)
                 }
         }
@@ -165,9 +165,8 @@ inline fun ConstructObjects(gameobjectFactory: (Position: Vector2, Size: Vector2
 }
 
 fun constructTombs(location: LocationImpl): List<GameObject>{
-        val tombFactory = {Position : Vector2, Size: Vector2 -> Tomb(Position,Size,location) }
-        return ConstructObjects(tombFactory,location.bottomleft.x.toInt() + 20, 200, location.bottomright.x.toInt(),
-                location.bottomleft.y.toInt() + 400, 201, location.bottomleft.y.toInt())
+        return ConstructObjects(::Tomb,location.bottomleft.x.toInt() + 20, 200, location.bottomright.x.toInt(),
+                location.bottomleft.y.toInt() + 400, 201, location.bottomleft.y.toInt(),location)
 }
 
 fun middleOfObject(Position: Vector2,size: Vector2): Vector2{

@@ -16,7 +16,7 @@ class KeySensor(Position: Vector2, size: Vector2, location: LocationImpl, val lo
         sprite.draw(batch)
     }
     init {
-        polygon.setPosition(location.middle.x - polygon.vertices[0] - sprite.width / 2,sprite.y - polygon.vertices[1] - sprite.height)
+        polygon.setPosition(location.originalMiddle.x - polygon.vertices[0] - sprite.width / 2,sprite.y - polygon.vertices[1] - sprite.height)
     }
     override val collition = CheckKeyCollition(lockedDoor)
 }

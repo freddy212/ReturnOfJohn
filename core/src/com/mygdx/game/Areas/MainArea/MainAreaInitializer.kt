@@ -23,17 +23,15 @@ class MainAreaInitializer: AreaInitializer {
         val graveyardLoc = addLocationRelative(location4, Vector2(1000f, 2300f), InsertDirection.RIGHT, area, InsertDirection.MIDDLE, ::getLocationGraveyard)
         val worldTreeLoc = addLocationRelative(location6, Vector2(1000f, 1000f), InsertDirection.UP, area, InsertDirection.MIDDLE, ::getWorldTreeObjects)
         createFireLands(location2,area)
+        createIceLands(location3,area)
         LocationManager.SetArea(area)
         return area
     }
     private fun createFireLands(location2: LocationImpl, area: Area){
-        /*val location9 = addLocationRelative(location2, Vector2(1200f, 128f), InsertDirection.LEFT, area, InsertDirection.MIDDLE)
-        val location10 = addLocationRelative(location9, Vector2(500f, 500f), InsertDirection.DOWN, area, InsertDirection.LEFT,::getFireLandsLocationTwo)
-        location10.onLocationEnter = {
-            val deadBoulderGenerators = getFireLandsLocationTwo()
-            deadBoulderGenerators.forEach { location10.addGameObject(it) }
-        }*/
-        val fireLandsMainGround = DefaultTextureHandler.getTexture("MainB.jpg")
-        val location9 = addLocationRelative(location2, Vector2(2000f, 2000f), InsertDirection.LEFT, area, InsertDirection.MIDDLE,::getFireLandsLocationTwo,DamageLocation())
+        val location9 = addLocationRelative(location2, Vector2(2000f, 1500f), InsertDirection.LEFT, area, InsertDirection.MIDDLE,::getFireLandsLocationTwo,DamageLocation())
+    }
+    private fun createIceLands(location3: LocationImpl, area: Area){
+        val iceLandsMainGround = DefaultTextureHandler.getTexture("IceGround.png")
+        val location10 = addLocationRelative(location3, Vector2(1500f, 1000f), InsertDirection.UP, area, InsertDirection.MIDDLE,::getIceLandsLocationTwo,DamageLocation(iceLandsMainGround))
     }
 }

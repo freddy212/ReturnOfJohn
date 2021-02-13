@@ -5,4 +5,5 @@ import com.badlogic.gdx.math.Vector2
 interface RotationalObject {
     var angle: Float
     fun setRotation(unitVectorDirection: Vector2, gameObject: GameObject,angleModifier: Float)
+    fun rotateByAmount(amount: Float, gameObject: GameObject)
 }

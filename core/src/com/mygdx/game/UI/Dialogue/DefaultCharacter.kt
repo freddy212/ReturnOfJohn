@@ -27,6 +27,7 @@ abstract class DefaultCharacter(Position: Vector2, size: Vector2, location: Loca
     var stunDuration = 4
     lateinit var launchUnitVector: Vector2
     override var canChangeDirection = true
+    override var unitVectorDirection = Vector2(0f,0f)
 
     init {
         font.data.setScale(2f)
@@ -45,6 +46,7 @@ abstract class DefaultCharacter(Position: Vector2, size: Vector2, location: Loca
         this.unitVectorDirection = unitVectorDirection
     }
     override fun move(unitVectorDirection: Vector2): Boolean {
+        this.unitVectorDirection = unitVectorDirection
         var moveSuccessfull = false
         if(canChangeDirection()){
             setCharacterRotation(unitVectorDirection)

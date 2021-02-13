@@ -10,9 +10,7 @@ import com.mygdx.game.Enums.CharacterState
 import com.mygdx.game.Enums.Direction
 import com.mygdx.game.Enums.getDirectionUnitVector
 import com.mygdx.game.Events.DrawSentenceEvent
-import com.mygdx.game.GameObjects.ItemAbilities.Shield
 import com.mygdx.game.GameObjects.MoveableEntities.Player
-import com.mygdx.game.GameObjects.MoveableEntities.WaterGunSpray
 import com.mygdx.game.Interfaces.KeyPressedCollition
 import com.mygdx.game.Managers.EventManager
 import com.mygdx.game.Managers.LocationManager

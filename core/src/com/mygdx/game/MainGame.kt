@@ -13,7 +13,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.SaveHandling.FileHandler
-import com.mygdx.game.GameObjects.ItemAbilities.Shield
+import com.mygdx.game.GameObjects.ItemAbilities.ShieldAbility
 import com.mygdx.game.GameObjects.MoveableEntities.Player
 import com.mygdx.game.Interfaces.AreaIdentifier
 import com.mygdx.game.Managers.*
@@ -79,7 +79,7 @@ class MainGame : ApplicationAdapter() {
         font.data.setScale(2f)
         inventory = Inventory()
         inputAdapter = ROJInputAdapter(camera,player)
-        val shield = Shield(Vector2(0f,0f), Vector2(15f,40f))
+        val shield = ShieldAbility(Vector2(0f,0f), Vector2(15f,40f))
         //player.addAbility(shield)
         initInputAdapter()
 

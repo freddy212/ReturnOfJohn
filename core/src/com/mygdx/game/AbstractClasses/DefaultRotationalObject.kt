@@ -11,4 +11,8 @@ class DefaultRotationalObject: RotationalObject {
             gameObject.polygon.rotation = angle
             gameObject.sprite.rotation = angle
     }
+    override fun rotateByAmount(amount: Float, gameObject: GameObject){
+        gameObject.polygon.rotate(amount)
+        gameObject.sprite.rotate(amount)
+    }
 }

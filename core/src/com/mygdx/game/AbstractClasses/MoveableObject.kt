@@ -10,14 +10,11 @@ abstract class MoveableObject(Position: Vector2, size: Vector2, location: Locati
     abstract var currentSpeed : Float
     abstract val movementStrategy: MovementStrategy
     private var canMove = true
-    open var unitVectorDirection = Vector2(0f,0f)
+    abstract var unitVectorDirection: Vector2
 
     open fun move(unitVectorDirection: Vector2): Boolean{
         if(canMove){
             val moveSuccessfull = movementStrategy.moveEntity(this,unitVectorDirection)
-            if(moveSuccessfull){
-                this.unitVectorDirection = unitVectorDirection
-            }
             return moveSuccessfull
         }else{
             return false

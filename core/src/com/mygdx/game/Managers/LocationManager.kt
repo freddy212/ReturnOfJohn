@@ -17,6 +17,7 @@ class LocationManager {
         lateinit var ActiveLocations: List<LocationImpl>
         lateinit var MoveCollitionGameObjects: List<GameObject>
         lateinit var ButtonCollitionGameObjects: List<GameObject>
+        lateinit var currentLocation: LocationImpl
         var  ActiveGameObjects: List<GameObject>
         init {
             crossLocationGameObjects.add(player)
@@ -33,6 +34,7 @@ class LocationManager {
             val newLocation = findPlayerLocation
 
             if(oldLocation != newLocation) {
+                currentLocation = newLocation
                 oldLocation = newLocation
                 ActiveLocations = (listOf(oldLocation) + oldLocation.adjacentLocations)
                 val oldActiveGameObjects = ActiveGameObjects

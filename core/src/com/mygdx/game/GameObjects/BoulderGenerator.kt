@@ -7,7 +7,7 @@ import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.AbstractClasses.RotationalObject
 import com.mygdx.game.Collitions.IllegalMoveCollition
 import com.mygdx.game.Enums.Layer
-import com.mygdx.game.GameObjects.MoveableEntities.Boulder
+import com.mygdx.game.GameObjects.MoveableEntities.Projectiles.Boulder
 import com.mygdx.game.SaveHandling.DefaultRemoveObjectSaveState
 import com.mygdx.game.SaveState.SaveStateEntity
 import com.mygdx.game.Timer.DefaultTimer
@@ -37,7 +37,7 @@ class BoulderGenerator(Position: Vector2, size: Vector2, val unitVectorDirection
 
     fun generateBoulder(){
         val Position = Vector2(this.sprite.x + this.sprite.width/2,this.sprite.y + this.sprite.height /2) + (unitVectorDirection * 240f)
-        val boulder = Boulder(unitVectorDirection,Position,Vector2( 64 * 2f,64f * 2),location)
+        val boulder = Boulder(Vector2(unitVectorDirection.x,unitVectorDirection.y),Position,Vector2( 64 * 2f,64f * 2),location)
         location!!.addGameObject(boulder)
     }
 }

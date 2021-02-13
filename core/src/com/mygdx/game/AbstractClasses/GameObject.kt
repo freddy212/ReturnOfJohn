@@ -22,7 +22,9 @@ abstract class GameObject (val Position: Vector2, val size: Vector2,val location
     val width = size.x
     val height = size.y
 
-    val middle: Vector2 = Vector2(topleft.x + (topright.x - topleft.x) / 2,bottomleft.y + (topleft.y - bottomleft.y)/2)
+    val originalMiddle: Vector2 = Vector2(topleft.x + (topright.x - topleft.x) / 2,bottomleft.y + (topleft.y - bottomleft.y)/2)
+    val currentMiddle: Vector2
+    get() = Vector2(sprite.x + sprite.width/2, sprite.y + sprite.height/2)
 
     //Remember this. Temporary solution. texture must be overriden before polygon is called
     abstract val texture: Texture
