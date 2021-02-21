@@ -46,14 +46,14 @@ fun getLocationGraveyard(): List<GameObject>{
 
     val doorCollition = DoorCollition(doorPosition,AreaIdentifier.DUNGEONAREA, doorMainAreaAndDungeonConnection,Direction.UP)
 
-    val toggleCollition = ToggleCollition(IllegalMoveCollition,doorCollition)
+    //val toggleCollition = ToggleCollition(IllegalMoveCollition,doorCollition)
 
-    val door = Door(doorPosition, Vector2(32f * 2,64f * 2),DefaultTextureHandler.getTexture("CaveDoor.png"),graveyardLoc,Direction.UP,toggleCollition)
+    val door = Door(doorPosition, Vector2(32f * 2,64f * 2),DefaultTextureHandler.getTexture("CaveDoor.png"),graveyardLoc,Direction.UP,doorCollition)
 
-    val fireExtinguishedEvent = ToggleCollitionEvent(toggleCollition)
+    /*val fireExtinguishedEvent = ToggleCollitionEvent(toggleCollition)
     val fire = Fire(door.Position,door.size,fireExtinguishedEvent,door)
 
-    door.properties.add(fire)
+    door.properties.add(fire)*/
 
     val npc = NPC(middleOfObject(graveyardLoc.originalMiddle,Vector2(120f,120f)) - Vector2(0f,450f),Vector2(120f,120f),graveyardLoc)
 
@@ -88,10 +88,15 @@ fun getIceLandsLocationTwo():List<GameObject>{
     //location10.originalMiddle +  Vector2(location10.width / 2 - 150f, 0f)
     val walkableTerrain = GenericGameObject(location10.bottomleft +  Vector2(location10.width / 2 - 150f,0f), Vector2(300f,location10.height ),
         "MainB.jpg", Layer.ONGROUND, location10, RemoveDotDamageCollition)
+    //val iceGround1 = IceGround(walkableTerrain.bottomleft,Vector2(100f,200f),location10)
     val thorns = ConstructObjects(::Thorns,walkableTerrain.topleft.x.toInt(),60,walkableTerrain.topright.x.toInt() - 1,
-        walkableTerrain.topleft.y.toInt() - 200, 200,walkableTerrain.topleft.y.toInt() - 399,
+        walkableTerrain.topleft.y.toInt() - 100, 100,walkableTerrain.topleft.y.toInt() - 200,
         location10)
-    return listOf(walkableTerrain) + thorns
+    val iceGrounds = ConstructObjects(::IceGround,walkableTerrain.bottomleft.x.toInt(),100,walkableTerrain.bottomleft.x.toInt() + 199,
+                                    walkableTerrain.bottomleft.y.toInt() + 400,100,walkableTerrain.bottomleft.y.toInt(),location10)
+    val iceGrounds2 = ConstructObjects(::IceGround, walkableTerrain.bottomleft.x.toInt() + 100,100,walkableTerrain.topright.x.toInt() - 100,
+                                        walkableTerrain.topleft.y.toInt() - 300, 100,walkableTerrain.topleft.y.toInt() - 499,location10)
+    return listOf(walkableTerrain) + thorns + iceGrounds + iceGrounds2
 }
 fun getFireLandsLocationTwo(): List<GameObject> {
     val location2 = LocationManager.findLocation("location2", AreaIdentifier.MAINAREA)
@@ -101,9 +106,6 @@ fun getFireLandsLocationTwo(): List<GameObject> {
             if(entity is Boulder){
                 entity.removeFromLocation()
                 collidedObject.removeFromLocation()
-                if(collidedObject is SaveStateEntity){
-                    FileHandler.writeSaveStateEntity(collidedObject)
-                }
             }
         }
     }
@@ -124,10 +126,10 @@ fun getFireLandsLocationTwo(): List<GameObject> {
             "MainB.jpg", Layer.ONGROUND, location9, RemoveDotDamageCollition)
 
     val boulderGenSize = Vector2(128f,128f)
-    val boulderGenerator1 = BoulderGenerator(Vector2(location9.bottomleft.x + 350f,location9.bottomleft.y),boulderGenSize, getDirectionUnitVector(Direction.RIGHT) + Vector2(-0.5f,0.5f),location9,1f)
+    val boulderGenerator1 = BoulderGenerator(Vector2(location9.bottomleft.x + 400f,location9.bottomleft.y),boulderGenSize, getDirectionUnitVector(Direction.RIGHT) + Vector2(-0.3f,0.5f),location9,1f)
     //val boulderGenerator2 = BoulderGenerator(Vector2(location9.topleft.x + 350f,location9.topleft.y) - Vector2(0f,128f), boulderGenSize, getDirectionUnitVector(Direction.RIGHT) + Vector2(-0.5f,-0.5f),location9,3f)
 
-     val  walkableTerrain3 = GenericGameObject(walkableTerrain2.topleft, Vector2(300f,location9.topleft.y - walkableTerrain2.topleft.y),
+    val walkableTerrain3 = GenericGameObject(walkableTerrain2.topleft, Vector2(300f,location9.topleft.y - walkableTerrain2.topleft.y),
             "MainB.jpg", Layer.ONGROUND, location9, RemoveDotDamageCollition)
 
     return listOf(walkableTerrain, fence,fence2,walkableTerrain2,fireGate,boulderGenerator1,walkableTerrain3)

@@ -7,7 +7,7 @@ import com.mygdx.game.Interfaces.Area
 import com.mygdx.game.Interfaces.AreaIdentifier
 import com.mygdx.game.Interfaces.KeyPressedCollition
 import com.mygdx.game.Interfaces.MoveCollition
-import com.mygdx.game.SaveHandling.saveStates
+import com.mygdx.game.SaveHandling.savePlayerStates
 
 class LocationManager {
     companion object{
@@ -43,7 +43,7 @@ class LocationManager {
                 val oldGameObjects = oldActiveGameObjects - ActiveGameObjects
                 newGameObjects.forEach{it.onLocationEnterActions.forEach { it() }}
                 oldGameObjects.forEach {it.onLocationExitActions.forEach { it() }}
-                saveStates()
+                savePlayerStates()
             }
             ActiveGameObjects = ActiveLocations.flatMap { x -> x.gameObjects } + ActiveLocations + crossLocationGameObjects.List
             MoveCollitionGameObjects = ActiveGameObjects.filter{x -> x.collition is MoveCollition}

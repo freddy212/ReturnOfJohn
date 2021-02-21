@@ -8,4 +8,4 @@ abstract class SaveableObject() {
     abstract val entityId: Int
 }
 @Serializable
-class DefaultSaveableObject(override val entityId: Int): SaveableObject(){}
+open class DefaultSaveableObject(override val entityId: Int): SaveableObject(){}

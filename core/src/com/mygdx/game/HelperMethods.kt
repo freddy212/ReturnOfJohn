@@ -12,6 +12,7 @@ import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.utils.FloatArray
 import com.mygdx.game.AbstractClasses.*
 import com.mygdx.game.Enums.Direction
+import com.mygdx.game.Enums.Item
 import com.mygdx.game.GameObjects.*
 import com.mygdx.game.GameObjects.MoveableEntities.Player
 import com.mygdx.game.Interfaces.Area
@@ -19,7 +20,9 @@ import com.mygdx.game.Interfaces.DirectionalObject
 import com.mygdx.game.Interfaces.LocationStrategy
 import com.mygdx.game.Interfaces.MoveCollition
 import com.mygdx.game.Locations.DefaultLocation
+import com.mygdx.game.Managers.AreaManager
 import com.mygdx.game.Managers.LocationManager
+import com.mygdx.game.SaveState.SaveStateEntity
 import kotlin.math.PI
 import kotlin.math.atan2
 
@@ -165,8 +168,8 @@ inline fun ConstructObjects(gameobjectFactory: (Position: Vector2, Size: Vector2
 }
 
 fun constructTombs(location: LocationImpl): List<GameObject>{
-        return ConstructObjects(::Tomb,location.bottomleft.x.toInt() + 20, 200, location.bottomright.x.toInt(),
-                location.bottomleft.y.toInt() + 400, 201, location.bottomleft.y.toInt(),location)
+        return ConstructObjects(::Tomb,location.bottomleft.x.toInt() + 20, 120, location.bottomright.x.toInt(),
+                location.bottomleft.y.toInt() + 200, 128, location.bottomleft.y.toInt(),location)
 }
 
 fun middleOfObject(Position: Vector2,size: Vector2): Vector2{
@@ -204,10 +207,13 @@ fun GetNextStep(d: Direction, speed: Float): Vector2{
         }
 }
 fun GetCollidingObjects(gameObjects: List<GameObject>,polygon: Polygon): List<GameObject>{
-        val collidingObjects =  gameObjects.filter { p -> intersectPolygonEdges(FloatArray(polygon.transformedVertices), FloatArray(p.polygon.transformedVertices))
-                || polygon.anyPointInPolygon(p.polygon)}
+        val collidingObjects =  gameObjects.filter { p -> isPolygonsColliding(polygon,p.polygon)}
         val filteredCollitions = collidingObjects.fold(collidingObjects, {objects,nextObject -> nextObject.collition.filterCollitions(objects)})
         return filteredCollitions
+}
+fun isPolygonsColliding(polygon1: Polygon, polygon2: Polygon): Boolean{
+       return intersectPolygonEdges(FloatArray(polygon1.transformedVertices), FloatArray(polygon2.transformedVertices))
+                || polygon1.anyPointInPolygon(polygon2)
 }
 
 fun InitAssets(): AssetManager {
@@ -243,4 +249,16 @@ fun getDirectionFromAngle(angleToCheck: Float):Direction{
                 in 225f..315f -> Direction.LEFT
                 else -> Direction.DOWN
         }
+}
+
+fun getGameObjectWithEntityId(entityId: Int): GameObject? {
+        val relevantObjects: List<GameObject> = AreaManager.getAllGameObjects().filter { it is SaveStateEntity }
+        val matchingObject: GameObject? = relevantObjects.find { (it as SaveStateEntity).entityId == entityId }
+        return matchingObject
+}
+
+
+fun itemObjectAddToInventory(item: Item, itemObject: GameObject) {
+        player.inventory.addItem(item)
+        itemObject.removeFromLocation()
 }

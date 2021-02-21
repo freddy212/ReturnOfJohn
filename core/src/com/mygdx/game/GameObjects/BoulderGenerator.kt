@@ -1,5 +1,6 @@
 package com.mygdx.game.GameObjects
 
+import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.*
 import com.mygdx.game.AbstractClasses.DefaultRotationalObject
@@ -36,8 +37,15 @@ class BoulderGenerator(Position: Vector2, size: Vector2, val unitVectorDirection
     }
 
     fun generateBoulder(){
-        val Position = Vector2(this.sprite.x + this.sprite.width/2,this.sprite.y + this.sprite.height /2) + (unitVectorDirection * 240f)
+        val Position = Vector2(this.sprite.x + this.sprite.width/2,this.sprite.y + this.sprite.height /2) + getBoulderDistanceFromGenerator(unitVectorDirection)
         val boulder = Boulder(Vector2(unitVectorDirection.x,unitVectorDirection.y),Position,Vector2( 64 * 2f,64f * 2),location)
         location!!.addGameObject(boulder)
+    }
+    fun getBoulderDistanceFromGenerator(unitVectorDirection: Vector2):Vector2{
+        var distance = 1f
+        while(isPolygonsColliding(this.polygon,RectanglePolygon(Vector2(Position + (unitVectorDirection * distance)),128f,128f))){
+            distance +=1
+        }
+        return unitVectorDirection * distance
     }
 }

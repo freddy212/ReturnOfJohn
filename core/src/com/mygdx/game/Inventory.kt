@@ -1,6 +1,15 @@
 package com.mygdx.game
 
 import com.mygdx.game.Enums.Item
+import com.mygdx.game.SaveHandling.DefaultSaveableObject
+import com.mygdx.game.SaveHandling.SaveableObject
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class ItemSavableObject(val item: Item, val amount: Int){}
+
+@Serializable
+class InventorySaveObject(val items: List<ItemSavableObject>, override val entityId: Int): SaveableObject(){}
 
 class Inventory {
     private val InventoryList: MutableMap<Item,Int> = mutableMapOf()
@@ -20,5 +29,11 @@ class Inventory {
             return true
         }
         return false
+    }
+    fun loadItems(listOfItems: List<ItemSavableObject>){
+        listOfItems.forEach {this.addItem(it.item,it.amount)}
+    }
+    fun saveItems(){
+
     }
 }

@@ -28,8 +28,6 @@ fun getShopObjects(): List<GameObject>{
     val size = Vector2(120f,60f)
     val position = location1.originalMiddle
     val itemTable = GenericGameObject(middleOfObject(position,size),size,"ItemTable.png",Layer.ONGROUND,location1,IllegalMoveCollition)
-    val shopNPC = NPC(middleOfObject(Vector2(itemTable.originalMiddle.x,itemTable.originalMiddle.y + 200f),Vector2(128f,128f)), Vector2(128f,128f),location1)
-    val waterGunSize = Vector2(60f,40f)
-    val waterGun = WaterGunItemObject(middleOfObject(itemTable.originalMiddle,waterGunSize),waterGunSize,Layer.AIR,location1)
-    return listOf(door,itemTable,shopNPC,waterGun)
+   // val shopNPC = NPC(middleOfObject(Vector2(itemTable.originalMiddle.x,itemTable.originalMiddle.y + 200f),Vector2(128f,128f)), Vector2(128f,128f),location1)
+    return listOf(door,itemTable)
 }

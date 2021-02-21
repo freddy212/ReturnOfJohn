@@ -7,15 +7,24 @@ import com.mygdx.game.Collitions.IllegalMoveCollition
 import com.mygdx.game.Enums.Layer
 import com.mygdx.game.GameObjects.Sensors.KeySensor
 import com.mygdx.game.LocationImpl
+import com.mygdx.game.SaveHandling.DefaultRemoveObjectSaveState
+import com.mygdx.game.SaveState.SaveStateEntity
 
-class LockedDoor(Position: Vector2, size: Vector2, location: LocationImpl?) : GameObject(Position, size, location) {
+class LockedDoor(Position: Vector2, size: Vector2, location: LocationImpl?) : GameObject(Position, size, location),
+                                                                             SaveStateEntity by DefaultRemoveObjectSaveState(){
     override val texture = DefaultTextureHandler.getTexture("LockedDoor.png")
     override val layer = Layer.ONGROUND
 
     override val collition = IllegalMoveCollition
+    private lateinit var sensor: KeySensor
 
     init {
-        val sensor = KeySensor(Position,Vector2(100f,50f),location!!,this)
+        sensor = KeySensor(Position,Vector2(100f,50f),location!!,this)
         location.addGameObject(sensor)
+    }
+
+    override fun removeFromLocation() {
+        sensor.removeFromLocation()
+        super.removeFromLocation()
     }
 }

@@ -22,12 +22,12 @@ import com.mygdx.game.Managers.LocationManager
 import com.mygdx.game.Managers.TooltipManager
 import com.mygdx.game.SaveState.DefaultSaveStateHandler
 import com.mygdx.game.SaveState.SaveStateEntity
-import com.mygdx.game.UI.Dialogue.DefaultCharacter
+import com.mygdx.game.AbstractClasses.DefaultCharacter
 
 class Player(Position: Vector2, size: Vector2, modelHandler: ModelInstanceHandler = DefaultModelInstanceHandler(
         assets.get("ManBlender.g3db", Model::class.java),
         Position,size))
-             :DefaultCharacter(Position, size,null,modelHandler),SaveStateEntity by DefaultSaveStateHandler(){
+             : DefaultCharacter(Position, size,null,modelHandler),SaveStateEntity by DefaultSaveStateHandler(){
     private var death = false
     override val texture = DefaultTextureHandler.getTexture("man.png")
     override val movementStrategy = DefaultMovement(NoAction())
@@ -42,7 +42,7 @@ class Player(Position: Vector2, size: Vector2, modelHandler: ModelInstanceHandle
         player.setPosition(playerLocation.Position, player)
     }
     fun addAbility(characterAbility: CharacterAbility) {
-        val toolTip = ToolTip(Sprite(characterAbility.texture), Input.Keys.toString(characterAbility.triggerKey)[0])
+        val toolTip = ToolTip(Sprite(characterAbility.toolTipTexture), Input.Keys.toString(characterAbility.triggerKey)[0])
         TooltipManager.tooltipManager.add(toolTip)
         itemAbilities.add(characterAbility)
     }

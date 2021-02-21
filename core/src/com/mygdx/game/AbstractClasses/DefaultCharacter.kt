@@ -1,4 +1,4 @@
-package com.mygdx.game.UI.Dialogue
+package com.mygdx.game.AbstractClasses
 
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.BitmapFont

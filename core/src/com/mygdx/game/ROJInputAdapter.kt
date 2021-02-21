@@ -54,23 +54,19 @@ class ROJInputAdapter(private val camera : OrthographicCamera, val player: Playe
         return super.keyUp(keycode)
     }
     fun handleInput(player: Player) {
+        clickPosition = camera.unproject(Vector3(Gdx.input.x.toFloat(), Gdx.input.y.toFloat(), 0f))
+        val unitVectorTowardsPoint = getUnitVectorTowardsPoint(Vector2(player.sprite.x,player.sprite.y),Vector2(clickPosition.x,clickPosition.y))
         if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)){
-            clickPosition = camera.unproject(Vector3(Gdx.input.x.toFloat(), Gdx.input.y.toFloat(), 0f))
-            player.move(getUnitVectorTowardsPoint(Vector2(player.sprite.x,player.sprite.y),Vector2(clickPosition.x,clickPosition.y)))
+            if(!player.move(unitVectorTowardsPoint)){
+                handleCollitions(player,player.polygon,LocationManager.ActiveGameObjects)
+            }
+        }else{
+            //val currentDirection = player.unitVectorDirection
+            handleCollitions(player,player.polygon,LocationManager.ActiveGameObjects)
+           // player.setCharacterRotation(currentDirection)
         }
-        when {
-            Gdx.input.isKeyPressed(Input.Keys.W) -> {
-                player.move(getDirectionUnitVector(Direction.UP))
-            }
-            Gdx.input.isKeyPressed(Input.Keys.A) -> {
-                player.move(getDirectionUnitVector(Direction.LEFT))
-            }
-            Gdx.input.isKeyPressed(Input.Keys.D) -> {
-                player.move(getDirectionUnitVector(Direction.RIGHT))
-            }
-            Gdx.input.isKeyPressed(Input.Keys.S) -> {
-                player.move(getDirectionUnitVector(Direction.DOWN))
-            }
+        if (Gdx.input.isButtonPressed(Input.Buttons.RIGHT)){
+            player.setCharacterRotation(unitVectorTowardsPoint)
         }
 
     }

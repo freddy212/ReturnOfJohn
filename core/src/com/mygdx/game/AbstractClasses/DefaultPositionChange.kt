@@ -4,7 +4,7 @@ import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.Enums.Direction
 import com.mygdx.game.Interfaces.DirectionalObject
 import com.mygdx.game.Interfaces.DynamicEntity
-import com.mygdx.game.UI.Dialogue.DefaultCharacter
+import com.mygdx.game.AbstractClasses.DefaultCharacter
 import com.mygdx.game.angleBetweenPoints
 
 object DefaultPositionChange: DynamicEntity {

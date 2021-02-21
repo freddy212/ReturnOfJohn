@@ -12,6 +12,7 @@ import com.mygdx.game.GameObjects.BoulderGenerator
 import com.mygdx.game.GameObjects.Door
 import com.mygdx.game.GameObjects.ItemObjects.GenericItemObject
 import com.mygdx.game.GameObjects.ItemObjects.ShieldItemObject
+import com.mygdx.game.GameObjects.ItemObjects.WaterGunItemObject
 import com.mygdx.game.GameObjects.LockedDoor
 import com.mygdx.game.Interfaces.AreaIdentifier
 import com.mygdx.game.Managers.LocationManager
@@ -38,7 +39,9 @@ fun getLocationFourCaveObjects():List<GameObject>{
     val location = LocationManager.findLocation("location4",AreaIdentifier.DUNGEONAREA)
     val position = location.Position
     val door = LockedDoor(position, Vector2(location.size.x,100f),location)
-    return listOf(door)
+    val waterGunSize = Vector2(60f,40f)
+    val waterGun = WaterGunItemObject(middleOfObject(location.originalMiddle,waterGunSize),waterGunSize,Layer.AIR,location)
+    return listOf(door,waterGun)
 
 }
 fun getLocationNineCaveObjects():List<GameObject>{

@@ -1,5 +1,6 @@
 package com.mygdx.game.GameObjects.ItemAbilities
 
+import com.badlogic.gdx.graphics.Texture
 import com.mygdx.game.DefaultTextureHandler
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.*
@@ -14,8 +15,9 @@ import com.mygdx.game.Managers.LocationManager
 
 class ShieldAbility(Position: Vector2, size: Vector2): CharacterAbility(Position, size),DynamicEntity by DefaultPositionChange,
             RotationalObject by DefaultRotationalObject(){
-    override val texture=  DefaultTextureHandler.getTexture("shield-side.png")
+    override val texture = DefaultTextureHandler.getTexture("shield-side.png")
     override val triggerKey = com.badlogic.gdx.Input.Keys.NUM_2
+    override val toolTipTexture = DefaultTextureHandler.getTexture("shield-front.png")
 
     override val collition = ShieldCollition()
 

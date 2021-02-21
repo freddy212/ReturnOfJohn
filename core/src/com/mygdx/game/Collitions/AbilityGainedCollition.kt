@@ -14,7 +14,6 @@ class AbilityGainedCollition(val ability:CharacterAbility):MoveCollition by CanM
         if(entity is Player && collidedObject is AbilityItemObject){
             player.addAbility(ability)
             collidedObject.removeFromLocation()
-            FileHandler.writeSaveStateEntity(collidedObject)
         }
     }
 }

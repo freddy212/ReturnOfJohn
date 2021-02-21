@@ -22,9 +22,6 @@ class BoulderCollition: MoveCollition {
         if(entity is Boulder && (collidedObject is BoulderGenerator || collidedObject is Boulder)){
             collidedObject.removeFromLocation()
             entity.removeFromLocation()
-            if(collidedObject is BoulderGenerator){
-                FileHandler.writeSaveStateEntity(collidedObject)
-            }
         }
     }
 

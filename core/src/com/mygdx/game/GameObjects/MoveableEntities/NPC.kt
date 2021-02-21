@@ -16,7 +16,7 @@ import com.mygdx.game.SaveHandling.DefaultRemoveObjectSaveState
 import com.mygdx.game.SaveHandling.DefaultSaveableObject
 import com.mygdx.game.SaveHandling.FileHandler
 import com.mygdx.game.SaveState.SaveStateEntity
-import com.mygdx.game.UI.Dialogue.DefaultCharacter
+import com.mygdx.game.AbstractClasses.DefaultCharacter
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
@@ -57,6 +57,5 @@ class NPC(Position: Vector2, size: Vector2 = Vector2(128f,128f), location: Locat
     override fun removeFromLocation(){
         sensors.forEach {it.removeFromLocation()}
         super.removeFromLocation()
-        FileHandler.writeSaveStateEntity(this)
     }
 }

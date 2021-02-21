@@ -15,8 +15,6 @@ class TalkCollition(private val conversationEvent: ConversationEvent): KeyPresse
     override fun collitionHappened(entity: GameObject, collidedObject: GameObject) {
         if(entity is Player && collidedObject is TalkSensor){
             if(checkOpposingDirections(entity, collidedObject)){
-                counter += 1
-                println("Collition is successfull " + counter)
                 val characterRotation = getDirectionUnitVector(collidedObject.direction)
                 collidedObject.npc.setCharacterRotation(characterRotation)
                 conversationEvent.execute()

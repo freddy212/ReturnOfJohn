@@ -4,11 +4,11 @@ import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.Managers.AreaManager
 import com.mygdx.game.SaveState.DefaultSaveStateHandler
 import com.mygdx.game.SaveState.SaveStateEntity
+import com.mygdx.game.getGameObjectWithEntityId
 
-class DefaultRemoveObjectSaveState(): DefaultSaveStateHandler() {
+open class DefaultRemoveObjectSaveState: DefaultSaveStateHandler() {
     override fun onLoadAction() {
-            val relevantObjects: List<GameObject> = AreaManager.getAllGameObjects().filter { it is SaveStateEntity }
-            val matchingObject:GameObject? = relevantObjects.find {(it as SaveStateEntity).entityId == entityId }
-            matchingObject?.removeFromLocation()
+        val matchingObject: GameObject? = getGameObjectWithEntityId(entityId)
+        matchingObject?.removeFromLocation()
     }
 }

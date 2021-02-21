@@ -32,6 +32,6 @@ class MainAreaInitializer: AreaInitializer {
     }
     private fun createIceLands(location3: LocationImpl, area: Area){
         val iceLandsMainGround = DefaultTextureHandler.getTexture("IceGround.png")
-        val location10 = addLocationRelative(location3, Vector2(1500f, 1000f), InsertDirection.UP, area, InsertDirection.MIDDLE,::getIceLandsLocationTwo,DamageLocation(iceLandsMainGround))
+        val location10 = addLocationRelative(location3, Vector2(1500f, 1100f), InsertDirection.UP, area, InsertDirection.MIDDLE,::getIceLandsLocationTwo,DamageLocation(iceLandsMainGround))
     }
 }

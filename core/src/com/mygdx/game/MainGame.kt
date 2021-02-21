@@ -90,8 +90,8 @@ class MainGame : ApplicationAdapter() {
         camera.update()
         LocationManager.frameAction()
 
-        val ogfile = FileHandler.readFromFile()
-        val saves = ogfile.subList(1,ogfile.size)
+        val originalFile = FileHandler.readFromFile()
+        val saves = originalFile.subList(1,originalFile.size)
         val savedStates:List<DefaultSaveableObject> = saves.map { x -> Json.decodeFromString(x) }
         val savedEntities:List<SaveStateEntity> = AreaManager.getAllGameObjects()
             .filter {it is SaveStateEntity}.map { it as SaveStateEntity }.filter {savedStates.map {it.entityId}.contains(it.entityId)}
@@ -109,7 +109,7 @@ class MainGame : ApplicationAdapter() {
        // player.frameAction()
         inputAdapter.handleInput(player)
         RenderGraph.render(batch)
-        //drawrects()
+       // drawrects()
         EventManager.executeEvents()
         uiRenderer.render()
         camera.position.set(player.sprite.x, player.sprite.y,4f)
