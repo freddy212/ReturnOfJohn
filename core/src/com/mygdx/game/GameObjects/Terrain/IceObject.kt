@@ -1,4 +1,4 @@
-package com.mygdx.game.GameObjects
+package com.mygdx.game.GameObjects.Terrain
 
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch
@@ -11,7 +11,7 @@ import com.mygdx.game.Interfaces.MoveCollition
 import com.mygdx.game.LocationImpl
 import com.mygdx.game.ObjectProperties.Ice
 
-class IceGround(Position: Vector2, size: Vector2, location: LocationImpl?) :
+class IceObject(Position: Vector2, size: Vector2, location: LocationImpl?) :
     GameObject(Position, size, location) {
     override val collition = DOTCollition
     override val texture = DefaultTextureHandler.getTexture("Sensor.png")

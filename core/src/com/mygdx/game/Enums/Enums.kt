@@ -7,6 +7,7 @@ enum class Item{WORLDLEAF,KEY}
 enum class Layer {BEFORELOCATION,GROUND,ONGROUND,PERSON,AIR,FOREGROUND}
 enum class ConversationState {BEFORE,ONGOING}
 enum class CharacterState {STUNNED,FREE}
+enum class QuestIdentifier{DOJO,FIRE}
 
 fun getDirectionUnitVector(direction: Direction): Vector2{
    return when(direction){

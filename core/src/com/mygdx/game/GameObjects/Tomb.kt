@@ -17,7 +17,7 @@ class Tomb(Position: Vector2, size: Vector2,location: LocationImpl) : GameObject
     override val layer = Layer.ONGROUND
 
     init {
-        graveyardGrass.properties.add(Fire(graveyardGrass.Position,graveyardGrass.size,DefaultEvent(),graveyardGrass))
+        //graveyardGrass.properties.add(Fire(graveyardGrass.Position,graveyardGrass.size,DefaultEvent(),graveyardGrass))
         location.addGameObject(graveyardGrass)
     }
 }

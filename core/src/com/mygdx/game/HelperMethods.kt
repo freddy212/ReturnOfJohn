@@ -85,7 +85,7 @@ fun unitVectorToAngle(unitVector: Vector2):Float{
 
 
 enum class InsertDirection{LEFT,UP,RIGHT,DOWN,MIDDLE}
-fun GetPositionRelativeToLocation(location: LocationImpl, size: Vector2, direction: InsertDirection, directionOnPlane:InsertDirection): Vector2{
+fun GetPositionRelativeToLocation(location: LocationImpl, size: Vector2, direction: InsertDirection, directionOnPlane:InsertDirection, modifier: Vector2 = Vector2(0f,0f)): Vector2{
 
         val DirectionOnPlane = when(direction){
                 InsertDirection.LEFT, InsertDirection.RIGHT ->
@@ -113,7 +113,7 @@ fun GetPositionRelativeToLocation(location: LocationImpl, size: Vector2, directi
                 InsertDirection.DOWN -> Vector2(location.topleft.x + DirectionOnPlane,
                         location.bottomleft.y - size.y)
                 else -> Vector2(0f,0f)
-        }
+        } + modifier
 }
 
 fun addLocation(location: LocationImpl, area: Area): LocationImpl{
@@ -121,8 +121,9 @@ fun addLocation(location: LocationImpl, area: Area): LocationImpl{
         return location
 }
 fun addLocationRelative(location: LocationImpl, size:Vector2, direction:InsertDirection, area: Area,
-                        directionOnPlane:InsertDirection, objectCreationMethod: () -> List<GameObject> = {listOf()},locationStrategy:LocationStrategy = DefaultLocation()):LocationImpl{
-        val pos1 = GetPositionRelativeToLocation(location,size,direction,directionOnPlane)
+                        directionOnPlane:InsertDirection, objectCreationMethod: () -> List<GameObject> = {listOf()},locationStrategy:LocationStrategy = DefaultLocation(),
+                        positionModifier: Vector2 = Vector2(0f,0f)):LocationImpl{
+        val pos1 = GetPositionRelativeToLocation(location,size,direction,directionOnPlane,positionModifier)
         val newLocation = LocationImpl(size,pos1, objectCreationMethod,locationStrategy)
         location.addAdjacentLocation(newLocation)
         newLocation.addAdjacentLocation(location)

@@ -7,13 +7,13 @@ import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.Enums.Layer
 import com.mygdx.game.Interfaces.Event
 
-class Fire(val position:Vector2, val size: Vector2,val extinguishFireEvent: Event, objectOnFire: GameObject) : ROJParticleObject(ParticleEffect(),objectOnFire) {
+class Fire(val extinguishFireEvent: Event, objectOnFire: GameObject) : ROJParticleObject(ParticleEffect(),objectOnFire) {
     override val layer = Layer.FOREGROUND
     init {
         particleEffect.load(Gdx.files.internal("ParticleEmitters/Fire.p"), Gdx.files.internal(""))
-        particleEffect.emitters.first().setPosition(position.x, position.y)
-        particleEffect.emitters.first().xOffsetValue.setLow(0f,size.x)
-        particleEffect.emitters.first().yOffsetValue.setLow(- 10f,size.y /2)
+        particleEffect.emitters.first().setPosition(objectOnFire.x, objectOnFire.y)
+        particleEffect.emitters.first().xOffsetValue.setLow(0f,objectOnFire.size.x)
+        particleEffect.emitters.first().yOffsetValue.setLow(- 10f,objectOnFire.size.y /2)
 
         particleEffect.start()
 }

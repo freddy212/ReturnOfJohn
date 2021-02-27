@@ -2,7 +2,6 @@ package com.mygdx.game.Areas.MainArea
 
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.*
-import com.mygdx.game.GameObjects.Fence
 import com.mygdx.game.Interfaces.Area
 import com.mygdx.game.Interfaces.AreaIdentifier
 import com.mygdx.game.Interfaces.AreaInitializer
@@ -28,10 +27,10 @@ class MainAreaInitializer: AreaInitializer {
         return area
     }
     private fun createFireLands(location2: LocationImpl, area: Area){
-        val location9 = addLocationRelative(location2, Vector2(2000f, 1500f), InsertDirection.LEFT, area, InsertDirection.MIDDLE,::getFireLandsLocationTwo,DamageLocation())
+        val location9 = addLocationRelative(location2, Vector2(2000f, 1500f), InsertDirection.LEFT, area, InsertDirection.MIDDLE,::getFireLandsGateWayLocation,DamageLocation())
     }
     private fun createIceLands(location3: LocationImpl, area: Area){
         val iceLandsMainGround = DefaultTextureHandler.getTexture("IceGround.png")
-        val location10 = addLocationRelative(location3, Vector2(1500f, 1100f), InsertDirection.UP, area, InsertDirection.MIDDLE,::getIceLandsLocationTwo,DamageLocation(iceLandsMainGround))
+        val location10 = addLocationRelative(location3, Vector2(1500f, 1100f), InsertDirection.UP, area, InsertDirection.MIDDLE,::getIceLandsGateWayLocation,DamageLocation(iceLandsMainGround))
     }
 }

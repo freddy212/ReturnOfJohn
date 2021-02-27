@@ -48,7 +48,7 @@ fun GetFireFixedConversation(npc: NPC):Conversation{
 
     val sentence1 = Sentence(dialogueBox, dialogueText, npc)
     val sentence2 = Sentence(dialogueBox, dialogueText2, player)
-    sentence2.dialogueText.event = CompositeEvent(listOf(RemoveNpcEvent(npc),ContinueConversationEvent(npc)))
+    sentence2.dialogueText.event = CompositeEvent(listOf(RemoveGameObjectEvent(npc),ContinueConversationEvent(npc)))
 
     val conversation = Conversation(npc)
     conversation.conversation.addAll(listOf(sentence1,sentence2))

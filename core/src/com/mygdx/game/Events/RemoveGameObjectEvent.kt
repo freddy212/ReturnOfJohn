@@ -1,11 +1,12 @@
 package com.mygdx.game.Events
 
+import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.GameObjects.MoveableEntities.NPC
 import com.mygdx.game.Interfaces.Event
 
-class RemoveNpcEvent(val npc: NPC):Event {
+class RemoveGameObjectEvent(val gameObject: GameObject):Event {
     override fun execute() {
-        npc.removeFromLocation()
+        gameObject.removeFromLocation()
     }
 
 }

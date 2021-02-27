@@ -58,11 +58,11 @@ class ROJInputAdapter(private val camera : OrthographicCamera, val player: Playe
         val unitVectorTowardsPoint = getUnitVectorTowardsPoint(Vector2(player.sprite.x,player.sprite.y),Vector2(clickPosition.x,clickPosition.y))
         if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)){
             if(!player.move(unitVectorTowardsPoint)){
-                handleCollitions(player,player.polygon,LocationManager.ActiveGameObjects)
+                handleCollitions(player,player.polygon,LocationManager.MoveCollitionGameObjects)
             }
         }else{
             //val currentDirection = player.unitVectorDirection
-            handleCollitions(player,player.polygon,LocationManager.ActiveGameObjects)
+            handleCollitions(player,player.polygon,LocationManager.MoveCollitionGameObjects)
            // player.setCharacterRotation(currentDirection)
         }
         if (Gdx.input.isButtonPressed(Input.Buttons.RIGHT)){
