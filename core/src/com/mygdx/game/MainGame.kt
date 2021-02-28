@@ -109,7 +109,7 @@ class MainGame : ApplicationAdapter() {
        // player.frameAction()
         inputAdapter.handleInput(player)
         RenderGraph.render(batch)
-       // drawrects()
+        drawrects()
         EventManager.executeEvents()
         uiRenderer.render()
         camera.position.set(player.sprite.x, player.sprite.y,4f)

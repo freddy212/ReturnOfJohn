@@ -28,7 +28,7 @@ class ShieldCollition: MoveCollition by CanMoveCollition{
                     val centerShield = Vector2(collidedObject.sprite.x + collidedObject.sprite.width / 2, collidedObject.sprite.y + collidedObject.sprite.height)
                     entity.unitVectorDirection = getOppositeUnitVector(centerBoulder,centerShield)
                 }else{
-                    player.die()
+                    BoulderCollition().collitionHappened(entity, player)
                 }
             }
         }

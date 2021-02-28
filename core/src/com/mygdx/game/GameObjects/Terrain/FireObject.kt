@@ -7,17 +7,22 @@ import com.mygdx.game.Collitions.FireCollition
 import com.mygdx.game.DefaultTextureHandler
 import com.mygdx.game.Enums.Layer
 import com.mygdx.game.Events.RemoveGameObjectEvent
+import com.mygdx.game.Interfaces.MoveCollition
 import com.mygdx.game.LocationImpl
 import com.mygdx.game.ObjectProperties.Fire
+import com.mygdx.game.SaveHandling.DefaultRemoveObjectSaveState
+import com.mygdx.game.SaveState.SaveStateEntity
 
-class FireObject(Position: Vector2, size: Vector2, objectAttached: GameObject, location:LocationImpl) : GameObject(Position, size,location) {
-        override val collition = FireCollition(objectAttached.collition)
+class FireObject(Position: Vector2, size: Vector2, objectAttached: GameObject, location:LocationImpl, collitionOnFire: MoveCollition) : GameObject(Position, size,location),
+                                                                                                        SaveStateEntity by DefaultRemoveObjectSaveState(){
+        val fire = Fire(RemoveGameObjectEvent(this),this)
+        override val collition = FireCollition(objectAttached.collition,collitionOnFire)
         override val texture = DefaultTextureHandler.getTexture("Sensor.png")
         override val layer = Layer.ONGROUND
         override val polygon = objectAttached.polygon
         override fun render(batch: PolygonSpriteBatch) {}
 
         init {
-            properties.add(Fire(RemoveGameObjectEvent(this),this))
+            properties.add(fire)
         }
 }

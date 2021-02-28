@@ -3,6 +3,7 @@ package com.mygdx.game.Areas.FireLands
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.*
 import com.mygdx.game.AbstractClasses.GameObject
+import com.mygdx.game.Collitions.DOTCollition
 import com.mygdx.game.Collitions.DoorCollition
 import com.mygdx.game.Enums.Direction
 import com.mygdx.game.Enums.Layer
@@ -46,12 +47,12 @@ fun getFireLandsLocationFourObjects():List<GameObject>{
 
     val doorPosition = Vector2(cave.originalMiddle.x - 64 / 2,cave.bottomleft.y)
 
-    val doorCollition = DoorCollition(doorPosition,AreaIdentifier.DUNGEONAREA, doorFireLandsAndDungeonConnection,Direction.UP)
+    val doorCollition = DoorCollition(doorPosition,AreaIdentifier.FIRELANDSDUNGEON, doorFireLandsAndDungeonConnection,Direction.UP)
 
     //val toggleCollition = ToggleCollition(IllegalMoveCollition,doorCollition)
 
     val door = Door(doorPosition, Vector2(32f * 2,64f * 2),DefaultTextureHandler.getTexture("CaveDoor.png"),location4,Direction.UP,doorCollition)
-    val fireObject = FireObject(door.Position,door.size,door,location4)
+    val fireObject = FireObject(door.Position,door.size,door,location4, DOTCollition)
 
     return listOf(cave,door,fireObject)
 }

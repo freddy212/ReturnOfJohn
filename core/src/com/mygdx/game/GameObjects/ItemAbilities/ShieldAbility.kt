@@ -44,6 +44,8 @@ class ShieldAbility(Position: Vector2, size: Vector2): CharacterAbility(Position
 
     override fun activeAction(){
         super.activeAction()
+        setActiveSide()
+        setPosition(getPos(),this)
         player.freezeMoving()
     }
 
