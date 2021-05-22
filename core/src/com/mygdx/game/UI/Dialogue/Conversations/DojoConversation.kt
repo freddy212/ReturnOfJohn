@@ -2,7 +2,7 @@ package com.mygdx.game.UI.Dialogue.Conversations
 
 import com.mygdx.game.Enums.QuestIdentifier
 import com.mygdx.game.Events.*
-import com.mygdx.game.GameObjects.MoveableEntities.NPC
+import com.mygdx.game.GameObjects.MoveableEntities.Characters.NPC
 import com.mygdx.game.UI.Dialogue.*
 import com.mygdx.game.player
 
@@ -14,7 +14,7 @@ fun GetDojoConversation(npc: NPC): Conversation {
     val dialogueText2 = DialogueText("Train? What do you want me to do?",npc)
     val dialogueText3 = DialogueText("I need to practice for the show at the festival",npc)
     val dialogueText4 = DialogueText("Just block 10 of my attacks",npc)
-    val OptionText = TextChoice(DialogueChoice("I'll help", npc,CompositeEvent(listOf(AddEventEvent(DojoEvent(npc.location!!,ClearQuestEvent(QuestIdentifier.DOJO))), RemoveGameObjectEvent(npc),ContinueConversationEvent(npc)))), DialogueChoice("I'll do it later",npc),npc)
+    val OptionText = TextChoice(DialogueChoice("I'll help", npc,CompositeEvent(listOf(AddEventEvent(DojoEvent(npc.defaultLocation!!,ClearQuestEvent(QuestIdentifier.DOJO))), RemoveGameObjectEvent(npc),ContinueConversationEvent(npc)))), DialogueChoice("I'll do it later",npc),npc)
 
     val sentence1 = Sentence(dialogueBox, dialogueText, npc)
     val sentence2 = Sentence(dialogueBox, dialogueText2, player)

@@ -1,9 +1,9 @@
 package com.mygdx.game.AbstractClasses
 
 import com.badlogic.gdx.math.Vector2
-import com.mygdx.game.LocationImpl
+import com.mygdx.game.Locations.DefaultLocation
 
-abstract class Projectile(Position: Vector2, size: Vector2, location: LocationImpl?) : MoveableObject(Position, size, location),
+abstract class Projectile(Position: Vector2, size: Vector2, defaultLocation: DefaultLocation?) : MoveableObject(Position, size, defaultLocation),
     RotationalObject by DefaultRotationalObject(){
     override fun frameTask() {
         super.frameTask()

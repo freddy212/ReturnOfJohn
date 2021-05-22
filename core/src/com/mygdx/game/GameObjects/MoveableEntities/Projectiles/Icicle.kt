@@ -1,18 +1,15 @@
 package com.mygdx.game.GameObjects.MoveableEntities.Projectiles
 
-import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.AbstractClasses.DefaultMovement
 import com.mygdx.game.AbstractClasses.Projectile
 import com.mygdx.game.Collitions.CanMoveCollition
-import com.mygdx.game.Collitions.IcicleCollition
 import com.mygdx.game.DefaultTextureHandler
 import com.mygdx.game.EdgeOfLocationStrategies.RemoveObject
 import com.mygdx.game.Enums.Layer
-import com.mygdx.game.Interfaces.MovementStrategy
-import com.mygdx.game.LocationImpl
+import com.mygdx.game.Locations.DefaultLocation
 
-class Icicle(Position: Vector2, size: Vector2, location: LocationImpl?, override val unitVectorDirection: Vector2) : Projectile(Position, size, location) {
+class Icicle(Position: Vector2, size: Vector2, defaultLocation: DefaultLocation?, override val unitVectorDirection: Vector2) : Projectile(Position, size, defaultLocation) {
     override var currentSpeed = 8f
     override val movementStrategy = DefaultMovement(RemoveObject())
     override val texture = DefaultTextureHandler.getTexture("Icicle.png")

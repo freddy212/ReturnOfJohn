@@ -1,17 +1,16 @@
 package com.mygdx.game.GameObjects
 
 import com.badlogic.gdx.graphics.Texture
-import com.mygdx.game.DefaultTextureHandler
 import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.AbstractClasses.GameObject
-import com.mygdx.game.Collitions.IllegalMoveCollition
 import com.mygdx.game.Collitions.NoCharacterCanPassCollition
+import com.mygdx.game.DefaultTextureHandler
 import com.mygdx.game.Enums.Layer
-import com.mygdx.game.LocationImpl
+import com.mygdx.game.Locations.DefaultLocation
 import com.mygdx.game.renderRepeatedTexture
 
-class Fence(Position: Vector2, size: Vector2,location: LocationImpl, override val texture: Texture = DefaultTextureHandler.getTexture("Fence-Start.png")): GameObject(Position,size,location) {
+class Fence(Position: Vector2, size: Vector2, defaultLocation: DefaultLocation, override val texture: Texture = DefaultTextureHandler.getTexture("Fence-Start.png")): GameObject(Position,size,defaultLocation) {
 
     init {
         texture.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat)

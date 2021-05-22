@@ -13,14 +13,15 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.SaveHandling.FileHandler
-import com.mygdx.game.GameObjects.ItemAbilities.ShieldAbility
-import com.mygdx.game.GameObjects.MoveableEntities.Player
+import com.mygdx.game.GameObjects.MoveableEntities.Characters.Player
 import com.mygdx.game.Interfaces.AreaIdentifier
 import com.mygdx.game.Managers.*
 import com.mygdx.game.SaveHandling.DefaultSaveableObject
 import com.mygdx.game.SaveState.PlayerSaveState
 import com.mygdx.game.SaveState.SaveStateEntity
 import com.mygdx.game.UI.UIRenderer
+import com.mygdx.game.Utils.RectanglePolygon
+import com.mygdx.game.Utils.RenderGraph
 import kotlinx.serialization.json.*
 import kotlinx.serialization.*
 
@@ -40,7 +41,6 @@ class MainGame : ApplicationAdapter() {
     lateinit var inventory: Inventory
     lateinit var inputAdapter: ROJInputAdapter
     lateinit var uiRenderer: UIRenderer
-    lateinit var previousCameraPos: Vector2
 
     override fun create() {
 
@@ -79,8 +79,6 @@ class MainGame : ApplicationAdapter() {
         font.data.setScale(2f)
         inventory = Inventory()
         inputAdapter = ROJInputAdapter(camera,player)
-        val shield = ShieldAbility(Vector2(0f,0f), Vector2(15f,40f))
-        //player.addAbility(shield)
         initInputAdapter()
 
         environment.set(ColorAttribute(ColorAttribute.AmbientLight, 0.4f, 0.4f, 0.4f, 1f))
@@ -106,10 +104,9 @@ class MainGame : ApplicationAdapter() {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT or GL20.GL_DEPTH_BUFFER_BIT)
         batch.projectionMatrix = camera.combined
         LocationManager.frameAction()
-       // player.frameAction()
         inputAdapter.handleInput(player)
         RenderGraph.render(batch)
-        drawrects()
+       // drawrects()
         EventManager.executeEvents()
         uiRenderer.render()
         camera.position.set(player.sprite.x, player.sprite.y,4f)

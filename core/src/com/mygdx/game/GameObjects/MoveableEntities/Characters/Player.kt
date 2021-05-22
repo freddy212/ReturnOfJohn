@@ -1,4 +1,4 @@
-package com.mygdx.game.GameObjects.MoveableEntities
+package com.mygdx.game.GameObjects.MoveableEntities.Characters
 
 import ToolTip
 import com.badlogic.gdx.Input
@@ -23,6 +23,7 @@ import com.mygdx.game.Managers.TooltipManager
 import com.mygdx.game.SaveState.DefaultSaveStateHandler
 import com.mygdx.game.SaveState.SaveStateEntity
 import com.mygdx.game.AbstractClasses.DefaultCharacter
+import com.mygdx.game.Utils.ResourceList
 
 class Player(Position: Vector2, size: Vector2, modelHandler: ModelInstanceHandler = DefaultModelInstanceHandler(
         assets.get("ManBlender.g3db", Model::class.java),
@@ -38,7 +39,7 @@ class Player(Position: Vector2, size: Vector2, modelHandler: ModelInstanceHandle
     val itemAbilities = ResourceList<CharacterAbility>()
     override val collition = IllegalMoveCollition
     fun die(){
-        val playerLocation = LocationManager.locations.find{ x -> x.sprite.boundingRectangle.contains(Vector2(camera.position.x, camera.position.y))}!!
+        val playerLocation = LocationManager.activeDefaultLocations.find{ x -> x.sprite.boundingRectangle.contains(Vector2(camera.position.x, camera.position.y))}!!
         player.setPosition(playerLocation.Position, player)
     }
     fun addAbility(characterAbility: CharacterAbility) {

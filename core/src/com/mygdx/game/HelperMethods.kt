@@ -14,15 +14,17 @@ import com.mygdx.game.AbstractClasses.*
 import com.mygdx.game.Enums.Direction
 import com.mygdx.game.Enums.Item
 import com.mygdx.game.GameObjects.*
-import com.mygdx.game.GameObjects.MoveableEntities.Player
+import com.mygdx.game.GameObjects.MoveableEntities.Characters.Player
 import com.mygdx.game.Interfaces.Area
 import com.mygdx.game.Interfaces.DirectionalObject
-import com.mygdx.game.Interfaces.LocationStrategy
+import com.mygdx.game.Interfaces.LocationDataStrategy
 import com.mygdx.game.Interfaces.MoveCollition
 import com.mygdx.game.Locations.DefaultLocation
+import com.mygdx.game.Locations.DefaultLocationData
 import com.mygdx.game.Managers.AreaManager
 import com.mygdx.game.Managers.LocationManager
 import com.mygdx.game.SaveState.SaveStateEntity
+import com.mygdx.game.Utils.RectanglePolygon
 import kotlin.math.PI
 import kotlin.math.atan2
 
@@ -75,67 +77,63 @@ fun getOppositeUnitVector(position: Vector2, point: Vector2): Vector2{
         return Vector2(-unitvector.x, -unitvector.y)
 }
 
-fun angleBetweenPoints(from: Vector2, to: Vector2): Float{
-        val atanresult = (Math.atan2(from.y - to.y.toDouble(), from.x - to.x.toDouble()))
-        return (atanresult * 180.0/ Math.PI).toFloat()
-}
 fun unitVectorToAngle(unitVector: Vector2):Float{
         return (atan2(unitVector.y,unitVector.x)*180/PI).toFloat()
 }
 
 
 enum class InsertDirection{LEFT,UP,RIGHT,DOWN,MIDDLE}
-fun GetPositionRelativeToLocation(location: LocationImpl, size: Vector2, direction: InsertDirection, directionOnPlane:InsertDirection, modifier: Vector2 = Vector2(0f,0f)): Vector2{
+fun GetPositionRelativeToLocation(defaultLocation: DefaultLocation, size: Vector2, direction: InsertDirection, directionOnPlane:InsertDirection, modifier: Vector2 = Vector2(0f,0f)): Vector2{
 
         val DirectionOnPlane = when(direction){
                 InsertDirection.LEFT, InsertDirection.RIGHT ->
                         when(directionOnPlane) {
-                               InsertDirection.UP -> (location.topleft.y - location.bottomleft.y) - size.y
+                               InsertDirection.UP -> (defaultLocation.topleft.y - defaultLocation.bottomleft.y) - size.y
                                InsertDirection.DOWN -> 0f
-                               else ->  ((location.topleft.y - location.bottomleft.y) / 2f - size.y / 2)
+                               else ->  ((defaultLocation.topleft.y - defaultLocation.bottomleft.y) / 2f - size.y / 2)
                         }
                 InsertDirection.UP, InsertDirection.DOWN ->
                         when(directionOnPlane){
-                                InsertDirection.RIGHT -> (location.topright.x - location.topleft.x) - size.x
+                                InsertDirection.RIGHT -> (defaultLocation.topright.x - defaultLocation.topleft.x) - size.x
                                 InsertDirection.LEFT -> 0f
-                                else -> (location.topright.x - location.topleft.x) / 2f - size.x / 2
+                                else -> (defaultLocation.topright.x - defaultLocation.topleft.x) / 2f - size.x / 2
                         }
                 else -> 0f
         }
 
         return when(direction){
-                InsertDirection.LEFT -> Vector2(location.bottomleft.x - size.x,
-                location.bottomleft.y + DirectionOnPlane)
-                InsertDirection.UP -> Vector2(location.topleft.x + DirectionOnPlane,
-                        location.topleft.y)
-                InsertDirection.RIGHT -> Vector2(location.bottomright.x,
-                        location.bottomleft.y + DirectionOnPlane)
-                InsertDirection.DOWN -> Vector2(location.topleft.x + DirectionOnPlane,
-                        location.bottomleft.y - size.y)
+                InsertDirection.LEFT -> Vector2(defaultLocation.bottomleft.x - size.x,
+                defaultLocation.bottomleft.y + DirectionOnPlane)
+                InsertDirection.UP -> Vector2(defaultLocation.topleft.x + DirectionOnPlane,
+                        defaultLocation.topleft.y)
+                InsertDirection.RIGHT -> Vector2(defaultLocation.bottomright.x,
+                        defaultLocation.bottomleft.y + DirectionOnPlane)
+                InsertDirection.DOWN -> Vector2(defaultLocation.topleft.x + DirectionOnPlane,
+                        defaultLocation.bottomleft.y - size.y)
                 else -> Vector2(0f,0f)
         } + modifier
 }
 
-fun addLocation(location: LocationImpl, area: Area): LocationImpl{
-        area.addLocation(location)
-        return location
+fun addLocation(defaultLocation: DefaultLocation, area: Area): DefaultLocation {
+        area.addLocation(defaultLocation)
+        return defaultLocation
 }
-fun addLocationRelative(location: LocationImpl, size:Vector2, direction:InsertDirection, area: Area,
-                        directionOnPlane:InsertDirection, objectCreationMethod: () -> List<GameObject> = {listOf()},locationStrategy:LocationStrategy = DefaultLocation(),
-                        positionModifier: Vector2 = Vector2(0f,0f)):LocationImpl{
-        val pos1 = GetPositionRelativeToLocation(location,size,direction,directionOnPlane,positionModifier)
-        val newLocation = LocationImpl(size,pos1, objectCreationMethod,locationStrategy)
-        location.addAdjacentLocation(newLocation)
-        newLocation.addAdjacentLocation(location)
+fun addLocationRelative(defaultLocation: DefaultLocation, size:Vector2, direction:InsertDirection, area: Area,
+                        directionOnPlane:InsertDirection, objectCreationMethod: () -> List<GameObject> = {listOf()}, locationDataStrategy:LocationDataStrategy = DefaultLocationData(),
+                        positionModifier: Vector2 = Vector2(0f,0f)): DefaultLocation {
+        val pos1 = GetPositionRelativeToLocation(defaultLocation,size,direction,directionOnPlane,positionModifier)
+        val newLocation = DefaultLocation(size,pos1, objectCreationMethod,locationDataStrategy)
+        defaultLocation.addAdjacentLocation(newLocation)
+        newLocation.addAdjacentLocation(defaultLocation)
         return addLocation(newLocation,area)
 }
 
 fun addLocationsToArea(area: Area){
-        area.locations.forEach{x -> x.initLocation()}
+        area.defaultLocations.forEach{ x -> x.initLocation()}
 }
 
 fun handleCollitions(gameObject: GameObject,polygonToCheck: Polygon, objectsToCheck: List<GameObject>):Boolean {
-        val collidingObjects = GetCollidingObjects(objectsToCheck - gameObject,polygonToCheck)
+        val collidingObjects = GetCollidingObjects(polygonToCheck ,objectsToCheck - gameObject)
         val collitions = collidingObjects.map { x -> x.collition }
         collidingObjects.forEach { x -> x.collition.collitionHappened(gameObject, x);
                                         gameObject.collition.collitionHappened(gameObject,x)}
@@ -156,21 +154,22 @@ fun GameObject.InitPolygon(sprite: Sprite): Polygon{
         return polygon
 }
 
-inline fun ConstructObjects(gameobjectFactory: (Position: Vector2, Size: Vector2,location:LocationImpl) -> GameObject, fromx: Int, incrementx: Int, endx: Int,
-                     fromy: Int, incrementy: Int, endy: Int, location: LocationImpl): List<GameObject>{
+inline fun ConstructObjects(gameobjectFactory: (Position: Vector2, Size: Vector2, defaultLocation: DefaultLocation) -> GameObject, fromx: Int, incrementx: Int, endx: Int,
+                            fromy: Int, incrementy: Int, endy: Int, defaultLocation: DefaultLocation
+): List<GameObject>{
         val objects = mutableListOf<GameObject>()
         for(y in fromy downTo endy step incrementy){
                 for(x in fromx..endx step incrementx){
-                        val gameObject = gameobjectFactory(Vector2(x.toFloat(),y.toFloat()), Vector2(incrementx.toFloat(),incrementy.toFloat()),location)
+                        val gameObject = gameobjectFactory(Vector2(x.toFloat(),y.toFloat()), Vector2(incrementx.toFloat(),incrementy.toFloat()),defaultLocation)
                         objects.add(gameObject)
                 }
         }
         return objects.toList()
 }
 
-fun constructTombs(location: LocationImpl): List<GameObject>{
-        return ConstructObjects(::Tomb,location.bottomleft.x.toInt() + 20, 120, location.bottomright.x.toInt(),
-                location.bottomleft.y.toInt() + 200, 128, location.bottomleft.y.toInt(),location)
+fun constructTombs(defaultLocation: DefaultLocation): List<GameObject>{
+        return ConstructObjects(::Tomb,defaultLocation.bottomleft.x.toInt() + 20, 120, defaultLocation.bottomright.x.toInt(),
+                defaultLocation.bottomleft.y.toInt() + 200, 128, defaultLocation.bottomleft.y.toInt(),defaultLocation)
 }
 
 fun middleOfObject(Position: Vector2,size: Vector2): Vector2{
@@ -180,7 +179,7 @@ fun renderRepeatedTexture(batch: PolygonSpriteBatch,texture: Texture,position: V
         batch.draw(texture,position.x,position.y,0,0,size.x.toInt(),size.y.toInt())
 }
 
-fun checkOpposingDirections(player: Player , directionalObject: DirectionalObject): Boolean{
+fun checkOpposingDirections(player: Player, directionalObject: DirectionalObject): Boolean{
         return when(player.direction){
                 Direction.UP -> directionalObject.direction == Direction.DOWN
                 Direction.LEFT -> directionalObject.direction == Direction.RIGHT
@@ -188,26 +187,7 @@ fun checkOpposingDirections(player: Player , directionalObject: DirectionalObjec
                 Direction.DOWN -> directionalObject.direction == Direction.UP
         }
 }
-fun getOpposingDirection(direction: Direction): Direction{
-        return when(direction){
-                Direction.UP -> Direction.DOWN
-                Direction.LEFT -> Direction.RIGHT
-                Direction.DOWN -> Direction.UP
-                Direction.RIGHT -> Direction.LEFT
-        }
-}
-
-var counter = 0
-
-fun GetNextStep(d: Direction, speed: Float): Vector2{
-        return when(d){
-                Direction.UP -> Vector2(0f,  speed)
-                Direction.LEFT -> Vector2(- speed, 0f)
-                Direction.RIGHT -> Vector2(speed, 0f)
-                Direction.DOWN -> Vector2(0f,-speed)
-        }
-}
-fun GetCollidingObjects(gameObjects: List<GameObject>,polygon: Polygon): List<GameObject>{
+fun GetCollidingObjects(polygon: Polygon, gameObjects: List<GameObject>): List<GameObject>{
         val collidingObjects =  gameObjects.filter { p -> isPolygonsColliding(polygon,p.polygon)}
         val filteredCollitions = collidingObjects.fold(collidingObjects, {objects,nextObject -> nextObject.collition.filterCollitions(objects)})
         return filteredCollitions
@@ -227,7 +207,7 @@ fun entityWithinLocations(polygonToCheck: Polygon): Boolean {
         var inLocation1 = false
         for (point in getPolygonPoints(polygonToCheck)) {
                 inLocation1 = false
-                for (rectangle in LocationManager.ActiveLocations.map { x -> x.sprite.boundingRectangle }) {
+                for (rectangle in LocationManager.activeDefaultLocations.map { x -> x.sprite.boundingRectangle }) {
                         if (rectangle.contains(point)) {
                                 inLocation1 = true
                                 break
@@ -237,9 +217,6 @@ fun entityWithinLocations(polygonToCheck: Polygon): Boolean {
                         break
                 }
         }
-        //val locationsAsPoligons:List<Polygon> = LocationManager.ActiveLocations.map { x -> RectanglePolygon(x.sprite.boundingRectangle) }
-        //val entityNoIntersection = locationsAsPoligons.none { intersectPolygonEdges(FloatArray(polygonToCheck.transformedVertices),
-               // FloatArray(it.transformedVertices))}
         return inLocation1
 }
 fun getDirectionFromAngle(angleToCheck: Float):Direction{

@@ -1,4 +1,4 @@
-package com.mygdx.game.GameObjects.MoveableEntities
+package com.mygdx.game.GameObjects.MoveableEntities.Characters
 
 import com.mygdx.game.DefaultTextureHandler
 import com.badlogic.gdx.graphics.g3d.Model
@@ -13,14 +13,11 @@ import com.mygdx.game.GameObjects.Sensors.TalkSensor
 import com.mygdx.game.Interfaces.ModelInstanceHandler
 import com.mygdx.game.Managers.DefaultAssetHandler.assets
 import com.mygdx.game.SaveHandling.DefaultRemoveObjectSaveState
-import com.mygdx.game.SaveHandling.DefaultSaveableObject
-import com.mygdx.game.SaveHandling.FileHandler
 import com.mygdx.game.SaveState.SaveStateEntity
 import com.mygdx.game.AbstractClasses.DefaultCharacter
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
+import com.mygdx.game.Locations.DefaultLocation
 
-class NPC(Position: Vector2, size: Vector2 = Vector2(128f,128f), location: LocationImpl?,
+class NPC(Position: Vector2, size: Vector2 = Vector2(128f,128f), val location: DefaultLocation?,
           modelHandler: ModelInstanceHandler = DefaultModelInstanceHandler(
                   assets.get("ManBlender.g3db", Model::class.java),
                   Position,size))

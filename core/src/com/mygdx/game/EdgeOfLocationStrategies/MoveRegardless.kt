@@ -2,7 +2,6 @@ package com.mygdx.game.EdgeOfLocationStrategies
 
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.AbstractClasses.MoveableObject
-import com.mygdx.game.GetNextStep
 import com.mygdx.game.Interfaces.CannotMoveStrategy
 import com.mygdx.game.plus
 import com.mygdx.game.times

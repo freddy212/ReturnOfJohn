@@ -7,10 +7,8 @@ import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.math.Vector3
 import com.mygdx.game.Enums.CharacterState
-import com.mygdx.game.Enums.Direction
-import com.mygdx.game.Enums.getDirectionUnitVector
 import com.mygdx.game.Events.DrawSentenceEvent
-import com.mygdx.game.GameObjects.MoveableEntities.Player
+import com.mygdx.game.GameObjects.MoveableEntities.Characters.Player
 import com.mygdx.game.Interfaces.KeyPressedCollition
 import com.mygdx.game.Managers.EventManager
 import com.mygdx.game.Managers.LocationManager

@@ -10,11 +10,13 @@ import com.mygdx.game.Collitions.CanMoveCollition
 import com.mygdx.game.Interfaces.Collition
 import com.mygdx.game.Interfaces.ObjectProperty
 import com.mygdx.game.Interfaces.Renderable
-import com.mygdx.game.RenderGraph.Companion.addToSceneGraph
+import com.mygdx.game.Locations.DefaultLocation
+import com.mygdx.game.Utils.RenderGraph.Companion.addToSceneGraph
 import com.mygdx.game.SaveHandling.FileHandler
 import com.mygdx.game.SaveState.SaveStateEntity
+import com.mygdx.game.Utils.ResourceList
 
-abstract class GameObject (val Position: Vector2, val size: Vector2,val location: LocationImpl?): Renderable {
+abstract class GameObject (val Position: Vector2, val size: Vector2,val defaultLocation: DefaultLocation?): Renderable {
     val topleft = Vector2(Position.x,Position.y + size.y)
     val topright = Vector2(Position.x + size.x,Position.y + size.y)
     val bottomright =  Vector2(Position.x + size.x,Position.y)
@@ -48,7 +50,7 @@ abstract class GameObject (val Position: Vector2, val size: Vector2,val location
     constructor(Position: Vector2, size: Vector2): this(Position,size,null)
 
     open fun removeFromLocation(){
-        location?.removeGameObject(this)
+        defaultLocation?.removeGameObject(this)
         if(this is SaveStateEntity){
             FileHandler.writeSaveStateEntity(this)
         }

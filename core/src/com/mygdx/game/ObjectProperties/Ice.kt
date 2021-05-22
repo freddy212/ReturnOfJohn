@@ -30,7 +30,7 @@ class Ice(objectAttached: GameObject) :
         particleEffect.emitters.get(1).life.setHigh(3100 * (size.y / 100))
     }
     fun changeWater(waterBall: WaterBall) {
-        val location = waterBall.location!!
+        val location = waterBall.defaultLocation!!
         location.removeGameObject(waterBall)
         location.addGameObject(Icicle(Vector2(waterBall.currentMiddle - Vector2(50f,17f)),
             Vector2(100f,33f),location,waterBall.unitVectorDirection

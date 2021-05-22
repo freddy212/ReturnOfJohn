@@ -5,7 +5,7 @@ import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.Enums.Direction
 import com.mygdx.game.Enums.Item
 import com.mygdx.game.GameObjects.LockedDoor
-import com.mygdx.game.GameObjects.MoveableEntities.Player
+import com.mygdx.game.GameObjects.MoveableEntities.Characters.Player
 import com.mygdx.game.GameObjects.Sensors.KeySensor
 import com.mygdx.game.Interfaces.KeyPressedCollition
 import com.mygdx.game.player

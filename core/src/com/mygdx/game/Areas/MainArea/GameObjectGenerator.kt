@@ -1,6 +1,5 @@
 package com.mygdx.game.Areas.MainArea
 
-import com.mygdx.game.DefaultTextureHandler
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.*
 import com.mygdx.game.AbstractClasses.GameObject
@@ -9,8 +8,8 @@ import com.mygdx.game.Enums.*
 import com.mygdx.game.GameObjects.GenericGameObject
 import com.mygdx.game.GameObjects.*
 import com.mygdx.game.GameObjects.ItemObjects.GenericItemObject
+import com.mygdx.game.GameObjects.MoveableEntities.Characters.NPC
 import com.mygdx.game.GameObjects.MoveableEntities.Projectiles.Boulder
-import com.mygdx.game.GameObjects.MoveableEntities.NPC
 import com.mygdx.game.GameObjects.Terrain.IceObject
 import com.mygdx.game.GameObjects.Terrain.WalkableTerrain
 import com.mygdx.game.Interfaces.AreaIdentifier
@@ -22,6 +21,7 @@ import com.mygdx.game.UI.Dialogue.Conversations.GetFireConversation
 import com.mygdx.game.UI.Dialogue.Conversations.GetFireFixedConversation
 import com.mygdx.game.UI.Dialogue.Conversations.GetFireNotFixedConversation
 import com.mygdx.game.UI.Dialogue.Conversations.GetFirstConversation
+import com.mygdx.game.Utils.DefaultQuest
 
 fun getLocationOneObjects(): List<GameObject>{
     val location = LocationManager.findLocation("location1",AreaIdentifier.MAINAREA)
@@ -47,7 +47,8 @@ fun getLocationGraveyard(): List<GameObject>{
 
     //val toggleCollition = ToggleCollition(IllegalMoveCollition,doorCollition)
 
-    val door = Door(doorPosition, Vector2(32f * 2,64f * 2),DefaultTextureHandler.getTexture("CaveDoor.png"),graveyardLoc,Direction.UP,doorCollition)
+    val door = Door(doorPosition, Vector2(32f * 2,64f * 2),
+        DefaultTextureHandler.getTexture("CaveDoor.png"),graveyardLoc,Direction.UP,doorCollition)
 
     /*val fireExtinguishedEvent = ToggleCollitionEvent(toggleCollition)
     val fire = Fire(door.Position,door.size,fireExtinguishedEvent,door)
@@ -78,8 +79,10 @@ fun getLocationFourObjects(): List<GameObject>{
 fun getWorldTreeObjects(): List<GameObject>{
     val location = LocationManager.findLocation("location8",AreaIdentifier.MAINAREA)
     val tree = Tree(location.originalMiddle, Vector2(64f * 2, 128f * 2),location)
-    val WorldLeaf = GenericItemObject(tree.topleft + Vector2(0f, 0f), Vector2(64f, 32f), location,Item.WORLDLEAF,DefaultTextureHandler.getTexture("WorldLeaf.png"))
-    val WorldLeaf2 = GenericItemObject(tree.bottomright + Vector2(0f, 0f), Vector2(64f, 32f), location,Item.WORLDLEAF,DefaultTextureHandler.getTexture("WorldLeaf.png"))
+    val WorldLeaf = GenericItemObject(tree.topleft + Vector2(0f, 0f), Vector2(64f, 32f), location,Item.WORLDLEAF,
+        DefaultTextureHandler.getTexture("WorldLeaf.png"))
+    val WorldLeaf2 = GenericItemObject(tree.bottomright + Vector2(0f, 0f), Vector2(64f, 32f), location,Item.WORLDLEAF,
+        DefaultTextureHandler.getTexture("WorldLeaf.png"))
     return listOf(tree,WorldLeaf,WorldLeaf2)
 }
 fun getIceLandsGateWayLocation():List<GameObject>{
@@ -128,7 +131,8 @@ fun getFireLandsGateWayLocation(): List<GameObject> {
 
     val doorCollition = DoorCollition(doorPosition,AreaIdentifier.FIRELANDS, doorMainAreaAndFireLands,Direction.UP)
 
-    val door = Door(doorPosition, Vector2(32f * 2,64f * 2),DefaultTextureHandler.getTexture("CaveDoor.png"),location9,Direction.UP,doorCollition)
+    val door = Door(doorPosition, Vector2(32f * 2,64f * 2),
+        DefaultTextureHandler.getTexture("CaveDoor.png"),location9,Direction.UP,doorCollition)
 
     return listOf(walkableTerrain, fence,fence2,walkableTerrain2,fireGate,boulderGenerator1,walkableTerrain3,door)
 }

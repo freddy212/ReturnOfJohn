@@ -14,7 +14,6 @@ import com.mygdx.game.GameObjects.Terrain.FireObject
 import com.mygdx.game.GameObjects.Terrain.WalkableTerrain
 import com.mygdx.game.Interfaces.AreaIdentifier
 import com.mygdx.game.Managers.LocationManager
-import com.mygdx.game.ObjectProperties.Fire
 
 
 fun getFireLandsLocationOneObjects(): List<GameObject>{
@@ -51,7 +50,8 @@ fun getFireLandsLocationFourObjects():List<GameObject>{
 
     //val toggleCollition = ToggleCollition(IllegalMoveCollition,doorCollition)
 
-    val door = Door(doorPosition, Vector2(32f * 2,64f * 2),DefaultTextureHandler.getTexture("CaveDoor.png"),location4,Direction.UP,doorCollition)
+    val door = Door(doorPosition, Vector2(32f * 2,64f * 2),
+        DefaultTextureHandler.getTexture("CaveDoor.png"),location4,Direction.UP,doorCollition)
     val fireObject = FireObject(door.Position,door.size,door,location4, DOTCollition)
 
     return listOf(cave,door,fireObject)

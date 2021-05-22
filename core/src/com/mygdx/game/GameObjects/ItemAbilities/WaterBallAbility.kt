@@ -3,7 +3,6 @@ package com.mygdx.game.GameObjects.ItemAbilities
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.AbstractClasses.CharacterAbility
 import com.mygdx.game.AbstractClasses.DefaultPositionChange
-import com.mygdx.game.Collitions.WaterGunCollition
 import com.mygdx.game.DefaultTextureHandler
 import com.mygdx.game.Enums.Layer
 import com.mygdx.game.GameObjects.MoveableEntities.Projectiles.WaterBall
@@ -21,8 +20,8 @@ class WaterBallAbility(Position: Vector2, size: Vector2): CharacterAbility(Posit
 
     override fun activeAction(){
         if(cooldownTimer.tryUseCooldown()) {
-                val waterBall = WaterBall(player.currentMiddle,Vector2(96f,120f),LocationManager.currentLocation, player.unitVectorDirection)
-                waterBall.location!!.addGameObject(waterBall)
+                val waterBall = WaterBall(player.currentMiddle,Vector2(96f,120f),LocationManager.currentDefaultLocation, player.unitVectorDirection)
+                waterBall.defaultLocation!!.addGameObject(waterBall)
         }
     }
 }

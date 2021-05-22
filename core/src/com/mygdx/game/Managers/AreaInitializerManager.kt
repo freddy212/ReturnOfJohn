@@ -6,8 +6,6 @@ import com.mygdx.game.Areas.FireLands.FireLandsInitializer
 import com.mygdx.game.Areas.FireLandsDungeon.FireLandsDungeonInitializer
 import com.mygdx.game.Areas.MainArea.MainAreaInitializer
 import com.mygdx.game.Areas.ShopArea.ShopAreaInitializer
-import com.mygdx.game.Interfaces.AreaInitializer
-import com.mygdx.game.ResourceList
 import com.mygdx.game.addLocationsToArea
 
 class AreaInitializerManager(){

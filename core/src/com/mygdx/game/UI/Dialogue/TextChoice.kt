@@ -1,9 +1,9 @@
 package com.mygdx.game.UI.Dialogue
 
-import com.mygdx.game.GameObjects.MoveableEntities.NPC
+import com.mygdx.game.GameObjects.MoveableEntities.Characters.NPC
 import com.mygdx.game.Interfaces.Event
 
-class TextChoice(val Option1: DialogueChoice, val Option2: DialogueChoice,npc:NPC):DialogueText(Option1.Option + Option2.Option,npc) {
+class TextChoice(val Option1: DialogueChoice, val Option2: DialogueChoice,npc: NPC):DialogueText(Option1.Option + Option2.Option,npc) {
     var activeOption = Option1
         private set
     override var event: Event = object: Event{

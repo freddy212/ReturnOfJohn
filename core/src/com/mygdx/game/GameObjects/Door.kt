@@ -8,10 +8,10 @@ import com.mygdx.game.Enums.Direction
 import com.mygdx.game.Enums.Layer
 import com.mygdx.game.Interfaces.DirectionalObject
 import com.mygdx.game.Interfaces.MoveCollition
-import com.mygdx.game.LocationImpl
+import com.mygdx.game.Locations.DefaultLocation
 
-class Door(Position: Vector2, size: Vector2, texture: Texture, location: LocationImpl,
-           override var direction: Direction, override val collition: MoveCollition): GameObject(Position,size,location),DirectionalObject {
+class Door(Position: Vector2, size: Vector2, texture: Texture, defaultLocation: DefaultLocation,
+           override var direction: Direction, override val collition: MoveCollition): GameObject(Position,size,defaultLocation),DirectionalObject {
     override val texture = texture
     override val layer = Layer.AIR
     override var canChangeDirection = false

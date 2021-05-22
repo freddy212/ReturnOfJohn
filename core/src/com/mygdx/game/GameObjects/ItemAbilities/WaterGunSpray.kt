@@ -2,13 +2,13 @@ package com.mygdx.game.GameObjects.MoveableEntities
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.Input
-import com.mygdx.game.DefaultTextureHandler
 import com.badlogic.gdx.graphics.g2d.ParticleEffect
 import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.AbstractClasses.CharacterAbility
 import com.mygdx.game.AbstractClasses.DefaultPositionChange
 import com.mygdx.game.Collitions.WaterGunCollition
+import com.mygdx.game.DefaultTextureHandler
 import com.mygdx.game.Enums.Direction
 import com.mygdx.game.Enums.Layer
 import com.mygdx.game.Interfaces.DynamicEntity

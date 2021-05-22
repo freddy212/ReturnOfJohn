@@ -5,7 +5,7 @@ import com.mygdx.game.*
 import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.GameObjects.ItemAbilities.ShieldAbility
 import com.mygdx.game.GameObjects.MoveableEntities.Projectiles.Boulder
-import com.mygdx.game.GameObjects.MoveableEntities.Player
+import com.mygdx.game.GameObjects.MoveableEntities.Characters.Player
 import com.mygdx.game.Interfaces.MoveCollition
 import com.mygdx.game.ObjectProperties.Fire
 import com.mygdx.game.Trimer.DelayTimer

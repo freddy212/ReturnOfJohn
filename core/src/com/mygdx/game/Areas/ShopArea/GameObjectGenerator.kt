@@ -1,16 +1,14 @@
 package com.mygdx.game.Areas.ShopArea
 
-import com.mygdx.game.DefaultTextureHandler
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.Collitions.DoorCollition
 import com.mygdx.game.Collitions.IllegalMoveCollition
+import com.mygdx.game.DefaultTextureHandler
 import com.mygdx.game.Enums.Direction
 import com.mygdx.game.Enums.Layer
 import com.mygdx.game.GameObjects.Door
 import com.mygdx.game.GameObjects.GenericGameObject
-import com.mygdx.game.GameObjects.ItemObjects.WaterGunItemObject
-import com.mygdx.game.GameObjects.MoveableEntities.NPC
 import com.mygdx.game.Interfaces.AreaIdentifier
 import com.mygdx.game.Managers.LocationManager
 import com.mygdx.game.doorMainAreaAndShop

@@ -1,7 +1,7 @@
 package com.mygdx.game.Managers
 
 import ToolTip
-import com.mygdx.game.ResourceList
+import com.mygdx.game.Utils.ResourceList
 
 class TooltipManager {
     companion object{

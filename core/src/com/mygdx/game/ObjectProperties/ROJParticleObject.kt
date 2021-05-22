@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch
 import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.Interfaces.ObjectProperty
 import com.mygdx.game.Interfaces.Renderable
-import com.mygdx.game.RenderGraph.Companion.addToSceneGraph
+import com.mygdx.game.Utils.RenderGraph.Companion.addToSceneGraph
 
 abstract class ROJParticleObject(val particleEffect: ParticleEffect, val objectAttached: GameObject): Renderable,
     ObjectProperty {

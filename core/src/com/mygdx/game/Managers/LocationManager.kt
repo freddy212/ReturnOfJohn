@@ -7,21 +7,22 @@ import com.mygdx.game.Interfaces.Area
 import com.mygdx.game.Interfaces.AreaIdentifier
 import com.mygdx.game.Interfaces.KeyPressedCollition
 import com.mygdx.game.Interfaces.MoveCollition
+import com.mygdx.game.Locations.DefaultLocation
 import com.mygdx.game.SaveHandling.savePlayerStates
 
 class LocationManager {
     companion object{
         lateinit var activeArea: Area
-        lateinit var locations : List<LocationImpl>
-        var oldLocation: LocationImpl
-        lateinit var ActiveLocations: List<LocationImpl>
+        lateinit var defaultLocations : List<DefaultLocation>
+        var oldDefaultLocation: DefaultLocation
+        lateinit var activeDefaultLocations: List<DefaultLocation>
         lateinit var MoveCollitionGameObjects: List<GameObject>
         lateinit var ButtonCollitionGameObjects: List<GameObject>
-        lateinit var currentLocation: LocationImpl
+        lateinit var currentDefaultLocation: DefaultLocation
         var  ActiveGameObjects: List<GameObject>
         init {
             crossLocationGameObjects.add(player)
-            oldLocation = LocationImpl(Vector2(0f,0f),Vector2(0f,0f))
+            oldDefaultLocation = DefaultLocation(Vector2(0f,0f),Vector2(0f,0f))
             ActiveGameObjects = listOf()
         }
         fun frameAction(){
@@ -29,23 +30,23 @@ class LocationManager {
             ActiveGameObjects.forEach{it.frameTask()}
         }
         fun LocationFrameTasks(){
-            locations = activeArea.locations
-            val findPlayerLocation = locations.find{ x -> x.sprite.boundingRectangle.contains(Vector2(player.sprite.x, player.sprite.y)) } ?: oldLocation
+            defaultLocations = activeArea.defaultLocations
+            val findPlayerLocation = defaultLocations.find{ x -> x.sprite.boundingRectangle.contains(Vector2(player.sprite.x, player.sprite.y)) } ?: oldDefaultLocation
             val newLocation = findPlayerLocation
 
-            if(oldLocation != newLocation) {
-                currentLocation = newLocation
-                oldLocation = newLocation
-                ActiveLocations = (listOf(oldLocation) + oldLocation.adjacentLocations)
+            if(oldDefaultLocation != newLocation) {
+                currentDefaultLocation = newLocation
+                oldDefaultLocation = newLocation
+                activeDefaultLocations = (listOf(oldDefaultLocation) + oldDefaultLocation.adjacentDefaultLocations)
                 val oldActiveGameObjects = ActiveGameObjects
-                ActiveGameObjects = ActiveLocations.flatMap { x -> x.gameObjects } + ActiveLocations + crossLocationGameObjects.List
+                ActiveGameObjects = activeDefaultLocations.flatMap { x -> x.gameObjects } + activeDefaultLocations + crossLocationGameObjects.List
                 val newGameObjects = ActiveGameObjects - oldActiveGameObjects
                 val oldGameObjects = oldActiveGameObjects - ActiveGameObjects
                 newGameObjects.forEach{it.onLocationEnterActions.forEach { it() }}
                 oldGameObjects.forEach {it.onLocationExitActions.forEach { it() }}
                 savePlayerStates()
             }
-            ActiveGameObjects = ActiveLocations.flatMap { x -> x.gameObjects } + ActiveLocations + crossLocationGameObjects.List
+            ActiveGameObjects = activeDefaultLocations.flatMap { x -> x.gameObjects } + activeDefaultLocations + crossLocationGameObjects.List
             MoveCollitionGameObjects = ActiveGameObjects.filter{x -> x.collition is MoveCollition}
             ButtonCollitionGameObjects = ActiveGameObjects.filter { x -> x.collition is KeyPressedCollition }
             //Can be optimized at some point
@@ -53,9 +54,9 @@ class LocationManager {
         fun SetArea(area: Area){
             activeArea = area
         }
-        fun findLocation(name: String, areaIdentifier: AreaIdentifier): LocationImpl {
+        fun findLocation(name: String, areaIdentifier: AreaIdentifier): DefaultLocation {
             val area = AreaManager.getArea(areaIdentifier)
-            return area.locations.find { x -> x.locationName == name }!!
+            return area.defaultLocations.find { x -> x.locationName == name }!!
         }
     }
 }

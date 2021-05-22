@@ -1,7 +1,7 @@
 package com.mygdx.game.UI.Dialogue.Conversations
 
 import com.mygdx.game.Events.EndConversationEvent
-import com.mygdx.game.GameObjects.MoveableEntities.NPC
+import com.mygdx.game.GameObjects.MoveableEntities.Characters.NPC
 import com.mygdx.game.UI.Dialogue.*
 import com.mygdx.game.player
 

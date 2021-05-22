@@ -1,6 +1,6 @@
 package com.mygdx.game.Events
 
-import com.mygdx.game.GameObjects.MoveableEntities.NPC
+import com.mygdx.game.GameObjects.MoveableEntities.Characters.NPC
 import com.mygdx.game.Interfaces.Event
 import com.mygdx.game.Managers.ConversationStateManager
 import com.mygdx.game.Managers.EventManager

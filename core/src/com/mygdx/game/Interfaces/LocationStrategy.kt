@@ -1,10 +1,10 @@
 package com.mygdx.game.Interfaces
 
 import com.badlogic.gdx.graphics.Texture
-import com.mygdx.game.LocationImpl
+import com.mygdx.game.Locations.DefaultLocation
 
-interface LocationStrategy {
+interface LocationDataStrategy {
     val texture: Texture
-    val initialization: (LocationImpl) -> Unit
+    val initialization: (DefaultLocation) -> Unit
     val collition: MoveCollition
 }

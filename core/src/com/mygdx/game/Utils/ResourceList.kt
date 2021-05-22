@@ -1,4 +1,4 @@
-package com.mygdx.game
+package com.mygdx.game.Utils
 
 import java.util.function.Predicate
 

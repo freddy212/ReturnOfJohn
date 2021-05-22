@@ -1,7 +1,7 @@
 package com.mygdx.game.Managers
 
 import com.mygdx.game.Interfaces.Event
-import com.mygdx.game.ResourceList
+import com.mygdx.game.Utils.ResourceList
 
 class EventManager {
     companion object {

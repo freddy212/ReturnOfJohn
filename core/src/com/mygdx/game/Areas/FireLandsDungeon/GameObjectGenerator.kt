@@ -3,20 +3,14 @@ package com.mygdx.game.Areas.FireLandsDungeon
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.*
 import com.mygdx.game.AbstractClasses.GameObject
-import com.mygdx.game.Collitions.DOTCollition
 import com.mygdx.game.Collitions.DoorCollition
 import com.mygdx.game.Enums.Direction
-import com.mygdx.game.Enums.Layer
 import com.mygdx.game.Enums.getDirectionUnitVector
 import com.mygdx.game.GameObjects.Abyss
 import com.mygdx.game.GameObjects.BoulderGenerator
 import com.mygdx.game.GameObjects.Door
-import com.mygdx.game.GameObjects.GenericGameObject
-import com.mygdx.game.GameObjects.Terrain.FireObject
-import com.mygdx.game.GameObjects.Terrain.WalkableTerrain
 import com.mygdx.game.Interfaces.AreaIdentifier
 import com.mygdx.game.Managers.LocationManager
-import com.mygdx.game.ObjectProperties.Fire
 
 
 fun getFireLandsDungeonLocationOneObjects(): List<GameObject>{

@@ -3,7 +3,7 @@ package com.mygdx.game.Managers
 import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.Interfaces.Area
 import com.mygdx.game.Interfaces.AreaIdentifier
-import com.mygdx.game.ResourceList
+import com.mygdx.game.Utils.ResourceList
 
 class AreaManager{
     companion object{
@@ -18,7 +18,7 @@ class AreaManager{
             return areaManager.List
         }
         fun getAllGameObjects(): List<GameObject>{
-            return getAllAreas().flatMap {it.locations}.flatMap {it.gameObjects}
+            return getAllAreas().flatMap {it.defaultLocations}.flatMap {it.gameObjects}
         }
     }
 }

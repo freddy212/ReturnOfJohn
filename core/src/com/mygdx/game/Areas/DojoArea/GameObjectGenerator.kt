@@ -1,19 +1,19 @@
 package com.mygdx.game.Areas.DojoArea
 
-import com.mygdx.game.DefaultTextureHandler
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.Collitions.DoorCollition
 import com.mygdx.game.Collitions.IllegalMoveCollition
-import com.mygdx.game.DefaultQuest
+import com.mygdx.game.DefaultTextureHandler
+import com.mygdx.game.Utils.DefaultQuest
 import com.mygdx.game.Enums.Direction
 import com.mygdx.game.Enums.Layer
 import com.mygdx.game.Enums.QuestIdentifier
 import com.mygdx.game.Events.DojoEvent
 import com.mygdx.game.GameObjects.Door
 import com.mygdx.game.GameObjects.GenericGameObject
-import com.mygdx.game.GameObjects.MoveableEntities.DojoAttackObject
-import com.mygdx.game.GameObjects.MoveableEntities.NPC
+import com.mygdx.game.GameObjects.MoveableEntities.Characters.NPC
+import com.mygdx.game.GameObjects.MoveableEntities.Projectiles.DojoAttackObject
 import com.mygdx.game.Interfaces.AreaIdentifier
 import com.mygdx.game.Managers.EventManager
 import com.mygdx.game.Managers.LocationManager
@@ -43,7 +43,7 @@ fun getDojoObjects(): List<GameObject>{
             dojoNPC.add()
             EventManager.eventManager.remove(dojoEvent)
             val dojoAttackObject: DojoAttackObject? = location1.gameObjects.find { it is DojoAttackObject } as DojoAttackObject?
-            dojoAttackObject?.location?.removeGameObject(dojoAttackObject!!)
+            dojoAttackObject?.defaultLocation?.removeGameObject(dojoAttackObject!!)
         }
     }
     return listOf(door,dojoNPC)

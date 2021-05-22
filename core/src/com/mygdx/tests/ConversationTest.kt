@@ -2,7 +2,7 @@ package com.mygdx.tests
 
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.Events.ConversationEvent
-import com.mygdx.game.GameObjects.MoveableEntities.NPC
+import com.mygdx.game.GameObjects.MoveableEntities.Characters.NPC
 import com.mygdx.game.UI.Dialogue.Conversations.GetFirstConversation
 import com.mygdx.game.UI.Dialogue.Conversations.GetSecondConversation
 import org.junit.jupiter.api.Assertions

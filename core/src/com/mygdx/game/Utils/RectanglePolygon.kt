@@ -1,4 +1,4 @@
-package com.mygdx.game
+package com.mygdx.game.Utils
 
 import com.badlogic.gdx.math.Polygon
 import com.badlogic.gdx.math.Rectangle

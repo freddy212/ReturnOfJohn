@@ -1,7 +1,6 @@
-package com.mygdx.game
+package com.mygdx.game.Utils
 
 import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch
-import com.badlogic.gdx.graphics.g2d.Sprite
 import com.mygdx.game.Interfaces.Renderable
 
 class RenderGraph {

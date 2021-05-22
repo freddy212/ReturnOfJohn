@@ -9,8 +9,7 @@ import com.mygdx.game.Interfaces.AreaIdentifier
 import com.mygdx.game.Interfaces.MoveCollition
 import com.mygdx.game.Managers.AreaManager
 import com.mygdx.game.Managers.LocationManager
-import com.mygdx.game.GameObjects.MoveableEntities.Player
-import com.mygdx.game.Interfaces.DynamicEntity
+import com.mygdx.game.GameObjects.MoveableEntities.Characters.Player
 
 class DoorCollition(doorPosition: Vector2,val areaId: AreaIdentifier, val connection: DoorConnection,
                     val triggerDirection: Direction): MoveCollition{

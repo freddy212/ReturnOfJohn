@@ -4,8 +4,7 @@ import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.AbstractClasses.MoveableObject
-import com.mygdx.game.GameObjects.MoveableEntities.NPC
-import com.mygdx.game.GameObjects.MoveableEntities.Player
+import com.mygdx.game.GameObjects.MoveableEntities.Characters.NPC
 import com.mygdx.game.Interfaces.Character
 import com.mygdx.game.camera
 import com.mygdx.game.drawPolygonShape
@@ -22,7 +21,6 @@ class UIController {
             val dialogueBox = sentence.dialogueBox
 
             val font = character.font
-            val text = dialogueText.text
             val box = dialogueBox.polygon
 
             val talkingCharacter:MoveableObject = if(character is NPC) character else player

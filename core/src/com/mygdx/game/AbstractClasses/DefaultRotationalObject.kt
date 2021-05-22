@@ -1,7 +1,6 @@
 package com.mygdx.game.AbstractClasses
 
 import com.badlogic.gdx.math.Vector2
-import com.mygdx.game.angleBetweenPoints
 import com.mygdx.game.unitVectorToAngle
 
 class DefaultRotationalObject: RotationalObject {

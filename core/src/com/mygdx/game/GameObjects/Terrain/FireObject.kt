@@ -8,12 +8,12 @@ import com.mygdx.game.DefaultTextureHandler
 import com.mygdx.game.Enums.Layer
 import com.mygdx.game.Events.RemoveGameObjectEvent
 import com.mygdx.game.Interfaces.MoveCollition
-import com.mygdx.game.LocationImpl
+import com.mygdx.game.Locations.DefaultLocation
 import com.mygdx.game.ObjectProperties.Fire
 import com.mygdx.game.SaveHandling.DefaultRemoveObjectSaveState
 import com.mygdx.game.SaveState.SaveStateEntity
 
-class FireObject(Position: Vector2, size: Vector2, objectAttached: GameObject, location:LocationImpl, collitionOnFire: MoveCollition) : GameObject(Position, size,location),
+class FireObject(Position: Vector2, size: Vector2, objectAttached: GameObject, defaultLocation: DefaultLocation, collitionOnFire: MoveCollition) : GameObject(Position, size,defaultLocation),
                                                                                                         SaveStateEntity by DefaultRemoveObjectSaveState(){
         val fire = Fire(RemoveGameObjectEvent(this),this)
         override val collition = FireCollition(objectAttached.collition,collitionOnFire)

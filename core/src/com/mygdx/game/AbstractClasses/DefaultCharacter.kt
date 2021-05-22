@@ -15,8 +15,9 @@ import com.mygdx.game.Enums.getDirectionUnitVector
 import com.mygdx.game.Interfaces.Character
 import com.mygdx.game.Interfaces.DirectionalObject
 import com.mygdx.game.Interfaces.ModelInstanceHandler
+import com.mygdx.game.Locations.DefaultLocation
 
-abstract class DefaultCharacter(Position: Vector2, size: Vector2, location: LocationImpl?,
+abstract class DefaultCharacter(Position: Vector2, size: Vector2, location: DefaultLocation?,
                                 val modelHandler: ModelInstanceHandler) : Character,MoveableObject(Position, size, location),
                                 RotationalObject by DefaultRotationalObject(),DirectionalObject{
     override val font = BitmapFont()
