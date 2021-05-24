@@ -18,15 +18,13 @@ import com.mygdx.game.AbstractClasses.DefaultCharacter
 import com.mygdx.game.Locations.DefaultLocation
 
 class NPC(Position: Vector2, size: Vector2 = Vector2(128f,128f), val location: DefaultLocation?,
-          modelHandler: ModelInstanceHandler = DefaultModelInstanceHandler(
-                  assets.get("ManBlender.g3db", Model::class.java),
-                  Position,size))
-    : DefaultCharacter(Position, size, location,modelHandler), SaveStateEntity by DefaultRemoveObjectSaveState(){
+          modelHandler: ModelInstanceHandler = DefaultModelInstanceHandler("ManBlender.g3db",Position,size))
+    : DefaultCharacter(Position, size, location,modelHandler),
+    SaveStateEntity by DefaultRemoveObjectSaveState(){
     override val texture = DefaultTextureHandler.getTexture("DefaultPerson.png")
     override val layer = Layer.ONGROUND
     override var currentSpeed = 2f
     override var direction = Direction.UP
-    override val movementStrategy = DefaultMovement(NoAction())
     val conversationsHandler = ConversationHandler()
 
     private val sensorUp = TalkSensor(this.topleft, Vector2(128f, 62f), this, Direction.UP)
@@ -35,7 +33,6 @@ class NPC(Position: Vector2, size: Vector2 = Vector2(128f,128f), val location: D
     private val sensorDown = TalkSensor(this.bottomleft - Vector2(0f, 62f), Vector2(128f, 62f), this, Direction.DOWN)
     private val sensors = listOf(sensorUp,sensorDown,sensorLeft,sensorRight)
 
-    override val collition = IllegalMoveCollition
     init {
         sensors.forEach{location!!.addGameObject(it)}
     }

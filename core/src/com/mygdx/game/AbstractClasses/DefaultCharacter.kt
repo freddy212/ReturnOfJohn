@@ -10,12 +10,15 @@ import com.mygdx.game.AbstractClasses.DefaultRotationalObject
 import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.AbstractClasses.MoveableObject
 import com.mygdx.game.AbstractClasses.RotationalObject
+import com.mygdx.game.Collitions.IllegalMoveCollition
+import com.mygdx.game.EdgeOfLocationStrategies.NoAction
 import com.mygdx.game.Enums.CharacterState
 import com.mygdx.game.Enums.getDirectionUnitVector
 import com.mygdx.game.Interfaces.Character
 import com.mygdx.game.Interfaces.DirectionalObject
 import com.mygdx.game.Interfaces.ModelInstanceHandler
 import com.mygdx.game.Locations.DefaultLocation
+import com.mygdx.game.Managers.LocationManager
 
 abstract class DefaultCharacter(Position: Vector2, size: Vector2, location: DefaultLocation?,
                                 val modelHandler: ModelInstanceHandler) : Character,MoveableObject(Position, size, location),
@@ -29,6 +32,8 @@ abstract class DefaultCharacter(Position: Vector2, size: Vector2, location: Defa
     lateinit var launchUnitVector: Vector2
     override var canChangeDirection = true
     override var unitVectorDirection = Vector2(0f,0f)
+    override val movementStrategy = DefaultMovement(NoAction())
+    override val collition = IllegalMoveCollition
 
     init {
         font.data.setScale(2f)
@@ -69,6 +74,7 @@ abstract class DefaultCharacter(Position: Vector2, size: Vector2, location: Defa
         if(characterState == CharacterState.STUNNED){
             handleStunned(launchUnitVector)
         }
+        handleCollitions(this, this.polygon, LocationManager.EveryFrameCollitionGameObjects)
         super.frameTask()
     }
     open fun isHit(launchUnitVector: Vector2){

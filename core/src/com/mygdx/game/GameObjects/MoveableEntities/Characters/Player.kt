@@ -25,19 +25,15 @@ import com.mygdx.game.SaveState.SaveStateEntity
 import com.mygdx.game.AbstractClasses.DefaultCharacter
 import com.mygdx.game.Utils.ResourceList
 
-class Player(Position: Vector2, size: Vector2, modelHandler: ModelInstanceHandler = DefaultModelInstanceHandler(
-        assets.get("ManBlender.g3db", Model::class.java),
-        Position,size))
+class Player(Position: Vector2, size: Vector2, modelHandler: ModelInstanceHandler = DefaultModelInstanceHandler("ManBlender.g3db",Position,size))
              : DefaultCharacter(Position, size,null,modelHandler),SaveStateEntity by DefaultSaveStateHandler(){
     private var death = false
     override val texture = DefaultTextureHandler.getTexture("man.png")
-    override val movementStrategy = DefaultMovement(NoAction())
     override var currentSpeed = 7f
     override val layer = Layer.PERSON
     val inventory = Inventory()
     override var direction = Direction.UP
     val itemAbilities = ResourceList<CharacterAbility>()
-    override val collition = IllegalMoveCollition
     fun die(){
         val playerLocation = LocationManager.activeDefaultLocations.find{ x -> x.sprite.boundingRectangle.contains(Vector2(camera.position.x, camera.position.y))}!!
         player.setPosition(playerLocation.Position, player)

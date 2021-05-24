@@ -2,6 +2,7 @@ package com.mygdx.game
 
 import com.badlogic.gdx.ApplicationAdapter
 import com.badlogic.gdx.Gdx
+import com.badlogic.gdx.Input
 import com.badlogic.gdx.graphics.GL20
 import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch
@@ -15,6 +16,7 @@ import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.SaveHandling.FileHandler
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Player
 import com.mygdx.game.Interfaces.AreaIdentifier
+import com.mygdx.game.Interfaces.KeyPressedCollition
 import com.mygdx.game.Managers.*
 import com.mygdx.game.SaveHandling.DefaultSaveableObject
 import com.mygdx.game.SaveState.PlayerSaveState
@@ -106,7 +108,7 @@ class MainGame : ApplicationAdapter() {
         LocationManager.frameAction()
         inputAdapter.handleInput(player)
         RenderGraph.render(batch)
-       // drawrects()
+        drawrects()
         EventManager.executeEvents()
         uiRenderer.render()
         camera.position.set(player.sprite.x, player.sprite.y,4f)

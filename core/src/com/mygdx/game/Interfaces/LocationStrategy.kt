@@ -6,5 +6,5 @@ import com.mygdx.game.Locations.DefaultLocation
 interface LocationDataStrategy {
     val texture: Texture
     val initialization: (DefaultLocation) -> Unit
-    val collition: MoveCollition
+    val collition: Collition
 }

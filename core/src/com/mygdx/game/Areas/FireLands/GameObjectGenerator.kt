@@ -5,11 +5,13 @@ import com.mygdx.game.*
 import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.Collitions.DOTCollition
 import com.mygdx.game.Collitions.DoorCollition
+import com.mygdx.game.Collitions.IllegalMoveCollition
 import com.mygdx.game.Enums.Direction
 import com.mygdx.game.Enums.Layer
 import com.mygdx.game.GameObjects.Abyss
 import com.mygdx.game.GameObjects.Door
 import com.mygdx.game.GameObjects.GenericGameObject
+import com.mygdx.game.GameObjects.MoveableEntities.Characters.SmallDevil
 import com.mygdx.game.GameObjects.Terrain.FireObject
 import com.mygdx.game.GameObjects.Terrain.WalkableTerrain
 import com.mygdx.game.Interfaces.AreaIdentifier
@@ -25,7 +27,8 @@ fun getFireLandsLocationOneObjects(): List<GameObject>{
     val door = Door(doorPosition, Vector2(32f * 2, 64f * 2), DefaultTextureHandler.getTexture("CaveDoor.png"),location1,
         Direction.DOWN,doorCollition)
     val walkableTerrain = WalkableTerrain(Vector2(location1.originalMiddle.x - 150f + door.width / 4,location1.bottomleft.y), Vector2(300f, location1.topleft.y - location1.bottomleft.y), location1)
-    return listOf(door,walkableTerrain)
+    val devil = SmallDevil(doorPosition + Vector2(0f,300f), Vector2(70f,70f),location1)
+    return listOf(door,walkableTerrain,devil)
 }
 fun getFireLandsLocationTwoObjects(): List<GameObject>{
     val location1= LocationManager.findLocation("location1",AreaIdentifier.FIRELANDS)
@@ -48,11 +51,9 @@ fun getFireLandsLocationFourObjects():List<GameObject>{
 
     val doorCollition = DoorCollition(doorPosition,AreaIdentifier.FIRELANDSDUNGEON, doorFireLandsAndDungeonConnection,Direction.UP)
 
-    //val toggleCollition = ToggleCollition(IllegalMoveCollition,doorCollition)
-
     val door = Door(doorPosition, Vector2(32f * 2,64f * 2),
         DefaultTextureHandler.getTexture("CaveDoor.png"),location4,Direction.UP,doorCollition)
-    val fireObject = FireObject(door.Position,door.size,door,location4, DOTCollition)
+    val fireObject = FireObject(door.Position,door.size,door,location4, IllegalMoveCollition)
 
     return listOf(cave,door,fireObject)
 }

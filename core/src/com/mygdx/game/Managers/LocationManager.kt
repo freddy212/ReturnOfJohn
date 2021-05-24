@@ -3,10 +3,7 @@ package com.mygdx.game.Managers
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.*
 import com.mygdx.game.AbstractClasses.GameObject
-import com.mygdx.game.Interfaces.Area
-import com.mygdx.game.Interfaces.AreaIdentifier
-import com.mygdx.game.Interfaces.KeyPressedCollition
-import com.mygdx.game.Interfaces.MoveCollition
+import com.mygdx.game.Interfaces.*
 import com.mygdx.game.Locations.DefaultLocation
 import com.mygdx.game.SaveHandling.savePlayerStates
 
@@ -18,6 +15,7 @@ class LocationManager {
         lateinit var activeDefaultLocations: List<DefaultLocation>
         lateinit var MoveCollitionGameObjects: List<GameObject>
         lateinit var ButtonCollitionGameObjects: List<GameObject>
+        lateinit var EveryFrameCollitionGameObjects: List<GameObject>
         lateinit var currentDefaultLocation: DefaultLocation
         var  ActiveGameObjects: List<GameObject>
         init {
@@ -49,6 +47,7 @@ class LocationManager {
             ActiveGameObjects = activeDefaultLocations.flatMap { x -> x.gameObjects } + activeDefaultLocations + crossLocationGameObjects.List
             MoveCollitionGameObjects = ActiveGameObjects.filter{x -> x.collition is MoveCollition}
             ButtonCollitionGameObjects = ActiveGameObjects.filter { x -> x.collition is KeyPressedCollition }
+            EveryFrameCollitionGameObjects = ActiveGameObjects.filter { x -> x.collition is EveryFrameCollition }
             //Can be optimized at some point
         }
         fun SetArea(area: Area){

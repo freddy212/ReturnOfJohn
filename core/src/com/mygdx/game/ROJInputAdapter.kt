@@ -16,9 +16,6 @@ import com.mygdx.game.UI.Dialogue.OptionSentence
 
 class ROJInputAdapter(private val camera : OrthographicCamera, val player: Player) : InputAdapter(){
     var clickPosition = Vector3(0f,0f,0f)
-    override fun touchDown(screenX: Int, screenY: Int, pointer: Int, button: Int): Boolean {
-        return super.touchDown(screenX, screenY, pointer, button)
-    }
 
     override fun keyDown(keycode: Int): Boolean {
         if (keycode ==Input.Keys.SPACE) {
@@ -54,14 +51,8 @@ class ROJInputAdapter(private val camera : OrthographicCamera, val player: Playe
     fun handleInput(player: Player) {
         clickPosition = camera.unproject(Vector3(Gdx.input.x.toFloat(), Gdx.input.y.toFloat(), 0f))
         val unitVectorTowardsPoint = getUnitVectorTowardsPoint(Vector2(player.sprite.x,player.sprite.y),Vector2(clickPosition.x,clickPosition.y))
-        if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)){
-            if(!player.move(unitVectorTowardsPoint)){
-                handleCollitions(player,player.polygon,LocationManager.MoveCollitionGameObjects)
-            }
-        }else{
-            //val currentDirection = player.unitVectorDirection
-            handleCollitions(player,player.polygon,LocationManager.MoveCollitionGameObjects)
-           // player.setCharacterRotation(currentDirection)
+        if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
+            player.move((unitVectorTowardsPoint))
         }
         if (Gdx.input.isButtonPressed(Input.Buttons.RIGHT)){
             player.setCharacterRotation(unitVectorTowardsPoint)

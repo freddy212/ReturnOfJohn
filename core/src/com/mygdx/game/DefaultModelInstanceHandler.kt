@@ -7,9 +7,10 @@ import com.badlogic.gdx.math.Quaternion
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.math.Vector3
 import com.mygdx.game.Interfaces.ModelInstanceHandler
+import com.mygdx.game.Managers.DefaultAssetHandler
 
-class DefaultModelInstanceHandler(model:Model, Position: Vector2, size:Vector2) : ModelInstanceHandler {
-    val modelInstance: ModelInstance = ModelInstance(model)
+class DefaultModelInstanceHandler(path:String, Position: Vector2, size:Vector2) : ModelInstanceHandler {
+    val modelInstance: ModelInstance = ModelInstance(DefaultAssetHandler.assets.get(path, Model::class.java))
     init {
         modelInstance.transform.setTranslation(Position.x + size.x / 2,Position.y + size.y / 2,-150f)
         modelInstance.nodes.get(0).rotation.setEulerAngles(0f,-20f,0f)
