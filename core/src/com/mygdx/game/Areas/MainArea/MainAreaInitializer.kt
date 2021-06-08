@@ -8,6 +8,7 @@ import com.mygdx.game.Interfaces.AreaIdentifier
 import com.mygdx.game.Interfaces.AreaInitializer
 import com.mygdx.game.Locations.DamageLocationData
 import com.mygdx.game.Locations.DefaultLocation
+import com.mygdx.game.Managers.AreaManager.Companion.SetArea
 import com.mygdx.game.Managers.LocationManager
 class MainAreaInitializer: AreaInitializer {
     override fun initializeArea(): Area {
@@ -25,7 +26,7 @@ class MainAreaInitializer: AreaInitializer {
         val worldTreeLoc = addLocationRelative(location6, Vector2(1000f, 1000f), InsertDirection.UP, area, InsertDirection.MIDDLE, ::getWorldTreeObjects)
         createFireLands(location2,area)
         createIceLands(location3,area)
-        LocationManager.SetArea(area)
+        SetArea(area)
         return area
     }
     private fun createFireLands(defaultLocation2: DefaultLocation, area: Area){

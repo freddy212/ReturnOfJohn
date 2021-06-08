@@ -16,7 +16,7 @@ import com.mygdx.game.SaveHandling.FileHandler
 import com.mygdx.game.SaveState.SaveStateEntity
 import com.mygdx.game.Utils.ResourceList
 
-abstract class GameObject (val Position: Vector2, val size: Vector2,val defaultLocation: DefaultLocation?): Renderable {
+abstract class GameObject (val Position: Vector2, val size: Vector2,var defaultLocation: DefaultLocation?): Renderable {
     val topleft = Vector2(Position.x,Position.y + size.y)
     val topright = Vector2(Position.x + size.x,Position.y + size.y)
     val bottomright =  Vector2(Position.x + size.x,Position.y)
@@ -46,7 +46,7 @@ abstract class GameObject (val Position: Vector2, val size: Vector2,val defaultL
         }
     }
     open val onLocationEnterActions: MutableList<()-> Unit> = mutableListOf({})
-    open val onLocationExitActions: MutableList<()->Unit> = mutableListOf({})
+    val onLocationExitActions: MutableList<(newLocation: DefaultLocation)->Unit> = mutableListOf({})
     constructor(Position: Vector2, size: Vector2): this(Position,size,null)
 
     open fun removeFromLocation(){

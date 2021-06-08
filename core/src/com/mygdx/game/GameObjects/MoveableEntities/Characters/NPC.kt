@@ -25,6 +25,7 @@ class NPC(Position: Vector2, size: Vector2 = Vector2(128f,128f), val location: D
     override val layer = Layer.ONGROUND
     override var currentSpeed = 2f
     override var direction = Direction.UP
+    override val collition = IllegalMoveCollition
     val conversationsHandler = ConversationHandler()
 
     private val sensorUp = TalkSensor(this.topleft, Vector2(128f, 62f), this, Direction.UP)

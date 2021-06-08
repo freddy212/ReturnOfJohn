@@ -10,9 +10,12 @@ import com.mygdx.game.Interfaces.MoveCollition
 import com.mygdx.game.ObjectProperties.Fire
 import com.mygdx.game.Trimer.DelayTimer
 
-class ShieldCollition: MoveCollition by CanMoveCollition{
+class ShieldCollition: MoveCollition{
     val boulderDelay = mutableMapOf<Boulder,DelayTimer>()
+
+    override var canMoveAfterCollition = true
     override fun collitionHappened(entity: GameObject, collidedObject: GameObject) {
+        canMoveAfterCollition = entity is Boulder
         if(entity is Boulder && collidedObject is ShieldAbility){
             if(entity in boulderDelay.keys){
                 val delayTimer = boulderDelay[entity]!!

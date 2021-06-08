@@ -10,8 +10,8 @@ import com.mygdx.game.Enums.Layer
 import com.mygdx.game.Locations.DefaultLocation
 import com.mygdx.game.middleOfObject
 
-class Boulder(override var unitVectorDirection: Vector2, Position: Vector2, size: Vector2, defaultLocation: DefaultLocation?):
-        Projectile(middleOfObject(Position,size),size,defaultLocation){
+class Boulder(Position: Vector2, size: Vector2, defaultLocation: DefaultLocation?,unitVectorDirection: Vector2):
+        Projectile(middleOfObject(Position,size),size,defaultLocation,unitVectorDirection){
     override val movementStrategy = DefaultMovement(RemoveObject())
     override val texture = DefaultTextureHandler.getTexture("Boulder.png")
     override var currentSpeed = 5f

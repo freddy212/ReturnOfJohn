@@ -57,4 +57,12 @@ fun getFireLandsLocationFourObjects():List<GameObject>{
 
     return listOf(cave,door,fireObject)
 }
+fun getFireLandsLocationFiveObjects(): List<GameObject>{
+    val location5 = LocationManager.findLocation("location5",AreaIdentifier.FIRELANDS)
+
+    val walkableTerrain = WalkableTerrain(Vector2(location5.originalMiddle.x - 100f,location5.bottomright.y),Vector2(200f,500f),location5)
+    val walkableTerrain2 = WalkableTerrain(Vector2(walkableTerrain.topleft - Vector2(300f,0f)), Vector2(800f,600f),location5)
+
+    return listOf(walkableTerrain,walkableTerrain2)
+}
 

@@ -87,10 +87,8 @@ fun getWorldTreeObjects(): List<GameObject>{
 }
 fun getIceLandsGateWayLocation():List<GameObject>{
     val location10 = LocationManager.findLocation("location10", AreaIdentifier.MAINAREA)
-    //location10.originalMiddle +  Vector2(location10.width / 2 - 150f, 0f)
     val walkableTerrain = GenericGameObject(location10.bottomleft +  Vector2(location10.width / 2 - 150f,0f), Vector2(300f,location10.height ),
         "MainB.jpg", Layer.ONGROUND, location10, RemoveDotDamageCollition)
-    //val iceGround1 = IceGround(walkableTerrain.bottomleft,Vector2(100f,200f),location10)
     val thorns = ConstructObjects(::Thorns,walkableTerrain.topleft.x.toInt(),60,walkableTerrain.topright.x.toInt() - 1,
         walkableTerrain.topleft.y.toInt() - 100, 100,walkableTerrain.topleft.y.toInt() - 200,
         location10)
@@ -98,7 +96,17 @@ fun getIceLandsGateWayLocation():List<GameObject>{
                                     walkableTerrain.bottomleft.y.toInt() + 400,100,walkableTerrain.bottomleft.y.toInt(),location10)
     val iceGrounds2 = ConstructObjects(::IceObject, walkableTerrain.bottomleft.x.toInt() + 100,100,walkableTerrain.topright.x.toInt() - 100,
                                         walkableTerrain.topleft.y.toInt() - 300, 100,walkableTerrain.topleft.y.toInt() - 499,location10)
-    return listOf(walkableTerrain) + thorns + iceGrounds + iceGrounds2
+
+    val doorPosition = Vector2(walkableTerrain.originalMiddle.x - (playerSize.x),walkableTerrain.topleft.y)
+
+    val doorCollition = DoorCollition(doorPosition,
+        AreaIdentifier.ICELANDS, doorMainAreaAndIceLands,
+        Direction.UP)
+
+    val door = Door(doorPosition, Vector2(32f * 2, 64f * 2), DefaultTextureHandler.getTexture("CaveDoor.png"),location10,
+        Direction.UP,doorCollition)
+
+    return listOf(walkableTerrain,door) + thorns + iceGrounds + iceGrounds2
 }
 fun getFireLandsGateWayLocation(): List<GameObject> {
     val location2 = LocationManager.findLocation("location2", AreaIdentifier.MAINAREA)

@@ -33,6 +33,7 @@ class Player(Position: Vector2, size: Vector2, modelHandler: ModelInstanceHandle
     override val layer = Layer.PERSON
     val inventory = Inventory()
     override var direction = Direction.UP
+    override val collition = IllegalMoveCollition
     val itemAbilities = ResourceList<CharacterAbility>()
     fun die(){
         val playerLocation = LocationManager.activeDefaultLocations.find{ x -> x.sprite.boundingRectangle.contains(Vector2(camera.position.x, camera.position.y))}!!

@@ -15,6 +15,7 @@ import com.mygdx.game.GameObjects.MoveableEntities.Characters.Player
 import com.mygdx.game.Interfaces.AreaIdentifier
 import com.mygdx.game.Interfaces.ModelInstanceHandler
 import com.mygdx.game.Locations.DefaultLocation
+import com.mygdx.game.Managers.AreaManager
 import com.mygdx.game.Managers.DefaultAssetHandler
 import com.mygdx.game.Managers.LocationManager
 import com.mygdx.game.SaveState.PlayerSaveState
@@ -52,7 +53,7 @@ open class TestGame :ApplicationAdapter() {
         val area = DefaultArea(AreaIdentifier.NOTIMPLEMENTED)
         location = DefaultLocation(Vector2(1024f,1024f), Vector2(0f,0f))
         area.addLocation(location)
-        LocationManager.SetArea(area)
+        AreaManager.SetArea(area)
         LocationManager.LocationFrameTasks()
     }
     @AfterEach

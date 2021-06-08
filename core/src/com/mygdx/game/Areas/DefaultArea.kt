@@ -11,6 +11,7 @@ class DefaultArea(override val identifier: AreaIdentifier): Area {
     private val Locations = mutableListOf<DefaultLocation>()
     override fun addLocation(defaultLocation: DefaultLocation){
         defaultLocation.locationName = "location" + (Locations.size + 1)
+        defaultLocation.areaIdentifier = identifier
         Locations.add(defaultLocation)
     }
     init {

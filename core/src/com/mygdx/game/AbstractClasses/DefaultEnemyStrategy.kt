@@ -2,7 +2,6 @@ package com.mygdx.game.AbstractClasses
 
 import com.badlogic.gdx.math.Circle
 import com.badlogic.gdx.math.Vector2
-import com.mygdx.game.EnemyActions.MoveRight
 import com.mygdx.game.Interfaces.EnemyStrategy
 import com.mygdx.game.Interfaces.EnemyAction
 import com.mygdx.game.player
@@ -22,27 +21,21 @@ class DefaultAggro(): AggroStrategy{
     }
 }
 
-open class DefaultEnemyStrategy() : EnemyStrategy {
-    private var aggroed = false
-    override fun aggroed(aggroStrategy: AggroStrategy): Boolean {
-        aggroed = aggroed || aggroStrategy.isAggroed()
-        return aggroed
-    }
+open class DefaultEnemyStrategy(override val actionList : List<EnemyAction>) : EnemyStrategy {
 
-    override val actionList: List<EnemyAction> = listOf(MoveRight())
-
-    override fun getNextAction(): EnemyAction {
-        val validActions = actionList.filter {it.condition()}
+    override fun getActions(enemy: Enemy): List<EnemyAction>{
+        val validActions = actionList.filter {it.condition(enemy)}
         val random = Random.nextDouble(0.0,1.0)
         var current = 0.0
+        var actions = mutableListOf<EnemyAction>()
 
         for(action in validActions){
-            current += action.probability
+            current = action.probability
             if(current >= random){
-                return action
+                actions.add(action)
             }
         }
-        return actionList[0]
+        return actions
     }
 
 }

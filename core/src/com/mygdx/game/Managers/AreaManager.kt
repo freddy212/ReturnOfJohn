@@ -8,6 +8,7 @@ import com.mygdx.game.Utils.ResourceList
 class AreaManager{
     companion object{
         private val areaManager  = ResourceList<Area>()
+        lateinit var activeArea: Area
         fun addArea(area:Area){
             areaManager.add(area)
         }
@@ -19,6 +20,9 @@ class AreaManager{
         }
         fun getAllGameObjects(): List<GameObject>{
             return getAllAreas().flatMap {it.defaultLocations}.flatMap {it.gameObjects}
+        }
+        fun SetArea(area: Area){
+            activeArea = area
         }
     }
 }

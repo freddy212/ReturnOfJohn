@@ -1,11 +1,10 @@
 package com.mygdx.game.Collitions
 
 import com.mygdx.game.AbstractClasses.GameObject
-import com.mygdx.game.GameObjects.MoveableEntities.Projectiles.Icicle
-import com.mygdx.game.GameObjects.Thorns
 import com.mygdx.game.Interfaces.MoveCollition
 
-class IcicleCollition: MoveCollition by IllegalMoveCollition{
+object IceObjectCollition: MoveCollition by CanMoveCollition {
     override fun collitionHappened(entity: GameObject, collidedObject: GameObject) {
+        DOTCollition.collitionHappened(entity,collidedObject)
     }
 }

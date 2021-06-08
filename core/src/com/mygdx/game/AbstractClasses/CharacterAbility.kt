@@ -18,6 +18,6 @@ abstract class CharacterAbility(Position: Vector2, size: Vector2) : GameObject(P
         }
     }
     open fun InactiveAction(){
-        crossLocationGameObjects.remove(this)
+            crossLocationGameObjects.remove(this)
     }
 }

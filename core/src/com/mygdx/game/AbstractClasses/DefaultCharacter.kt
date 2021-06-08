@@ -33,7 +33,6 @@ abstract class DefaultCharacter(Position: Vector2, size: Vector2, location: Defa
     override var canChangeDirection = true
     override var unitVectorDirection = Vector2(0f,0f)
     override val movementStrategy = DefaultMovement(NoAction())
-    override val collition = IllegalMoveCollition
 
     init {
         font.data.setScale(2f)

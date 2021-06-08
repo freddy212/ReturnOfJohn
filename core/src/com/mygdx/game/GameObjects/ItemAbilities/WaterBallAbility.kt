@@ -20,7 +20,7 @@ class WaterBallAbility(Position: Vector2, size: Vector2): CharacterAbility(Posit
 
     override fun activeAction(){
         if(cooldownTimer.tryUseCooldown()) {
-                val waterBall = WaterBall(player.currentMiddle,Vector2(96f,120f),LocationManager.currentDefaultLocation, player.unitVectorDirection)
+                val waterBall = WaterBall(player.currentMiddle,Vector2(96f,120f),LocationManager.newDefaultLocation, player.unitVectorDirection)
                 waterBall.defaultLocation!!.addGameObject(waterBall)
         }
     }

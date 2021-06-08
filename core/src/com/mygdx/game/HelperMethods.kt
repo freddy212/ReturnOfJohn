@@ -27,11 +27,16 @@ import com.mygdx.game.SaveState.SaveStateEntity
 import com.mygdx.game.Utils.RectanglePolygon
 import kotlin.math.PI
 import kotlin.math.atan2
+import kotlin.math.pow
+import kotlin.math.sqrt
 
 
 var font: BitmapFont = BitmapFont()
 
-
+fun distance(point1: Vector2, point2: Vector2): Float{
+     val first = (point2.x - point1.x).pow(2) + (point2.y - point1.y).pow(2)
+     return sqrt(first)
+}
 fun getPolygonPoints(polygon: Polygon): List<Vector2>{
         val floatArray = polygon.transformedVertices
         val xValues = floatArray.filterIndexed{ index, _ -> index.toFloat() % 2f == 0f}
@@ -239,4 +244,16 @@ fun getGameObjectWithEntityId(entityId: Int): GameObject? {
 fun itemObjectAddToInventory(item: Item, itemObject: GameObject) {
         player.inventory.addItem(item)
         itemObject.removeFromLocation()
+}
+
+fun HitOppositeDirection(
+        entity: GameObject,
+        character: DefaultCharacter
+) {
+        val centerPointBoulder =
+                Vector2(entity.sprite.x + entity.sprite.width / 2, entity.sprite.y + entity.sprite.height / 2)
+        val centerPointPlayer =
+                Vector2(character.sprite.x + character.sprite.width / 2, character.sprite.y + character.sprite.height / 2)
+        val oppositeDirection = getOppositeUnitVector(centerPointPlayer, centerPointBoulder)
+        character.isHit(oppositeDirection)
 }

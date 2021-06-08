@@ -13,6 +13,7 @@ import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.math.Vector2
+import com.mygdx.game.GameObjects.ItemAbilities.IcicleAbility
 import com.mygdx.game.SaveHandling.FileHandler
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Player
 import com.mygdx.game.Interfaces.AreaIdentifier
@@ -76,7 +77,7 @@ class MainGame : ApplicationAdapter() {
         }else{
             playerSaveState = PlayerSaveState(Center.x, Center.y,AreaIdentifier.MAINAREA, player.entityId)
         }
-        LocationManager.activeArea = AreaManager.getArea(playerSaveState.areaIdentifier)
+        AreaManager.activeArea = AreaManager.getArea(playerSaveState.areaIdentifier)
         player.setPosition(Vector2(playerSaveState.playerXPos, playerSaveState.playerYPos), player)
         font.data.setScale(2f)
         inventory = Inventory()
@@ -97,6 +98,7 @@ class MainGame : ApplicationAdapter() {
             .filter {it is SaveStateEntity}.map { it as SaveStateEntity }.filter {savedStates.map {it.entityId}.contains(it.entityId)}
         println("size of saved elements is : + " + savedStates.size + " and size of matching elements is : " + savedEntities.size)
         savedEntities.forEach { it.onLoadAction() }
+        player.addAbility(IcicleAbility(Vector2(0f,0f),Vector2(0f,0f)))
     }
 
 
@@ -108,7 +110,7 @@ class MainGame : ApplicationAdapter() {
         LocationManager.frameAction()
         inputAdapter.handleInput(player)
         RenderGraph.render(batch)
-        drawrects()
+      //  drawrects()
         EventManager.executeEvents()
         uiRenderer.render()
         camera.position.set(player.sprite.x, player.sprite.y,4f)

@@ -41,7 +41,7 @@ class BoulderGenerator(Position: Vector2, size: Vector2, val unitVectorDirection
 
     fun generateBoulder(){
         val Position = Vector2(this.sprite.x + this.sprite.width/2,this.sprite.y + this.sprite.height /2) + getBoulderDistanceFromGenerator(unitVectorDirection)
-        val boulder = Boulder(Vector2(unitVectorDirection.x,unitVectorDirection.y),Position,Vector2( 64 * 2f,64f * 2),defaultLocation)
+        val boulder = Boulder(Position,Vector2( 64 * 2f,64f * 2),defaultLocation,Vector2(unitVectorDirection.x,unitVectorDirection.y))
         if(genereateFireBoulder) boulder.properties.add(Fire(DefaultEvent(),boulder))
         defaultLocation!!.addGameObject(boulder)
     }

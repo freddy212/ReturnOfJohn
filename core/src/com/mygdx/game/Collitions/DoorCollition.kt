@@ -33,7 +33,7 @@ class DoorCollition(doorPosition: Vector2,val areaId: AreaIdentifier, val connec
                     val playerPosMiddle = Vector2(playerPosAfter.x + playerSize.x / 2, playerPosAfter.y)
                     entity.setPosition(playerPosMiddle,entity)
 
-                    LocationManager.activeArea = AreaManager.getArea(areaId)
+                    AreaManager.SetArea(AreaManager.getArea(areaId))
                     canMoveAfterCollition = false
                 }
             }

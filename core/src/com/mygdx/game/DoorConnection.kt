@@ -7,6 +7,7 @@ val doorMainAreaAndShop = DoorConnection()
 val doorMainAreaAndDojo = DoorConnection()
 val doorMainAreaAndFireLands = DoorConnection()
 val doorFireLandsAndDungeonConnection = DoorConnection()
+val doorMainAreaAndIceLands = DoorConnection()
 class DoorConnection() {
     var firstEntrance = Vector2(0f,0f)
     var secondEntrance = Vector2(0f,0f)

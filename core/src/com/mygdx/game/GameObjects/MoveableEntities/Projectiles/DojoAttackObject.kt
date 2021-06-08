@@ -3,6 +3,7 @@ package com.mygdx.game.GameObjects.MoveableEntities.Projectiles
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.AbstractClasses.DefaultMovement
 import com.mygdx.game.AbstractClasses.MoveableObject
+import com.mygdx.game.AbstractClasses.Projectile
 import com.mygdx.game.Collitions.DojoMasterCollition
 import com.mygdx.game.DefaultTextureHandler
 import com.mygdx.game.EdgeOfLocationStrategies.MoveRegardless

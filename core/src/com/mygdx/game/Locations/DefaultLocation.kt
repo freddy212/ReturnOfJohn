@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.Enums.Layer
+import com.mygdx.game.Interfaces.AreaIdentifier
 import com.mygdx.game.Interfaces.LocationDataStrategy
 import com.mygdx.game.font
 
@@ -19,7 +20,9 @@ class DefaultLocation(size: Vector2, Position: Vector2, private val initGameObje
         get() = ChildrenGameObjects.toList()
     override val layer = Layer.GROUND
     override val collition = locationStrategy.collition
-    var locationName = ""
+
+    lateinit var areaIdentifier: AreaIdentifier
+    lateinit var locationName: String
     init {
         texture.setFilter(Texture.TextureFilter.Linear,Texture.TextureFilter.Linear)
         texture.setWrap(Texture.TextureWrap.Repeat,Texture.TextureWrap.MirroredRepeat)
@@ -32,6 +35,7 @@ class DefaultLocation(size: Vector2, Position: Vector2, private val initGameObje
 
     fun addGameObject(gameObject: GameObject){
         ChildrenGameObjects.add(gameObject)
+        gameObject.defaultLocation = this
     }
     fun removeGameObject(gameObject: GameObject){
         ChildrenGameObjects.remove(gameObject)
