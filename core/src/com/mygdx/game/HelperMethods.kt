@@ -15,14 +15,12 @@ import com.mygdx.game.Enums.Direction
 import com.mygdx.game.Enums.Item
 import com.mygdx.game.GameObjects.*
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Player
-import com.mygdx.game.Interfaces.Area
-import com.mygdx.game.Interfaces.DirectionalObject
-import com.mygdx.game.Interfaces.LocationDataStrategy
-import com.mygdx.game.Interfaces.MoveCollition
+import com.mygdx.game.Interfaces.*
 import com.mygdx.game.Locations.DefaultLocation
 import com.mygdx.game.Locations.DefaultLocationData
 import com.mygdx.game.Managers.AreaManager
 import com.mygdx.game.Managers.LocationManager
+import com.mygdx.game.SaveState.PlayerSaveState
 import com.mygdx.game.SaveState.SaveStateEntity
 import com.mygdx.game.Utils.RectanglePolygon
 import kotlin.math.PI
@@ -248,12 +246,17 @@ fun itemObjectAddToInventory(item: Item, itemObject: GameObject) {
 
 fun HitOppositeDirection(
         entity: GameObject,
-        character: DefaultCharacter
+        fightableEntity: FightableEntity
 ) {
+        val character = fightableEntity as DefaultCharacter
         val centerPointBoulder =
                 Vector2(entity.sprite.x + entity.sprite.width / 2, entity.sprite.y + entity.sprite.height / 2)
         val centerPointPlayer =
                 Vector2(character.sprite.x + character.sprite.width / 2, character.sprite.y + character.sprite.height / 2)
         val oppositeDirection = getOppositeUnitVector(centerPointPlayer, centerPointBoulder)
         character.isHit(oppositeDirection)
+}
+fun ResetPlayer(playerSaveState: PlayerSaveState){
+        player.setPosition(Vector2(playerSaveState.playerXPos, playerSaveState.playerYPos), player)
+        player.health = player.maxHealth
 }
