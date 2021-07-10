@@ -24,7 +24,6 @@ class FireLandsDungeonInitializer: AreaInitializer {
         )
         val location4 = addLocationRelative(location3, Vector2(400f,location3.bottomright.y - location1.topright.y),DOWN,area,RIGHT)
         location4.addAdjacentLocation(location1)
-        location1.addAdjacentLocation(location4)
         return area
         //addLocationsToArea(area)
 

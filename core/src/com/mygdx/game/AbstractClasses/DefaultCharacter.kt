@@ -16,13 +16,17 @@ import com.mygdx.game.Enums.CharacterState
 import com.mygdx.game.Enums.getDirectionUnitVector
 import com.mygdx.game.Interfaces.Character
 import com.mygdx.game.Interfaces.DirectionalObject
+import com.mygdx.game.Interfaces.FightableEntity
 import com.mygdx.game.Interfaces.ModelInstanceHandler
 import com.mygdx.game.Locations.DefaultLocation
 import com.mygdx.game.Managers.LocationManager
 
 abstract class DefaultCharacter(Position: Vector2, size: Vector2, location: DefaultLocation?,
-                                val modelHandler: ModelInstanceHandler) : Character,MoveableObject(Position, size, location),
-                                RotationalObject by DefaultRotationalObject(),DirectionalObject{
+                                val modelHandler: ModelInstanceHandler) :MoveableObject(Position, size, location),
+                                RotationalObject by DefaultRotationalObject(),
+                                DirectionalObject,
+                                Character,
+                                FightableEntity{
     override val font = BitmapFont()
     val speedDecrease = 0.95f
     var characterState: CharacterState = CharacterState.FREE
@@ -33,6 +37,7 @@ abstract class DefaultCharacter(Position: Vector2, size: Vector2, location: Defa
     override var canChangeDirection = true
     override var unitVectorDirection = Vector2(0f,0f)
     override val movementStrategy = DefaultMovement(NoAction())
+    abstract fun death()
 
     init {
         font.data.setScale(2f)
@@ -75,8 +80,12 @@ abstract class DefaultCharacter(Position: Vector2, size: Vector2, location: Defa
         }
         handleCollitions(this, this.polygon, LocationManager.EveryFrameCollitionGameObjects)
         super.frameTask()
+        if(health <= 0f){
+            death()
+        }
     }
     open fun isHit(launchUnitVector: Vector2){
+        this.health -= 10f
         originalSpeed = originalSpeed ?: currentSpeed
         characterState = CharacterState.STUNNED
         this.launchUnitVector = launchUnitVector

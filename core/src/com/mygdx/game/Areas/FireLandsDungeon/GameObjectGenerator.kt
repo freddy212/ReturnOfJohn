@@ -26,7 +26,8 @@ fun getFireLandsDungeonLocationOneObjects(): List<GameObject>{
 }
 fun getFireLandsDungeonLocationTwoObjects(): List<GameObject>{
     val location2 = LocationManager.findLocation("location2",AreaIdentifier.FIRELANDSDUNGEON)
-    val boulderGenerator1 = BoulderGenerator(Vector2(location2.bottomleft.x + 10f,location2.originalMiddle.y), Vector2(64f * 2,64f * 2), getDirectionUnitVector(Direction.DOWN),location2,1f,3f,true)
-    val boulderGenerator2 = BoulderGenerator(Vector2(location2.bottomleft.x + 128f + 20f,location2.originalMiddle.y), Vector2(64f * 2,64f * 2), getDirectionUnitVector(Direction.DOWN),location2,1f,6f, true)
-    return listOf(boulderGenerator1,boulderGenerator2)
+    //val boulderGenerator1 = BoulderGenerator(Vector2(location2.bottomleft.x + 10f,location2.originalMiddle.y), Vector2(64f * 2,64f * 2), getDirectionUnitVector(Direction.DOWN),location2,1f,3f,true)
+    //val boulderGenerator2 = BoulderGenerator(Vector2(location2.bottomleft.x + 128f + 20f,location2.originalMiddle.y), Vector2(64f * 2,64f * 2), getDirectionUnitVector(Direction.DOWN),location2,1f,6f, true)
+    val boulderGenerator1 = BoulderGenerator(Vector2(location2.bottomleft.x + 35f,location2.originalMiddle.y), Vector2(230f,230f), getDirectionUnitVector(Direction.DOWN),location2,1f,3f,true)
+    return listOf(boulderGenerator1)
 }

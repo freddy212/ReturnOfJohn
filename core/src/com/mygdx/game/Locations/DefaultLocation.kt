@@ -46,5 +46,6 @@ class DefaultLocation(size: Vector2, Position: Vector2, private val initGameObje
     }
     fun addAdjacentLocation(defaultLocation: DefaultLocation){
         AdjacentLocations.add(defaultLocation)
+        defaultLocation.AdjacentLocations.add(this)
     }
 }

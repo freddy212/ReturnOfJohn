@@ -1,5 +1,6 @@
 package com.mygdx.game.GameObjects.MoveableEntities.Characters
 
+import com.badlogic.gdx.graphics.g2d.Sprite
 import com.mygdx.game.DefaultTextureHandler
 import com.badlogic.gdx.graphics.g3d.Model
 import com.badlogic.gdx.math.Vector2
@@ -25,6 +26,17 @@ class NPC(Position: Vector2, size: Vector2 = Vector2(128f,128f), val location: D
     override val layer = Layer.ONGROUND
     override var currentSpeed = 2f
     override var direction = Direction.UP
+    override var health = 10f
+    override val maxHealth = 10f
+
+    override fun showHealth(sprite: Sprite) {
+
+    }
+
+    override fun death() {
+
+    }
+
     override val collition = IllegalMoveCollition
     val conversationsHandler = ConversationHandler()
 

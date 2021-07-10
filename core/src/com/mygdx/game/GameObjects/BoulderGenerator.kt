@@ -41,14 +41,14 @@ class BoulderGenerator(Position: Vector2, size: Vector2, val unitVectorDirection
 
     fun generateBoulder(){
         val Position = Vector2(this.sprite.x + this.sprite.width/2,this.sprite.y + this.sprite.height /2) + getBoulderDistanceFromGenerator(unitVectorDirection)
-        val boulder = Boulder(Position,Vector2( 64 * 2f,64f * 2),defaultLocation,Vector2(unitVectorDirection.x,unitVectorDirection.y))
+        val boulder = Boulder(Position,Vector2(size.x - (size.x / 10) ,size.y - (size.y / 10)),defaultLocation,Vector2(unitVectorDirection.x,unitVectorDirection.y))
         if(genereateFireBoulder) boulder.properties.add(Fire(DefaultEvent(),boulder))
         defaultLocation!!.addGameObject(boulder)
     }
     fun getBoulderDistanceFromGenerator(unitVectorDirection: Vector2):Vector2{
         var distance = 1f
         while(isPolygonsColliding(this.polygon,
-                RectanglePolygon(Vector2(Position + (unitVectorDirection * distance)),128f,128f)
+                RectanglePolygon(Vector2(Position + (unitVectorDirection * distance)),size.x,size.y)
             )){
             distance +=1
         }

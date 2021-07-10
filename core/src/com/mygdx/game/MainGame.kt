@@ -2,7 +2,6 @@ package com.mygdx.game
 
 import com.badlogic.gdx.ApplicationAdapter
 import com.badlogic.gdx.Gdx
-import com.badlogic.gdx.Input
 import com.badlogic.gdx.graphics.GL20
 import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch
@@ -17,12 +16,11 @@ import com.mygdx.game.GameObjects.ItemAbilities.IcicleAbility
 import com.mygdx.game.SaveHandling.FileHandler
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Player
 import com.mygdx.game.Interfaces.AreaIdentifier
-import com.mygdx.game.Interfaces.KeyPressedCollition
 import com.mygdx.game.Managers.*
 import com.mygdx.game.SaveHandling.DefaultSaveableObject
 import com.mygdx.game.SaveState.PlayerSaveState
 import com.mygdx.game.SaveState.SaveStateEntity
-import com.mygdx.game.UI.UIRenderer
+import com.mygdx.game.Managers.UIRendererManager
 import com.mygdx.game.Utils.RectanglePolygon
 import com.mygdx.game.Utils.RenderGraph
 import kotlinx.serialization.json.*
@@ -43,7 +41,7 @@ class MainGame : ApplicationAdapter() {
     lateinit var testRect: Rectangle
     lateinit var inventory: Inventory
     lateinit var inputAdapter: ROJInputAdapter
-    lateinit var uiRenderer: UIRenderer
+    lateinit var uiRendererManager: UIRendererManager
 
     override fun create() {
 
@@ -51,7 +49,6 @@ class MainGame : ApplicationAdapter() {
         DefaultAssetHandler.setAssetManager(InitAssets())
         batch = PolygonSpriteBatch()
         player =  Player(Vector2(0f, 0f), Vector2(32f,40f))
-        uiRenderer = UIRenderer()
         firstpoly = RectanglePolygon(Vector2(50f,0f),500f,500f)
         firstpoly.vertices = firstpoly.vertices.map { x -> x * 1f }.toFloatArray()
         secondpoly = RectanglePolygon(
@@ -78,7 +75,7 @@ class MainGame : ApplicationAdapter() {
             playerSaveState = PlayerSaveState(Center.x, Center.y,AreaIdentifier.MAINAREA, player.entityId)
         }
         AreaManager.activeArea = AreaManager.getArea(playerSaveState.areaIdentifier)
-        player.setPosition(Vector2(playerSaveState.playerXPos, playerSaveState.playerYPos), player)
+        ResetPlayer(playerSaveState)
         font.data.setScale(2f)
         inventory = Inventory()
         inputAdapter = ROJInputAdapter(camera,player)
@@ -112,7 +109,7 @@ class MainGame : ApplicationAdapter() {
         RenderGraph.render(batch)
       //  drawrects()
         EventManager.executeEvents()
-        uiRenderer.render()
+        UIRendererManager.render()
         camera.position.set(player.sprite.x, player.sprite.y,4f)
         camera.update()
     }

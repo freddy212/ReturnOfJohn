@@ -5,29 +5,27 @@ import com.badlogic.gdx.Input
 import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch
 import com.mygdx.game.DefaultTextureHandler
 import com.badlogic.gdx.graphics.g2d.Sprite
-import com.badlogic.gdx.graphics.g3d.Model
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.math.Vector3
 import com.mygdx.game.*
 import com.mygdx.game.AbstractClasses.CharacterAbility
-import com.mygdx.game.AbstractClasses.DefaultMovement
 import com.mygdx.game.Collitions.IllegalMoveCollition
-import com.mygdx.game.EdgeOfLocationStrategies.NoAction
 import com.mygdx.game.Enums.Direction
 import com.mygdx.game.Enums.Layer
 import com.mygdx.game.Enums.getDirectionUnitVector
 import com.mygdx.game.Interfaces.ModelInstanceHandler
-import com.mygdx.game.Managers.DefaultAssetHandler.assets
 import com.mygdx.game.Managers.LocationManager
 import com.mygdx.game.Managers.TooltipManager
 import com.mygdx.game.SaveState.DefaultSaveStateHandler
 import com.mygdx.game.SaveState.SaveStateEntity
 import com.mygdx.game.AbstractClasses.DefaultCharacter
+import com.mygdx.game.FightableEnitityData.PlayerFightableEntity
+import com.mygdx.game.Interfaces.FightableEntity
 import com.mygdx.game.Utils.ResourceList
 
 class Player(Position: Vector2, size: Vector2, modelHandler: ModelInstanceHandler = DefaultModelInstanceHandler("ManBlender.g3db",Position,size))
-             : DefaultCharacter(Position, size,null,modelHandler),SaveStateEntity by DefaultSaveStateHandler(){
-    private var death = false
+             : DefaultCharacter(Position, size,null,modelHandler),SaveStateEntity by DefaultSaveStateHandler(),
+                                                                         FightableEntity by PlayerFightableEntity(){
     override val texture = DefaultTextureHandler.getTexture("man.png")
     override var currentSpeed = 7f
     override val layer = Layer.PERSON
@@ -60,5 +58,9 @@ class Player(Position: Vector2, size: Vector2, modelHandler: ModelInstanceHandle
         super.render(batch)
         camera.position.set(oldCameraPos)
         camera.update()
+    }
+
+    override fun death() {
+        ResetPlayer(playerSaveState)
     }
 }
