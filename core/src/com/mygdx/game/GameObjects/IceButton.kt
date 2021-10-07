@@ -20,10 +20,11 @@ class IceButton(Position: Vector2, size: Vector2, defaultLocation: DefaultLocati
     override fun frameTask() {
         super.frameTask()
         val collitions = GetCollidingObjects(this.polygon, LocationManager.MoveCollitionGameObjects - this)
-        if(player in collitions && objectToToggle in LocationManager.MoveCollitionGameObjects){
+        val iceClone = collitions.find { it is IceClone }
+        if((player in collitions || iceClone in collitions) && objectToToggle in LocationManager.MoveCollitionGameObjects){
             objectToToggle.removeFromLocation()
         }
-        else if(player !in collitions && objectToToggle !in LocationManager.MoveCollitionGameObjects){
+        else if((player !in collitions && iceClone !in collitions) && objectToToggle !in LocationManager.MoveCollitionGameObjects){
             objectToToggle.defaultLocation?.addGameObject(objectToToggle)
         }
     }

@@ -7,7 +7,7 @@ import com.mygdx.game.Collitions.DoorCollition
 import com.mygdx.game.Enums.Direction
 import com.mygdx.game.Enums.getDirectionUnitVector
 import com.mygdx.game.GameObjects.Abyss
-import com.mygdx.game.GameObjects.BoulderGenerator
+import com.mygdx.game.GameObjects.Generators.BoulderGenerator
 import com.mygdx.game.GameObjects.Door
 import com.mygdx.game.Interfaces.AreaIdentifier
 import com.mygdx.game.Managers.LocationManager

@@ -12,7 +12,7 @@ class LocationManager {
     companion object{
         lateinit var defaultLocations : List<DefaultLocation>
         var oldDefaultLocation: DefaultLocation
-        lateinit var activeDefaultLocations: List<DefaultLocation>
+        lateinit var activeDefaultLocations: Set<DefaultLocation>
         lateinit var MoveCollitionGameObjects: List<GameObject>
         lateinit var ButtonCollitionGameObjects: List<GameObject>
         lateinit var EveryFrameCollitionGameObjects: List<GameObject>
@@ -33,7 +33,7 @@ class LocationManager {
 
             if(oldDefaultLocation != newDefaultLocation) {
                 oldDefaultLocation = newDefaultLocation
-                activeDefaultLocations = (listOf(oldDefaultLocation) + oldDefaultLocation.adjacentDefaultLocations)
+                activeDefaultLocations = (setOf(oldDefaultLocation) + oldDefaultLocation.adjacentDefaultLocations)
                 val oldActiveGameObjects = ActiveGameObjects
                 ActiveGameObjects = activeDefaultLocations.flatMap { x -> x.gameObjects } + activeDefaultLocations + crossLocationGameObjects.List
                 val newGameObjects = ActiveGameObjects - oldActiveGameObjects

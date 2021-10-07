@@ -6,7 +6,11 @@ import com.mygdx.game.Enums.Layer
 import com.mygdx.game.GameObjects.ItemAbilities.ShieldAbility
 import com.mygdx.game.Locations.DefaultLocation
 
-class ShieldItemObject(Position: Vector2, size: Vector2, override val layer: Layer, defaultLocation: DefaultLocation):
-    AbilityItemObject(Position, size,defaultLocation,ShieldAbility(Vector2(0f,0f), Vector2(20f,40f))) {
-    override val texture = DefaultTextureHandler.getTexture("shield-front.png")
+class ShieldItemObject(Position: Vector2, size: Vector2, defaultLocation: DefaultLocation):
+    AbilityItemObject(Position,
+                      size,
+                      defaultLocation,
+                      ShieldAbility(Vector2(0f,0f),
+                          Vector2(20f,40f)),
+                      DefaultTextureHandler.getTexture("shield-front.png")) {
 }

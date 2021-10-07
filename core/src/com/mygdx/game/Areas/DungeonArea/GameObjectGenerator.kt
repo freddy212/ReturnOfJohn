@@ -8,7 +8,7 @@ import com.mygdx.game.Enums.Direction
 import com.mygdx.game.Enums.Item
 import com.mygdx.game.Enums.Layer
 import com.mygdx.game.Enums.getDirectionUnitVector
-import com.mygdx.game.GameObjects.BoulderGenerator
+import com.mygdx.game.GameObjects.Generators.BoulderGenerator
 import com.mygdx.game.GameObjects.Door
 import com.mygdx.game.GameObjects.ItemObjects.GenericItemObject
 import com.mygdx.game.GameObjects.ItemObjects.ShieldItemObject
@@ -65,7 +65,7 @@ fun getLocationTenCaveObjects():List<GameObject>{
 fun getLocationEightCaveObjects(): List<GameObject> {
     val location = LocationManager.findLocation("location8",AreaIdentifier.DUNGEONAREA)
     val size = Vector2(80f,80f)
-    val shieldItem = ShieldItemObject(middleOfObject(location.originalMiddle,size),size,Layer.ONGROUND,location)
+    val shieldItem = ShieldItemObject(middleOfObject(location.originalMiddle,size),size,location)
     return listOf(shieldItem)
 }
 fun getLocationElevenCaveObjects(): List<GameObject> {

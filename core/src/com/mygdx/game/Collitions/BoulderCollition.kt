@@ -2,7 +2,7 @@ package com.mygdx.game.Collitions
 
 import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.AbstractClasses.ProjectileCollition
-import com.mygdx.game.GameObjects.BoulderGenerator
+import com.mygdx.game.GameObjects.Generators.BoulderGenerator
 import com.mygdx.game.GameObjects.MoveableEntities.Projectiles.Boulder
 
 

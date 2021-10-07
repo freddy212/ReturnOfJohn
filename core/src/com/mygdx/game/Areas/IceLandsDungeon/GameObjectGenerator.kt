@@ -5,8 +5,12 @@ import com.mygdx.game.*
 import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.Collitions.DoorCollition
 import com.mygdx.game.Enums.Direction
+import com.mygdx.game.Enums.getDirectionUnitVector
 import com.mygdx.game.GameObjects.Abyss
 import com.mygdx.game.GameObjects.Door
+import com.mygdx.game.GameObjects.Generators.IceGenerator
+import com.mygdx.game.GameObjects.ItemAbilities.IceCloneAbility
+import com.mygdx.game.GameObjects.ItemObjects.AbilityItemObject
 import com.mygdx.game.Interfaces.AreaIdentifier
 import com.mygdx.game.Managers.LocationManager
 
@@ -19,4 +23,17 @@ fun getIceLandsDungeonLocationOneObjects(): List<GameObject>{
     val door = Door(doorPosition, Vector2(32f * 2, 64f * 2), DefaultTextureHandler.getTexture("CaveDoor.png"),location1,
         Direction.DOWN,doorCollition)
     return listOf(door)
+}
+
+fun getIceLandsDungeonLocationTwoObjects(): List<GameObject>{
+    val location2 = LocationManager.findLocation("location2",AreaIdentifier.ICELANDSDUNGEON)
+    val iceGenerator = IceGenerator(location2.topleft - Vector2(0f,100f), Vector2(100f,100f), getDirectionUnitVector(Direction.DOWN),location2,0f,0.8f)
+    val iceCloneAbility = AbilityItemObject(location2.topleft + Vector2(-500f,-300f),
+                                           Vector2(80f,80f),
+                                           location2,
+                                           IceCloneAbility(Vector2(0f,0f), Vector2(35f,65f)),
+                                           DefaultTextureHandler.getTexture("IceClone.png")
+
+    )
+    return listOf(iceGenerator,iceCloneAbility)
 }
