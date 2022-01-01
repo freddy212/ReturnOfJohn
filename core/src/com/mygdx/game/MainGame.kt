@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.math.Vector2
+import com.mygdx.game.GameObjects.ItemAbilities.AxeAbility
 import com.mygdx.game.GameObjects.ItemAbilities.IcicleAbility
 import com.mygdx.game.SaveHandling.FileHandler
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Player
@@ -96,6 +97,9 @@ class MainGame : ApplicationAdapter() {
         println("size of saved elements is : + " + savedStates.size + " and size of matching elements is : " + savedEntities.size)
         savedEntities.forEach { it.onLoadAction() }
         player.addAbility(IcicleAbility(Vector2(0f,0f),Vector2(0f,0f)))
+        player.addAbility(AxeAbility(Vector2(0f,0f),Vector2(0f,0f)))
+
+
     }
 
 
@@ -107,11 +111,12 @@ class MainGame : ApplicationAdapter() {
         LocationManager.frameAction()
         inputAdapter.handleInput(player)
         RenderGraph.render(batch)
-      //  drawrects()
+        drawrects()
         EventManager.executeEvents()
         UIRendererManager.render()
         camera.position.set(player.sprite.x, player.sprite.y,4f)
         camera.update()
+        println(player.sprite.rotation)
     }
 
     fun drawrects(){

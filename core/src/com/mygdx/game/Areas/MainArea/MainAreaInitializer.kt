@@ -8,6 +8,7 @@ import com.mygdx.game.Interfaces.AreaIdentifier
 import com.mygdx.game.Interfaces.AreaInitializer
 import com.mygdx.game.Locations.DamageLocationData
 import com.mygdx.game.Locations.DefaultLocation
+import com.mygdx.game.Locations.DefaultLocationData
 import com.mygdx.game.Managers.AreaManager.Companion.SetArea
 import com.mygdx.game.Managers.LocationManager
 class MainAreaInitializer: AreaInitializer {
@@ -20,7 +21,7 @@ class MainAreaInitializer: AreaInitializer {
         val location2 = addLocationRelative(location1, horizontalHallway, InsertDirection.LEFT, area, InsertDirection.MIDDLE)
         val location3 = addLocationRelative(location1, verticalHallway, InsertDirection.UP, area, InsertDirection.MIDDLE)
         val location4 = addLocationRelative(location1, horizontalHallway, InsertDirection.RIGHT, area, InsertDirection.MIDDLE, ::getLocationFourObjects)
-        val location5 = addLocationRelative(location1, verticalHallway, InsertDirection.DOWN, area, InsertDirection.MIDDLE)
+        val location5 = addLocationRelative(location1, verticalHallway, InsertDirection.DOWN, area, InsertDirection.MIDDLE, ::getWastelandGatewayLocation, DefaultLocationData(DefaultTextureHandler.getTexture("wasteland.jpg")))
         val location6 = addLocationRelative(location2, verticalHallway, InsertDirection.UP, area, InsertDirection.MIDDLE)
         val graveyardLoc = addLocationRelative(location4, Vector2(1000f, 2300f), InsertDirection.RIGHT, area, InsertDirection.MIDDLE, ::getLocationGraveyard)
         val worldTreeLoc = addLocationRelative(location6, Vector2(1000f, 1000f), InsertDirection.UP, area, InsertDirection.MIDDLE, ::getWorldTreeObjects)

@@ -8,6 +8,7 @@ import com.mygdx.game.Areas.FireLandsDungeon.FireLandsDungeonInitializer
 import com.mygdx.game.Areas.FireLandsDungeon.IceLandsDungeonInitializer
 import com.mygdx.game.Areas.MainArea.MainAreaInitializer
 import com.mygdx.game.Areas.ShopArea.ShopAreaInitializer
+import com.mygdx.game.Areas.WastelandArea.WastelandAreaInitializer
 import com.mygdx.game.addLocationsToArea
 
 class AreaInitializerManager(){
@@ -15,7 +16,8 @@ class AreaInitializerManager(){
         fun init(){
             val listToInit = listOf(DojoAreaInitializer(),DungeonAreaInitializer(),
                 MainAreaInitializer(),ShopAreaInitializer(), FireLandsInitializer(),
-                FireLandsDungeonInitializer(), IceLandsInitializer(),IceLandsDungeonInitializer())
+                FireLandsDungeonInitializer(), IceLandsInitializer(),IceLandsDungeonInitializer(),
+                WastelandAreaInitializer())
             listToInit.forEach { x -> addLocationsToArea(x.initializeArea()) }
         }
     }

@@ -41,7 +41,7 @@ class DoorCollition(doorPosition: Vector2,val areaId: AreaIdentifier, val connec
     }
     fun getPlayerPos(connection: DoorConnection,triggerDirection: Direction): Vector2{
         return when(triggerDirection){
-            Direction.UP -> connection.secondEntrance
+            Direction.UP -> (Vector2(connection.secondEntrance.x, connection.secondEntrance.y + playerSize.y / 4))
             Direction.DOWN-> Vector2(connection.firstEntrance.x,connection.firstEntrance.y - playerSize.y)
             else -> Vector2(0f,0f)
         }

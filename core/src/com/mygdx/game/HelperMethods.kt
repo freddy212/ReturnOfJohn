@@ -143,6 +143,11 @@ fun handleCollitions(gameObject: GameObject,polygonToCheck: Polygon, objectsToCh
         return collitions.filterIsInstance<MoveCollition>().all { x -> x.canMoveAfterCollition }
 }
 
+fun GameObject.rotate(rotationDegree: Float) {
+        this.sprite.rotate(rotationDegree)
+        this.polygon.rotate(rotationDegree)
+}
+
 fun GameObject.InitSprite(texture: Texture): Sprite{
         val sprite = Sprite(texture)
         sprite.setSize(size.x,size.y)

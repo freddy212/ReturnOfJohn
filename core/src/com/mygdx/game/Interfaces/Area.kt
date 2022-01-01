@@ -2,7 +2,7 @@ package com.mygdx.game.Interfaces
 
 import com.mygdx.game.Locations.DefaultLocation
 
-enum class AreaIdentifier{MAINAREA,DUNGEONAREA,SHOP,DOJO,NOTIMPLEMENTED, FIRELANDS, FIRELANDSDUNGEON, ICELANDS, ICELANDSDUNGEON }
+enum class AreaIdentifier{MAINAREA,DUNGEONAREA,SHOP,DOJO,NOTIMPLEMENTED, FIRELANDS, FIRELANDSDUNGEON, ICELANDS, ICELANDSDUNGEON, WASTELAND }
 
 interface Area {
     fun addLocation(defaultLocation: DefaultLocation)

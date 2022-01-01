@@ -145,3 +145,18 @@ fun getFireLandsGateWayLocation(): List<GameObject> {
 
     return listOf(walkableTerrain, fence,fence2,walkableTerrain2,fireGate,boulderGenerator1,walkableTerrain3,door)
 }
+
+fun getWastelandGatewayLocation(): List<GameObject>{
+    val location5 = LocationManager.findLocation("location5", AreaIdentifier.MAINAREA)
+
+    val doorPosition = Vector2(location5.originalMiddle.x - (playerSize.x),location5.bottomleft.y)
+
+    val doorCollition = DoorCollition(doorPosition,
+        AreaIdentifier.WASTELAND, doorMainAreaAndWasteland,
+        Direction.DOWN)
+
+    val door = Door(doorPosition, Vector2(32f * 2, 64f * 2), DefaultTextureHandler.getTexture("CaveDoor.png"),location5,
+        Direction.DOWN,doorCollition)
+
+    return listOf(door)
+}
