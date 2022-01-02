@@ -15,12 +15,11 @@ class DefaultTimer (private val CooldownTime: Float): Timer {
         }
     }
     override fun tryUseCooldown():Boolean{
+        UpdateTimer()
         if(coolDownAvailable){
-            UpdateTimer()
             reset()
             return true
         }
-        UpdateTimer()
         return false
     }
     fun reset(){

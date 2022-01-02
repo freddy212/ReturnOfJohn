@@ -1,7 +1,7 @@
 package com.mygdx.game.Interfaces
 
-import com.mygdx.game.Enums.Item
+import com.mygdx.game.Enums.ItemType
 
 interface ItemObject{
-   val item: Item
+   val itemType: ItemType
 }

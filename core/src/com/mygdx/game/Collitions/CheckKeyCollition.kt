@@ -3,7 +3,7 @@ package com.mygdx.game.Collitions
 import com.badlogic.gdx.Input
 import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.Enums.Direction
-import com.mygdx.game.Enums.Item
+import com.mygdx.game.Enums.ItemType
 import com.mygdx.game.GameObjects.LockedDoor
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Player
 import com.mygdx.game.GameObjects.Sensors.KeySensor
@@ -15,8 +15,8 @@ class CheckKeyCollition(val lockedDoor: LockedDoor): KeyPressedCollition {
 
     override fun collitionHappened(entity: GameObject, collidedObject: GameObject) {
         if(entity is Player && collidedObject is KeySensor){
-            if(player.inventory.getItemCount(Item.KEY) > 0 && player.direction == Direction.UP){
-                player.inventory.useItems(Item.KEY,1)
+            if(player.inventory.getItemCount(ItemType.KEY) > 0 && player.direction == Direction.UP){
+                player.inventory.useItems(ItemType.KEY,1)
                 lockedDoor.removeFromLocation()
                 collidedObject.removeFromLocation()
             }

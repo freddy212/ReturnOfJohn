@@ -2,7 +2,7 @@ package com.mygdx.tests
 
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.AbstractClasses.DefaultEnemyStrategy
-import com.mygdx.game.GameObjects.MoveableEntities.Characters.SmallDevil
+import com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.SmallDevil
 import com.mygdx.game.Interfaces.EnemyAction
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test

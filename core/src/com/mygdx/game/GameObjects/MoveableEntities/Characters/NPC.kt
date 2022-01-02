@@ -16,6 +16,9 @@ import com.mygdx.game.Managers.DefaultAssetHandler.assets
 import com.mygdx.game.SaveHandling.DefaultRemoveObjectSaveState
 import com.mygdx.game.SaveState.SaveStateEntity
 import com.mygdx.game.AbstractClasses.DefaultCharacter
+import com.mygdx.game.AbstractClasses.DefaultEnemyStrategy
+import com.mygdx.game.FightableEnitityData.EnemyHealthStrategy
+import com.mygdx.game.Interfaces.HealthStrategy
 import com.mygdx.game.Locations.DefaultLocation
 
 class NPC(Position: Vector2, size: Vector2 = Vector2(128f,128f), val location: DefaultLocation?,
@@ -28,10 +31,7 @@ class NPC(Position: Vector2, size: Vector2 = Vector2(128f,128f), val location: D
     override var direction = Direction.UP
     override var health = 10f
     override val maxHealth = 10f
-
-    override fun showHealth(sprite: Sprite) {
-
-    }
+    override val healthStrategy = EnemyHealthStrategy()
 
     override fun death() {
 

@@ -3,9 +3,8 @@ package com.mygdx.game.AbstractClasses
 import com.badlogic.gdx.math.Circle
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.Collitions.PlayerHitCollition
-import com.mygdx.game.FightableEnitityData.EnemyFightableEntity
+import com.mygdx.game.FightableEnitityData.EnemyHealthStrategy
 import com.mygdx.game.Interfaces.EnemyStrategy
-import com.mygdx.game.Interfaces.FightableEntity
 import com.mygdx.game.Interfaces.ModelInstanceHandler
 import com.mygdx.game.Locations.DefaultLocation
 import com.mygdx.game.Managers.AreaManager
@@ -16,11 +15,11 @@ abstract class Enemy(
     var location: DefaultLocation?,
     modelHandler: ModelInstanceHandler,
     val aggroRadius: Float
-) : DefaultCharacter(Position, size, location, modelHandler)
-                    , FightableEntity by EnemyFightableEntity() {
+) : DefaultCharacter(Position, size, location, modelHandler){
 
     private var aggroed = false
     override val collition = PlayerHitCollition()
+    override val healthStrategy = EnemyHealthStrategy()
 
     abstract val enemyStrategy:EnemyStrategy
 

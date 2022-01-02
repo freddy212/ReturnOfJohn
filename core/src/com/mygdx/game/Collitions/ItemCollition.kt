@@ -9,7 +9,7 @@ import com.mygdx.game.itemObjectAddToInventory
 object ItemCollition: MoveCollition by CanMoveCollition {
     override fun collitionHappened(entity: GameObject, collidedObject: GameObject) {
         if(entity is Player && collidedObject is ItemObject){
-            val item = collidedObject.item
+            val item = collidedObject.itemType
             itemObjectAddToInventory(item, collidedObject)
         }
     }

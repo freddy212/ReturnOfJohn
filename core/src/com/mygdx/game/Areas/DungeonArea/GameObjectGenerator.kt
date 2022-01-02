@@ -5,7 +5,7 @@ import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.Collitions.DoorCollition
 import com.mygdx.game.DefaultTextureHandler
 import com.mygdx.game.Enums.Direction
-import com.mygdx.game.Enums.Item
+import com.mygdx.game.Enums.ItemType
 import com.mygdx.game.Enums.Layer
 import com.mygdx.game.Enums.getDirectionUnitVector
 import com.mygdx.game.GameObjects.Generators.BoulderGenerator
@@ -71,6 +71,6 @@ fun getLocationEightCaveObjects(): List<GameObject> {
 fun getLocationElevenCaveObjects(): List<GameObject> {
     val location = LocationManager.findLocation("location11",AreaIdentifier.DUNGEONAREA)
     val size = Vector2(80f,40f)
-    val key = GenericItemObject(middleOfObject(location.originalMiddle,size),size,location,Item.KEY, DefaultTextureHandler.getTexture("Key.png"))
+    val key = GenericItemObject(middleOfObject(location.originalMiddle,size),size,location,ItemType.KEY, DefaultTextureHandler.getTexture("Key.png"))
     return listOf(key)
 }

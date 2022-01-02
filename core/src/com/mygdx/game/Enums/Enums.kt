@@ -1,13 +1,16 @@
 package com.mygdx.game.Enums
 
+import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.math.Vector2
 
+
 enum class Direction{UP,LEFT,RIGHT,DOWN}
-enum class Item{WORLDLEAF,KEY}
+enum class ItemType{WORLDLEAF,KEY}
 enum class Layer {BEFORELOCATION,GROUND,ONGROUND,PERSON,AIR,FOREGROUND}
 enum class ConversationState {BEFORE,ONGOING}
 enum class CharacterState {STUNNED,FREE}
 enum class QuestIdentifier{DOJO,FIRE}
+data class Item(val itemType: ItemType,var amount:Int, val texture: Texture)
 
 fun getDirectionUnitVector(direction: Direction): Vector2{
    return when(direction){

@@ -5,5 +5,8 @@ import com.badlogic.gdx.graphics.g2d.Sprite
 interface FightableEntity {
     var health: Float
     val maxHealth: Float
-    fun showHealth(sprite:Sprite)
+    val healthStrategy: HealthStrategy
+}
+interface HealthStrategy {
+    fun showHealth(sprite:Sprite, health: Float, maxHealth: Float)
 }

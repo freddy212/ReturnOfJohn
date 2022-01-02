@@ -13,23 +13,25 @@ import com.mygdx.game.rotate
 class AxeSwing(Position: Vector2, size: Vector2): GameObject(Position, size) {
     override val texture = DefaultTextureHandler.getTexture("Axe.png")
     override val layer = Layer.FOREGROUND
-    val framesToSwing = 45
+    val framesToSwing = 30
     var counter = 0
     val currentLocation = LocationManager.newDefaultLocation
-    val axe = Axe(Vector2(player.sprite.x , player.sprite.y + player.sprite.height / 2),Vector2(20f,50f),currentLocation)
+    val axe = Axe(Vector2(player.sprite.x , player.sprite.y + player.sprite.height / 2),Vector2(20f,60f),currentLocation)
 
     init {
         currentLocation.addGameObject(this)
         currentLocation.addGameObject(axe)
         player.freezeMoving()
+        player.freezeChangingDirection()
         axe.rotate(player.sprite.rotation - 180f)
     }
 
     override fun frameTask() {
         if(counter <= framesToSwing){
-            axe.rotate(2.5f)
+            axe.rotate(4f)
         } else{
             player.enableMoving()
+            player.enableChangingDirection()
             currentLocation.removeGameObject(axe)
             currentLocation.removeGameObject(this)
         }

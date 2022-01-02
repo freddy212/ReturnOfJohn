@@ -19,7 +19,7 @@ class UIRendererManager {
             toolTipPanel.renderToolTips()
 
             val fightableEntities = LocationManager.ActiveGameObjects.filter {it is FightableEntity}
-            fightableEntities.forEach {(it as FightableEntity).showHealth(it.sprite)}
+            fightableEntities.forEach {(it as FightableEntity).healthStrategy.showHealth(it.sprite,it.health,it.maxHealth)}
 
             uiBatch.end()
         }

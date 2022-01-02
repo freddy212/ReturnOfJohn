@@ -12,7 +12,7 @@ import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.utils.FloatArray
 import com.mygdx.game.AbstractClasses.*
 import com.mygdx.game.Enums.Direction
-import com.mygdx.game.Enums.Item
+import com.mygdx.game.Enums.ItemType
 import com.mygdx.game.GameObjects.*
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Player
 import com.mygdx.game.Interfaces.*
@@ -244,8 +244,8 @@ fun getGameObjectWithEntityId(entityId: Int): GameObject? {
 }
 
 
-fun itemObjectAddToInventory(item: Item, itemObject: GameObject) {
-        player.inventory.addItem(item)
+fun itemObjectAddToInventory(itemType: ItemType, itemObject: GameObject) {
+        player.inventory.addItem(itemType)
         itemObject.removeFromLocation()
 }
 

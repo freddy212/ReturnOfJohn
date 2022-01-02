@@ -7,7 +7,7 @@ import com.mygdx.game.Managers.LocationManager
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
-class ItemAbilityTest : TestGame() {
+class ItemTypeAbilityTest : TestGame() {
     private val itemAbility = WaterBallAbility(Vector2(120f, 120f), Vector2(120f, 120f))
 
     @Test

@@ -1,8 +1,6 @@
 package com.mygdx.game.Collitions
 
 import com.mygdx.game.AbstractClasses.GameObject
-import com.mygdx.game.Interfaces.MoveCollition
-import com.mygdx.game.AbstractClasses.DefaultCharacter
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Player
 import com.mygdx.game.Interfaces.EveryFrameCollition
 import com.mygdx.game.player

@@ -6,11 +6,6 @@ import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.math.Vector3
 import com.mygdx.game.*
-import com.mygdx.game.AbstractClasses.DefaultRotationalObject
-import com.mygdx.game.AbstractClasses.GameObject
-import com.mygdx.game.AbstractClasses.MoveableObject
-import com.mygdx.game.AbstractClasses.RotationalObject
-import com.mygdx.game.Collitions.IllegalMoveCollition
 import com.mygdx.game.EdgeOfLocationStrategies.NoAction
 import com.mygdx.game.Enums.CharacterState
 import com.mygdx.game.Enums.getDirectionUnitVector

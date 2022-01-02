@@ -19,19 +19,23 @@ import com.mygdx.game.Managers.TooltipManager
 import com.mygdx.game.SaveState.DefaultSaveStateHandler
 import com.mygdx.game.SaveState.SaveStateEntity
 import com.mygdx.game.AbstractClasses.DefaultCharacter
-import com.mygdx.game.FightableEnitityData.PlayerFightableEntity
+import com.mygdx.game.FightableEnitityData.PlayerHealthStrategy
 import com.mygdx.game.Interfaces.FightableEntity
+import com.mygdx.game.Interfaces.HealthStrategy
 import com.mygdx.game.Utils.ResourceList
 
 class Player(Position: Vector2, size: Vector2, modelHandler: ModelInstanceHandler = DefaultModelInstanceHandler("ManBlender.g3db",Position,size))
              : DefaultCharacter(Position, size,null,modelHandler),SaveStateEntity by DefaultSaveStateHandler(),
-                                                                         FightableEntity by PlayerFightableEntity(){
+                                                                         FightableEntity{
     override val texture = DefaultTextureHandler.getTexture("man.png")
     override var currentSpeed = 7f
     override val layer = Layer.PERSON
     val inventory = Inventory()
     override var direction = Direction.UP
     override val collition = IllegalMoveCollition
+    override var health = 100f
+    override val maxHealth = 100f
+    override val healthStrategy = PlayerHealthStrategy()
     val itemAbilities = ResourceList<CharacterAbility>()
     fun die(){
         val playerLocation = LocationManager.activeDefaultLocations.find{ x -> x.sprite.boundingRectangle.contains(Vector2(camera.position.x, camera.position.y))}!!

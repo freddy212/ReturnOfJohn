@@ -8,9 +8,11 @@ import com.mygdx.game.Enums.*
 import com.mygdx.game.GameObjects.GenericGameObject
 import com.mygdx.game.GameObjects.*
 import com.mygdx.game.GameObjects.Generators.BoulderGenerator
+import com.mygdx.game.GameObjects.ItemAbilities.ShieldAbility
 import com.mygdx.game.GameObjects.ItemObjects.GenericItemObject
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.NPC
 import com.mygdx.game.GameObjects.MoveableEntities.Projectiles.Boulder
+import com.mygdx.game.GameObjects.ShopItem.ShopItem
 import com.mygdx.game.GameObjects.Terrain.IceObject
 import com.mygdx.game.GameObjects.Terrain.WalkableTerrain
 import com.mygdx.game.Interfaces.AreaIdentifier
@@ -32,7 +34,17 @@ fun getLocationOneObjects(): List<GameObject>{
     val shop = House(location.originalMiddle.x ,location.originalMiddle.y, 150f, 200f,location, doorMainAreaAndShop,AreaIdentifier.SHOP)
     val dojo = House(location.topleft.x + 300f,location.topleft.y - 200f,300f,200f,location, doorMainAreaAndDojo,AreaIdentifier.DOJO)
 
-    return listOf(shop,dojo,firstNPC)
+    val itemTable = GenericGameObject(location.topright - Vector2(200f,150f),Vector2(120f,60f),"ItemTable.png",Layer.ONGROUND,location,IllegalMoveCollition)
+    /*val shopItem = ShopItem("shield-front.png", listOf(
+        Item(ItemType.WORLDLEAF,2,DefaultTextureHandler.getTexture("WorldLeaf.png")),
+        Item(ItemType.KEY,1,DefaultTextureHandler.getTexture("Key.png"))),
+        middleOfObject(itemTable.originalMiddle, Vector2(60f,40f)),Vector2(60f,40f),location)*/
+    val shopItem = ShopItem("shield-front.png", listOf(
+        Item(ItemType.WORLDLEAF,1,DefaultTextureHandler.getTexture("WorldLeaf.png"))),
+        middleOfObject(itemTable.originalMiddle, Vector2(60f,40f)),Vector2(60f,40f),location, ShieldAbility(Vector2(0f,0f),
+            Vector2(20f,40f)))
+
+    return listOf(shop,dojo,firstNPC, itemTable, shop, shopItem)
 }
 
 fun getLocationGraveyard(): List<GameObject>{
@@ -80,9 +92,9 @@ fun getLocationFourObjects(): List<GameObject>{
 fun getWorldTreeObjects(): List<GameObject>{
     val location = LocationManager.findLocation("location8",AreaIdentifier.MAINAREA)
     val tree = Tree(location.originalMiddle, Vector2(64f * 2, 128f * 2),location)
-    val WorldLeaf = GenericItemObject(tree.topleft + Vector2(0f, 0f), Vector2(64f, 32f), location,Item.WORLDLEAF,
+    val WorldLeaf = GenericItemObject(tree.topleft + Vector2(0f, 0f), Vector2(64f, 32f), location,ItemType.WORLDLEAF,
         DefaultTextureHandler.getTexture("WorldLeaf.png"))
-    val WorldLeaf2 = GenericItemObject(tree.bottomright + Vector2(0f, 0f), Vector2(64f, 32f), location,Item.WORLDLEAF,
+    val WorldLeaf2 = GenericItemObject(tree.bottomright + Vector2(0f, 0f), Vector2(64f, 32f), location,ItemType.WORLDLEAF,
         DefaultTextureHandler.getTexture("WorldLeaf.png"))
     return listOf(tree,WorldLeaf,WorldLeaf2)
 }
