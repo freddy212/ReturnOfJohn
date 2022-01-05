@@ -16,5 +16,6 @@ fun drawPolygonShape(polygon: Polygon, shapeRenderer: ShapeRenderer){
 
     shapeRenderer.polygon(polygon.transformedVertices + Position)
     shapeRenderer.end()
-
 }
+
+const val NOTSAVEDID = -1

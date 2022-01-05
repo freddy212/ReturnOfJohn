@@ -5,6 +5,9 @@ import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.GameObjects.Sensors.BuySensor
 import com.mygdx.game.GameObjects.ShopItem.ShopItem
 import com.mygdx.game.Interfaces.KeyPressedCollition
+import com.mygdx.game.Managers.SignalManager
+import com.mygdx.game.Signal.SIGNALTYPE
+import com.mygdx.game.Signal.Signal
 import com.mygdx.game.player
 
 class BuyItemCollition(val shopItem: ShopItem): KeyPressedCollition {
@@ -12,26 +15,23 @@ class BuyItemCollition(val shopItem: ShopItem): KeyPressedCollition {
 
     override fun collitionHappened(entity: GameObject, collidedObject: GameObject) {
         if(collidedObject is BuySensor){
-            if(checkCanBuy()){
-                Buy()
-                player.addAbility(shopItem.ability)
-                shopItem.removeFromLocation()
+            if(Buy(shopItem)){
+                SignalManager.emitSignal(Signal( SIGNALTYPE.ABILITY_GAINED, shopItem.ability.abilityId.ordinal))
+                SignalManager.emitSignal(Signal( SIGNALTYPE.REMOVE_OBJECT, shopItem.entityId))
+            }
+                //shopItem.removeFromLocation()
             }
         }
-    }
 
-    private fun checkCanBuy(): Boolean{
+    private fun Buy(shopItem: ShopItem): Boolean{
         for(item in shopItem.requiredItems){
-            if(player.inventory.getItemCount(item.itemType) < item.amount){
+            if(!player.inventory.checkItemsEnough(item)){
                 return false
             }
         }
-        return true
-    }
-
-    private fun Buy(){
-        for(item in shopItem.requiredItems){
-            player.inventory.useItems(item.itemType,item.amount)
+        shopItem.requiredItems.forEach {
+            SignalManager.emitSignal(Signal(SIGNALTYPE.USE_ITEMS, it.itemType.ordinal, it.amount))
         }
+        return true
     }
 }

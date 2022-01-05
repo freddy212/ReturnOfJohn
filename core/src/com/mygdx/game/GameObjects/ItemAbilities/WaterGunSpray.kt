@@ -15,11 +15,10 @@ import com.mygdx.game.Interfaces.DynamicEntity
 import com.mygdx.game.Managers.LocationManager
 import com.mygdx.game.handleCollitions
 import com.mygdx.game.player
-
-class WaterGunSpray(Position: Vector2, size: Vector2): CharacterAbility(Position, size),DynamicEntity by DefaultPositionChange {
+/*
+class WaterGunSpray(): CharacterAbility() {
     override val triggerKey = Input.Keys.NUM_1
     override val texture = DefaultTextureHandler.getTexture("WaterGun.png")
-    override val layer = Layer.AIR
 
     var waterEffect: ParticleEffect
     init {
@@ -71,4 +70,4 @@ class WaterGunSpray(Position: Vector2, size: Vector2): CharacterAbility(Position
         waterEffect.draw(batch)
     }
 
-}
+}*/

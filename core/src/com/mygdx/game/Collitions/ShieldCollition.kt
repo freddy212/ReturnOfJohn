@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.*
 import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.AbstractClasses.Projectile
+import com.mygdx.game.GameObjects.ItemAbilities.Shield
 import com.mygdx.game.GameObjects.ItemAbilities.ShieldAbility
 import com.mygdx.game.GameObjects.MoveableEntities.Projectiles.Boulder
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Player
@@ -18,7 +19,7 @@ class ShieldCollition: MoveCollition{
     override var canMoveAfterCollition = true
     override fun collitionHappened(entity: GameObject, collidedObject: GameObject) {
         canMoveAfterCollition = entity is Boulder || entity is SmallBoulder
-        if((entity is Boulder || entity is SmallBoulder) && collidedObject is ShieldAbility){
+        if((entity is Boulder || entity is SmallBoulder) && collidedObject is Shield){
             if(entity in delayMap.keys){
                 val delayTimer = delayMap[entity]!!
                 if(delayTimer.getTimeHasPassed()){

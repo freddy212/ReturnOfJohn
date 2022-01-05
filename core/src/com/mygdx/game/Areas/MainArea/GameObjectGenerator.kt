@@ -9,7 +9,7 @@ import com.mygdx.game.GameObjects.GenericGameObject
 import com.mygdx.game.GameObjects.*
 import com.mygdx.game.GameObjects.Generators.BoulderGenerator
 import com.mygdx.game.GameObjects.ItemAbilities.ShieldAbility
-import com.mygdx.game.GameObjects.ItemObjects.GenericItemObject
+import com.mygdx.game.GameObjects.ItemObjects.GenericInventoryItemObject
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.NPC
 import com.mygdx.game.GameObjects.MoveableEntities.Projectiles.Boulder
 import com.mygdx.game.GameObjects.ShopItem.ShopItem
@@ -18,8 +18,11 @@ import com.mygdx.game.GameObjects.Terrain.WalkableTerrain
 import com.mygdx.game.Interfaces.AreaIdentifier
 import com.mygdx.game.Interfaces.MoveCollition
 import com.mygdx.game.Managers.LocationManager
+import com.mygdx.game.Managers.SignalManager
 import com.mygdx.game.SaveHandling.DefaultRemoveObjectSaveState
 import com.mygdx.game.SaveState.SaveStateEntity
+import com.mygdx.game.Signal.SIGNALTYPE
+import com.mygdx.game.Signal.Signal
 import com.mygdx.game.UI.Dialogue.Conversations.GetFireConversation
 import com.mygdx.game.UI.Dialogue.Conversations.GetFireFixedConversation
 import com.mygdx.game.UI.Dialogue.Conversations.GetFireNotFixedConversation
@@ -40,9 +43,9 @@ fun getLocationOneObjects(): List<GameObject>{
         Item(ItemType.KEY,1,DefaultTextureHandler.getTexture("Key.png"))),
         middleOfObject(itemTable.originalMiddle, Vector2(60f,40f)),Vector2(60f,40f),location)*/
     val shopItem = ShopItem("shield-front.png", listOf(
-        Item(ItemType.WORLDLEAF,1,DefaultTextureHandler.getTexture("WorldLeaf.png"))),
-        middleOfObject(itemTable.originalMiddle, Vector2(60f,40f)),Vector2(60f,40f),location, ShieldAbility(Vector2(0f,0f),
-            Vector2(20f,40f)))
+        Item(ItemType.WORLDLEAF,2,DefaultTextureHandler.getTexture("WorldLeaf.png")),
+        Item(ItemType.KEY,1,DefaultTextureHandler.getTexture("Key.png"))),
+        middleOfObject(itemTable.originalMiddle, Vector2(60f,40f)),Vector2(60f,40f),location, ShieldAbility())
 
     return listOf(shop,dojo,firstNPC, itemTable, shop, shopItem)
 }
@@ -92,9 +95,9 @@ fun getLocationFourObjects(): List<GameObject>{
 fun getWorldTreeObjects(): List<GameObject>{
     val location = LocationManager.findLocation("location8",AreaIdentifier.MAINAREA)
     val tree = Tree(location.originalMiddle, Vector2(64f * 2, 128f * 2),location)
-    val WorldLeaf = GenericItemObject(tree.topleft + Vector2(0f, 0f), Vector2(64f, 32f), location,ItemType.WORLDLEAF,
+    val WorldLeaf = GenericInventoryItemObject(tree.topleft + Vector2(0f, 0f), Vector2(64f, 32f), location,ItemType.WORLDLEAF,
         DefaultTextureHandler.getTexture("WorldLeaf.png"))
-    val WorldLeaf2 = GenericItemObject(tree.bottomright + Vector2(0f, 0f), Vector2(64f, 32f), location,ItemType.WORLDLEAF,
+    val WorldLeaf2 = GenericInventoryItemObject(tree.bottomright + Vector2(0f, 0f), Vector2(64f, 32f), location,ItemType.WORLDLEAF,
         DefaultTextureHandler.getTexture("WorldLeaf.png"))
     return listOf(tree,WorldLeaf,WorldLeaf2)
 }
@@ -128,7 +131,7 @@ fun getFireLandsGateWayLocation(): List<GameObject> {
         override fun collitionHappened(entity: GameObject, collidedObject: GameObject) {
             if(entity is Boulder){
                 entity.removeFromLocation()
-                collidedObject.removeFromLocation()
+                SignalManager.emitSignal(Signal(SIGNALTYPE.REMOVE_OBJECT,(collidedObject as SaveStateEntity).entityId))
             }
         }
     }

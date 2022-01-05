@@ -44,7 +44,7 @@ class ROJInputAdapter(private val camera : OrthographicCamera, val player: Playe
 
     override fun keyUp(keycode: Int): Boolean {
         for (itemAbility in player.itemAbilities.List){
-            if(keycode == itemAbility.triggerKey && itemAbility in crossLocationGameObjects.List){
+            if(keycode == itemAbility.triggerKey){
                 itemAbility.InactiveAction()
             }
         }

@@ -4,7 +4,6 @@ import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.AbstractClasses.Projectile
 import com.mygdx.game.AbstractClasses.ProjectileCollition
 import com.mygdx.game.GameObjects.MoveableEntities.Projectiles.WaterBall
-import com.mygdx.game.GameObjects.MoveableEntities.WaterGunSpray
 import com.mygdx.game.Interfaces.MoveCollition
 import com.mygdx.game.ObjectProperties.Fire
 import com.mygdx.game.ObjectProperties.Ice

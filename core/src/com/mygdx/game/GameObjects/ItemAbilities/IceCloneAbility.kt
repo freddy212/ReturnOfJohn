@@ -2,6 +2,7 @@ package com.mygdx.game.GameObjects.ItemAbilities
 
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.*
+import com.mygdx.game.AbstractClasses.AbilityId
 import com.mygdx.game.AbstractClasses.CharacterAbility
 import com.mygdx.game.AbstractClasses.DefaultPositionChange
 import com.mygdx.game.Enums.Layer
@@ -12,10 +13,10 @@ import com.mygdx.game.Managers.AreaManager
 import com.mygdx.game.Managers.LocationManager
 import com.mygdx.game.Timer.DefaultTimer
 
-class IceCloneAbility(Position: Vector2, size: Vector2): CharacterAbility(Position, size), DynamicEntity by DefaultPositionChange  {
+class IceCloneAbility(): CharacterAbility(){
+    override val abilityId = AbilityId.ICECLONE
     override val triggerKey = com.badlogic.gdx.Input.Keys.NUM_5
     override val texture = DefaultTextureHandler.getTexture("IceClone.png")
-    override val layer = Layer.AIR
 
     val cooldownTimer = DefaultTimer(1f)
 

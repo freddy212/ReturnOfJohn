@@ -11,9 +11,12 @@ import com.mygdx.game.Interfaces.Collition
 import com.mygdx.game.Interfaces.ObjectProperty
 import com.mygdx.game.Interfaces.Renderable
 import com.mygdx.game.Locations.DefaultLocation
+import com.mygdx.game.Managers.SignalManager
 import com.mygdx.game.Utils.RenderGraph.Companion.addToSceneGraph
 import com.mygdx.game.SaveHandling.FileHandler
 import com.mygdx.game.SaveState.SaveStateEntity
+import com.mygdx.game.Signal.SIGNALTYPE
+import com.mygdx.game.Signal.Signal
 import com.mygdx.game.Utils.ResourceList
 
 abstract class GameObject (val Position: Vector2, val size: Vector2,var defaultLocation: DefaultLocation?): Renderable {
@@ -51,8 +54,5 @@ abstract class GameObject (val Position: Vector2, val size: Vector2,var defaultL
 
     open fun removeFromLocation(){
         defaultLocation?.removeGameObject(this)
-        if(this is SaveStateEntity){
-            FileHandler.writeSaveStateEntity(this)
-        }
     }
 }

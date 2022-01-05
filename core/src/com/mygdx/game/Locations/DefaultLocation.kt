@@ -10,7 +10,7 @@ import com.mygdx.game.Interfaces.LocationDataStrategy
 import com.mygdx.game.font
 
 class DefaultLocation(size: Vector2, Position: Vector2, private val initGameObjectsFunction: () -> List<GameObject> = {listOf()},
-                      locationStrategy: LocationDataStrategy = DefaultLocationData()): GameObject(Position,size){
+                     val locationStrategy: LocationDataStrategy = DefaultLocationData()): GameObject(Position,size){
     override val texture: Texture = locationStrategy.texture
     private val AdjacentLocations = mutableListOf<DefaultLocation>()
     private val ChildrenGameObjects: MutableList<GameObject> = mutableListOf()
@@ -29,7 +29,7 @@ class DefaultLocation(size: Vector2, Position: Vector2, private val initGameObje
         locationStrategy.initialization(this)
     }
     override fun render(batch: PolygonSpriteBatch){
-        this.sprite.draw(batch)
+        locationStrategy.render(batch,sprite)
         font.draw(batch,this.locationName, this.topleft.x + 50f, this.topleft.y - 50f)
     }
 

@@ -37,7 +37,6 @@ class DojoEvent(val defaultLocation: DefaultLocation, val eventCompletedEvent: E
             EventManager.eventManager.remove(this)
             eventCompletedEvent.execute()
         }
-        println(counter)
     }
     fun resetCounter(){
         counter = 0

@@ -11,7 +11,7 @@ import com.mygdx.game.Locations.DefaultLocation
 import com.mygdx.game.SaveHandling.DefaultItemObjectSaveState
 import com.mygdx.game.SaveState.SaveStateEntity
 
-class GenericItemObject(Position: Vector2, size: Vector2, defaultLocation: DefaultLocation, itemType: ItemType, texture: Texture) : GameObject(Position, size,defaultLocation),ItemObject,
+class GenericInventoryItemObject(Position: Vector2, size: Vector2, defaultLocation: DefaultLocation, itemType: ItemType, texture: Texture) : GameObject(Position, size,defaultLocation),ItemObject,
                                                           SaveStateEntity by DefaultItemObjectSaveState(itemType){
     override val texture = texture
     override val collition = ItemCollition

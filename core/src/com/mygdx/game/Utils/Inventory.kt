@@ -1,6 +1,8 @@
 package com.mygdx.game
 
+import com.mygdx.game.Enums.Item
 import com.mygdx.game.Enums.ItemType
+import com.mygdx.game.Managers.SignalManager
 import com.mygdx.game.SaveHandling.SaveableObject
 import kotlinx.serialization.Serializable
 
@@ -21,13 +23,12 @@ class Inventory {
     fun getItemCount(itemType: ItemType): Int{
         return InventoryList.getOrDefault(itemType,0)
     }
-    fun useItems(itemType: ItemType, amountToUse: Int): Boolean{
+    fun useItems(itemType: ItemType, amountToUse: Int){
         val itemCount = getItemCount(itemType)
-        if(amountToUse <= itemCount){
-            InventoryList[itemType] = itemCount - amountToUse
-            return true
-        }
-        return false
+        InventoryList[itemType] = itemCount - amountToUse
+    }
+    fun checkItemsEnough(item:Item): Boolean{
+        return getItemCount(item.itemType) >= item.amount
     }
     fun loadItems(listOfItems: List<ItemSavableObject>){
         listOfItems.forEach {this.addItem(it.itemType,it.amount)}

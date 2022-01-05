@@ -15,6 +15,7 @@ import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.Enums.ItemType
 import com.mygdx.game.GameObjects.ItemAbilities.AxeAbility
 import com.mygdx.game.GameObjects.ItemAbilities.IcicleAbility
+import com.mygdx.game.GameObjects.ItemAbilities.ShieldAbility
 import com.mygdx.game.SaveHandling.FileHandler
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Player
 import com.mygdx.game.Interfaces.AreaIdentifier
@@ -23,6 +24,8 @@ import com.mygdx.game.SaveHandling.DefaultSaveableObject
 import com.mygdx.game.SaveState.PlayerSaveState
 import com.mygdx.game.SaveState.SaveStateEntity
 import com.mygdx.game.Managers.UIRendererManager
+import com.mygdx.game.Signal.Signal
+import com.mygdx.game.Signal.initListeners
 import com.mygdx.game.Utils.RectanglePolygon
 import com.mygdx.game.Utils.RenderGraph
 import kotlinx.serialization.json.*
@@ -82,6 +85,7 @@ class MainGame : ApplicationAdapter() {
         inventory = Inventory()
         inputAdapter = ROJInputAdapter(camera,player)
         initInputAdapter()
+        initListeners()
 
         environment.set(ColorAttribute(ColorAttribute.AmbientLight, 0.4f, 0.4f, 0.4f, 1f))
         environment.add(DirectionalLight().set(0.8f, 0.8f, 0.8f, -1f, -0.8f, -0.2f))
@@ -92,13 +96,16 @@ class MainGame : ApplicationAdapter() {
 
         val originalFile = FileHandler.readFromFile()
         val saves = originalFile.subList(1,originalFile.size)
-        val savedStates:List<DefaultSaveableObject> = saves.map { x -> Json.decodeFromString(x) }
-        val savedEntities:List<SaveStateEntity> = AreaManager.getAllGameObjects()
-            .filter {it is SaveStateEntity}.map { it as SaveStateEntity }.filter {savedStates.map {it.entityId}.contains(it.entityId)}
-        println("size of saved elements is : + " + savedStates.size + " and size of matching elements is : " + savedEntities.size)
-        savedEntities.forEach { it.onLoadAction() }
-        player.addAbility(IcicleAbility(Vector2(0f,0f),Vector2(0f,0f)))
-        player.addAbility(AxeAbility(Vector2(0f,0f),Vector2(0f,0f)))
+        val savedSignals:List<Signal> = saves.map { x -> Json.decodeFromString(x)}
+        savedSignals.forEach { SignalManager.emitSignal(it,false) }
+        player.addAbility(AxeAbility())
+            /* val savedStates:List<DefaultSaveableObject> = saves.map { x -> Json.decodeFromString(x) }
+             val savedEntities:List<SaveStateEntity> = AreaManager.getAllGameObjects()
+                 .filter {it is SaveStateEntity}.map { it as SaveStateEntity }.filter {savedStates.map {it.entityId}.contains(it.entityId)}
+             println("size of saved elements is : + " + savedStates.size + " and size of matching elements is : " + savedEntities.size)
+             savedEntities.forEach { it.onLoadAction() }
+             player.addAbility(IcicleAbility(Vector2(0f,0f),Vector2(0f,0f)))
+             */
     }
 
 
@@ -115,7 +122,7 @@ class MainGame : ApplicationAdapter() {
         UIRendererManager.render()
         camera.position.set(player.sprite.x, player.sprite.y,4f)
         camera.update()
-        println(player.inventory.getItemCount(ItemType.WORLDLEAF))
+        SignalManager.useSignals()
     }
 
     fun drawrects(){

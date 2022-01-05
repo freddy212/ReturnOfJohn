@@ -19,7 +19,6 @@ class LocationManager {
         lateinit var newDefaultLocation: DefaultLocation
         var  ActiveGameObjects: List<GameObject>
         init {
-            crossLocationGameObjects.add(player)
             oldDefaultLocation = DefaultLocation(Vector2(0f,0f),Vector2(0f,0f))
             ActiveGameObjects = listOf()
         }
@@ -32,17 +31,19 @@ class LocationManager {
             newDefaultLocation = defaultLocations.find{ x -> x.sprite.boundingRectangle.contains(Vector2(player.sprite.x, player.sprite.y)) } ?: oldDefaultLocation
 
             if(oldDefaultLocation != newDefaultLocation) {
+                oldDefaultLocation.removeGameObject(player)
+                newDefaultLocation.addGameObject(player)
                 oldDefaultLocation = newDefaultLocation
                 activeDefaultLocations = (setOf(oldDefaultLocation) + oldDefaultLocation.adjacentDefaultLocations)
                 val oldActiveGameObjects = ActiveGameObjects
-                ActiveGameObjects = activeDefaultLocations.flatMap { x -> x.gameObjects } + activeDefaultLocations + crossLocationGameObjects.List
+                ActiveGameObjects = activeDefaultLocations.flatMap { x -> x.gameObjects } + activeDefaultLocations
                 val newGameObjects = ActiveGameObjects - oldActiveGameObjects
                 val oldGameObjects = oldActiveGameObjects - ActiveGameObjects
                 newGameObjects.forEach{it.onLocationEnterActions.forEach { it() }}
                 oldGameObjects.forEach {it.onLocationExitActions.forEach { it(newDefaultLocation) }}
                 savePlayerStates()
             }
-            ActiveGameObjects = activeDefaultLocations.flatMap { x -> x.gameObjects } + activeDefaultLocations + crossLocationGameObjects.List
+            ActiveGameObjects = activeDefaultLocations.flatMap { x -> x.gameObjects } + activeDefaultLocations
             MoveCollitionGameObjects = ActiveGameObjects.filter{x -> x.collition is MoveCollition}
             ButtonCollitionGameObjects = ActiveGameObjects.filter { x -> x.collition is KeyPressedCollition }
             EveryFrameCollitionGameObjects = ActiveGameObjects.filter { x -> x.collition is EveryFrameCollition }

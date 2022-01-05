@@ -31,7 +31,7 @@ fun getIceLandsDungeonLocationTwoObjects(): List<GameObject>{
     val iceCloneAbility = AbilityItemObject(location2.topleft + Vector2(-500f,-300f),
                                            Vector2(80f,80f),
                                            location2,
-                                           IceCloneAbility(Vector2(0f,0f), Vector2(35f,65f)),
+                                           IceCloneAbility(),
                                            DefaultTextureHandler.getTexture("IceClone.png")
 
     )

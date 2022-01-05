@@ -2,6 +2,7 @@ package com.mygdx.game.Collitions
 
 import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.Events.DojoEvent
+import com.mygdx.game.GameObjects.ItemAbilities.Shield
 import com.mygdx.game.GameObjects.ItemAbilities.ShieldAbility
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Player
 import com.mygdx.game.Interfaces.MoveCollition
@@ -14,7 +15,7 @@ class DojoMasterCollition(val dojoEvent: DojoEvent): MoveCollition by CanMoveCol
             player.die()
             dojoEvent.resetCounter()
         }
-        if(collidedObject is ShieldAbility){
+        if(collidedObject is Shield){
             entity.removeFromLocation()
             dojoEvent.blockedWithShield()
         }

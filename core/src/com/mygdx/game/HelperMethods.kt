@@ -20,8 +20,11 @@ import com.mygdx.game.Locations.DefaultLocation
 import com.mygdx.game.Locations.DefaultLocationData
 import com.mygdx.game.Managers.AreaManager
 import com.mygdx.game.Managers.LocationManager
+import com.mygdx.game.Managers.SignalManager
 import com.mygdx.game.SaveState.PlayerSaveState
 import com.mygdx.game.SaveState.SaveStateEntity
+import com.mygdx.game.Signal.SIGNALTYPE
+import com.mygdx.game.Signal.Signal
 import com.mygdx.game.Utils.RectanglePolygon
 import kotlin.math.PI
 import kotlin.math.atan2
@@ -184,6 +187,7 @@ fun middleOfObject(Position: Vector2,size: Vector2): Vector2{
         return Vector2(Position.x - (size.x / 2), Position.y - (size.y / 2))
 }
 fun renderRepeatedTexture(batch: PolygonSpriteBatch,texture: Texture,position: Vector2,size: Vector2){
+        texture.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat)
         batch.draw(texture,position.x,position.y,0,0,size.x.toInt(),size.y.toInt())
 }
 
@@ -230,10 +234,10 @@ fun entityWithinLocations(polygonToCheck: Polygon): Boolean {
 fun getDirectionFromAngle(angleToCheck: Float):Direction{
 
         return when(angleToCheck){
+                in -45f..45f -> Direction.DOWN
                 in 45f..135f -> Direction.RIGHT
                 in 135f..225f -> Direction.UP
-                in 225f..315f -> Direction.LEFT
-                else -> Direction.DOWN
+                else -> Direction.LEFT
         }
 }
 
@@ -245,8 +249,10 @@ fun getGameObjectWithEntityId(entityId: Int): GameObject? {
 
 
 fun itemObjectAddToInventory(itemType: ItemType, itemObject: GameObject) {
-        player.inventory.addItem(itemType)
-        itemObject.removeFromLocation()
+        SignalManager.emitSignal(Signal(SIGNALTYPE.ITEM_PICKED_UP,itemType.ordinal))
+        val id = if(itemObject is SaveStateEntity) itemObject.entityId else NOTSAVEDID
+        SignalManager.emitSignal(Signal(SIGNALTYPE.REMOVE_OBJECT,id))
+
 }
 
 fun HitOppositeDirection(

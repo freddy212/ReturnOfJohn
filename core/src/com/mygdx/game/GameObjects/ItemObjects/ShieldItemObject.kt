@@ -10,7 +10,6 @@ class ShieldItemObject(Position: Vector2, size: Vector2, defaultLocation: Defaul
     AbilityItemObject(Position,
                       size,
                       defaultLocation,
-                      ShieldAbility(Vector2(0f,0f),
-                          Vector2(20f,40f)),
+                      ShieldAbility(),
                       DefaultTextureHandler.getTexture("shield-front.png")) {
 }
