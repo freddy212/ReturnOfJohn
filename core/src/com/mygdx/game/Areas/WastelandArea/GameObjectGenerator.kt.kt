@@ -25,7 +25,7 @@ fun getWastelandLocationOneObjects(): List<GameObject>{
         AreaIdentifier.MAINAREA, doorMainAreaAndWasteland,
         Direction.UP)
 
-    val door = Door(doorPosition, Vector2(32f * 2, 64f * 2), DefaultTextureHandler.getTexture("CaveDoor.png"),location1,
+    val door = Door(doorPosition, Vector2(32f * 2, 32f * 2), DefaultTextureHandler.getTexture("EmptyDoor.png"),location1,
         Direction.UP,doorCollition)
 
     val axe = Axe(location1.originalMiddle,Vector2(32f,64f), location1)

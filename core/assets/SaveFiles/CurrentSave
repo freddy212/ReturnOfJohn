@@ -1,4 +1,4 @@
-{"playerXPos":-1000.26746,"playerYPos":797.9516,"areaIdentifier":"WASTELAND","entityId":0}
+{"playerXPos":-646.1688,"playerYPos":1606.3383,"areaIdentifier":"FIRELANDS","entityId":0}
 {"signaltype":"ABILITY_GAINED","id":3}
 {"signaltype":"REMOVE_OBJECT","id":11}
 {"signaltype":"ITEM_PICKED_UP","id":1}
@@ -9,3 +9,4 @@
 {"signaltype":"REMOVE_OBJECT","id":7}
 {"signaltype":"ITEM_PICKED_UP","id":0}
 {"signaltype":"REMOVE_OBJECT","id":38}
+{"signaltype":"REMOVE_OBJECT","id":19}

@@ -63,7 +63,7 @@ fun getLocationGraveyard(): List<GameObject>{
 
     //val toggleCollition = ToggleCollition(IllegalMoveCollition,doorCollition)
 
-    val door = Door(doorPosition, Vector2(32f * 2,64f * 2),
+    val door = Door(doorPosition, Vector2(32f * 2,36f * 2),
         DefaultTextureHandler.getTexture("CaveDoor.png"),graveyardLoc,Direction.UP,doorCollition)
 
     /*val fireExtinguishedEvent = ToggleCollitionEvent(toggleCollition)
@@ -170,7 +170,7 @@ fun getWastelandGatewayLocation(): List<GameObject>{
         AreaIdentifier.WASTELAND, doorMainAreaAndWasteland,
         Direction.DOWN)
 
-    val door = Door(doorPosition, Vector2(32f * 2, 64f * 2), DefaultTextureHandler.getTexture("CaveDoor.png"),location5,
+    val door = Door(doorPosition, Vector2(32f * 2, 32f * 2), DefaultTextureHandler.getTexture("EmptyDoor.png"),location5,
         Direction.DOWN,doorCollition)
 
     return listOf(door)

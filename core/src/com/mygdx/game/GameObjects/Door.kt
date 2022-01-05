@@ -21,7 +21,8 @@ class Door(Position: Vector2, size: Vector2, texture: Texture, defaultLocation: 
     init {
         polygon.vertices = floatArrayOf(x + size.x / 4, y, x + size.x - size.x / 4, y, x + size.x - size.x / 4, y - 20f, x + size.x / 4, y - 20f)
         if(direction == Direction.DOWN || direction == Direction.LEFT) {
-            sprite.setAlpha(0.5f)
+            sprite.setPosition(sprite.x,sprite.y - 64f)
+            polygon.vertices = floatArrayOf(x + size.x / 4, y + 20f, x + size.x - size.x / 4, y + 20f, x + size.x - size.x / 4, y, x + size.x / 4, y)
         }
     }
 }
