@@ -23,6 +23,6 @@ fun GetDojoConversation(npc: NPC): Conversation {
     val sentence5 = OptionSentence(dialogueBox,OptionText, player)
 
     val conversation = Conversation(npc)
-    conversation.conversation.addAll(listOf(sentence1,sentence2,sentence3,sentence4,sentence5))
+    conversation.sentenceList.addAll(listOf(sentence1,sentence2,sentence3,sentence4,sentence5))
     return conversation
 }

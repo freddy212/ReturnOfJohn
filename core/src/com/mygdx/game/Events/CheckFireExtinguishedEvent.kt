@@ -12,12 +12,12 @@ class CheckFireExtinguishedEvent(val npc: NPC) : Event {
 
         val listOfProperties:List<ObjectProperty> = npc.defaultLocation!!.gameObjects.flatMap { it.properties.List }
         val fire = listOfProperties.find { it is Fire } as Fire?
-        if(fire!= null){
+        /*if(fire!= null){
             StartConversationEvent("firenotfixed",npc).execute()
         }else{
             ClearQuestEvent(QuestIdentifier.FIRE).execute()
             StartConversationEvent("firefixed",npc).execute()
-        }
+        }*/
     }
 
 }

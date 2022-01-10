@@ -33,7 +33,7 @@ fun getDojoObjects(): List<GameObject>{
     val size = Vector2(120f,60f)
     val position = location1.originalMiddle
     val itemTable = GenericGameObject(middleOfObject(position,size),size,"ItemTable.png",Layer.ONGROUND,location1,IllegalMoveCollition)
-    val dojoNPC = NPC(middleOfObject(Vector2(itemTable.originalMiddle.x,itemTable.originalMiddle.y + 200f),Vector2(128f,128f)), Vector2(128f,128f),location1)
+/*    val dojoNPC = NPC(middleOfObject(Vector2(itemTable.originalMiddle.x,itemTable.originalMiddle.y + 200f),Vector2(128f,128f)), Vector2(128f,128f),location1)
     dojoNPC.conversationsHandler.addConversation("first", GetDojoConversation(dojoNPC))
     val quest = DefaultQuest(dojoNPC,QuestIdentifier.DOJO)
     quest.StartQuest()
@@ -45,6 +45,6 @@ fun getDojoObjects(): List<GameObject>{
             val dojoAttackObject: DojoAttackObject? = location1.gameObjects.find { it is DojoAttackObject } as DojoAttackObject?
             dojoAttackObject?.defaultLocation?.removeGameObject(dojoAttackObject!!)
         }
-    }
-    return listOf(door,dojoNPC)
+    }*/
+    return listOf(door)
 }

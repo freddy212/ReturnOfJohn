@@ -39,9 +39,9 @@ abstract class DefaultCharacter(Position: Vector2, size: Vector2, location: Defa
         font.color = Color.WHITE
     }
 
-    override fun setPosition(nextPosition: Vector2, gameObject: GameObject) {
+    override fun setPosition(nextPosition: Vector2) {
         modelHandler.setPosition(Vector3(nextPosition.x + sprite.width / 2, nextPosition.y + sprite.height / 2,-150f))
-        super.setPosition(nextPosition, gameObject)
+        super.setPosition(nextPosition)
     }
 
     fun setCharacterRotation(unitVectorDirection: Vector2) {

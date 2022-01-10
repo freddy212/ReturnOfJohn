@@ -22,6 +22,12 @@ class DefaultTimer (private val CooldownTime: Float): Timer {
         }
         return false
     }
+
+    override fun cooldownAvailable(): Boolean {
+        UpdateTimer()
+        return coolDownAvailable
+    }
+
     fun reset(){
         lastUsedTime = System.currentTimeMillis()
         coolDownAvailable = false

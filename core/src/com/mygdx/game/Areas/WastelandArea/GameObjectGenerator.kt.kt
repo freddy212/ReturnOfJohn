@@ -1,20 +1,24 @@
 import com.badlogic.gdx.math.Vector2
+import com.mygdx.game.*
 import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.Collitions.DoorCollition
-import com.mygdx.game.DefaultTextureHandler
 import com.mygdx.game.Enums.Direction
 import com.mygdx.game.Enums.ItemType
+import com.mygdx.game.Enums.QuestIdentifier
 import com.mygdx.game.GameObjects.Axe
 import com.mygdx.game.GameObjects.Door
 import com.mygdx.game.GameObjects.ItemObjects.GenericInventoryItemObject
+import com.mygdx.game.GameObjects.MoveableEntities.Characters.NPC
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.RockMonster
 import com.mygdx.game.GameObjects.Terrain.WalkableTerrain
 import com.mygdx.game.GameObjects.Tree
 import com.mygdx.game.Interfaces.AreaIdentifier
 import com.mygdx.game.Managers.LocationManager
-import com.mygdx.game.doorMainAreaAndWasteland
-import com.mygdx.game.playerSize
-import com.mygdx.game.plus
+import com.mygdx.game.UI.Dialogue.Conversations.GetFireConversation
+import com.mygdx.game.UI.Dialogue.Conversations.GetFireFixedConversation
+import com.mygdx.game.UI.Dialogue.Conversations.GetFireNotFixedConversation
+import com.mygdx.game.UI.Dialogue.Conversations.engineerFirst
+import com.mygdx.game.Utils.DefaultQuest
 
 fun getWastelandLocationOneObjects(): List<GameObject>{
     val location1 = LocationManager.findLocation("location1", AreaIdentifier.WASTELAND)
@@ -29,8 +33,13 @@ fun getWastelandLocationOneObjects(): List<GameObject>{
         Direction.UP,doorCollition)
 
     val axe = Axe(location1.originalMiddle,Vector2(32f,64f), location1)
+
     val rockMonster = RockMonster(doorPosition + Vector2(-300f,-200f), Vector2(70f,70f),location1)
-    return listOf(door, axe,rockMonster)
+
+    val npc = NPC(location1.bottomleft + Vector2(200f,200f),Vector2(128f,128f),location1)
+    npc.conversationsHandler.addConversation("engineer", engineerFirst(npc))
+    npc.conversationsHandler.setConversation("engineer")
+    return listOf(door, axe,rockMonster,npc)
 }
 
 fun getWastelandLocationThreeObjects(): List<GameObject>{

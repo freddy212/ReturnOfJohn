@@ -18,7 +18,7 @@ class DefaultMovement(private val edgeOfLocationStrategy: CannotMoveStrategy): M
         val canMove = handleCollitions(moveableObject,polygonToCheck,LocationManager.MoveCollitionGameObjects)
         val inLocation = entityWithinLocations(polygonToCheck)
         if(inLocation && canMove){
-            moveableObject.setPosition(Vector2(sprite.x,sprite.y) + nextIncrement,moveableObject)
+            moveableObject.setPosition(Vector2(sprite.x,sprite.y) + nextIncrement)
             return true
         }else{
             edgeOfLocationStrategy.CannotMoveAction(moveableObject)

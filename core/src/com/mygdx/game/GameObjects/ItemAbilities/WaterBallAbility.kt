@@ -17,7 +17,7 @@ class WaterBallAbility():CharacterAbility(){
     override val triggerKey = com.badlogic.gdx.Input.Keys.NUM_1
     override val texture = DefaultTextureHandler.getTexture("WaterBall.png")
 
-    val cooldownTimer = DefaultTimer(1f)
+    override val cooldownTimer = DefaultTimer(1f)
 
     override fun activeAction(){
         if(cooldownTimer.tryUseCooldown()) {

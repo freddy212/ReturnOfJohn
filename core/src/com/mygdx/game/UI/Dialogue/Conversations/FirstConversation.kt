@@ -21,7 +21,7 @@ fun GetFirstConversation(npc: NPC): Conversation {
     val sentence5 = Sentence(dialogueBox,dialogueText4,npc)
 
     val conversation = Conversation(npc)
-    conversation.conversation.addAll(listOf(sentence1,sentence2,sentence3,sentence4,sentence5))
+    conversation.sentenceList.addAll(listOf(sentence1,sentence2,sentence3,sentence4,sentence5))
     return conversation
 }
 fun GetSecondConversation(npc: NPC): Conversation {
@@ -36,6 +36,6 @@ fun GetSecondConversation(npc: NPC): Conversation {
     val sentence3 = Sentence(dialogueBox, dialogueText3, player)
 
     val conversation = Conversation(npc)
-    conversation.conversation.addAll(listOf(sentence1,sentence2,sentence3))
+    conversation.sentenceList.addAll(listOf(sentence1,sentence2,sentence3))
     return conversation
 }

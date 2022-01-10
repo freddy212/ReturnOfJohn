@@ -24,7 +24,7 @@ fun GetFireConversation(npc: NPC): Conversation {
     val sentence6 = Sentence(dialogueBox,dialogueText5,npc)
 
     val conversation = Conversation(npc)
-    conversation.conversation.addAll(listOf(sentence1,sentence2,sentence3,sentence4,sentence5,sentence6))
+    conversation.sentenceList.addAll(listOf(sentence1,sentence2,sentence3,sentence4,sentence5,sentence6))
     return conversation
 }
 
@@ -36,7 +36,7 @@ fun GetFireNotFixedConversation(npc: NPC):Conversation{
     val sentence1 = Sentence(dialogueBox, dialogueText, npc)
 
     val conversation = Conversation(npc)
-    conversation.conversation.addAll(listOf(sentence1))
+    conversation.sentenceList.addAll(listOf(sentence1))
     return conversation
 
 }
@@ -51,6 +51,6 @@ fun GetFireFixedConversation(npc: NPC):Conversation{
     sentence2.dialogueText.event = CompositeEvent(listOf(RemoveGameObjectEvent(npc),ContinueConversationEvent(npc)))
 
     val conversation = Conversation(npc)
-    conversation.conversation.addAll(listOf(sentence1,sentence2))
+    conversation.sentenceList.addAll(listOf(sentence1,sentence2))
     return conversation
 }

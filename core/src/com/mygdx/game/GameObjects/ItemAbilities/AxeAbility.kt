@@ -15,7 +15,7 @@ class AxeAbility() : CharacterAbility() {
     override val triggerKey = com.badlogic.gdx.Input.Keys.Q
     override val texture = DefaultTextureHandler.getTexture("Axe.png")
 
-    val cooldownTimer = DefaultTimer(2f)
+    override val cooldownTimer = DefaultTimer(2f)
 
     override fun activeAction() {
         if(cooldownTimer.tryUseCooldown()){

@@ -8,7 +8,7 @@ import com.mygdx.game.UI.Dialogue.Conversations.GetSecondConversation
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
-
+/*
 class ConversationTest: TestGame() {
     private val npc = NPC(Vector2(0f,0f), Vector2(0f,0f),location,modelInstanceHandlerMock)
     private val firstConversation = GetFirstConversation(npc)
@@ -35,3 +35,4 @@ class ConversationTest: TestGame() {
         assertEquals("hello, what are you doing here?",npc.conversationsHandler.GetSentence().dialogueText.text)
     }
 }
+*/

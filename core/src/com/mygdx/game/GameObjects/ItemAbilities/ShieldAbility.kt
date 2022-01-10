@@ -7,12 +7,15 @@ import com.mygdx.game.AbstractClasses.*
 import com.mygdx.game.Collitions.ShieldCollition
 import com.mygdx.game.Enums.Layer
 import com.mygdx.game.Interfaces.DynamicEntity
+import com.mygdx.game.Interfaces.Timer
 import com.mygdx.game.Managers.LocationManager
+import com.mygdx.game.Timer.DefaultTimer
 
 class ShieldAbility(): CharacterAbility(){
     override val abilityId = AbilityId.SHIELD
     override val triggerKey = com.badlogic.gdx.Input.Keys.NUM_2
     override val texture = DefaultTextureHandler.getTexture("shield-front.png")
+    override val cooldownTimer = DefaultTimer(1f)
     val shield = Shield(Vector2(0f,0f),
         Vector2(20f,40f))
 

@@ -1,20 +1,15 @@
 package com.mygdx.game.AbstractClasses
 
 import com.badlogic.gdx.graphics.Texture
-import com.badlogic.gdx.math.Vector2
-import com.mygdx.game.Enums.CharacterState
 import com.mygdx.game.GameObjects.ItemAbilities.*
-import com.mygdx.game.GameObjects.MoveableEntities.Projectiles.Icicle
-import com.mygdx.game.SaveState.DefaultSaveStateHandler
-import com.mygdx.game.SaveState.SaveStateEntity
-import com.mygdx.game.crossLocationGameObjects
-import com.mygdx.game.player
+import com.mygdx.game.Interfaces.Timer
 
 enum class AbilityId{AXE,ICECLONE,ICICLE,SHIELD,WATERBALL}
 abstract class CharacterAbility(){
     abstract val abilityId: AbilityId
     abstract val triggerKey: Int
     abstract val texture: Texture
+    abstract val cooldownTimer: Timer
     open val toolTipTexture: Texture
     get() = texture
 

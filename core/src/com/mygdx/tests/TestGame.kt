@@ -49,7 +49,7 @@ open class TestGame :ApplicationAdapter() {
         DefaultAssetHandler.setAssetManager(assetsMock)
 
         player = Player(Vector2(0f,0f),Vector2(32f,64f),modelInstanceHandlerMock)
-        player.setPosition(Vector2(300f,300f),player)
+        player.setPosition(Vector2(300f,300f))
         val area = DefaultArea(AreaIdentifier.NOTIMPLEMENTED)
         location = DefaultLocation(Vector2(1024f,1024f), Vector2(0f,0f))
         area.addLocation(location)

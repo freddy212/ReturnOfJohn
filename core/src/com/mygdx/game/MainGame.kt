@@ -46,7 +46,6 @@ class MainGame : ApplicationAdapter() {
     lateinit var testRect: Rectangle
     lateinit var inventory: Inventory
     lateinit var inputAdapter: ROJInputAdapter
-    lateinit var uiRendererManager: UIRendererManager
 
     override fun create() {
 
@@ -117,7 +116,7 @@ class MainGame : ApplicationAdapter() {
         LocationManager.frameAction()
         inputAdapter.handleInput(player)
         RenderGraph.render(batch)
-       // drawrects()
+        drawrects()
         EventManager.executeEvents()
         UIRendererManager.render()
         camera.position.set(player.sprite.x, player.sprite.y,4f)

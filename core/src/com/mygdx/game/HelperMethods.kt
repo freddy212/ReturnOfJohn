@@ -158,6 +158,10 @@ fun GameObject.InitSprite(texture: Texture): Sprite{
         sprite.setPosition(Position.x,Position.y)
         return sprite
 }
+fun GameObject.SetFixedPosition(position: Vector2){
+        sprite.setPosition(500f,500f)
+        polygon.setPosition(sprite.x - polygon.vertices[0],sprite.y - polygon.vertices[1])
+}
 fun GameObject.InitPolygon(sprite: Sprite): Polygon{
         val polygon = RectanglePolygon(sprite.boundingRectangle)
         polygon.setOrigin(sprite.x + sprite.originX, sprite.y + sprite.originY)
@@ -268,6 +272,6 @@ fun HitOppositeDirection(
         character.isHit(oppositeDirection)
 }
 fun ResetPlayer(playerSaveState: PlayerSaveState){
-        player.setPosition(Vector2(playerSaveState.playerXPos, playerSaveState.playerYPos), player)
+        player.setPosition(Vector2(playerSaveState.playerXPos, playerSaveState.playerYPos))
         player.health = player.maxHealth
 }

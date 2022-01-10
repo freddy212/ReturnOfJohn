@@ -55,4 +55,12 @@ abstract class GameObject (val Position: Vector2, val size: Vector2,var defaultL
     open fun removeFromLocation(){
         defaultLocation?.removeGameObject(this)
     }
+    open fun addToLocation(location: DefaultLocation){
+        location.addGameObject(this)
+    }
+
+    open fun setPosition(position: Vector2) {
+        sprite.setPosition(position.x,position.y)
+        polygon.setPosition(position.x - polygon.vertices[0],position.y - polygon.vertices[1])
+    }
 }

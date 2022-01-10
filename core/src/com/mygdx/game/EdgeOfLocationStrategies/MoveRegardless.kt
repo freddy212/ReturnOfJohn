@@ -8,6 +8,6 @@ import com.mygdx.game.times
 
 class MoveRegardless: CannotMoveStrategy {
     override fun CannotMoveAction(moveableObject: MoveableObject) {
-        moveableObject.setPosition(Vector2(moveableObject.sprite.x,moveableObject.sprite.y) + moveableObject.unitVectorDirection * moveableObject.currentSpeed,moveableObject)
+        moveableObject.setPosition(Vector2(moveableObject.sprite.x,moveableObject.sprite.y) + moveableObject.unitVectorDirection * moveableObject.currentSpeed)
     }
 }

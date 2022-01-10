@@ -15,7 +15,7 @@ class IcicleAbility(): CharacterAbility() {
     override val abilityId = AbilityId.ICICLE
     override val triggerKey = com.badlogic.gdx.Input.Keys.NUM_4
     override val texture = DefaultTextureHandler.getTexture("Icicle.png")
-    val cooldownTimer = DefaultTimer(1f)
+    override val cooldownTimer = DefaultTimer(1f)
 
     override fun activeAction(){
         if(cooldownTimer.tryUseCooldown()) {

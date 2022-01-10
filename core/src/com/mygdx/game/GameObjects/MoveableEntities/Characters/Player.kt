@@ -39,10 +39,10 @@ class Player(Position: Vector2, size: Vector2, modelHandler: ModelInstanceHandle
     val itemAbilities = ResourceList<CharacterAbility>()
     fun die(){
         val playerLocation = LocationManager.activeDefaultLocations.find{ x -> x.sprite.boundingRectangle.contains(Vector2(camera.position.x, camera.position.y))}!!
-        player.setPosition(playerLocation.Position, player)
+        player.setPosition(playerLocation.Position)
     }
     fun addAbility(characterAbility: CharacterAbility) {
-        val toolTip = ToolTip(Sprite(characterAbility.toolTipTexture), Input.Keys.toString(characterAbility.triggerKey)[0])
+        val toolTip = ToolTip(Sprite(characterAbility.toolTipTexture), Input.Keys.toString(characterAbility.triggerKey)[0],characterAbility.cooldownTimer)
         TooltipManager.tooltipManager.add(toolTip)
         itemAbilities.add(characterAbility)
     }

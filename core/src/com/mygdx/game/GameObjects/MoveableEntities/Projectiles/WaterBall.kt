@@ -21,7 +21,7 @@ class WaterBall(Position: Vector2, size: Vector2, defaultLocation: DefaultLocati
         setRotation(unitVectorDirection,this,90f)
         val startPos = Vector2(Position.x - size.x / 2, Position.y - size.y / 2)
         val offset = unitVectorDirection * 80f
-        setPosition(startPos + offset, this)
+        setPosition(startPos + offset)
     }
 
     override fun frameTask() {

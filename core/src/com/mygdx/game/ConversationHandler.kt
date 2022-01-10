@@ -1,35 +1,39 @@
 package com.mygdx.game
 
-import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.mygdx.game.UI.Dialogue.Conversation
 import com.mygdx.game.UI.Dialogue.Sentence
-import com.mygdx.game.UI.Dialogue.UIController
 
-class ConversationHandler() {
+class ConversationHandler(firstConvo: Conversation, identifier: String) {
     private val conversations = mutableMapOf<String,Conversation>()
     private var currentStep = 0
     private lateinit var activeConversation: Conversation
 
+    init {
+        conversations[identifier] = firstConvo
+        activeConversation = firstConvo
+    }
     fun addConversation(conversationIdentifier: String, conversation: Conversation){
         conversations[conversationIdentifier] = conversation
     }
     fun getConversation(conversationIdentifier: String): Conversation{
         return conversations[conversationIdentifier]!!
     }
-    fun startConversation(identifier: String){
+    fun getActiveConversation(): Conversation{
+        return activeConversation
+    }
+    fun setConversation(identifier: String){
         activeConversation = conversations[identifier]!!
     }
     //Returns true if there are more sentences left
     fun continueConversation():Boolean{
-        if(activeConversation.conversation.size > currentStep + 1){
+        if(activeConversation.sentenceList.size > currentStep + 1){
             currentStep += 1
             return true
         }
         return false
     }
     fun GetSentence():Sentence{
-        return activeConversation.conversation[currentStep]
+        return activeConversation.sentenceList[currentStep]
     }
     fun resetConversation(){
         currentStep = 0

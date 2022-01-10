@@ -5,8 +5,7 @@ import com.mygdx.game.Interfaces.DynamicEntity
 import com.mygdx.game.Interfaces.MovementStrategy
 import com.mygdx.game.Locations.DefaultLocation
 
-abstract class MoveableObject(Position: Vector2, size: Vector2, defaultLocation: DefaultLocation?):GameObject(Position,size,defaultLocation),
-        DynamicEntity by DefaultPositionChange{
+abstract class MoveableObject(Position: Vector2, size: Vector2, defaultLocation: DefaultLocation?):GameObject(Position,size,defaultLocation){
     abstract var currentSpeed : Float
     abstract val movementStrategy: MovementStrategy
     private var canMove = true

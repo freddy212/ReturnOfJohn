@@ -18,7 +18,7 @@ class IceCloneAbility(): CharacterAbility(){
     override val triggerKey = com.badlogic.gdx.Input.Keys.NUM_5
     override val texture = DefaultTextureHandler.getTexture("IceClone.png")
 
-    val cooldownTimer = DefaultTimer(1f)
+    override val cooldownTimer = DefaultTimer(1f)
 
     override fun activeAction(){
         if(cooldownTimer.tryUseCooldown()) {

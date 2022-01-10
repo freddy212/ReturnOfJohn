@@ -21,6 +21,6 @@ DynamicEntity by DefaultPositionChange{
     override fun render(batch: PolygonSpriteBatch){
         sprite.draw(batch)
     }
-    val conversationEvent =  ConversationEvent("first",npc)
+    val conversationEvent =  ConversationEvent(npc.conversationsHandler.getActiveConversation(),npc)
     override val collition = TalkCollition(conversationEvent)
 }

@@ -20,6 +20,7 @@ import com.mygdx.game.AbstractClasses.DefaultEnemyStrategy
 import com.mygdx.game.FightableEnitityData.EnemyHealthStrategy
 import com.mygdx.game.Interfaces.HealthStrategy
 import com.mygdx.game.Locations.DefaultLocation
+import com.mygdx.game.UI.Dialogue.Conversations.engineerFirst
 
 class NPC(Position: Vector2, size: Vector2 = Vector2(128f,128f), val location: DefaultLocation?,
           modelHandler: ModelInstanceHandler = DefaultModelInstanceHandler("ManBlender.g3db",Position,size))
@@ -38,7 +39,7 @@ class NPC(Position: Vector2, size: Vector2 = Vector2(128f,128f), val location: D
     }
 
     override val collition = IllegalMoveCollition
-    val conversationsHandler = ConversationHandler()
+    val conversationsHandler = ConversationHandler(engineerFirst(this),"engineer")
 
     private val sensorUp = TalkSensor(this.topleft, Vector2(128f, 62f), this, Direction.UP)
     private val sensorLeft = TalkSensor(this.bottomleft - Vector2(128f, 0f), Vector2(128f, 62f), this, Direction.LEFT)
@@ -57,12 +58,19 @@ class NPC(Position: Vector2, size: Vector2 = Vector2(128f,128f), val location: D
         return sucessfullMove*/
         return true
     }
-    fun add(){
-        sensors.forEach {this.location!!.addGameObject(it)}
-        this.location!!.addGameObject(this)
+    override fun addToLocation(location: DefaultLocation){
+        sensors.forEach {location.addGameObject(it)}
+        location.addGameObject(this)
     }
     override fun removeFromLocation(){
         sensors.forEach {it.removeFromLocation()}
         super.removeFromLocation()
+    }
+
+    override fun setPosition(nextPosition: Vector2) {
+        val prevPos = Vector2(sprite.x,sprite.y)
+        println(nextPosition)
+        super.setPosition(nextPosition)
+        sensors.forEach {it.setPosition( it.Position + nextPosition - prevPos) }
     }
 }
