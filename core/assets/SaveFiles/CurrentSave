@@ -1,0 +1,7 @@
+{"playerXPos":3484.0,"playerYPos":1860.0,"areaIdentifier":"MAINAREA","entityId":0}
+{"signaltype":"CHANGE_OBJECT_LOCATION","id":34,"stringValue":"location1"}
+{"signaltype":"MOVE_OBJECT_COORDINATES","id":34,"x":1100.0,"y":1300.0}
+{"signaltype":"ADD_OBJECT","id":0,"stringValue":"location1"}
+{"signaltype":"CHANGE_CONVERSATION","id":34,"stringValue":"engineer2"}
+{"signaltype":"ABILITY_GAINED","id":3}
+{"signaltype":"REMOVE_OBJECT","id":10}

@@ -14,10 +14,7 @@ import com.mygdx.game.GameObjects.Terrain.WalkableTerrain
 import com.mygdx.game.GameObjects.Tree
 import com.mygdx.game.Interfaces.AreaIdentifier
 import com.mygdx.game.Managers.LocationManager
-import com.mygdx.game.UI.Dialogue.Conversations.GetFireConversation
-import com.mygdx.game.UI.Dialogue.Conversations.GetFireFixedConversation
-import com.mygdx.game.UI.Dialogue.Conversations.GetFireNotFixedConversation
-import com.mygdx.game.UI.Dialogue.Conversations.engineerFirst
+import com.mygdx.game.UI.Dialogue.Conversations.*
 import com.mygdx.game.Utils.DefaultQuest
 
 fun getWastelandLocationOneObjects(): List<GameObject>{
@@ -38,6 +35,7 @@ fun getWastelandLocationOneObjects(): List<GameObject>{
 
     val npc = NPC(location1.bottomleft + Vector2(200f,200f),Vector2(128f,128f),location1)
     npc.conversationsHandler.addConversation("engineer", engineerFirst(npc))
+    npc.conversationsHandler.addConversation("engineer2", engineerSecond(npc))
     npc.conversationsHandler.setConversation("engineer")
     return listOf(door, axe,rockMonster,npc)
 }
@@ -45,9 +43,9 @@ fun getWastelandLocationOneObjects(): List<GameObject>{
 fun getWastelandLocationThreeObjects(): List<GameObject>{
     val location3 = LocationManager.findLocation("location3", AreaIdentifier.WASTELAND)
     val tree = Tree(location3.topleft + Vector2(300f,0f), Vector2(64f * 2, 128f * 2),location3)
-    val WorldLeaf = GenericInventoryItemObject(tree.topleft + Vector2(0f, -300f), Vector2(64f, 32f), location3, ItemType.WORLDLEAF,
-        DefaultTextureHandler.getTexture("WorldLeaf.png"))
-    return listOf(tree,WorldLeaf)
+    val Wood = GenericInventoryItemObject(tree.topleft + Vector2(0f, -300f), Vector2(64f, 32f), location3, ItemType.WOOD,
+        DefaultTextureHandler.getTexture("wood.png"))
+    return listOf(tree,Wood)
 }
 
 fun getWastelandLocationFiveObjects(): List<GameObject>{

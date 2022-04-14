@@ -6,5 +6,5 @@ import com.mygdx.game.Signal.SignalListeners.*
 
 fun initListeners(){
     SignalManager.addSignalListeners(listOf(RemoveObject(),ItemPickedUp(),AbilityGained(),
-        UseItems(), ChangeObjectLocation(),MoveObject(),AddGameObject(::spawnEngineerItems)))
+        UseItems(), ChangeObjectLocation(),MoveObject(),AddGameObject(::spawnEngineerItems), ConversationChange()))
 }

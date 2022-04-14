@@ -13,7 +13,7 @@ class AddGameObject(val objectCreationMethod: (DefaultLocation) -> List<GameObje
 
     override fun triggerEvent(signal: Signal) {
         val identifier = AreaIdentifier.values().first { it.ordinal == signal.areaIdentifier}
-        val location = LocationManager.findLocation(signal.locationName,identifier)
+        val location = LocationManager.findLocation(signal.stringValue,identifier)
 
         val objects = objectCreationMethod(location)
         objects.forEach {location.addGameObject(it)}

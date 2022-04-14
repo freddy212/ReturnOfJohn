@@ -45,8 +45,8 @@ fun spawnEngineerItems(location: DefaultLocation): List<GameObject>{
         Item(ItemType.KEY,1,DefaultTextureHandler.getTexture("Key.png"))),
         middleOfObject(itemTable.originalMiddle, Vector2(60f,40f)),Vector2(60f,40f),location)*/
     val shopItem = ShopItem("shield-front.png", listOf(
-        Item(ItemType.WORLDLEAF,2,DefaultTextureHandler.getTexture("WorldLeaf.png")),
-        Item(ItemType.KEY,1,DefaultTextureHandler.getTexture("Key.png"))),
+        Item(ItemType.FLINT,3,DefaultTextureHandler.getTexture("Flint.png")),
+        Item(ItemType.WOOD,1,DefaultTextureHandler.getTexture("wood.png"))),
         middleOfObject(itemTable.originalMiddle, Vector2(60f,40f)),Vector2(60f,40f),location, ShieldAbility())
 
     return listOf(itemTable,shopItem)

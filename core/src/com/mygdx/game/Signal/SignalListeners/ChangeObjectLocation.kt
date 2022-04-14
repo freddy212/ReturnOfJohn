@@ -13,7 +13,7 @@ class ChangeObjectLocation: SignaledEventListener {
     override fun triggerEvent(signal: Signal) {
         val gameObject =  getGameObjectWithEntityId(signal.id)
         val identifier = AreaIdentifier.values().first { it.ordinal == signal.areaIdentifier}
-        val otherLocation = LocationManager.findLocation(signal.locationName,identifier)
+        val otherLocation = LocationManager.findLocation(signal.stringValue,identifier)
         gameObject!!.removeFromLocation()
         gameObject!!.addToLocation(otherLocation)
     }
