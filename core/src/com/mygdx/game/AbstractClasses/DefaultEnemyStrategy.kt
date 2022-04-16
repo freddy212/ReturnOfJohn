@@ -15,11 +15,6 @@ class InsideCircle(val circle: Circle): AggroStrategy{
         return circle.contains(Vector2(player.sprite.x, player.sprite.y))
     }
 }
-class DefaultAggro(): AggroStrategy{
-    override fun isAggroed(): Boolean {
-        return true
-    }
-}
 
 open class DefaultEnemyStrategy(override val actionList : List<EnemyAction>) : EnemyStrategy {
 

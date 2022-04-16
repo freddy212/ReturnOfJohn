@@ -1,30 +1,23 @@
 package com.mygdx.game.GameObjects.MoveableEntities.Characters
 
-import com.badlogic.gdx.graphics.g2d.Sprite
 import com.mygdx.game.DefaultTextureHandler
-import com.badlogic.gdx.graphics.g3d.Model
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.*
-import com.mygdx.game.AbstractClasses.DefaultMovement
 import com.mygdx.game.Collitions.IllegalMoveCollition
-import com.mygdx.game.EdgeOfLocationStrategies.NoAction
 import com.mygdx.game.Enums.Direction
 import com.mygdx.game.Enums.Layer
 import com.mygdx.game.GameObjects.Sensors.TalkSensor
 import com.mygdx.game.Interfaces.ModelInstanceHandler
-import com.mygdx.game.Managers.DefaultAssetHandler.assets
 import com.mygdx.game.SaveHandling.DefaultRemoveObjectSaveState
 import com.mygdx.game.SaveState.SaveStateEntity
 import com.mygdx.game.AbstractClasses.DefaultCharacter
-import com.mygdx.game.AbstractClasses.DefaultEnemyStrategy
-import com.mygdx.game.FightableEnitityData.EnemyHealthStrategy
-import com.mygdx.game.Interfaces.HealthStrategy
+import com.mygdx.game.HealthStrategy.EnemyHealthStrategy
 import com.mygdx.game.Locations.DefaultLocation
 import com.mygdx.game.UI.Dialogue.Conversations.engineerFirst
 
 class NPC(Position: Vector2, size: Vector2 = Vector2(128f,128f), val location: DefaultLocation?,
           modelHandler: ModelInstanceHandler = DefaultModelInstanceHandler("ManBlender.g3db",Position,size))
-    : DefaultCharacter(Position, size, location,modelHandler),
+    : DefaultCharacter(Position, size, location),
     SaveStateEntity by DefaultRemoveObjectSaveState(){
     override val texture = DefaultTextureHandler.getTexture("DefaultPerson.png")
     override val layer = Layer.ONGROUND

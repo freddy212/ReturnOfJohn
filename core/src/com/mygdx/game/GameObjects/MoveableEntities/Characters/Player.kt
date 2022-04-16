@@ -19,13 +19,12 @@ import com.mygdx.game.Managers.TooltipManager
 import com.mygdx.game.SaveState.DefaultSaveStateHandler
 import com.mygdx.game.SaveState.SaveStateEntity
 import com.mygdx.game.AbstractClasses.DefaultCharacter
-import com.mygdx.game.FightableEnitityData.PlayerHealthStrategy
+import com.mygdx.game.HealthStrategy.PlayerHealthStrategy
 import com.mygdx.game.Interfaces.FightableEntity
-import com.mygdx.game.Interfaces.HealthStrategy
 import com.mygdx.game.Utils.ResourceList
 
 class Player(Position: Vector2, size: Vector2, modelHandler: ModelInstanceHandler = DefaultModelInstanceHandler("ManBlender.g3db",Position,size))
-             : DefaultCharacter(Position, size,null,modelHandler),SaveStateEntity by DefaultSaveStateHandler(),
+             : DefaultCharacter(Position, size,null),SaveStateEntity by DefaultSaveStateHandler(),
                                                                          FightableEntity{
     override val texture = DefaultTextureHandler.getTexture("man.png")
     override var currentSpeed = 7f

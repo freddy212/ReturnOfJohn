@@ -42,7 +42,7 @@ class DefaultLocation(size: Vector2, Position: Vector2, private val initGameObje
     }
     fun initLocation() {
         val objects = initGameObjectsFunction()
-        objects.forEach{x -> addGameObject(x)}
+        objects.forEach{x -> x.addToLocation(this)}
     }
     fun addAdjacentLocation(defaultLocation: DefaultLocation){
         AdjacentLocations.add(defaultLocation)

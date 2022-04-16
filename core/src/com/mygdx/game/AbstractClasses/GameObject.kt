@@ -63,4 +63,8 @@ abstract class GameObject (val Position: Vector2, val size: Vector2,var defaultL
         sprite.setPosition(position.x,position.y)
         polygon.setPosition(position.x - polygon.vertices[0],position.y - polygon.vertices[1])
     }
+
+    fun currentPosition(): Vector2 {
+        return Vector2(sprite.x,sprite.y)
+    }
 }

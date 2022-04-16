@@ -18,6 +18,7 @@ import com.mygdx.game.addLocation
 import com.mygdx.game.addLocationRelative
 import getWastelandLocationFiveObjects
 import getWastelandLocationOneObjects
+import getWastelandLocationSevenObjects
 import getWastelandLocationThreeObjects
 
 class WastelandAreaInitializer: AreaInitializer {
@@ -34,6 +35,8 @@ class WastelandAreaInitializer: AreaInitializer {
         val location3 = addLocationRelative(location2,Vector2(700f, 700f), InsertDirection.RIGHT,area,InsertDirection.MIDDLE,::getWastelandLocationThreeObjects, wastelandLocationData)
         val location4 = addLocationRelative(location1,Vector2(1000f, 300f), InsertDirection.LEFT,area,InsertDirection.MIDDLE,{ listOf()}, wastelandLocationData)
         val location5 = addLocationRelative(location4,Vector2(3000f, 600f), InsertDirection.LEFT,area,InsertDirection.MIDDLE,::getWastelandLocationFiveObjects, wastelandDamageLocation)
+        val location6 = addLocationRelative(location1,Vector2(300f, 500f), InsertDirection.DOWN,area,InsertDirection.MIDDLE,{ listOf()}, wastelandLocationData)
+        val location7 = addLocationRelative(location6,Vector2(1500f, 1500f), InsertDirection.DOWN,area,InsertDirection.MIDDLE,::getWastelandLocationSevenObjects , wastelandDamageLocation)
         return area
     }
 }

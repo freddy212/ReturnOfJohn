@@ -10,7 +10,7 @@ import com.mygdx.game.Enums.Layer
 import com.mygdx.game.GameObjects.Abyss
 import com.mygdx.game.GameObjects.Door
 import com.mygdx.game.GameObjects.GenericGameObject
-import com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.SmallDevil
+import com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Mobs.SmallDevil
 import com.mygdx.game.GameObjects.Terrain.FireObject
 import com.mygdx.game.GameObjects.Terrain.WalkableTerrain
 import com.mygdx.game.Interfaces.AreaIdentifier

@@ -1,9 +1,8 @@
-package com.mygdx.game.FightableEnitityData
+package com.mygdx.game.HealthStrategy
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.g2d.Sprite
 import com.badlogic.gdx.math.Vector2
-import com.mygdx.game.Interfaces.FightableEntity
 import com.mygdx.game.Interfaces.HealthStrategy
 import com.mygdx.game.drawHealthBar
 

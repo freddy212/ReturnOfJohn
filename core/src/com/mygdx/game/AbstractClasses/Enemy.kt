@@ -3,9 +3,11 @@ package com.mygdx.game.AbstractClasses
 import com.badlogic.gdx.math.Circle
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.Collitions.PlayerHitCollition
-import com.mygdx.game.FightableEnitityData.EnemyHealthStrategy
+import com.mygdx.game.HealthStrategy.EnemyHealthStrategy
 import com.mygdx.game.Interfaces.EnemyStrategy
+import com.mygdx.game.Interfaces.HealthStrategy
 import com.mygdx.game.Interfaces.ModelInstanceHandler
+import com.mygdx.game.Interfaces.MoveCollition
 import com.mygdx.game.Locations.DefaultLocation
 import com.mygdx.game.Managers.AreaManager
 
@@ -13,37 +15,40 @@ abstract class Enemy(
     Position: Vector2,
     size: Vector2,
     var location: DefaultLocation?,
-    modelHandler: ModelInstanceHandler,
-    val aggroRadius: Float
-) : DefaultCharacter(Position, size, location, modelHandler){
+    val aggroRadius: Float,
+    collition:MoveCollition = PlayerHitCollition()
+) : DefaultCharacter(Position, size, location){
 
     private var aggroed = false
-    override val collition = PlayerHitCollition()
-    override val healthStrategy = EnemyHealthStrategy()
-
+    override val collition = collition
+    override val healthStrategy: HealthStrategy = EnemyHealthStrategy()
     abstract val enemyStrategy:EnemyStrategy
 
-    // ShootProjectile(::Fireball, Vector2(100f, 50f))
     init {
         this.onLocationExitActions.add(::changeLocation)
     }
 
     override fun frameTask() {
-        val aggroCircle = Circle(this.sprite.x, this.sprite.y, aggroRadius)
-        if (checkAggroed(InsideCircle(aggroCircle))) {
+        if (aggroed) {
             enemyStrategy.getActions(this).forEach {it.executeEnemyAction(this)}
+        } else {
+            val aggroCircle = Circle(this.sprite.x, this.sprite.y, aggroRadius)
+            setAggoroed(InsideCircle(aggroCircle))
         }
         super.frameTask()
     }
 
     override fun isHit(launchUnitVector: Vector2) {
-        checkAggroed(DefaultAggro())
+        aggroed = true
         super.isHit(launchUnitVector)
     }
 
-    fun checkAggroed(aggroStrategy: AggroStrategy): Boolean {
-        aggroed = aggroed || aggroStrategy.isAggroed()
+    fun isAggroed(): Boolean {
         return aggroed
+    }
+
+    fun setAggoroed(aggroStrategy: AggroStrategy) {
+        aggroed = aggroed || aggroStrategy.isAggroed()
     }
 
     fun changeLocation(newLocation: DefaultLocation) {

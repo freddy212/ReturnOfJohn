@@ -132,7 +132,6 @@ fun getFireLandsGateWayLocation(): List<GameObject> {
     val fireGateCollition = object : MoveCollition by IllegalMoveCollition{
         override fun collitionHappened(entity: GameObject, collidedObject: GameObject) {
             if(entity is Boulder){
-                entity.removeFromLocation()
                 SignalManager.emitSignal(Signal(SIGNALTYPE.REMOVE_OBJECT,(collidedObject as SaveStateEntity).entityId))
             }
         }
