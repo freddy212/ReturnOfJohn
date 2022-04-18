@@ -6,7 +6,7 @@ import com.mygdx.game.UI.Dialogue.Sentence
 class ConversationHandler(firstConvo: Conversation, identifier: String) {
     private val conversations = mutableMapOf<String,Conversation>()
     private var currentStep = 0
-    private lateinit var activeConversation: Conversation
+    private var activeConversation: Conversation
 
     init {
         conversations[identifier] = firstConvo
@@ -24,7 +24,6 @@ class ConversationHandler(firstConvo: Conversation, identifier: String) {
     fun setConversation(identifier: String){
         activeConversation = conversations[identifier]!!
     }
-    //Returns true if there are more sentences left
     fun continueConversation():Boolean{
         if(activeConversation.sentenceList.size > currentStep + 1){
             currentStep += 1

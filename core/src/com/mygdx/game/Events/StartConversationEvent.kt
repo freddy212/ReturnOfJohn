@@ -8,7 +8,6 @@ import com.mygdx.game.UI.Dialogue.Conversation
 import com.mygdx.game.player
 
 class StartConversationEvent(val npc: NPC): Event {
-    val conversationHandler = npc.conversationsHandler
     private val readSentenceEvent = DrawSentenceEvent(npc.conversationsHandler)
     override fun execute() {
         ConversationStateManager.startConversation()

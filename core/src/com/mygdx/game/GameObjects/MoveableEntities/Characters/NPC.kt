@@ -40,9 +40,6 @@ class NPC(Position: Vector2, size: Vector2 = Vector2(128f,128f), val location: D
     private val sensorDown = TalkSensor(this.bottomleft - Vector2(0f, 62f), Vector2(128f, 62f), this, Direction.DOWN)
     private val sensors = listOf(sensorUp,sensorDown,sensorLeft,sensorRight)
 
-    init {
-        sensors.forEach{location!!.addGameObject(it)}
-    }
     override fun move(directionUnitVector: Vector2): Boolean {
         /*val sucessfullMove = super.move(getDirectionUnitVector(this.direction))
         if(sucessfullMove){

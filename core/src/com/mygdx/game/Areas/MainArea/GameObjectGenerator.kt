@@ -40,10 +40,6 @@ fun getLocationOneObjects(): List<GameObject>{
 
 fun spawnEngineerItems(location: DefaultLocation): List<GameObject>{
     val itemTable = GenericGameObject(location.topright - Vector2(200f,150f),Vector2(120f,60f),"ItemTable.png",Layer.ONGROUND,location,IllegalMoveCollition)
-    /*val shopItem = ShopItem("shield-front.png", listOf(
-        Item(ItemType.WORLDLEAF,2,DefaultTextureHandler.getTexture("WorldLeaf.png")),
-        Item(ItemType.KEY,1,DefaultTextureHandler.getTexture("Key.png"))),
-        middleOfObject(itemTable.originalMiddle, Vector2(60f,40f)),Vector2(60f,40f),location)*/
     val shopItem = ShopItem("shield-front.png", listOf(
         Item(ItemType.FLINT,3,DefaultTextureHandler.getTexture("Flint.png")),
         Item(ItemType.WOOD,1,DefaultTextureHandler.getTexture("wood.png"))),

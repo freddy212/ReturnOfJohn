@@ -12,6 +12,7 @@ class AddGameObject(val objectCreationMethod: (DefaultLocation) -> List<GameObje
     override val signaltype = SIGNALTYPE.ADD_OBJECT
 
     override fun triggerEvent(signal: Signal) {
+        // I need to have an additional check to not add anything twice.
         val identifier = AreaIdentifier.values().first { it.ordinal == signal.areaIdentifier}
         val location = LocationManager.findLocation(signal.stringValue,identifier)
 
