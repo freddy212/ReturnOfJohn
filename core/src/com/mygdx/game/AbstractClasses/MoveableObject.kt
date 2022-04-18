@@ -9,7 +9,7 @@ abstract class MoveableObject(Position: Vector2, size: Vector2, defaultLocation:
     abstract var currentSpeed : Float
     abstract val movementStrategy: MovementStrategy
     private var canMove = true
-    abstract val unitVectorDirection: Vector2
+    abstract var unitVectorDirection: Vector2
 
     open fun move(unitVectorDirection: Vector2): Boolean{
         if(canMove){

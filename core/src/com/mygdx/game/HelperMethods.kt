@@ -264,14 +264,18 @@ fun HitOppositeDirection(
         fightableEntity: FightableEntity
 ) {
         val character = fightableEntity as DefaultCharacter
-        val centerPointBoulder =
+        val centerPointObject =
                 Vector2(entity.sprite.x + entity.sprite.width / 2, entity.sprite.y + entity.sprite.height / 2)
         val centerPointPlayer =
                 Vector2(character.sprite.x + character.sprite.width / 2, character.sprite.y + character.sprite.height / 2)
-        val oppositeDirection = getOppositeUnitVector(centerPointPlayer, centerPointBoulder)
+        val oppositeDirection = getOppositeUnitVector(centerPointPlayer, centerPointObject)
         character.isHit(oppositeDirection)
 }
 fun ResetPlayer(playerSaveState: PlayerSaveState){
         player.setPosition(Vector2(playerSaveState.playerXPos, playerSaveState.playerYPos))
         player.health = player.maxHealth
+}
+
+fun Radians(float: Float): Float{
+        return (float * (PI/180f)).toFloat()
 }

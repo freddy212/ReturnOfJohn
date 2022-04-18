@@ -67,7 +67,7 @@ abstract class DefaultCharacter(Position: Vector2, size: Vector2, location: Defa
             death()
         }
     }
-    open fun isHit(launchUnitVector: Vector2){
+    override fun isHit(launchUnitVector: Vector2){
         this.health -= 10f
         originalSpeed = originalSpeed ?: currentSpeed
         characterState = CharacterState.STUNNED

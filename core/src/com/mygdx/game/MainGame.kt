@@ -18,6 +18,7 @@ import com.mygdx.game.GameObjects.ItemAbilities.IcicleAbility
 import com.mygdx.game.GameObjects.ItemAbilities.ShieldAbility
 import com.mygdx.game.SaveHandling.FileHandler
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Player
+import com.mygdx.game.GameObjects.MoveableEntities.Projectiles.Fireball
 import com.mygdx.game.Interfaces.AreaIdentifier
 import com.mygdx.game.Managers.*
 import com.mygdx.game.SaveHandling.DefaultSaveableObject
@@ -98,6 +99,8 @@ class MainGame : ApplicationAdapter() {
         val savedSignals:List<Signal> = saves.map { x -> Json.decodeFromString(x)}
         savedSignals.forEach { SignalManager.emitSignal(it,false) }
         player.addAbility(AxeAbility())
+        player.addAbility(IcicleAbility())
+        player.addAbility(ShieldAbility())
             /* val savedStates:List<DefaultSaveableObject> = saves.map { x -> Json.decodeFromString(x) }
              val savedEntities:List<SaveStateEntity> = AreaManager.getAllGameObjects()
                  .filter {it is SaveStateEntity}.map { it as SaveStateEntity }.filter {savedStates.map {it.entityId}.contains(it.entityId)}

@@ -9,10 +9,10 @@ import com.mygdx.game.player
 class PlayerHitCollition: MoveCollition by IllegalMoveCollition {
     override fun collitionHappened(entity: GameObject, collidedObject: GameObject) {
         if(entity is Player){
-            HitOppositeDirection(collidedObject, player)
+            player.HitAction(collidedObject, player)
         }
         else if(collidedObject is Player){
-            HitOppositeDirection(entity, player)
+            player.HitAction(entity, player)
         }
     }
 }

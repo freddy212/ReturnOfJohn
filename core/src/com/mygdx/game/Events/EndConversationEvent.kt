@@ -13,7 +13,7 @@ class EndConversationEvent(val npc: NPC): Event {
     override fun execute(){
         conversationHandler.resetConversation()
 
-        EventManager.eventManager.removeIf(Predicate {x -> x is DrawSentenceEvent})
+        EventManager.eventManager.removeIf { x -> x is DrawSentenceEvent }
         ConversationStateManager.resetConversation()
 
         npc.enableMoving()

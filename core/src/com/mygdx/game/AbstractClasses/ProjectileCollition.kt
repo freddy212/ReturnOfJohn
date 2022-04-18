@@ -8,6 +8,7 @@ abstract class ProjectileCollition: MoveCollition{
     override fun collitionHappened(entity: GameObject, collidedObject: GameObject) {
         if(entity is Projectile && collidedObject is FightableEntity){
             collidedObject.HitAction(entity,collidedObject)
+            entity.removeFromLocation()
         }
     }
 

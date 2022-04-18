@@ -14,7 +14,7 @@ import com.mygdx.game.Interfaces.FightableEntity
 class AxeSwingCollision: EveryFrameCollition {
     override fun collitionHappened(entity: GameObject, collidedObject: GameObject) {
         if(entity is Axe && collidedObject is FightableEntity){
-            HitOppositeDirection(entity, collidedObject)
+            collidedObject.HitAction(entity,collidedObject)
         }
         if(entity is Axe && collidedObject is SmallBoulder){
             collidedObject.defaultLocation!!.removeGameObject(collidedObject)

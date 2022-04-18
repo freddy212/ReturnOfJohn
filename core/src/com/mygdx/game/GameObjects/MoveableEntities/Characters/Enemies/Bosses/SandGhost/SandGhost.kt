@@ -20,6 +20,7 @@ import com.mygdx.game.getOppositeUnitVector
 import com.mygdx.game.getUnitVectorTowardsPoint
 import com.mygdx.game.*
 import com.mygdx.game.AbstractClasses.GameObject
+import com.mygdx.game.Enums.CharacterState
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Bosses.Boss
 import com.mygdx.game.Interfaces.FightableEntity
 
@@ -29,19 +30,15 @@ class SandGhost(Position: Vector2, size: Vector2 = Vector2(150f,150f),location: 
     override val texture = DefaultTextureHandler.getTexture("BossFace.png")
     override val layer = Layer.PERSON
     override var direction = Direction.DOWN
-    override fun HitAction(other: GameObject, thisEntity: FightableEntity) {
-
-    }
     private val randomAction = RandomAction(listOf( EnemyMove(0f,::getUnitVectorTowardsPoint),
         EnemyMove(200f,::getUnitVectorTowardsPoint),
         EnemyMove(200f,::getOppositeUnitVector)),DefaultTimer(2f))
-    override val enemyStrategy =  DefaultEnemyStrategy(listOf(randomAction,
-        ShootProjectile(::SmallBoulder, Vector2(50f, 50f))))
-    override var health = 50f
-    override val maxHealth = 50f
+    override val enemyStrategy =  DefaultEnemyStrategy(listOf(randomAction))
+    override var health = 100f
+    override val maxHealth = 100f
 
-    val sandHand1 = SandHand(currentPosition() - Vector2(250f,100f),Vector2(143f,128f), location, false)
-    val sandHand2 = SandHand(currentPosition() + Vector2(250f,-100f),Vector2(143f,128f), location, true)
+    val sandHand1 = SandHand(currentPosition(),Vector2(143f,128f), location, false, this)
+    val sandHand2 = SandHand(currentPosition(),Vector2(143f,128f), location, true, this)
 
     init{
         polygon.setScale(0.8f,0.8f)
@@ -57,5 +54,13 @@ class SandGhost(Position: Vector2, size: Vector2 = Vector2(150f,150f),location: 
         listOf(sandHand1,sandHand2).forEach { it.removeFromLocation() }
     }
 
-    override var currentSpeed = 0f
+    override fun HitAction(other: GameObject, thisEntity: FightableEntity) {
+        isHit(Vector2(0f,0f))
+    }
+
+    override fun isHit(launchUnitVector: Vector2) {
+        this.health -= 10f
+    }
+
+    override var currentSpeed = 2f
 }
