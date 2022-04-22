@@ -19,6 +19,7 @@ import com.mygdx.game.Timer.DefaultTimer
 import com.mygdx.game.getOppositeUnitVector
 import com.mygdx.game.getUnitVectorTowardsPoint
 import com.mygdx.game.*
+import com.mygdx.game.AI.EnemyActions.MoveRight
 import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.Enums.CharacterState
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Bosses.Boss
@@ -30,15 +31,12 @@ class SandGhost(Position: Vector2, size: Vector2 = Vector2(150f,150f),location: 
     override val texture = DefaultTextureHandler.getTexture("BossFace.png")
     override val layer = Layer.PERSON
     override var direction = Direction.DOWN
-    private val randomAction = RandomAction(listOf( EnemyMove(0f,::getUnitVectorTowardsPoint),
-        EnemyMove(200f,::getUnitVectorTowardsPoint),
-        EnemyMove(200f,::getOppositeUnitVector)),DefaultTimer(2f))
-    override val enemyStrategy =  DefaultEnemyStrategy(listOf(randomAction))
+    val sandHand1 = SandHand(currentPosition() - Vector2(200f,0f),Vector2(143f,128f), location, false, this)
+    val sandHand2 = SandHand(currentPosition() + Vector2(200f,0f),Vector2(143f,128f), location, true, this)
+    private val randomAction = RandomAction(listOf( EnemyMove(100f,::getUnitVectorTowardsPoint)),DefaultTimer(1f))
+    override val enemyStrategy =  DefaultEnemyStrategy(listOf(randomAction, MoveRight(), ExtendArms(sandHand1,sandHand2,this), GhostBoulder(this)))
     override var health = 100f
     override val maxHealth = 100f
-
-    val sandHand1 = SandHand(currentPosition(),Vector2(143f,128f), location, false, this)
-    val sandHand2 = SandHand(currentPosition(),Vector2(143f,128f), location, true, this)
 
     init{
         polygon.setScale(0.8f,0.8f)
@@ -59,11 +57,12 @@ class SandGhost(Position: Vector2, size: Vector2 = Vector2(150f,150f),location: 
     }
 
     override fun isHit(launchUnitVector: Vector2) {
-        this.health -= 10f
+        setAggroed()
+        loseHealth(10f)
     }
 
     override fun setRotation(unitVectorDirection: Vector2, gameObject: GameObject, angleModifier: Float) {
     }
 
-    override var currentSpeed = 2f
+    override var currentSpeed = 3f
 }

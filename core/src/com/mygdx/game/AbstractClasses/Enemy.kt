@@ -6,7 +6,6 @@ import com.mygdx.game.Collitions.PlayerHitCollition
 import com.mygdx.game.HealthStrategy.EnemyHealthStrategy
 import com.mygdx.game.Interfaces.EnemyStrategy
 import com.mygdx.game.Interfaces.HealthStrategy
-import com.mygdx.game.Interfaces.ModelInstanceHandler
 import com.mygdx.game.Interfaces.MoveCollition
 import com.mygdx.game.Locations.DefaultLocation
 import com.mygdx.game.Managers.AreaManager
@@ -26,6 +25,8 @@ abstract class Enemy(
 
     init {
         this.onLocationExitActions.add(::changeLocation)
+        this.onLocationEnterActions.add(::resetAggro)
+        this.onLocationEnterActions.add(::resetHealth)
     }
 
     override fun frameTask() {
@@ -33,13 +34,13 @@ abstract class Enemy(
             enemyStrategy.getActions(this).forEach {it.executeEnemyAction(this)}
         } else {
             val aggroCircle = Circle(this.sprite.x, this.sprite.y, aggroRadius)
-            setAggoroed(InsideCircle(aggroCircle))
+            checkAggroed(InsideCircle(aggroCircle))
         }
         super.frameTask()
     }
 
     override fun isHit(launchUnitVector: Vector2) {
-        aggroed = true
+        setAggroed()
         super.isHit(launchUnitVector)
     }
 
@@ -47,7 +48,7 @@ abstract class Enemy(
         return aggroed
     }
 
-    fun setAggoroed(aggroStrategy: AggroStrategy) {
+    fun checkAggroed(aggroStrategy: AggroStrategy) {
         aggroed = aggroed || aggroStrategy.isAggroed()
     }
 
@@ -58,6 +59,15 @@ abstract class Enemy(
             location = newLocation
             location?.addGameObject(this)
         }
+    }
+    fun resetAggro() {
+        aggroed = false
+    }
+    fun setAggroed(){
+        aggroed = true
+    }
+    fun resetHealth() {
+        health = maxHealth
     }
 
     override fun death() {

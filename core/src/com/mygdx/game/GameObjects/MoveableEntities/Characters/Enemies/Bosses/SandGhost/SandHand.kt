@@ -19,7 +19,7 @@ import com.mygdx.game.*
 import com.mygdx.game.GameObjects.ItemAbilities.Shield
 import com.mygdx.game.Trimer.DelayTimer
 
-class SandHand(Position: Vector2, size: Vector2, location: DefaultLocation?, right: Boolean, val sandGhost: SandGhost)
+class SandHand(Position: Vector2, size: Vector2, location: DefaultLocation?, val right: Boolean, val sandGhost: SandGhost)
     : MoveableObject(Position, size, location),
     SaveStateEntity by DefaultRemoveObjectSaveState(),
     FightableEntity{
@@ -29,23 +29,30 @@ class SandHand(Position: Vector2, size: Vector2, location: DefaultLocation?, rig
     override var currentSpeed = 1f
     override val movementStrategy = DefaultMovement(NoAction())
     override var unitVectorDirection = Vector2(0f,0f)
-    val radius = 250f
+    val baseRadius = 200f
+    var radius = baseRadius
     var angle = if(right) 0f else 180f
    // get() = if (angle < 0f) 359f else angle
     var increment = 1.5f
 
     init {
         if (right){
-            val pos = Vector2(radius * cos(Radians(angle)), radius * sin(Radians(angle)))
-            this.setPosition(this.currentPosition() + pos)
+            /*val pos = Vector2(radius * cos(Radians(angle)), radius * sin(Radians(angle)))
+            this.setPosition(this.currentPosition() + pos)*/
             this.sprite.flip(true,false)
             polygon.translate(polygon.x - 10f,polygon.y - 10f)
         } else {
-            val pos = Vector2(radius * cos(Radians(angle)), radius * sin(Radians(angle)))
-            this.setPosition(this.currentPosition() + pos)
+           /* val pos = Vector2(radius * cos(Radians(angle)), radius * sin(Radians(angle)))
+            this.setPosition(this.currentPosition() + pos)*/
             polygon.translate(polygon.x + 10f,polygon.y - 10f)
         }
         polygon.setScale(0.8f,0.8f)
+        onLocationEnterActions.add(::initHand)
+    }
+
+    private fun initHand(){
+        angle = if(right) 0f else 180f
+        radius = baseRadius
     }
 
     override fun frameTask() {

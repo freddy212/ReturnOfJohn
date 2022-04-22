@@ -10,8 +10,10 @@ import com.mygdx.game.*
 import com.mygdx.game.EdgeOfLocationStrategies.NoAction
 import com.mygdx.game.Enums.CharacterState
 import com.mygdx.game.Enums.getDirectionUnitVector
+import com.mygdx.game.Events.ImmuneEvent
 import com.mygdx.game.Interfaces.*
 import com.mygdx.game.Locations.DefaultLocation
+import com.mygdx.game.Managers.EventManager
 import com.mygdx.game.Managers.LocationManager
 
 abstract class DefaultCharacter(Position: Vector2, size: Vector2, location: DefaultLocation?) :MoveableObject(Position, size, location),
@@ -30,6 +32,8 @@ abstract class DefaultCharacter(Position: Vector2, size: Vector2, location: Defa
     override var canChangeDirection = true
     override var unitVectorDirection = Vector2(0f,0f)
     override val movementStrategy = DefaultMovement(NoAction())
+    val immunityFrames = 30f
+    var immuneToDamage = false
     abstract fun death()
 
     init {
@@ -68,7 +72,7 @@ abstract class DefaultCharacter(Position: Vector2, size: Vector2, location: Defa
         }
     }
     override fun isHit(launchUnitVector: Vector2){
-        this.health -= 10f
+        loseHealth(10f)
         originalSpeed = originalSpeed ?: currentSpeed
         characterState = CharacterState.STUNNED
         this.launchUnitVector = launchUnitVector
@@ -82,5 +86,16 @@ abstract class DefaultCharacter(Position: Vector2, size: Vector2, location: Defa
             characterState = CharacterState.FREE
         }
         super.move(directionUnitVector)
+    }
+    fun loseHealth(amount: Float) {
+        if(!immuneToDamage) {
+            this.health -= amount
+        }
+        makeImmune()
+    }
+
+    fun makeImmune(){
+        immuneToDamage = true
+        EventManager.eventManager.add(ImmuneEvent(immunityFrames,this))
     }
 }

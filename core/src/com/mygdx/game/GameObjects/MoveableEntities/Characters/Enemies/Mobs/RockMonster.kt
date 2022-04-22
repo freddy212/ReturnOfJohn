@@ -32,8 +32,7 @@ class RockMonster(Position: Vector2, size: Vector2 = Vector2(128f,128f),location
     override var currentSpeed = 2f
     override var direction = Direction.UP
     private val randomAction = RandomAction(listOf( EnemyMove(0f,::getUnitVectorTowardsPoint),
-        EnemyMove(200f,::getUnitVectorTowardsPoint),
-        EnemyMove(200f,::getOppositeUnitVector)),DefaultTimer(2f))
+        EnemyMove(200f,::getUnitVectorTowardsPoint)),DefaultTimer(2f))
     override val enemyStrategy =  DefaultEnemyStrategy(listOf(randomAction,
         ShootProjectile(::SmallBoulder, Vector2(50f, 50f))))
     override var health = 50f

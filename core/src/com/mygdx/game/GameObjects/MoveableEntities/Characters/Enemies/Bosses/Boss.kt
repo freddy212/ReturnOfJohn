@@ -23,11 +23,7 @@ abstract class Boss(
 
     override val healthStrategy = BossHealthStrategy(boolHolder)
     override fun frameTask() {
-        val beforeAggro = isAggroed()
+        boolHolder.value = isAggroed()
         super.frameTask()
-        val afterAggro = isAggroed()
-        if(!beforeAggro && afterAggro){
-            boolHolder.value = true
-        }
     }
 }

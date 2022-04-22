@@ -11,6 +11,10 @@ abstract class MoveableObject(Position: Vector2, size: Vector2, defaultLocation:
     private var canMove = true
     abstract var unitVectorDirection: Vector2
 
+    init {
+        onLocationEnterActions.add(::resetObject)
+    }
+
     open fun move(unitVectorDirection: Vector2): Boolean{
         if(canMove){
             val moveSuccessfull = movementStrategy.moveEntity(this,unitVectorDirection)
@@ -29,4 +33,9 @@ abstract class MoveableObject(Position: Vector2, size: Vector2, defaultLocation:
     fun canMove():Boolean{
         return canMove
     }
+
+    private fun resetObject(){
+        this.setPosition(Position)
+    }
+
 }

@@ -10,7 +10,7 @@ import com.mygdx.game.distance
 import com.mygdx.game.getUnitVectorTowardsPoint
 import com.mygdx.game.player
 
-class EnemyMove(private val distanceToStop: Float, private val directionFunction: (Vector2,Vector2) -> Vector2): EnemyAction {
+class EnemyMove(private val distanceToStop: Float, private val directionFunction: (Vector2,Vector2) -> Vector2): EnemyAction() {
     override fun executeEnemyAction(enemy: Enemy) {
         enemy.move(directionFunction(Vector2(enemy.sprite.x,enemy.sprite.y), Vector2(player.sprite.x, player.sprite.y)))
     }
@@ -22,4 +22,5 @@ class EnemyMove(private val distanceToStop: Float, private val directionFunction
         /*val objectsColliding =  GetCollidingObjects(enemy.polygon,LocationManager.EveryFrameCollitionGameObjects)
         return objectsColliding.map{it.collition}.any{it is DOTCollition}*/
     }
+
 }

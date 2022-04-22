@@ -48,7 +48,7 @@ abstract class GameObject (val Position: Vector2, val size: Vector2,var defaultL
             property.frameTask()
         }
     }
-    open val onLocationEnterActions: MutableList<()-> Unit> = mutableListOf({})
+    val onLocationEnterActions: MutableList<()-> Unit> = mutableListOf({})
     val onLocationExitActions: MutableList<(newLocation: DefaultLocation)->Unit> = mutableListOf({})
     constructor(Position: Vector2, size: Vector2): this(Position,size,null)
 

@@ -30,6 +30,7 @@ import kotlin.math.PI
 import kotlin.math.atan2
 import kotlin.math.pow
 import kotlin.math.sqrt
+import kotlin.random.Random
 
 
 var font: BitmapFont = BitmapFont()
@@ -272,10 +273,22 @@ fun HitOppositeDirection(
         character.isHit(oppositeDirection)
 }
 fun ResetPlayer(playerSaveState: PlayerSaveState){
+        LocationManager.ActiveGameObjects.forEach {it.onLocationEnterActions.forEach { it() }}
         player.setPosition(Vector2(playerSaveState.playerXPos, playerSaveState.playerYPos))
         player.health = player.maxHealth
 }
 
 fun Radians(float: Float): Float{
         return (float * (PI/180f)).toFloat()
+}
+
+fun generateEnemyProjectile(projectileFactory: (Position: Vector2, Size: Vector2, defaultLocation: DefaultLocation, unitVectorDirection:Vector2) -> Projectile,enemy: Enemy, size: Vector2){
+        var unitVector = getUnitVectorTowardsPoint(Vector2(enemy.sprite.x, enemy.sprite.y), Vector2(player.sprite.x, player.sprite.y))
+        val random = Random.nextInt(2)
+        val clone = LocationManager.newDefaultLocation.gameObjects.find { it is IceClone }
+        if(random == 1 && clone != null){
+                unitVector = getUnitVectorTowardsPoint(Vector2(enemy.sprite.x, enemy.sprite.y), Vector2(clone.sprite.x, clone.sprite.y))
+        }
+        val enemyStart = enemy.currentMiddle
+        enemy.defaultLocation!!.addGameObject(projectileFactory(enemyStart + (unitVector * 100f) - Vector2(size.x / 2,size.y / 2),size,enemy.defaultLocation!!,unitVector))
 }
