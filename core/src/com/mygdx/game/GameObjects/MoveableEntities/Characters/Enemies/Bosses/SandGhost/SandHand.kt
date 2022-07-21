@@ -1,5 +1,6 @@
 package com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Bosses.SandGhost
 
+import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch
 import com.badlogic.gdx.graphics.g2d.Sprite
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.AbstractClasses.*
@@ -32,18 +33,13 @@ class SandHand(Position: Vector2, size: Vector2, location: DefaultLocation?, val
     val baseRadius = 200f
     var radius = baseRadius
     var angle = if(right) 0f else 180f
-   // get() = if (angle < 0f) 359f else angle
     var increment = 1.5f
 
     init {
         if (right){
-            /*val pos = Vector2(radius * cos(Radians(angle)), radius * sin(Radians(angle)))
-            this.setPosition(this.currentPosition() + pos)*/
             this.sprite.flip(true,false)
             polygon.translate(polygon.x - 10f,polygon.y - 10f)
         } else {
-           /* val pos = Vector2(radius * cos(Radians(angle)), radius * sin(Radians(angle)))
-            this.setPosition(this.currentPosition() + pos)*/
             polygon.translate(polygon.x + 10f,polygon.y - 10f)
         }
         polygon.setScale(0.8f,0.8f)
@@ -53,6 +49,7 @@ class SandHand(Position: Vector2, size: Vector2, location: DefaultLocation?, val
     private fun initHand(){
         angle = if(right) 0f else 180f
         radius = baseRadius
+        increment = 1.5f
     }
 
     override fun frameTask() {
@@ -83,6 +80,15 @@ class SandHand(Position: Vector2, size: Vector2, location: DefaultLocation?, val
 
     override fun isHit(launchUnitVector: Vector2) {
         sandGhost.isHit(launchUnitVector)
+    }
+
+    override fun render(batch: PolygonSpriteBatch) {
+        if(sandGhost.immuneToDamage){
+            sprite.setAlpha(0.5f)
+        } else {
+            sprite.setAlpha(1f)
+        }
+        super.render(batch)
     }
 }
 

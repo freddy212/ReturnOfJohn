@@ -37,7 +37,7 @@ fun getLocationThreeCaveObjects(): List<GameObject>{
 }
 fun getLocationFourCaveObjects():List<GameObject>{
     val location = LocationManager.findLocation("location4",AreaIdentifier.DUNGEONAREA)
-    val position = location.Position
+    val position = location.initPosition
     val door = LockedDoor(position, Vector2(location.size.x,100f),location)
     val waterGunSize = Vector2(60f,40f)
     val waterGun = WaterGunItemObject(middleOfObject(location.originalMiddle,waterGunSize),waterGunSize,Layer.AIR,location)

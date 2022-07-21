@@ -6,11 +6,15 @@ import com.mygdx.game.HitOppositeDirection
 import com.mygdx.game.Interfaces.MoveCollition
 import com.mygdx.game.player
 
-class PlayerHitCollition: MoveCollition by IllegalMoveCollition {
+class PlayerHitCollition: MoveCollition {
+    override var canMoveAfterCollition = true
+
     override fun collitionHappened(entity: GameObject, collidedObject: GameObject) {
+
         if(entity is Player){
             player.HitAction(collidedObject, player)
         }
+
         else if(collidedObject is Player){
             player.HitAction(entity, player)
         }

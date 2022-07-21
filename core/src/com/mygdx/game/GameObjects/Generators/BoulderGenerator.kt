@@ -24,7 +24,7 @@ class BoulderGenerator(Position: Vector2, size: Vector2, unitVectorDirection: Ve
 
     override fun generateProjectile(){
         val Position = Vector2(this.sprite.x + this.sprite.width/2,this.sprite.y + this.sprite.height /2) + getDistanceFromGenerator(unitVectorDirection)
-        val boulder = Boulder(Position,Vector2(size.x - (size.x / 10) ,size.y - (size.y / 10)),defaultLocation,Vector2(unitVectorDirection.x,unitVectorDirection.y))
+        val boulder = Boulder(Position,Vector2(size.x - (size.x / 10) ,size.y - (size.y / 10)),defaultLocation,Vector2(unitVectorDirection.x,unitVectorDirection.y), this)
         if(genereateFireBoulder) boulder.properties.add(Fire(DefaultEvent(),boulder))
         defaultLocation!!.addGameObject(boulder)
     }

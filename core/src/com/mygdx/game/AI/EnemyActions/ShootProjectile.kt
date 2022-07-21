@@ -14,7 +14,7 @@ import com.mygdx.game.Timer.DefaultTimer
 import kotlin.random.Random
 import kotlin.reflect.KFunction4
 
-class ShootProjectile(val projectileFactory: (Position: Vector2, Size: Vector2, defaultLocation: DefaultLocation, unitVectorDirection:Vector2) -> Projectile, val size:Vector2): EnemyAction() {
+class ShootProjectile(val projectileFactory: (Position: Vector2, Size: Vector2, defaultLocation: DefaultLocation, unitVectorDirection:Vector2, shooter:GameObject) -> Projectile, val size:Vector2): EnemyAction() {
     val timer = DefaultTimer(2f)
     override fun executeEnemyAction(enemy: Enemy) {
         generateEnemyProjectile(projectileFactory,enemy,size)

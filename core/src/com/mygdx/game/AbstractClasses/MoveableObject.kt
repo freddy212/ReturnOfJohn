@@ -1,7 +1,7 @@
 package com.mygdx.game.AbstractClasses
 
 import com.badlogic.gdx.math.Vector2
-import com.mygdx.game.Interfaces.DynamicEntity
+import com.mygdx.game.GameObjects.MoveableEntities.Characters.Player
 import com.mygdx.game.Interfaces.MovementStrategy
 import com.mygdx.game.Locations.DefaultLocation
 
@@ -35,7 +35,11 @@ abstract class MoveableObject(Position: Vector2, size: Vector2, defaultLocation:
     }
 
     private fun resetObject(){
-        this.setPosition(Position)
+        if(this is Player){
+            this.setPosition(Vector2(sprite.x,sprite.y))
+        } else{
+            this.setPosition(startingPosition)
+        }
     }
 
 }

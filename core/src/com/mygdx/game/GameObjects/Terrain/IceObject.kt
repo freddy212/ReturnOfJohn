@@ -20,6 +20,6 @@ class IceObject(Position: Vector2, size: Vector2, defaultLocation: DefaultLocati
 
     init {
         properties.add(Ice(this))
-        defaultLocation?.addGameObject(GenericGameObject(this.Position,this.size,"sensor.png",Layer.BEFORELOCATION,defaultLocation,DOTCollition))
+        defaultLocation?.addGameObject(GenericGameObject(this.initPosition,this.size,"sensor.png",Layer.BEFORELOCATION,defaultLocation,DOTCollition))
     }
 }

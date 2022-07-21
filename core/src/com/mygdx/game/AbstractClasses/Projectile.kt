@@ -4,8 +4,9 @@ import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.Locations.DefaultLocation
 
 abstract class Projectile(Position: Vector2, size: Vector2, defaultLocation: DefaultLocation?,
-                          override var unitVectorDirection: Vector2) : MoveableObject(Position, size, defaultLocation),
+                          override var unitVectorDirection: Vector2, shooter: GameObject) : MoveableObject(Position, size, defaultLocation),
     RotationalObject by DefaultRotationalObject(){
+    var shooter = shooter
     init {
         onLocationExitActions.add(::removeProjectile)
     }

@@ -27,6 +27,7 @@ abstract class Enemy(
         this.onLocationExitActions.add(::changeLocation)
         this.onLocationEnterActions.add(::resetAggro)
         this.onLocationEnterActions.add(::resetHealth)
+        this.onLocationEnterActions.add(::cleanUpAbilties)
     }
 
     override fun frameTask() {
@@ -49,7 +50,9 @@ abstract class Enemy(
     }
 
     fun checkAggroed(aggroStrategy: AggroStrategy) {
-        aggroed = aggroed || aggroStrategy.isAggroed()
+        if(aggroStrategy.isAggroed()){
+            setAggroed()
+        }
     }
 
     fun changeLocation(newLocation: DefaultLocation) {
@@ -63,7 +66,10 @@ abstract class Enemy(
     fun resetAggro() {
         aggroed = false
     }
-    fun setAggroed(){
+    fun cleanUpAbilties(){
+        enemyStrategy.actionList.forEach { it.cleanUp() }
+    }
+    open fun setAggroed(){
         aggroed = true
     }
     fun resetHealth() {

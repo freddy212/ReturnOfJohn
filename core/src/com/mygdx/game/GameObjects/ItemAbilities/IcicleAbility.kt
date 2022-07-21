@@ -18,9 +18,7 @@ class IcicleAbility(): CharacterAbility() {
     override val cooldownTimer = DefaultTimer(1f)
 
     override fun activeAction(){
-        if(cooldownTimer.tryUseCooldown()) {
-            val icicle = Icicle(player.currentMiddle - Vector2(50f,17f) + (player.unitVectorDirection * 100f),Vector2(100f,33f),LocationManager.newDefaultLocation, player.unitVectorDirection)
-            icicle.defaultLocation!!.addGameObject(icicle)
-        }
+        val icicle = Icicle(player.currentMiddle - Vector2(50f,17f) + (player.unitVectorDirection * 100f),Vector2(100f,33f),LocationManager.newDefaultLocation, player.unitVectorDirection, player)
+        icicle.defaultLocation!!.addGameObject(icicle)
     }
 }

@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Texture
 import com.mygdx.game.GameObjects.ItemAbilities.*
 import com.mygdx.game.Interfaces.Timer
 
-enum class AbilityId{AXE,ICECLONE,ICICLE,SHIELD,WATERBALL}
+enum class AbilityId{AXE,ICECLONE,ICICLE,SHIELD,WATERBALL, FIREBALL}
 abstract class CharacterAbility(){
     abstract val abilityId: AbilityId
     abstract val triggerKey: Int
@@ -17,6 +17,12 @@ abstract class CharacterAbility(){
     open fun InactiveAction(){
 
     }
+
+    fun tryUseAction() {
+        if(cooldownTimer.tryUseCooldown()){
+            this.activeAction()
+        }
+    }
 }
 
 fun getAbility(abilityId: AbilityId): CharacterAbility{
@@ -26,5 +32,6 @@ fun getAbility(abilityId: AbilityId): CharacterAbility{
         AbilityId.SHIELD -> ShieldAbility()
         AbilityId.WATERBALL -> WaterBallAbility()
         AbilityId.ICICLE -> IcicleAbility()
+        AbilityId.FIREBALL -> FireballAbility()
     }
 }

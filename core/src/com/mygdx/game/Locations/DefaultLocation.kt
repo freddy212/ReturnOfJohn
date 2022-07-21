@@ -48,4 +48,8 @@ class DefaultLocation(size: Vector2, Position: Vector2, private val initGameObje
         AdjacentLocations.add(defaultLocation)
         defaultLocation.AdjacentLocations.add(this)
     }
+    fun removeAdjacentLocation(defaultLocation: DefaultLocation){
+        AdjacentLocations.remove(defaultLocation)
+        defaultLocation.AdjacentLocations.remove(this)
+    }
 }

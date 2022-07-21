@@ -10,6 +10,7 @@ import com.mygdx.game.Enums.Layer
 import com.mygdx.game.GameObjects.Abyss
 import com.mygdx.game.GameObjects.Door
 import com.mygdx.game.GameObjects.GenericGameObject
+import com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Bosses.SandGhost.Sartan
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Mobs.SmallDevil
 import com.mygdx.game.GameObjects.Terrain.FireObject
 import com.mygdx.game.GameObjects.Terrain.WalkableTerrain
@@ -52,7 +53,7 @@ fun getFireLandsLocationFourObjects():List<GameObject>{
 
     val door = Door(doorPosition, Vector2(32f * 2,64f * 2),
         DefaultTextureHandler.getTexture("CaveDoor.png"),location4,Direction.UP,doorCollition)
-    val fireObject = FireObject(door.Position,door.size,door,location4, IllegalMoveCollition)
+    val fireObject = FireObject(door.initPosition,door.size,door,location4, IllegalMoveCollition)
 
     return listOf(cave,door,fireObject)
 }
@@ -62,6 +63,8 @@ fun getFireLandsLocationFiveObjects(): List<GameObject>{
     val walkableTerrain = WalkableTerrain(Vector2(location5.originalMiddle.x - 100f,location5.bottomright.y),Vector2(200f,500f),location5)
     val walkableTerrain2 = WalkableTerrain(Vector2(walkableTerrain.topleft - Vector2(300f,0f)), Vector2(800f,600f),location5)
 
-    return listOf(walkableTerrain,walkableTerrain2)
+    val sartan = Sartan(walkableTerrain2.currentMiddle - Vector2(75f, 0f),Vector2(150f,150f), location5)
+
+    return listOf(walkableTerrain,walkableTerrain2, sartan)
 }
 

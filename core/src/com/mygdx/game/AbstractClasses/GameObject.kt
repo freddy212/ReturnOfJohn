@@ -11,27 +11,23 @@ import com.mygdx.game.Interfaces.Collition
 import com.mygdx.game.Interfaces.ObjectProperty
 import com.mygdx.game.Interfaces.Renderable
 import com.mygdx.game.Locations.DefaultLocation
-import com.mygdx.game.Managers.SignalManager
 import com.mygdx.game.Utils.RenderGraph.Companion.addToSceneGraph
-import com.mygdx.game.SaveHandling.FileHandler
-import com.mygdx.game.SaveState.SaveStateEntity
-import com.mygdx.game.Signal.SIGNALTYPE
-import com.mygdx.game.Signal.Signal
 import com.mygdx.game.Utils.ResourceList
 
-abstract class GameObject (val Position: Vector2, val size: Vector2,var defaultLocation: DefaultLocation?): Renderable {
-    val topleft = Vector2(Position.x,Position.y + size.y)
-    val topright = Vector2(Position.x + size.x,Position.y + size.y)
-    val bottomright =  Vector2(Position.x + size.x,Position.y)
-    val bottomleft = Position
-    val x = Position.x
-    val y = Position.y
+abstract class GameObject (val initPosition: Vector2, val size: Vector2, var defaultLocation: DefaultLocation?): Renderable {
+    val topleft = Vector2(initPosition.x,initPosition.y + size.y)
+    val topright = Vector2(initPosition.x + size.x,initPosition.y + size.y)
+    val bottomright =  Vector2(initPosition.x + size.x,initPosition.y)
+    val bottomleft = initPosition
+    val x = initPosition.x
+    val y = initPosition.y
     val width = size.x
     val height = size.y
 
     val originalMiddle: Vector2 = Vector2(topleft.x + (topright.x - topleft.x) / 2,bottomleft.y + (topleft.y - bottomleft.y)/2)
     val currentMiddle: Vector2
     get() = Vector2(sprite.x + sprite.width/2, sprite.y + sprite.height/2)
+    var startingPosition = initPosition
 
     //Remember this. Temporary solution. texture must be overriden before polygon is called
     abstract val texture: Texture
@@ -54,9 +50,11 @@ abstract class GameObject (val Position: Vector2, val size: Vector2,var defaultL
 
     open fun removeFromLocation(){
         defaultLocation?.removeGameObject(this)
+        this.defaultLocation = null
     }
     open fun addToLocation(location: DefaultLocation){
         location.addGameObject(this)
+        this.defaultLocation = location
     }
 
     open fun setPosition(position: Vector2) {

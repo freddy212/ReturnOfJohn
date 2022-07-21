@@ -77,7 +77,7 @@ fun intersectPolygonEdges(polygon1: FloatArray, polygon2: FloatArray): Boolean {
 }
 
 fun getUnitVectorTowardsPoint(position: Vector2, point: Vector2): Vector2{
-        return point.sub(position).nor()
+        return Vector2(point).sub(position).nor()
 }
 fun getOppositeUnitVector(position: Vector2, point: Vector2): Vector2{
         val unitvector = getUnitVectorTowardsPoint(position,point)
@@ -156,7 +156,7 @@ fun GameObject.InitSprite(texture: Texture): Sprite{
         val sprite = Sprite(texture)
         sprite.setSize(size.x,size.y)
         sprite.setOriginCenter()
-        sprite.setPosition(Position.x,Position.y)
+        sprite.setPosition(initPosition.x,initPosition.y)
         return sprite
 }
 fun GameObject.SetFixedPosition(position: Vector2){
@@ -282,7 +282,7 @@ fun Radians(float: Float): Float{
         return (float * (PI/180f)).toFloat()
 }
 
-fun generateEnemyProjectile(projectileFactory: (Position: Vector2, Size: Vector2, defaultLocation: DefaultLocation, unitVectorDirection:Vector2) -> Projectile,enemy: Enemy, size: Vector2){
+fun generateEnemyProjectile(projectileFactory: (Position: Vector2, Size: Vector2, defaultLocation: DefaultLocation, unitVectorDirection:Vector2, shooter: GameObject) -> Projectile,enemy: Enemy, size: Vector2){
         var unitVector = getUnitVectorTowardsPoint(Vector2(enemy.sprite.x, enemy.sprite.y), Vector2(player.sprite.x, player.sprite.y))
         val random = Random.nextInt(2)
         val clone = LocationManager.newDefaultLocation.gameObjects.find { it is IceClone }
@@ -290,5 +290,5 @@ fun generateEnemyProjectile(projectileFactory: (Position: Vector2, Size: Vector2
                 unitVector = getUnitVectorTowardsPoint(Vector2(enemy.sprite.x, enemy.sprite.y), Vector2(clone.sprite.x, clone.sprite.y))
         }
         val enemyStart = enemy.currentMiddle
-        enemy.defaultLocation!!.addGameObject(projectileFactory(enemyStart + (unitVector * 100f) - Vector2(size.x / 2,size.y / 2),size,enemy.defaultLocation!!,unitVector))
+        enemy.defaultLocation!!.addGameObject(projectileFactory(enemyStart + (unitVector * 20f) - Vector2(size.x / 2,size.y / 2),size,enemy.defaultLocation!!,unitVector, enemy))
 }

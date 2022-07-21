@@ -25,7 +25,7 @@ class IceGenerator(Position: Vector2, size: Vector2, unitVectorDirection: Vector
 
     override fun generateProjectile(){
         val Position = Vector2(this.sprite.x,this.sprite.y) + getDistanceFromGenerator(unitVectorDirection)
-        val icicle = Icicle(Position,Vector2(100f,34f),defaultLocation,Vector2(unitVectorDirection.x,unitVectorDirection.y))
+        val icicle = Icicle(Position,Vector2(100f,34f),defaultLocation,Vector2(unitVectorDirection.x,unitVectorDirection.y), this)
         icicle.collition = object : ProjectileCollition() {
             override fun collitionHappened(entity: GameObject, collidedObject: GameObject) {
                 if(entity is Projectile && collidedObject is FightableEntity){

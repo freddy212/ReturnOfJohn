@@ -14,6 +14,6 @@ class Fence(Position: Vector2, size: Vector2, defaultLocation: DefaultLocation, 
     override val collition = NoCharacterCanPassCollition()
     override val layer = Layer.ONGROUND
     override fun render(batch: PolygonSpriteBatch){
-        renderRepeatedTexture(batch,texture,Position,size)
+        renderRepeatedTexture(batch,texture,initPosition,size)
     }
 }

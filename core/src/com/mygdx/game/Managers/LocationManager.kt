@@ -31,16 +31,7 @@ class LocationManager {
             newDefaultLocation = defaultLocations.find{ x -> x.sprite.boundingRectangle.contains(Vector2(player.sprite.x, player.sprite.y)) } ?: oldDefaultLocation
 
             if(oldDefaultLocation != newDefaultLocation) {
-                oldDefaultLocation.removeGameObject(player)
-                newDefaultLocation.addGameObject(player)
-                oldDefaultLocation = newDefaultLocation
-                activeDefaultLocations = (setOf(oldDefaultLocation) + oldDefaultLocation.adjacentDefaultLocations)
-                val oldActiveGameObjects = ActiveGameObjects
-                ActiveGameObjects = activeDefaultLocations.flatMap { x -> x.gameObjects } + activeDefaultLocations
-                val newGameObjects = ActiveGameObjects - oldActiveGameObjects
-                val oldGameObjects = oldActiveGameObjects - ActiveGameObjects
-                newGameObjects.forEach{it.onLocationEnterActions.forEach { it() }}
-                oldGameObjects.forEach {it.onLocationExitActions.forEach { it(newDefaultLocation) }}
+                changeLocation()
                 savePlayerStates()
             }
             ActiveGameObjects = activeDefaultLocations.flatMap { x -> x.gameObjects } + activeDefaultLocations
@@ -48,6 +39,18 @@ class LocationManager {
             ButtonCollitionGameObjects = ActiveGameObjects.filter { x -> x.collition is KeyPressedCollition }
             EveryFrameCollitionGameObjects = ActiveGameObjects.filter { x -> x.collition is EveryFrameCollition }
             //Can be optimized at some point
+        }
+        fun changeLocation(){
+            oldDefaultLocation.removeGameObject(player)
+            newDefaultLocation.addGameObject(player)
+            oldDefaultLocation = newDefaultLocation
+            activeDefaultLocations = (setOf(oldDefaultLocation) + oldDefaultLocation.adjacentDefaultLocations)
+            val oldActiveGameObjects = ActiveGameObjects
+            ActiveGameObjects = activeDefaultLocations.flatMap { x -> x.gameObjects } + activeDefaultLocations
+            val newGameObjects = ActiveGameObjects - oldActiveGameObjects.toSet()
+            val oldGameObjects = oldActiveGameObjects - ActiveGameObjects.toSet()
+            newGameObjects.forEach{it.onLocationEnterActions.forEach { it() }}
+            oldGameObjects.forEach {it.onLocationExitActions.forEach { it(newDefaultLocation) }}
         }
         fun findLocation(name: String, areaIdentifier: AreaIdentifier): DefaultLocation {
             val area = AreaManager.getArea(areaIdentifier)

@@ -27,7 +27,7 @@ class ROJInputAdapter(private val camera : OrthographicCamera, val player: Playe
         if(player.characterState == CharacterState.FREE && player.canMove()) {
             for (itemAbility in player.itemAbilities.List) {
                 if (keycode == itemAbility.triggerKey) {
-                    itemAbility.activeAction()
+                    itemAbility.tryUseAction()
                 }
             }
         }

@@ -9,7 +9,8 @@ class ImmuneEvent(val immunityFrames: Float, val character: DefaultCharacter): E
         override fun execute() {
             counter++
             if (counter > immunityFrames) {
-                if(EventManager.eventManager.List.filterIsInstance<ImmuneEvent>().size == 1){
+                val immuneEvents = EventManager.eventManager.List.filterIsInstance<ImmuneEvent>()
+                if(immuneEvents.filter { it.character == character}.size == 1){
                     character.immuneToDamage = false
                 }
                 EventManager.eventManager.remove(this)

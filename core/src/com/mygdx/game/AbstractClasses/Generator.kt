@@ -5,7 +5,6 @@ import com.mygdx.game.Collitions.IllegalMoveCollition
 import com.mygdx.game.DefaultTextureHandler
 import com.mygdx.game.Enums.Layer
 import com.mygdx.game.Locations.DefaultLocation
-import com.mygdx.game.SaveHandling.DefaultRemoveObjectSaveState
 import com.mygdx.game.SaveState.DefaultSaveStateHandler
 import com.mygdx.game.SaveState.SaveStateEntity
 import com.mygdx.game.Timer.DefaultTimer
@@ -36,7 +35,7 @@ abstract class Generator(Position: Vector2, size: Vector2, defaultLocation: Defa
     fun getDistanceFromGenerator(unitVectorDirection: Vector2): Vector2 {
         var distance = 1f
         while(isPolygonsColliding(this.polygon,
-                RectanglePolygon(Vector2(Position + (unitVectorDirection * distance)),size.x,size.y)
+                RectanglePolygon(Vector2(initPosition + (unitVectorDirection * distance)),size.x,size.y)
             )
         ){
             distance +=1

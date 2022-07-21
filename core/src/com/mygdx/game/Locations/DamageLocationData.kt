@@ -10,7 +10,7 @@ open class DamageLocationData(textureGiven: Texture = DefaultTextureHandler.getT
 ): LocationDataStrategy {
     override val texture = textureGiven
     override val initialization = {
-            x: DefaultLocation -> x.addGameObject(Wall(x.Position, x.size, x))
+            x: DefaultLocation -> x.addGameObject(Wall(x.initPosition, x.size, x))
     }
     override val collition = DOTCollition
 }

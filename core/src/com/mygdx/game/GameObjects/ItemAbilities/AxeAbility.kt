@@ -18,8 +18,6 @@ class AxeAbility() : CharacterAbility() {
     override val cooldownTimer = DefaultTimer(2f)
 
     override fun activeAction() {
-        if(cooldownTimer.tryUseCooldown()){
-            AxeSwing(Vector2(0f,0f),Vector2(0f,0f))
-        }
+        AxeSwing(Vector2(0f,0f),Vector2(0f,0f))
     }
 }

@@ -5,7 +5,6 @@ import com.mygdx.game.*
 import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.AbstractClasses.Projectile
 import com.mygdx.game.GameObjects.ItemAbilities.Shield
-import com.mygdx.game.GameObjects.ItemAbilities.ShieldAbility
 import com.mygdx.game.GameObjects.MoveableEntities.Projectiles.Boulder
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Player
 import com.mygdx.game.GameObjects.MoveableEntities.Projectiles.SmallBoulder
@@ -32,7 +31,8 @@ class ShieldCollition: MoveCollition{
                     delayMap.put(entity, delayTimer)
                     val centerBoulder = Vector2(entity.sprite.x + entity.sprite.width / 2, entity.sprite.y + entity.sprite.height)
                     val centerShield = Vector2(collidedObject.sprite.x + collidedObject.sprite.width / 2, collidedObject.sprite.y + collidedObject.sprite.height)
-                    (entity as Projectile).unitVectorDirection = getOppositeUnitVector(centerBoulder,centerShield)
+                    (entity as Projectile).shooter = player
+                    entity.unitVectorDirection = getOppositeUnitVector(centerBoulder,centerShield)
                 }else{
                     BoulderCollition().collitionHappened(entity, player)
                 }

@@ -21,7 +21,7 @@ fun getFireLandsDungeonLocationOneObjects(): List<GameObject>{
         Direction.DOWN)
     val door = Door(doorPosition, Vector2(32f * 2, 64f * 2), DefaultTextureHandler.getTexture("CaveDoor.png"),location1,
         Direction.DOWN,doorCollition)
-    val abyss = Abyss(door.Position + Vector2(200f,0f),Vector2(100f,location1.height),location1)
+    val abyss = Abyss(door.initPosition + Vector2(200f,0f),Vector2(100f,location1.height),location1)
     return listOf(door,abyss)
 }
 fun getFireLandsDungeonLocationTwoObjects(): List<GameObject>{

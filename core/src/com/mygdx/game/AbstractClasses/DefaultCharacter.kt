@@ -1,11 +1,9 @@
 package com.mygdx.game.AbstractClasses
 
 import com.badlogic.gdx.graphics.Color
-import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch
 import com.badlogic.gdx.math.Vector2
-import com.badlogic.gdx.math.Vector3
 import com.mygdx.game.*
 import com.mygdx.game.EdgeOfLocationStrategies.NoAction
 import com.mygdx.game.Enums.CharacterState
@@ -27,7 +25,7 @@ abstract class DefaultCharacter(Position: Vector2, size: Vector2, location: Defa
     var characterState: CharacterState = CharacterState.FREE
         private set
     var originalSpeed: Float? = null
-    var stunDuration = 4
+    open val stunDuration = 4
     lateinit var launchUnitVector: Vector2
     override var canChangeDirection = true
     override var unitVectorDirection = Vector2(0f,0f)
@@ -39,6 +37,7 @@ abstract class DefaultCharacter(Position: Vector2, size: Vector2, location: Defa
     init {
         font.data.setScale(2f)
         font.color = Color.WHITE
+        onLocationEnterActions.add(::resetRotation)
     }
 
     fun setCharacterRotation(unitVectorDirection: Vector2) {
@@ -90,6 +89,7 @@ abstract class DefaultCharacter(Position: Vector2, size: Vector2, location: Defa
     fun loseHealth(amount: Float) {
         if(!immuneToDamage) {
             this.health -= amount
+        } else{
         }
         makeImmune()
     }
@@ -97,5 +97,18 @@ abstract class DefaultCharacter(Position: Vector2, size: Vector2, location: Defa
     fun makeImmune(){
         immuneToDamage = true
         EventManager.eventManager.add(ImmuneEvent(immunityFrames,this))
+    }
+
+    fun resetRotation(){
+        setRotation(Vector2(0f,0f),this, 0f)
+    }
+
+    override fun render(batch: PolygonSpriteBatch) {
+        if(immuneToDamage){
+            sprite.setAlpha(0.5f)
+        } else {
+            sprite.setAlpha(1f)
+        }
+        super.render(batch)
     }
 }

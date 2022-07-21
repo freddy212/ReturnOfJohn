@@ -14,6 +14,7 @@ import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.Enums.ItemType
 import com.mygdx.game.GameObjects.ItemAbilities.AxeAbility
+import com.mygdx.game.GameObjects.ItemAbilities.FireballAbility
 import com.mygdx.game.GameObjects.ItemAbilities.IcicleAbility
 import com.mygdx.game.GameObjects.ItemAbilities.ShieldAbility
 import com.mygdx.game.SaveHandling.FileHandler
@@ -86,20 +87,13 @@ class MainGame : ApplicationAdapter() {
         inputAdapter = ROJInputAdapter(camera,player)
         initInputAdapter()
         initListeners()
-
-        environment.set(ColorAttribute(ColorAttribute.AmbientLight, 0.4f, 0.4f, 0.4f, 1f))
-        environment.add(DirectionalLight().set(0.8f, 0.8f, 0.8f, -1f, -0.8f, -0.2f))
-        camera.near = 1f
-        camera.far = 300f
-        camera.update()
         LocationManager.frameAction()
 
         val originalFile = FileHandler.readFromFile()
         val saves = originalFile.subList(1,originalFile.size)
         val savedSignals:List<Signal> = saves.map { x -> Json.decodeFromString(x)}
         savedSignals.forEach { SignalManager.emitSignal(it,false) }
-        player.addAbility(AxeAbility())
-        player.addAbility(IcicleAbility())
+        player.addAbility(FireballAbility())
         player.addAbility(ShieldAbility())
             /* val savedStates:List<DefaultSaveableObject> = saves.map { x -> Json.decodeFromString(x) }
              val savedEntities:List<SaveStateEntity> = AreaManager.getAllGameObjects()
@@ -117,14 +111,14 @@ class MainGame : ApplicationAdapter() {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT or GL20.GL_DEPTH_BUFFER_BIT)
         batch.projectionMatrix = camera.combined
         LocationManager.frameAction()
-        inputAdapter.handleInput(player)
         RenderGraph.render(batch)
+        inputAdapter.handleInput(player)
         drawrects()
         EventManager.executeEvents()
         UIRendererManager.render()
-        camera.position.set(player.sprite.x, player.sprite.y,4f)
-        camera.update()
         SignalManager.useSignals()
+        camera.position.set(player.sprite.x, player.sprite.y,0f)
+        camera.update()
     }
 
     fun drawrects(){

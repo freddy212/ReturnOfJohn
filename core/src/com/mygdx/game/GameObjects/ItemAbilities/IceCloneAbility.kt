@@ -20,18 +20,17 @@ class IceCloneAbility(): CharacterAbility(){
 
     override val cooldownTimer = DefaultTimer(1f)
 
-    override fun activeAction(){
-        if(cooldownTimer.tryUseCooldown()) {
-            val iceClone = IceClone(
-                player.currentMiddle,
-                Vector2(35f,65f),
-                LocationManager.newDefaultLocation)
-            AreaManager.getAllGameObjects().forEach {
-                if(it is IceClone){
-                    it.defaultLocation!!.removeGameObject(it)
-                }
+    override fun activeAction() {
+        val iceClone = IceClone(
+            player.currentMiddle,
+            Vector2(35f, 65f),
+            LocationManager.newDefaultLocation
+        )
+        AreaManager.getAllGameObjects().forEach {
+            if (it is IceClone) {
+                it.defaultLocation!!.removeGameObject(it)
             }
-            iceClone.defaultLocation!!.addGameObject(iceClone)
         }
+        iceClone.defaultLocation!!.addGameObject(iceClone)
     }
 }

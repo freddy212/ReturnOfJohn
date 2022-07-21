@@ -3,7 +3,6 @@ package com.mygdx.game.Areas.IceLands
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.*
 import com.mygdx.game.AbstractClasses.GameObject
-import com.mygdx.game.Collitions.CanMoveCollition
 import com.mygdx.game.Collitions.DoorCollition
 import com.mygdx.game.Collitions.IllegalMoveCollition
 import com.mygdx.game.Enums.Direction
@@ -11,14 +10,11 @@ import com.mygdx.game.Enums.Layer
 import com.mygdx.game.GameObjects.Door
 import com.mygdx.game.GameObjects.GenericGameObject
 import com.mygdx.game.GameObjects.IceButton
-import com.mygdx.game.GameObjects.Terrain.FireObject
 import com.mygdx.game.GameObjects.Terrain.IceObject
 import com.mygdx.game.GameObjects.Terrain.WalkableTerrain
 import com.mygdx.game.GameObjects.Thorns
 import com.mygdx.game.Interfaces.AreaIdentifier
 import com.mygdx.game.Managers.LocationManager
-import com.mygdx.game.SaveHandling.DefaultRemoveObjectSaveState
-import com.mygdx.game.SaveState.SaveStateEntity
 
 fun getIceLandsLocationOneObjects(): List<GameObject>{
     val location1 = LocationManager.findLocation("location1",AreaIdentifier.ICELANDS)
@@ -53,8 +49,8 @@ fun getIceLandsLocationThreeObjects(): List<GameObject>{
 
     val door = Door(doorPosition, Vector2(32f * 2,64f * 2),
         DefaultTextureHandler.getTexture("CaveDoor.png"),location3,Direction.UP,doorCollition)
-    val thorns = Thorns(door.Position - Vector2(8f,64f), Vector2(80f,64f),location3)
-    val iceObject = IceObject(thorns.Position - Vector2(-10f,200f),Vector2(64f,64f),location3)
+    val thorns = Thorns(door.initPosition - Vector2(8f,64f), Vector2(80f,64f),location3)
+    val iceObject = IceObject(thorns.initPosition - Vector2(-10f,200f),Vector2(64f,64f),location3)
 
     return listOf(cave,door,thorns,iceObject)
 }

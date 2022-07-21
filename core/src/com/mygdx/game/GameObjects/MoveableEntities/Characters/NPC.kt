@@ -15,7 +15,7 @@ import com.mygdx.game.HealthStrategy.EnemyHealthStrategy
 import com.mygdx.game.Locations.DefaultLocation
 import com.mygdx.game.UI.Dialogue.Conversations.engineerFirst
 
-class NPC(Position: Vector2, size: Vector2 = Vector2(128f,128f), val location: DefaultLocation?,
+class NPC(Position: Vector2, size: Vector2 = Vector2(128f,128f),location: DefaultLocation?,
           modelHandler: ModelInstanceHandler = DefaultModelInstanceHandler("ManBlender.g3db",Position,size))
     : DefaultCharacter(Position, size, location),
     SaveStateEntity by DefaultRemoveObjectSaveState(){
@@ -50,17 +50,22 @@ class NPC(Position: Vector2, size: Vector2 = Vector2(128f,128f), val location: D
     }
     override fun addToLocation(location: DefaultLocation){
         sensors.forEach {location.addGameObject(it)}
-        location.addGameObject(this)
+        super.addToLocation(location)
     }
     override fun removeFromLocation(){
         sensors.forEach {it.removeFromLocation()}
         super.removeFromLocation()
     }
 
-    override fun setPosition(nextPosition: Vector2) {
+    override fun setPosition(position: Vector2) {
         val prevPos = Vector2(sprite.x,sprite.y)
-        println(nextPosition)
-        super.setPosition(nextPosition)
-        sensors.forEach {it.setPosition( it.Position + nextPosition - prevPos) }
+        println(position)
+        startingPosition = position;
+        super.setPosition(position)
+        sensors.forEach {
+            val newSensorPos = it.startingPosition + position - prevPos
+            it.startingPosition = newSensorPos
+            it.setPosition(newSensorPos)
+        }
     }
 }

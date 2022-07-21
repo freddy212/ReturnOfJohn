@@ -33,8 +33,7 @@ class Ice(objectAttached: GameObject) :
         val location = waterBall.defaultLocation!!
         location.removeGameObject(waterBall)
         location.addGameObject(Icicle(Vector2(waterBall.currentMiddle - Vector2(50f,17f)),
-            Vector2(100f,33f),location,waterBall.unitVectorDirection
-        ))
+            Vector2(100f,33f),location,waterBall.unitVectorDirection, waterBall.shooter))
     }
 
 }

@@ -7,6 +7,7 @@ class DefaultTimer (private val CooldownTime: Float): Timer {
     var coolDownAvailable = true
         private set
 
+
     fun UpdateTimer() {
         val currentTime = System.currentTimeMillis()
         val newTime: Float = (currentTime - lastUsedTime).toFloat() / 1000
