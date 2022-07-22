@@ -1,6 +1,7 @@
 package com.mygdx.game.Collitions
 
 import com.mygdx.game.AbstractClasses.GameObject
+import com.mygdx.game.GameObjects.Axe
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Player
 import com.mygdx.game.GameObjects.MoveableEntities.Projectiles.Icicle
 import com.mygdx.game.GameObjects.Thorns
@@ -14,12 +15,14 @@ class ThornsCollition: MoveCollition{
     override var canMoveAfterCollition = false
 
     override fun collitionHappened(entity: GameObject, collidedObject: GameObject) {
-        if(entity is Icicle && collidedObject is Thorns){
-            canMoveAfterCollition = true
-            SignalManager.emitSignal(Signal( SIGNALTYPE.REMOVE_OBJECT,collidedObject.entityId))
-        }
-        if(entity is Player && collidedObject is Thorns){
-            PlayerHitCollition().collitionHappened(entity,collidedObject)
+        if(collidedObject is Thorns){
+            if(entity is Icicle || entity is Axe){
+                canMoveAfterCollition = true
+                SignalManager.emitSignal(Signal( SIGNALTYPE.REMOVE_OBJECT,collidedObject.entityId))
+            }
+            if(entity is Player){
+                PlayerHitCollition().collitionHappened(entity,collidedObject)
+            }
         }
     }
 }

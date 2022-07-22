@@ -11,6 +11,7 @@ class SignalManager {
         companion object {
             val listenerMap = mutableMapOf<SIGNALTYPE,MutableList<SignaledEventListener>>()
             val signalManager = ResourceList<Signal>()
+            val pastSignals = ResourceList<Signal>()
             init {
                 for (signalType in SIGNALTYPE.values()){
                     listenerMap[signalType] = mutableListOf()

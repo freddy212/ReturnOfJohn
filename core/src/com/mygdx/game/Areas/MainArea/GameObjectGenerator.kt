@@ -10,7 +10,6 @@ import com.mygdx.game.GameObjects.*
 import com.mygdx.game.GameObjects.Generators.BoulderGenerator
 import com.mygdx.game.GameObjects.ItemAbilities.ShieldAbility
 import com.mygdx.game.GameObjects.ItemObjects.GenericInventoryItemObject
-import com.mygdx.game.GameObjects.MoveableEntities.Characters.NPC
 import com.mygdx.game.GameObjects.MoveableEntities.Projectiles.Boulder
 import com.mygdx.game.GameObjects.ShopItem.ShopItem
 import com.mygdx.game.GameObjects.Terrain.IceObject
@@ -24,11 +23,6 @@ import com.mygdx.game.SaveHandling.DefaultRemoveObjectSaveState
 import com.mygdx.game.SaveState.SaveStateEntity
 import com.mygdx.game.Signal.SIGNALTYPE
 import com.mygdx.game.Signal.Signal
-import com.mygdx.game.UI.Dialogue.Conversations.GetFireConversation
-import com.mygdx.game.UI.Dialogue.Conversations.GetFireFixedConversation
-import com.mygdx.game.UI.Dialogue.Conversations.GetFireNotFixedConversation
-import com.mygdx.game.UI.Dialogue.Conversations.GetFirstConversation
-import com.mygdx.game.Utils.DefaultQuest
 
 fun getLocationOneObjects(): List<GameObject>{
     val location = LocationManager.findLocation("location1",AreaIdentifier.MAINAREA)
@@ -36,16 +30,6 @@ fun getLocationOneObjects(): List<GameObject>{
     val dojo = House(location.topleft.x + 300f,location.topleft.y - 200f,300f,200f,location, doorMainAreaAndDojo,AreaIdentifier.DOJO)
 
     return listOf(shop,dojo,shop)
-}
-
-fun spawnEngineerItems(location: DefaultLocation): List<GameObject>{
-    val itemTable = GenericGameObject(location.topright - Vector2(200f,150f),Vector2(120f,60f),"ItemTable.png",Layer.ONGROUND,location,IllegalMoveCollition)
-    val shopItem = ShopItem("shield-front.png", listOf(
-        Item(ItemType.FLINT,3,DefaultTextureHandler.getTexture("Flint.png")),
-        Item(ItemType.WOOD,1,DefaultTextureHandler.getTexture("wood.png"))),
-        middleOfObject(itemTable.originalMiddle, Vector2(60f,40f)),Vector2(60f,40f),location, ShieldAbility())
-
-    return listOf(itemTable,shopItem)
 }
 
 fun getLocationGraveyard(): List<GameObject>{
@@ -57,7 +41,7 @@ fun getLocationGraveyard(): List<GameObject>{
 
     val doorPosition = Vector2(cave.originalMiddle.x - 64 / 2,cave.bottomleft.y)
 
-    val doorCollition = DoorCollition(doorPosition,AreaIdentifier.DUNGEONAREA, doorMainAreaAndDungeonConnection,Direction.UP)
+    val doorCollition = DoorCollition(doorPosition,AreaIdentifier.DUNGEONAREA, doorWastelandAndDungeonConnection,Direction.UP)
 
     //val toggleCollition = ToggleCollition(IllegalMoveCollition,doorCollition)
 

@@ -4,16 +4,19 @@ import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.Collitions.DoorCollition
 import com.mygdx.game.Enums.Direction
 import com.mygdx.game.Enums.ItemType
-import com.mygdx.game.GameObjects.Axe
-import com.mygdx.game.GameObjects.Door
+import com.mygdx.game.Enums.Layer
+import com.mygdx.game.GameObjects.*
 import com.mygdx.game.GameObjects.ItemObjects.GenericInventoryItemObject
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Bosses.SandGhost.SandGhost
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.NPC
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Mobs.RockMonster
 import com.mygdx.game.GameObjects.Terrain.WalkableTerrain
-import com.mygdx.game.GameObjects.Tree
 import com.mygdx.game.Interfaces.AreaIdentifier
 import com.mygdx.game.Managers.LocationManager
+import com.mygdx.game.Managers.SignalManager
+import com.mygdx.game.Signal.SIGNALTYPE
+import com.mygdx.game.Signal.Signal
+import com.mygdx.game.Signal.SignalListeners.ADDMETHODS
 import com.mygdx.game.UI.Dialogue.Conversations.*
 
 fun getWastelandLocationOneObjects(): List<GameObject>{
@@ -61,4 +64,34 @@ fun getWastelandLocationSevenObjects(): List<GameObject>{
     val walkableTerrain2 = WalkableTerrain(walkableTerrain.bottomleft - Vector2(350f,800f), Vector2(1000f,800f),location7)
     val sandGhost = SandGhost(walkableTerrain2.currentMiddle - Vector2(75f, 0f),Vector2(150f,150f), location7)
     return listOf(walkableTerrain,walkableTerrain2, sandGhost)
+}
+fun getWastelandLocationTenObjects(): List<GameObject>{
+    val location9 = LocationManager.findLocation("location9",AreaIdentifier.WASTELAND)
+    val location10 = LocationManager.findLocation("location10", AreaIdentifier.WASTELAND)
+    val walkableTerrain = WalkableTerrain(Vector2(location9.topleft), Vector2(200f,location10.height),location10)
+    val walkableTerrain2 = WalkableTerrain(Vector2(location10.topleft) - Vector2(0f,200f), Vector2(location10.width,200f),location10)
+
+    val cave = GenericGameObject(Vector2(location10.originalMiddle.x - 256f, location10.topleft.y), Vector2(256f * 2, 283f * 2), "Cave.png", Layer.ONGROUND, location10)
+    val doorPosition = Vector2(cave.originalMiddle.x - 64 / 2,cave.bottomleft.y)
+    val doorCollition = DoorCollition(doorPosition,AreaIdentifier.DUNGEONAREA, doorWastelandAndDungeonConnection,Direction.UP)
+    val door = Door(doorPosition, Vector2(32f * 2,36f * 2),
+        DefaultTextureHandler.getTexture("CaveDoor.png"),location10,Direction.UP,doorCollition)
+
+    val thorns = Thorns(location10.topright - Vector2(32f,64f), Vector2(32f,64f), location10)
+    thorns.onRemoveAction.add {
+        val thornsExists = SignalManager.pastSignals.List.find { it.id == thorns.entityId }
+        if(thornsExists == null){
+            SignalManager.emitSignal(
+                Signal(
+                    SIGNALTYPE.ADD_OBJECT,
+                    -1,0,0f,0f,"location1",AreaIdentifier.MAINAREA.ordinal,ADDMETHODS.DOOR1.ordinal)
+            )
+            SignalManager.emitSignal(
+                Signal(
+                    SIGNALTYPE.ADD_OBJECT,
+                    -1,0,0f,0f,"location10",AreaIdentifier.WASTELAND.ordinal,ADDMETHODS.DOOR2.ordinal)
+            )
+        }
+    }
+    return listOf(walkableTerrain, walkableTerrain2, cave,door, thorns)
 }

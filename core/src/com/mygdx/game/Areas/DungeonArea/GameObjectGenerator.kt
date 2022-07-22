@@ -16,14 +16,14 @@ import com.mygdx.game.GameObjects.ItemObjects.WaterGunItemObject
 import com.mygdx.game.GameObjects.LockedDoor
 import com.mygdx.game.Interfaces.AreaIdentifier
 import com.mygdx.game.Managers.LocationManager
-import com.mygdx.game.doorMainAreaAndDungeonConnection
+import com.mygdx.game.doorWastelandAndDungeonConnection
 import com.mygdx.game.middleOfObject
 import com.mygdx.game.playerSize
 
 fun getLocationOneCaveObjects(): List<GameObject>{
     val location1 = LocationManager.findLocation("location1",AreaIdentifier.DUNGEONAREA)
     val doorPosition = Vector2(location1.originalMiddle.x -  (playerSize.x / 2),location1.bottomleft.y)
-    val doorCollition = DoorCollition(doorPosition,AreaIdentifier.MAINAREA, doorMainAreaAndDungeonConnection,Direction.DOWN)
+    val doorCollition = DoorCollition(doorPosition,AreaIdentifier.WASTELAND, doorWastelandAndDungeonConnection,Direction.DOWN)
     val door = Door(doorPosition, Vector2(32f * 2, 36f * 2), DefaultTextureHandler.getTexture("CaveDoor.png"),location1,Direction.DOWN,doorCollition)
     return listOf(door)
 }

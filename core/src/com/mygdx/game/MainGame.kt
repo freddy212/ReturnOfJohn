@@ -92,8 +92,9 @@ class MainGame : ApplicationAdapter() {
         val originalFile = FileHandler.readFromFile()
         val saves = originalFile.subList(1,originalFile.size)
         val savedSignals:List<Signal> = saves.map { x -> Json.decodeFromString(x)}
-        savedSignals.forEach { SignalManager.emitSignal(it,false) }
-        player.addAbility(FireballAbility())
+        savedSignals.forEach { SignalManager.emitSignal(it,false); SignalManager.pastSignals.add(it) }
+        //player.addAbility(FireballAbility())
+        player.addAbility(AxeAbility())
         player.addAbility(ShieldAbility())
             /* val savedStates:List<DefaultSaveableObject> = saves.map { x -> Json.decodeFromString(x) }
              val savedEntities:List<SaveStateEntity> = AreaManager.getAllGameObjects()

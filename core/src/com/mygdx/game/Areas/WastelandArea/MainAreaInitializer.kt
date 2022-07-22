@@ -19,6 +19,7 @@ import com.mygdx.game.addLocationRelative
 import getWastelandLocationFiveObjects
 import getWastelandLocationOneObjects
 import getWastelandLocationSevenObjects
+import getWastelandLocationTenObjects
 import getWastelandLocationThreeObjects
 
 class WastelandAreaInitializer: AreaInitializer {
@@ -34,9 +35,13 @@ class WastelandAreaInitializer: AreaInitializer {
         val location2 = addLocationRelative(location1,Vector2(1000f, 300f), InsertDirection.RIGHT,area,InsertDirection.MIDDLE,{ listOf()}, wastelandLocationData)
         val location3 = addLocationRelative(location2,Vector2(700f, 700f), InsertDirection.RIGHT,area,InsertDirection.MIDDLE,::getWastelandLocationThreeObjects, wastelandLocationData)
         val location4 = addLocationRelative(location1,Vector2(1000f, 300f), InsertDirection.LEFT,area,InsertDirection.MIDDLE,{ listOf()}, wastelandLocationData)
-        val location5 = addLocationRelative(location4,Vector2(3000f, 600f), InsertDirection.LEFT,area,InsertDirection.MIDDLE,::getWastelandLocationFiveObjects, wastelandDamageLocation)
+        val location5 = addLocationRelative(location4,Vector2(1000f, 600f), InsertDirection.LEFT,area,InsertDirection.MIDDLE,::getWastelandLocationFiveObjects, wastelandDamageLocation)
         val location6 = addLocationRelative(location1,Vector2(300f, 500f), InsertDirection.DOWN,area,InsertDirection.MIDDLE,{ listOf()}, wastelandLocationData)
         val location7 = addLocationRelative(location6,Vector2(1500f, 1500f), InsertDirection.DOWN,area,InsertDirection.MIDDLE,::getWastelandLocationSevenObjects , wastelandDamageLocation)
+        val location8 = addLocationRelative(location5, Vector2(400f, 200f), InsertDirection.LEFT,area,InsertDirection.MIDDLE, { listOf()} , wastelandLocationData)
+        val location9 = addLocationRelative(location8, Vector2(200f, 500f), InsertDirection.UP,area,InsertDirection.LEFT, { listOf()} , wastelandLocationData)
+        val location10 = addLocationRelative(location9, Vector2(1000f, 1200f), InsertDirection.UP,area,InsertDirection.MIDDLE,  ::getWastelandLocationTenObjects , wastelandDamageLocation)
+        location9.addAdjacentLocation(location5)
         return area
     }
 }

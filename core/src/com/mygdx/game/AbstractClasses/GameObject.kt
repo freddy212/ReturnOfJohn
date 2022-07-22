@@ -14,7 +14,7 @@ import com.mygdx.game.Locations.DefaultLocation
 import com.mygdx.game.Utils.RenderGraph.Companion.addToSceneGraph
 import com.mygdx.game.Utils.ResourceList
 
-abstract class GameObject (val initPosition: Vector2, val size: Vector2, var defaultLocation: DefaultLocation?): Renderable {
+abstract class GameObject  (val initPosition: Vector2, val size: Vector2, var defaultLocation: DefaultLocation?): Renderable {
     val topleft = Vector2(initPosition.x,initPosition.y + size.y)
     val topright = Vector2(initPosition.x + size.x,initPosition.y + size.y)
     val bottomright =  Vector2(initPosition.x + size.x,initPosition.y)
@@ -46,11 +46,13 @@ abstract class GameObject (val initPosition: Vector2, val size: Vector2, var def
     }
     val onLocationEnterActions: MutableList<()-> Unit> = mutableListOf({})
     val onLocationExitActions: MutableList<(newLocation: DefaultLocation)->Unit> = mutableListOf({})
+    val onRemoveAction: MutableList<()->Unit> = mutableListOf({})
     constructor(Position: Vector2, size: Vector2): this(Position,size,null)
 
     open fun removeFromLocation(){
         defaultLocation?.removeGameObject(this)
         this.defaultLocation = null
+        onRemoveAction.forEach { it() }
     }
     open fun addToLocation(location: DefaultLocation){
         location.addGameObject(this)

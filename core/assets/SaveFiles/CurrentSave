@@ -1,5 +1,8 @@
-{"playerXPos":642.028,"playerYPos":1.2228422,"areaIdentifier":"MAINAREA","entityId":0}
+{"playerXPos":16.0,"playerYPos":10.0,"areaIdentifier":"MAINAREA","entityId":0}
 {"signaltype":"CHANGE_OBJECT_LOCATION","id":35,"stringValue":"location1"}
 {"signaltype":"MOVE_OBJECT_COORDINATES","id":35,"x":1100.0,"y":1300.0}
-{"signaltype":"ADD_OBJECT","id":0,"stringValue":"location1"}
+{"signaltype":"ADD_OBJECT","id":-1,"stringValue":"location1"}
 {"signaltype":"CHANGE_CONVERSATION","id":35,"stringValue":"engineer2"}
+{"signaltype":"REMOVE_OBJECT","id":40}
+{"signaltype":"ADD_OBJECT","id":-1,"stringValue":"location1","addMethod":1}
+{"signaltype":"ADD_OBJECT","id":-1,"stringValue":"location10","areaIdentifier":9,"addMethod":2}

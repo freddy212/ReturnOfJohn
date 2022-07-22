@@ -32,7 +32,6 @@ class DoorCollition(doorPosition: Vector2,val areaId: AreaIdentifier, val connec
                 if(areaId != AreaIdentifier.NOTIMPLEMENTED){
                     val playerPosMiddle = Vector2(playerPosAfter.x + playerSize.x / 2, playerPosAfter.y)
                     entity.setPosition(playerPosMiddle)
-
                     AreaManager.SetArea(AreaManager.getArea(areaId))
                     canMoveAfterCollition = false
                 }
@@ -43,7 +42,8 @@ class DoorCollition(doorPosition: Vector2,val areaId: AreaIdentifier, val connec
         return when(triggerDirection){
             Direction.UP -> (Vector2(connection.secondEntrance.x, connection.secondEntrance.y + playerSize.y / 4))
             Direction.DOWN-> Vector2(connection.firstEntrance.x,connection.firstEntrance.y - playerSize.y)
-            else -> Vector2(0f,0f)
+            Direction.RIGHT -> (Vector2(connection.secondEntrance.x + playerSize.x * 2, connection.secondEntrance.y + playerSize.y / 4))
+            Direction.LEFT-> Vector2(connection.firstEntrance.x - playerSize.x * 2 ,connection.firstEntrance.y + playerSize.y / 4 )
         }
     }
 }

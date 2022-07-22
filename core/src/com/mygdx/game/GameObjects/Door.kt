@@ -19,10 +19,18 @@ class Door(Position: Vector2, size: Vector2, texture: Texture, defaultLocation: 
     override val polygon = Polygon()
 
     init {
-        polygon.vertices = floatArrayOf(x + size.x / 4, y, x + size.x - size.x / 4, y, x + size.x - size.x / 4, y - 20f, x + size.x / 4, y - 20f)
-        if(direction == Direction.DOWN || direction == Direction.LEFT) {
+        if(direction == Direction.UP){
+            polygon.vertices = floatArrayOf(x + size.x / 4, y, x + size.x - size.x / 4, y, x + size.x - size.x / 4, y - 20f, x + size.x / 4, y - 20f)
+        }
+        if(direction == Direction.DOWN) {
             sprite.setPosition(sprite.x,sprite.y - 64f)
             polygon.vertices = floatArrayOf(x + size.x / 4, y + 20f, x + size.x - size.x / 4, y + 20f, x + size.x - size.x / 4, y, x + size.x / 4, y)
+        }
+        if(direction == Direction.RIGHT){
+            polygon.vertices = floatArrayOf(x - size.x / 4, y + 20f, x, y + 20f, x, y + size.y - size.y/4,x - size.x / 4, y + size.y - size.y/4)
+        }
+        if(direction == Direction.LEFT){
+            polygon.vertices = floatArrayOf(x + size.x, y + 20f, x + size.x / 4 + size.x, y + 20f, x + size.x / 4 + size.x, y + size.y - size.y/4,x + size.x, y + size.y - size.y/4)
         }
     }
 }

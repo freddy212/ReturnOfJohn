@@ -16,7 +16,7 @@ class AxeSwing(Position: Vector2, size: Vector2): GameObject(Position, size) {
     val framesToSwing = 30
     var counter = 0
     val currentLocation = LocationManager.newDefaultLocation
-    val axe = Axe(Vector2(player.sprite.x , player.sprite.y + player.sprite.height / 2),Vector2(20f,60f),currentLocation)
+    val axe = Axe(Vector2(player.sprite.x , player.sprite.y + player.sprite.height / 2),Vector2(30f,100f),currentLocation)
 
     init {
         currentLocation.addGameObject(this)
