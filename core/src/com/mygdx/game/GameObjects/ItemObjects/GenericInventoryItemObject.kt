@@ -10,10 +10,11 @@ import com.mygdx.game.Enums.Layer
 import com.mygdx.game.Locations.DefaultLocation
 import com.mygdx.game.SaveHandling.DefaultItemObjectSaveState
 import com.mygdx.game.SaveState.SaveStateEntity
+import com.mygdx.game.getItemTexture
 
-class GenericInventoryItemObject(Position: Vector2, size: Vector2, defaultLocation: DefaultLocation, itemType: ItemType, texture: Texture) : GameObject(Position, size,defaultLocation),ItemObject,
+class GenericInventoryItemObject(Position: Vector2, size: Vector2, defaultLocation: DefaultLocation, itemType: ItemType) : GameObject(Position, size,defaultLocation),ItemObject,
                                                           SaveStateEntity by DefaultItemObjectSaveState(itemType){
-    override val texture = texture
+    override val texture = getItemTexture(itemType)
     override val collition = ItemCollition
     override val itemType = itemType
     override val layer = Layer.ONGROUND

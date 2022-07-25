@@ -15,6 +15,7 @@ import com.mygdx.game.GameObjects.ShopItem.ShopItem
 import com.mygdx.game.GameObjects.Terrain.IceObject
 import com.mygdx.game.GameObjects.Terrain.WalkableTerrain
 import com.mygdx.game.Interfaces.AreaIdentifier
+import com.mygdx.game.Interfaces.Event
 import com.mygdx.game.Interfaces.MoveCollition
 import com.mygdx.game.Locations.DefaultLocation
 import com.mygdx.game.Managers.LocationManager
@@ -77,24 +78,35 @@ fun getLocationFourObjects(): List<GameObject>{
 fun getWorldTreeObjects(): List<GameObject>{
     val location = LocationManager.findLocation("location8",AreaIdentifier.MAINAREA)
     val tree = Tree(location.originalMiddle, Vector2(64f * 2, 128f * 2),location)
-    val WorldLeaf = GenericInventoryItemObject(tree.topleft + Vector2(0f, 0f), Vector2(64f, 32f), location,ItemType.WORLDLEAF,
-        DefaultTextureHandler.getTexture("WorldLeaf.png"))
-    val WorldLeaf2 = GenericInventoryItemObject(tree.bottomright + Vector2(0f, 0f), Vector2(64f, 32f), location,ItemType.WORLDLEAF,
-        DefaultTextureHandler.getTexture("WorldLeaf.png"))
+    val WorldLeaf = GenericInventoryItemObject(tree.topleft + Vector2(0f, 0f), Vector2(64f, 32f), location,ItemType.WORLDLEAF)
+    val WorldLeaf2 = GenericInventoryItemObject(tree.bottomright + Vector2(0f, 0f), Vector2(64f, 32f), location,ItemType.WORLDLEAF)
     return listOf(tree,WorldLeaf,WorldLeaf2)
 }
 fun getIceLandsGateWayLocation():List<GameObject>{
     val location10 = LocationManager.findLocation("location10", AreaIdentifier.MAINAREA)
     val walkableTerrain = GenericGameObject(location10.bottomleft +  Vector2(location10.width / 2 - 150f,0f), Vector2(300f,location10.height ),
         "MainB.jpg", Layer.ONGROUND, location10, RemoveDotDamageCollition)
-    val thorns = ConstructObjects(::Thorns,walkableTerrain.topleft.x.toInt(),60,walkableTerrain.topright.x.toInt() - 1,
-        walkableTerrain.topleft.y.toInt() - 100, 100,walkableTerrain.topleft.y.toInt() - 200,
-        location10)
     val iceGrounds = ConstructObjects(::IceObject,walkableTerrain.bottomleft.x.toInt(),100,walkableTerrain.bottomleft.x.toInt() + 199,
-                                    walkableTerrain.bottomleft.y.toInt() + 400,100,walkableTerrain.bottomleft.y.toInt(),location10)
-    val iceGrounds2 = ConstructObjects(::IceObject, walkableTerrain.bottomleft.x.toInt() + 100,100,walkableTerrain.topright.x.toInt() - 100,
-                                        walkableTerrain.topleft.y.toInt() - 300, 100,walkableTerrain.topleft.y.toInt() - 499,location10)
+        walkableTerrain.bottomleft.y.toInt() + 400,100,walkableTerrain.bottomleft.y.toInt(),location10)
 
+    /*val thorns = ConstructObjects(::Thorns,walkableTerrain.topleft.x.toInt(),60,walkableTerrain.topright.x.toInt() - 1,
+        walkableTerrain.topleft.y.toInt() - 100, 100,walkableTerrain.topleft.y.toInt() - 200,
+        location10)*/
+    val fence = Fence(Vector2(walkableTerrain.topleft.x,walkableTerrain.topleft.y - 130f), Vector2(walkableTerrain.width,150f),location10, DefaultTextureHandler.getTexture("FenceGate.png"), false)
+    val removeFenceEvent = object: Event {
+        override fun execute() {
+            SignalManager.emitSignal(Signal(SIGNALTYPE.REMOVE_OBJECT,fence.entityId))
+        }
+
+    }
+    val buttonEvent = DoorButtonEvent(removeFenceEvent)
+    val doorButton1 = DoorButton(walkableTerrain.topleft + Vector2(50f,0f), Vector2(40f,30f),location10,buttonEvent)
+    val doorButton2 = DoorButton(doorButton1.bottomleft + Vector2(150f,0f), Vector2(40f,30f),location10,buttonEvent)
+
+    val iceObject = IceObject(Vector2(fence.bottomleft.x + 30f, fence.bottomleft.y - 75f),
+        Vector2(75f,75f),location10
+    )
+    val iceObject2 = IceObject(Vector2(iceObject.bottomleft.x + 150f, iceObject.bottomleft.y),Vector2(75f,75f),location10)
     val doorPosition = Vector2(walkableTerrain.originalMiddle.x - (playerSize.x),walkableTerrain.topleft.y)
 
     val doorCollition = DoorCollition(doorPosition,
@@ -104,7 +116,7 @@ fun getIceLandsGateWayLocation():List<GameObject>{
     val door = Door(doorPosition, Vector2(32f * 2, 64f * 2), DefaultTextureHandler.getTexture("CaveDoor.png"),location10,
         Direction.UP,doorCollition)
 
-    return listOf(walkableTerrain,door) + thorns + iceGrounds + iceGrounds2
+    return listOf(walkableTerrain,door) + iceGrounds + iceObject + iceObject2 + fence + doorButton1 + doorButton2
 }
 fun getFireLandsGateWayLocation(): List<GameObject> {
     val location2 = LocationManager.findLocation("location2", AreaIdentifier.MAINAREA)

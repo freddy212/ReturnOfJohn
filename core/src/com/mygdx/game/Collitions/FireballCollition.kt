@@ -13,13 +13,13 @@ class FireballCollition : ProjectileCollition() {
         super.collitionHappened(entity, collidedObject)
         if (entity is Fireball || collidedObject is Fireball) {
             if (collidedObject is WaterBall || entity is WaterBall) {
-                entity.defaultLocation!!.removeGameObject(entity)
-                collidedObject.defaultLocation!!.removeGameObject(collidedObject)
+                entity.removeFromLocation()
+                collidedObject.removeFromLocation()
             }
             if (collidedObject is Icicle) {
-                collidedObject.defaultLocation!!.removeGameObject(collidedObject)
+                collidedObject.removeFromLocation()
             } else if (entity is Icicle) {
-                entity.defaultLocation!!.removeGameObject(entity)
+                entity.removeFromLocation()
             }
         }
     }

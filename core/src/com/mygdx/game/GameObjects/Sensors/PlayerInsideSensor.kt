@@ -3,18 +3,15 @@ package com.mygdx.game.GameObjects.Sensors
 import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.AbstractClasses.GameObject
-import com.mygdx.game.Collitions.CheckKeyCollition
 import com.mygdx.game.Collitions.PlayerInsideCollition
 import com.mygdx.game.DefaultTextureHandler
 import com.mygdx.game.Enums.Layer
-import com.mygdx.game.GameObjects.LockedDoor
 import com.mygdx.game.GameObjects.ShopItem.ShopItem
 import com.mygdx.game.GetCollidingObjects
 import com.mygdx.game.Locations.DefaultLocation
 import com.mygdx.game.Managers.LocationManager
-import com.mygdx.game.UI.RenderShopItem
+import com.mygdx.game.UI.Items.RenderShopItem
 import com.mygdx.game.Utils.RenderGraph
-import com.mygdx.game.handleCollitions
 import com.mygdx.game.player
 
 class PlayerInsideSensor(val shopItem: ShopItem, Position: Vector2, size: Vector2, defaultLocation: DefaultLocation?) : GameObject(Position, size,defaultLocation){

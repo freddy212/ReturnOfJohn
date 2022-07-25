@@ -71,6 +71,6 @@ fun getLocationEightCaveObjects(): List<GameObject> {
 fun getLocationElevenCaveObjects(): List<GameObject> {
     val location = LocationManager.findLocation("location11",AreaIdentifier.DUNGEONAREA)
     val size = Vector2(80f,40f)
-    val key = GenericInventoryItemObject(middleOfObject(location.originalMiddle,size),size,location,ItemType.KEY, DefaultTextureHandler.getTexture("Key.png"))
+    val key = GenericInventoryItemObject(middleOfObject(location.originalMiddle,size),size,location,ItemType.KEY)
     return listOf(key)
 }

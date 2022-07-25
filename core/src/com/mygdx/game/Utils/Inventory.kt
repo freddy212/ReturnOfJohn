@@ -1,16 +1,20 @@
 package com.mygdx.game
 
+import com.badlogic.gdx.graphics.Texture
 import com.mygdx.game.Enums.Item
 import com.mygdx.game.Enums.ItemType
 import com.mygdx.game.Managers.SignalManager
 import com.mygdx.game.SaveHandling.SaveableObject
 import kotlinx.serialization.Serializable
 
-@Serializable
-data class ItemSavableObject(val itemType: ItemType, val amount: Int){}
-
-@Serializable
-class InventorySaveObject(val items: List<ItemSavableObject>, override val entityId: Int): SaveableObject(){}
+fun getItemTexture(itemType: ItemType): Texture {
+    return when(itemType){
+        ItemType.FLINT -> DefaultTextureHandler.getTexture("Flint.png")
+        ItemType.WOOD -> DefaultTextureHandler.getTexture("wood.png")
+        ItemType.KEY -> DefaultTextureHandler.getTexture("Key.png")
+        ItemType.WORLDLEAF -> DefaultTextureHandler.getTexture("WorldLeaf.png")
+    }
+}
 
 class Inventory {
     private val InventoryList: MutableMap<ItemType,Int> = mutableMapOf()
@@ -29,11 +33,5 @@ class Inventory {
     }
     fun checkItemsEnough(item:Item): Boolean{
         return getItemCount(item.itemType) >= item.amount
-    }
-    fun loadItems(listOfItems: List<ItemSavableObject>){
-        listOfItems.forEach {this.addItem(it.itemType,it.amount)}
-    }
-    fun saveItems(){
-
     }
 }

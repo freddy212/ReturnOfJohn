@@ -1,16 +1,14 @@
-package com.mygdx.game.UI
+package com.mygdx.game.UI.Items
 
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch
 import com.badlogic.gdx.graphics.g2d.Sprite
-import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.DefaultTextureHandler
 import com.mygdx.game.Enums.Item
 import com.mygdx.game.Enums.Layer
 import com.mygdx.game.GameObjects.ShopItem.ShopItem
 import com.mygdx.game.Interfaces.Renderable
 import com.mygdx.game.Inventory
-import com.mygdx.game.drawShopItemImage
 import com.mygdx.game.font
 
 class RenderShopItem(val shopItem: ShopItem,val inventory: Inventory): Renderable {

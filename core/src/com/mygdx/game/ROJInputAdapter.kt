@@ -9,13 +9,20 @@ import com.badlogic.gdx.math.Vector3
 import com.mygdx.game.Enums.CharacterState
 import com.mygdx.game.Events.DrawSentenceEvent
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Player
+import com.mygdx.game.InputActions.ChangeDialogueOption
+import com.mygdx.game.InputActions.RenderInventoryAction
 import com.mygdx.game.Interfaces.KeyPressedCollition
 import com.mygdx.game.Managers.EventManager
+import com.mygdx.game.Managers.InputActionManager
 import com.mygdx.game.Managers.LocationManager
 import com.mygdx.game.UI.Dialogue.OptionSentence
 
 class ROJInputAdapter(private val camera : OrthographicCamera, val player: Player) : InputAdapter(){
     var clickPosition = Vector3(0f,0f,0f)
+
+    init {
+        InputActionManager.InputActionManager.addAll(listOf(ChangeDialogueOption(), RenderInventoryAction()))
+    }
 
     override fun keyDown(keycode: Int): Boolean {
         val keyCollitions = LocationManager.ButtonCollitionGameObjects.filter {(it.collition as KeyPressedCollition).specificButton == keycode}
@@ -31,12 +38,10 @@ class ROJInputAdapter(private val camera : OrthographicCamera, val player: Playe
                 }
             }
         }
-        if(keycode == Input.Keys.LEFT || keycode == Input.Keys.RIGHT || keycode == Input.Keys.A || keycode == Input.Keys.D){
-            val readSentenceEvent = EventManager.eventManager.List.find {it is DrawSentenceEvent} as DrawSentenceEvent?
-            if(readSentenceEvent != null){
-                if(readSentenceEvent.conversationHandler.GetSentence() is OptionSentence){
-                    (readSentenceEvent.conversationHandler.GetSentence() as OptionSentence).textChoice.changeActive()
-                }
+
+        InputActionManager.InputActionManager.List.forEach {
+            if(it.keycodes.contains(keycode)){
+                it.action()
             }
         }
         return super.keyDown(keycode)
@@ -46,6 +51,11 @@ class ROJInputAdapter(private val camera : OrthographicCamera, val player: Playe
         for (itemAbility in player.itemAbilities.List){
             if(keycode == itemAbility.triggerKey){
                 itemAbility.InactiveAction()
+            }
+        }
+        InputActionManager.InputActionManager.List.forEach {
+            if(it.keycodes.contains(keycode)){
+                it.inactiveAction()
             }
         }
         return super.keyUp(keycode)

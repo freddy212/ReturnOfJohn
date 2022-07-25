@@ -19,7 +19,7 @@ class AxeSwingCollision: EveryFrameCollition {
         if(entity is Axe && collidedObject is SmallBoulder){
             collidedObject.defaultLocation!!.removeGameObject(collidedObject)
             val genericItemObject = GenericInventoryItemObject(collidedObject.currentMiddle, Vector2(64f,32f),
-                                    collidedObject.defaultLocation!!, ItemType.FLINT,DefaultTextureHandler.getTexture("Flint.png"))
+                                    collidedObject.defaultLocation!!, ItemType.FLINT)
             collidedObject.defaultLocation!!.addGameObject(genericItemObject)
         }
     }

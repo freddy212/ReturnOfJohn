@@ -8,12 +8,21 @@ import com.mygdx.game.Collitions.NoCharacterCanPassCollition
 import com.mygdx.game.DefaultTextureHandler
 import com.mygdx.game.Enums.Layer
 import com.mygdx.game.Locations.DefaultLocation
+import com.mygdx.game.SaveHandling.DefaultRemoveObjectSaveState
+import com.mygdx.game.SaveHandling.SaveableObject
+import com.mygdx.game.SaveState.SaveStateEntity
 import com.mygdx.game.renderRepeatedTexture
 
-class Fence(Position: Vector2, size: Vector2, defaultLocation: DefaultLocation, override val texture: Texture = DefaultTextureHandler.getTexture("Fence-Start.png")): GameObject(Position,size,defaultLocation) {
+class Fence(Position: Vector2, size: Vector2, defaultLocation: DefaultLocation, override val texture: Texture = DefaultTextureHandler.getTexture("Fence-Start.png"), val repeat: Boolean = true)
+    : GameObject(Position,size,defaultLocation), SaveStateEntity by DefaultRemoveObjectSaveState() {
     override val collition = NoCharacterCanPassCollition()
     override val layer = Layer.ONGROUND
     override fun render(batch: PolygonSpriteBatch){
-        renderRepeatedTexture(batch,texture,initPosition,size)
+        if(repeat){
+            renderRepeatedTexture(batch,texture,initPosition,size)
+        }
+        else {
+            super.render(batch)
+        }
     }
 }

@@ -18,5 +18,8 @@ class ResourceList<T> {
     fun clear(){
         mutableList.clear()
     }
+    fun addAll(items: List<T>){
+        items.forEach { mutableList.add(it) }
+    }
 
 }

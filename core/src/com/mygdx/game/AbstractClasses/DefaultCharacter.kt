@@ -66,9 +66,6 @@ abstract class DefaultCharacter(Position: Vector2, size: Vector2, location: Defa
         }
         handleCollitions(this, this.polygon, LocationManager.EveryFrameCollitionGameObjects)
         super.frameTask()
-        if(health <= 0f){
-            death()
-        }
     }
     override fun isHit(launchUnitVector: Vector2){
         loseHealth(10f)
@@ -86,12 +83,16 @@ abstract class DefaultCharacter(Position: Vector2, size: Vector2, location: Defa
         }
         super.move(directionUnitVector)
     }
-    fun loseHealth(amount: Float) {
+    fun loseHealth(amount: Float, immuneAfter: Boolean = true) {
         if(!immuneToDamage) {
-            this.health -= amount
-        } else{
+            health -= amount
+            if(health <= 0f){
+                death()
+            }
         }
-        makeImmune()
+        if(immuneAfter){
+            makeImmune()
+        }
     }
 
     fun makeImmune(){
