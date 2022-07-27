@@ -25,7 +25,7 @@ class Player(Position: Vector2, size: Vector2, modelHandler: ModelInstanceHandle
              : DefaultCharacter(Position, size,null),SaveStateEntity by DefaultSaveStateHandler(),
                                                                          FightableEntity{
     override val texture = DefaultTextureHandler.getTexture("man.png")
-    override var currentSpeed = 7f
+    override var baseSpeed: Float = 7f
     override val layer = Layer.PERSON
     val inventory = Inventory()
     override var direction = Direction.UP

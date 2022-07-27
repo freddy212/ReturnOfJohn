@@ -28,7 +28,7 @@ class SmallDevil(Position: Vector2, size: Vector2 = Vector2(128f,128f),location:
     SaveStateEntity by DefaultRemoveObjectSaveState(){
     override val texture = DefaultTextureHandler.getTexture("DefaultPerson.png")
     override val layer = Layer.PERSON
-    override var currentSpeed = 2f
+    override var baseSpeed = 2f
     override var direction = Direction.UP
     override var health = 100f
     override val maxHealth = 100f

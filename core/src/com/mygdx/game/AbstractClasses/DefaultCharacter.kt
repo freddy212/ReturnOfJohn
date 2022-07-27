@@ -23,8 +23,6 @@ abstract class DefaultCharacter(Position: Vector2, size: Vector2, location: Defa
     override val texture = DefaultTextureHandler.getTexture("man.png")
     val speedDecrease = 0.95f
     var characterState: CharacterState = CharacterState.FREE
-        private set
-    var originalSpeed: Float? = null
     open val stunDuration = 4
     lateinit var launchUnitVector: Vector2
     override var canChangeDirection = true
@@ -51,7 +49,7 @@ abstract class DefaultCharacter(Position: Vector2, size: Vector2, location: Defa
         if(canChangeDirection()){
             setCharacterRotation(unitVectorDirection)
         }
-            if (characterState == CharacterState.FREE) {
+            if (characterState != CharacterState.STUNNED) {
                 moveSuccessfull = super.move(unitVectorDirection)
                 if (!moveSuccessfull) {
                     moveSuccessfull = super.move(getDirectionUnitVector(direction))
@@ -69,16 +67,15 @@ abstract class DefaultCharacter(Position: Vector2, size: Vector2, location: Defa
     }
     override fun isHit(launchUnitVector: Vector2){
         loseHealth(10f)
-        originalSpeed = originalSpeed ?: currentSpeed
         characterState = CharacterState.STUNNED
         this.launchUnitVector = launchUnitVector
-        currentSpeed = stunDuration * originalSpeed!!
+        currentSpeed = stunDuration * baseSpeed
         setCharacterRotation(launchUnitVector)
     }
     private fun handleStunned(directionUnitVector: Vector2){
-        currentSpeed *= speedDecrease
-        if(currentSpeed <= originalSpeed!!){
-            currentSpeed = originalSpeed!!
+        setCurrentSpeed(getCurrentSpeed() * speedDecrease)
+        if(getCurrentSpeed() <= baseSpeed){
+            setCurrentSpeed(baseSpeed)
             characterState = CharacterState.FREE
         }
         super.move(directionUnitVector)

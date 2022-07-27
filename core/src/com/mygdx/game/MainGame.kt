@@ -13,10 +13,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.Enums.ItemType
-import com.mygdx.game.GameObjects.ItemAbilities.AxeAbility
-import com.mygdx.game.GameObjects.ItemAbilities.FireballAbility
-import com.mygdx.game.GameObjects.ItemAbilities.IcicleAbility
-import com.mygdx.game.GameObjects.ItemAbilities.ShieldAbility
+import com.mygdx.game.GameObjects.ItemAbilities.*
 import com.mygdx.game.SaveHandling.FileHandler
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Player
 import com.mygdx.game.GameObjects.MoveableEntities.Projectiles.Fireball
@@ -96,6 +93,7 @@ class MainGame : ApplicationAdapter() {
         //player.addAbility(FireballAbility())
         player.addAbility(AxeAbility())
         player.addAbility(ShieldAbility())
+        player.addAbility(DashAbility())
             /* val savedStates:List<DefaultSaveableObject> = saves.map { x -> Json.decodeFromString(x) }
              val savedEntities:List<SaveStateEntity> = AreaManager.getAllGameObjects()
                  .filter {it is SaveStateEntity}.map { it as SaveStateEntity }.filter {savedStates.map {it.entityId}.contains(it.entityId)}

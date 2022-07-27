@@ -11,9 +11,8 @@ class DefaultMovement(private val edgeOfLocationStrategy: CannotMoveStrategy): M
 
     override fun moveEntity(moveableObject: MoveableObject,directionUnitVector:Vector2): Boolean{
         val sprite = moveableObject.sprite
-        val speed = moveableObject.currentSpeed
 
-        val nextIncrement = directionUnitVector * speed
+        val nextIncrement = directionUnitVector * moveableObject.getCurrentSpeed()
         val polygonToCheck = Polygon(moveableObject.polygon.transformedVertices + nextIncrement)
         val canMove = handleCollitions(moveableObject,polygonToCheck,LocationManager.MoveCollitionGameObjects)
         val inLocation = entityWithinLocations(polygonToCheck)

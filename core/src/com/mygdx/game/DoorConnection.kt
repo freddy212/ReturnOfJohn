@@ -2,6 +2,8 @@ package com.mygdx.game
 
 import com.badlogic.gdx.math.Vector2
 
+val doorConnectionMap: MutableMap<String, DoorConnection> = mutableMapOf()
+
 val doorWastelandAndDungeonConnection = DoorConnection()
 val doorMainAreaAndShop = DoorConnection()
 val doorMainAreaAndDojo = DoorConnection()

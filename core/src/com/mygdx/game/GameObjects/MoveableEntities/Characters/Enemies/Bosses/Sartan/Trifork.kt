@@ -23,7 +23,7 @@ import com.mygdx.game.plus
 
 class Trifork(Position: Vector2, size: Vector2, defaultLocation: DefaultLocation?, private val sartan: Sartan) :
     MoveableObject(Position, size, defaultLocation), RotationalObject by DefaultRotationalObject() {
-    override var currentSpeed = 8f
+    override var baseSpeed = 8f
     override val movementStrategy = DefaultMovement(NoAction())
     override var unitVectorDirection = Vector2(0f,0f)
     override val texture = DefaultTextureHandler.getTexture("Trifork.png")
@@ -35,7 +35,7 @@ class Trifork(Position: Vector2, size: Vector2, defaultLocation: DefaultLocation
     init {
         sprite.setOrigin(origOrigin.x, origOrigin.y)
         polygon.setOrigin(sprite.x + sprite.originX, sprite.y + sprite.originY)
-        this.currentSpeed = sartan.currentSpeed
+        this.setCurrentSpeed(sartan.getCurrentSpeed())
     }
 
     override fun frameTask(){

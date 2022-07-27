@@ -27,7 +27,7 @@ class SandHand(Position: Vector2, size: Vector2, location: DefaultLocation?, val
     override val collition = SandHandCollition(this)
     override val texture = DefaultTextureHandler.getTexture("Hand.png")
     override val layer = Layer.PERSON
-    override var currentSpeed = 1f
+    override var baseSpeed = 1f
     override val movementStrategy = DefaultMovement(NoAction())
     override var unitVectorDirection = Vector2(0f,0f)
     val baseRadius = 200f

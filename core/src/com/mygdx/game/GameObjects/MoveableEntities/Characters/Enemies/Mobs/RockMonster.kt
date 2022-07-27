@@ -29,7 +29,7 @@ class RockMonster(Position: Vector2, size: Vector2 = Vector2(128f,128f),location
     SaveStateEntity by DefaultRemoveObjectSaveState(){
     override val texture = DefaultTextureHandler.getTexture("DefaultPerson.png")
     override val layer = Layer.PERSON
-    override var currentSpeed = 2f
+    override var baseSpeed = 2f
     override var direction = Direction.UP
     private val randomAction = RandomAction(listOf( EnemyMove(0f,::getUnitVectorTowardsPoint),
         EnemyMove(200f,::getUnitVectorTowardsPoint)),DefaultTimer(2f))

@@ -61,15 +61,19 @@ class ROJInputAdapter(private val camera : OrthographicCamera, val player: Playe
         return super.keyUp(keycode)
     }
     fun handleInput(player: Player) {
-        clickPosition = camera.unproject(Vector3(Gdx.input.x.toFloat(), Gdx.input.y.toFloat(), 0f))
-        val unitVectorTowardsPoint = getUnitVectorTowardsPoint(Vector2(player.sprite.x,player.sprite.y),Vector2(clickPosition.x,clickPosition.y))
-        if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
-            player.move((unitVectorTowardsPoint))
+        if(player.characterState == CharacterState.FREE) {
+            clickPosition = camera.unproject(Vector3(Gdx.input.x.toFloat(), Gdx.input.y.toFloat(), 0f))
+            val unitVectorTowardsPoint = getUnitVectorTowardsPoint(
+                Vector2(player.sprite.x, player.sprite.y),
+                Vector2(clickPosition.x, clickPosition.y)
+            )
+            if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
+                player.move((unitVectorTowardsPoint))
+            }
+            if (Gdx.input.isButtonPressed(Input.Buttons.RIGHT)) {
+                player.setCharacterRotation(unitVectorTowardsPoint)
+            }
         }
-        if (Gdx.input.isButtonPressed(Input.Buttons.RIGHT)){
-            player.setCharacterRotation(unitVectorTowardsPoint)
-        }
-
     }
 
 }

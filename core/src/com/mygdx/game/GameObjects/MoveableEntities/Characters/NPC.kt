@@ -21,7 +21,7 @@ class NPC(Position: Vector2, size: Vector2 = Vector2(128f,128f),location: Defaul
     SaveStateEntity by DefaultRemoveObjectSaveState(){
     override val texture = DefaultTextureHandler.getTexture("DefaultPerson.png")
     override val layer = Layer.ONGROUND
-    override var currentSpeed = 2f
+    override var baseSpeed = 2f
     override var direction = Direction.UP
     override var health = 10f
     override val maxHealth = 10f

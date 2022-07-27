@@ -2,6 +2,7 @@ import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.*
 import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.Collitions.DoorCollition
+import com.mygdx.game.DataClasses.DoorData
 import com.mygdx.game.Enums.Direction
 import com.mygdx.game.Enums.ItemType
 import com.mygdx.game.Enums.Layer
@@ -75,6 +76,7 @@ fun getWastelandLocationTenObjects(): List<GameObject>{
     val doorCollition = DoorCollition(doorPosition,AreaIdentifier.DUNGEONAREA, doorWastelandAndDungeonConnection,Direction.UP)
     val door = Door(doorPosition, Vector2(32f * 2,36f * 2),
         DefaultTextureHandler.getTexture("CaveDoor.png"),location10,Direction.UP,doorCollition)
+    val firelandsDoor = createDoor(DoorData(location10.topleft,AreaIdentifier.WASTELAND, AreaIdentifier.FIRELANDS,"location10",Direction.UP,"WastelandFirelands"))
 
     val thorns = Thorns(location10.topright - Vector2(32f,64f), Vector2(32f,64f), location10)
     thorns.onRemoveAction.add {
@@ -92,5 +94,5 @@ fun getWastelandLocationTenObjects(): List<GameObject>{
             )
         }
     }
-    return listOf(walkableTerrain, walkableTerrain2, cave,door, thorns)
+    return listOf(walkableTerrain, walkableTerrain2, cave,door, thorns, firelandsDoor)
 }

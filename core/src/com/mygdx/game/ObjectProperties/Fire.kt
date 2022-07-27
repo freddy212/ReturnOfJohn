@@ -11,7 +11,6 @@ class Fire(val extinguishFireEvent: Event, objectOnFire: GameObject) : ROJPartic
     override val layer = Layer.FOREGROUND
     init {
         particleEffect.load(Gdx.files.internal("ParticleEmitters/Fire.p"), Gdx.files.internal(""))
-        particleEffect.emitters.first().setPosition(objectOnFire.x, objectOnFire.y)
         particleEffect.emitters.first().xOffsetValue.setLow(0f,objectOnFire.size.x)
         particleEffect.emitters.first().yOffsetValue.setLow(- 10f,objectOnFire.size.y /2)
 

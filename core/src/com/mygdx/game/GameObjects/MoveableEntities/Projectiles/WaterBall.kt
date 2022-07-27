@@ -11,7 +11,7 @@ import com.mygdx.game.times
 import com.mygdx.game.plus
 
 class WaterBall(Position: Vector2, size: Vector2, defaultLocation: DefaultLocation?,unitVectorDirection: Vector2, shooter: GameObject) : Projectile(Position, size, defaultLocation,unitVectorDirection, shooter){
-    override var currentSpeed = 8f
+    override var baseSpeed = 8f
     override val movementStrategy = DefaultMovement(RemoveObject())
     override val texture = DefaultTextureHandler.getTexture("WaterBall.png")
     override val layer = Layer.AIR

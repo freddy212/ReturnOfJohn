@@ -5,6 +5,7 @@ import com.mygdx.game.*
 import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.Collitions.DoorCollition
 import com.mygdx.game.Collitions.IllegalMoveCollition
+import com.mygdx.game.DataClasses.DoorData
 import com.mygdx.game.Enums.Direction
 import com.mygdx.game.Enums.Layer
 import com.mygdx.game.GameObjects.Abyss
@@ -67,4 +68,16 @@ fun getFireLandsLocationFiveObjects(): List<GameObject>{
 
     return listOf(walkableTerrain,walkableTerrain2, sartan)
 }
+
+fun getFireLandsLocationSevenObjects(): List<GameObject>{
+    val location7 = LocationManager.findLocation("location7",AreaIdentifier.FIRELANDS)
+    val location6 = LocationManager.findLocation("location6",AreaIdentifier.FIRELANDS)
+
+    val walkableTerrain = WalkableTerrain(Vector2(location6.bottomleft.x,location7.bottomleft.y),Vector2(location6.width,location7.height),location7)
+
+    val door = createDoor(DoorData(Vector2(walkableTerrain.currentMiddle.x - 25f,location7.bottomleft.y),AreaIdentifier.FIRELANDS,AreaIdentifier.WASTELAND,
+    "location7",Direction.DOWN,"WastelandFirelands"))
+    return listOf(walkableTerrain, door)
+}
+
 

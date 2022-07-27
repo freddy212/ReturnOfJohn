@@ -12,7 +12,7 @@ import com.mygdx.game.Enums.Layer
 import com.mygdx.game.Locations.DefaultLocation
 
 class Icicle(Position: Vector2, size: Vector2, defaultLocation: DefaultLocation?,unitVectorDirection: Vector2, shooter: GameObject) : Projectile(Position, size, defaultLocation,unitVectorDirection, shooter) {
-    override var currentSpeed = 8f
+    override var baseSpeed = 8f
     override val movementStrategy = DefaultMovement(RemoveObject())
     override val texture = DefaultTextureHandler.getTexture("Icicle.png")
     override val layer = Layer.AIR

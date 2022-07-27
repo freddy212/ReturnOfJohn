@@ -6,10 +6,11 @@ import com.mygdx.game.Interfaces.MovementStrategy
 import com.mygdx.game.Locations.DefaultLocation
 
 abstract class MoveableObject(Position: Vector2, size: Vector2, defaultLocation: DefaultLocation?):GameObject(Position,size,defaultLocation){
-    abstract var currentSpeed : Float
+    abstract var baseSpeed: Float
     abstract val movementStrategy: MovementStrategy
     private var canMove = true
     abstract var unitVectorDirection: Vector2
+    var currentSpeed: Float? = null
 
     init {
         onLocationEnterActions.add(::resetObject)
@@ -40,6 +41,14 @@ abstract class MoveableObject(Position: Vector2, size: Vector2, defaultLocation:
         } else{
             this.setPosition(startingPosition)
         }
+    }
+
+    fun getCurrentSpeed(): Float{
+        return currentSpeed ?: baseSpeed
+    }
+
+    fun setCurrentSpeed(float: Float) {
+        currentSpeed = float
     }
 
 }

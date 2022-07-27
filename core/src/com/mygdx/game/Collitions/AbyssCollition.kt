@@ -1,11 +1,19 @@
 package com.mygdx.game.Collitions
 
 import com.mygdx.game.AbstractClasses.GameObject
+import com.mygdx.game.Enums.CharacterState
+import com.mygdx.game.GameObjects.Abyss
+import com.mygdx.game.GameObjects.MoveableEntities.Characters.Player
 import com.mygdx.game.Interfaces.MoveCollition
 import com.mygdx.game.Interfaces.DynamicEntity
+import com.mygdx.game.player
 
 object AbyssCollition: MoveCollition by CanMoveCollition {
     override fun collitionHappened(entity: GameObject, collidedObject: GameObject) {
-        println("you fell into the abyss")
+        if(entity is Player && collidedObject is Abyss){
+            if(player.characterState != CharacterState.DASHING){
+                player.death()
+            }
+        }
     }
 }

@@ -17,7 +17,7 @@ class MovementTest: TestGame() {
         player.currentSpeed = 5f
         player.move(Direction.RIGHT)
         player.move(Direction.RIGHT)
-        Assertions.assertEquals(originalPosition + Vector2(player.currentSpeed * 2,0f),playerPos)
+        Assertions.assertEquals(originalPosition + Vector2(player.getCurrentSpeed() * 2,0f),playerPos)
 
         originalPosition = playerPos
         player.move(Direction.RIGHT)
@@ -28,7 +28,7 @@ class MovementTest: TestGame() {
 
         originalPosition = playerPos
         player.move(Direction.LEFT)
-        Assertions.assertEquals(originalPosition - Vector2(player.currentSpeed,0f),playerPos)
+        Assertions.assertEquals(originalPosition - Vector2(player.getCurrentSpeed(),0f),playerPos)
 
         player.move(Direction.RIGHT)
         Assertions.assertEquals(originalPosition,playerPos)

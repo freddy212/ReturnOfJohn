@@ -12,7 +12,6 @@ class DojoMasterCollition(val dojoEvent: DojoEvent): MoveCollition by CanMoveCol
 
     override fun collitionHappened(entity: GameObject, collidedObject: GameObject) {
         if(collidedObject is Player){
-            player.die()
             dojoEvent.resetCounter()
         }
         if(collidedObject is Shield){

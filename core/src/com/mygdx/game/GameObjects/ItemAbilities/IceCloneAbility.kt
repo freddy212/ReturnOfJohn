@@ -28,7 +28,7 @@ class IceCloneAbility(): CharacterAbility(){
         )
         AreaManager.getAllGameObjects().forEach {
             if (it is IceClone) {
-                it.defaultLocation!!.removeGameObject(it)
+                it.removeFromLocation()
             }
         }
         iceClone.defaultLocation!!.addGameObject(iceClone)
