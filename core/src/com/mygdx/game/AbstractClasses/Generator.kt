@@ -26,7 +26,7 @@ abstract class Generator(Position: Vector2, size: Vector2, defaultLocation: Defa
     val projectileTimer = DefaultTimer(shootCoolDown)
     val delayTimer = DelayTimer(timeUntilFire)
 
-    abstract fun generateProjectile()
+    abstract fun generateProjectile(): Projectile
     init {
         polygon.setOrigin(sprite.x + sprite.originX,sprite.y + sprite.originY)
         setRotation(unitVectorDirection,this, 0f)
@@ -47,7 +47,8 @@ abstract class Generator(Position: Vector2, size: Vector2, defaultLocation: Defa
         super.frameTask()
         if(delayTimer.getTimeHasPassed()){
             if(projectileTimer.tryUseCooldown()){
-                generateProjectile()
+                val projectile = generateProjectile()
+                projectile.defaultLocation!!.addGameObject(projectile)
             }
         }
     }

@@ -10,6 +10,7 @@ import com.mygdx.game.Enums.getDirectionUnitVector
 import com.mygdx.game.Events.DefaultEvent
 import com.mygdx.game.GameObjects.MoveableEntities.Projectiles.Boulder
 import com.mygdx.game.GameObjects.MoveableEntities.Projectiles.Icicle
+import com.mygdx.game.GameObjects.MoveableEntities.Projectiles.Rocket
 import com.mygdx.game.Interfaces.FightableEntity
 import com.mygdx.game.Locations.DefaultLocation
 import com.mygdx.game.ObjectProperties.Fire
@@ -19,22 +20,13 @@ import com.mygdx.game.Timer.DefaultTimer
 import com.mygdx.game.Trimer.DelayTimer
 import com.mygdx.game.Utils.RectanglePolygon
 
-class IceGenerator(Position: Vector2, size: Vector2, unitVectorDirection: Vector2, defaultLocation: DefaultLocation,
-                       timeUntilFire: Float = 0f, shootCoolDown:Float = 3f):
+class RocketGenerator(Position: Vector2, size: Vector2, unitVectorDirection: Vector2, defaultLocation: DefaultLocation,
+                   timeUntilFire: Float = 0f, shootCoolDown:Float = 3f):
     Generator(Position, size,defaultLocation,unitVectorDirection,timeUntilFire,shootCoolDown){
 
     override fun generateProjectile(): Projectile{
         val Position = Vector2(this.sprite.x,this.sprite.y) + getDistanceFromGenerator(unitVectorDirection)
-        val icicle = Icicle(Position,Vector2(100f,34f),defaultLocation,Vector2(unitVectorDirection.x,unitVectorDirection.y), this)
-        /*icicle.collition = object : ProjectileCollition() {
-            override fun collitionHappened(entity: GameObject, collidedObject: GameObject) {
-                if(entity is Projectile && collidedObject is FightableEntity){
-                    (collidedObject as DefaultCharacter).isHit(getDirectionUnitVector(Direction.DOWN))
-                }
-            }
-
-            override val canMoveAfterCollition = true
-        }*/
-        return icicle
+        val rocket = Rocket(Position,Vector2(100f,34f),defaultLocation,Vector2(unitVectorDirection.x,unitVectorDirection.y), this, player)
+        return rocket
     }
 }

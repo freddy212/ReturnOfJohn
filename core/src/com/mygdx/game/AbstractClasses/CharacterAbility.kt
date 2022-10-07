@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Texture
 import com.mygdx.game.GameObjects.ItemAbilities.*
 import com.mygdx.game.Interfaces.Timer
 
-enum class AbilityId{AXE,ICECLONE,ICICLE,SHIELD,WATERBALL, FIREBALL, DASH}
+enum class AbilityId{AXE,ICECLONE,ICICLE,SHIELD,WATERBALL, FIREBALL, DASH, DASHUPGRADE}
 abstract class CharacterAbility(){
     abstract val abilityId: AbilityId
     abstract val triggerKey: Int
@@ -34,5 +34,6 @@ fun getAbility(abilityId: AbilityId): CharacterAbility{
         AbilityId.ICICLE -> IcicleAbility()
         AbilityId.FIREBALL -> FireballAbility()
         AbilityId.DASH -> DashAbility()
+        AbilityId.DASHUPGRADE -> DashAbilityUpgraded()
     }
 }

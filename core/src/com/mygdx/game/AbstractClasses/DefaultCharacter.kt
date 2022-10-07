@@ -92,9 +92,9 @@ abstract class DefaultCharacter(Position: Vector2, size: Vector2, location: Defa
         }
     }
 
-    fun makeImmune(){
+    fun makeImmune(immuneFrames:Float = immunityFrames){
         immuneToDamage = true
-        EventManager.eventManager.add(ImmuneEvent(immunityFrames,this))
+        EventManager.eventManager.add(ImmuneEvent(immuneFrames,this))
     }
 
     fun resetRotation(){

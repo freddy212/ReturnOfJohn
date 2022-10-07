@@ -7,7 +7,9 @@ import com.mygdx.game.Collitions.DoorCollition
 import com.mygdx.game.Collitions.IllegalMoveCollition
 import com.mygdx.game.Enums.Direction
 import com.mygdx.game.Enums.Layer
+import com.mygdx.game.Enums.getDirectionUnitVector
 import com.mygdx.game.GameObjects.Door
+import com.mygdx.game.GameObjects.Generators.RocketGenerator
 import com.mygdx.game.GameObjects.GenericGameObject
 import com.mygdx.game.GameObjects.IceButton
 import com.mygdx.game.GameObjects.Terrain.IceObject
@@ -41,7 +43,7 @@ fun getIceLandsLocationTwoObjects(): List<GameObject>{
 fun getIceLandsLocationThreeObjects(): List<GameObject>{
     val location3 = LocationManager.findLocation("location3",AreaIdentifier.ICELANDS)
 
-    val cave = GenericGameObject(Vector2(location3.originalMiddle.x - 256f, location3.topleft.y), Vector2(256f * 2, 283f * 2), "Cave.png", Layer.ONGROUND, location3)
+    val cave = GenericGameObject(Vector2(location3.originalMiddle.x + 85, location3.topleft.y), Vector2(256f * 2, 283f * 2), "Cave.png", Layer.ONGROUND, location3)
 
     val doorPosition = Vector2(cave.originalMiddle.x - 64 / 2,cave.bottomleft.y)
 
@@ -53,4 +55,17 @@ fun getIceLandsLocationThreeObjects(): List<GameObject>{
     val iceObject = IceObject(thorns.initPosition - Vector2(-10f,200f),Vector2(64f,64f),location3)
 
     return listOf(cave,door,thorns,iceObject)
+}
+fun getIceLandsLocationFiveObjects(): List<GameObject> {
+    val location5 = LocationManager.findLocation("location5", AreaIdentifier.ICELANDS)
+    val walkableTerrain = WalkableTerrain(
+        Vector2(location5.originalMiddle.x - 50f, location5.bottomleft.y),
+        Vector2(100f, location5.topleft.y - location5.bottomleft.y),
+        location5
+    )
+    val rocketGenerator = RocketGenerator(Vector2(location5.topleft.x, location5.currentMiddle.y), Vector2(100f,100f),
+        getDirectionUnitVector(Direction.DOWN),location5)
+    val rocketGenerator2 = RocketGenerator(walkableTerrain.currentMiddle - Vector2(200f,0f), Vector2(100f,100f),
+        getDirectionUnitVector(Direction.DOWN),location5)
+    return listOf(walkableTerrain, rocketGenerator, rocketGenerator2)
 }
