@@ -10,7 +10,9 @@ import com.mygdx.game.Collitions.FireballCollition
 import com.mygdx.game.DefaultTextureHandler
 import com.mygdx.game.EdgeOfLocationStrategies.RemoveObject
 import com.mygdx.game.Enums.Layer
+import com.mygdx.game.GameObjects.IceClone
 import com.mygdx.game.Locations.DefaultLocation
+import com.mygdx.game.Managers.LocationManager
 import com.mygdx.game.getUnitVectorTowardsPoint
 import com.mygdx.game.unitVectorToAngle
 
@@ -26,7 +28,9 @@ class Rocket(Position: Vector2, size: Vector2, defaultLocation: DefaultLocation?
 
     override fun frameTask() {
         super.frameTask()
-        unitVectorDirection = getUnitVectorTowardsPoint(this.currentPosition(), target.currentPosition())
+        val clone = LocationManager.newDefaultLocation.gameObjects.find { it is IceClone }
+        val newTarget = clone ?: target
+        unitVectorDirection = getUnitVectorTowardsPoint(this.currentPosition(), newTarget.currentPosition())
         setRotation(unitVectorDirection,this, 0f)
     }
 }

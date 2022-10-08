@@ -60,12 +60,14 @@ fun getIceLandsLocationFiveObjects(): List<GameObject> {
     val location5 = LocationManager.findLocation("location5", AreaIdentifier.ICELANDS)
     val walkableTerrain = WalkableTerrain(
         Vector2(location5.originalMiddle.x - 50f, location5.bottomleft.y),
-        Vector2(100f, location5.topleft.y - location5.bottomleft.y),
+        Vector2(200f, location5.topleft.y - location5.bottomleft.y),
         location5
     )
-    val rocketGenerator = RocketGenerator(Vector2(location5.topleft.x, location5.currentMiddle.y), Vector2(100f,100f),
-        getDirectionUnitVector(Direction.DOWN),location5)
-    val rocketGenerator2 = RocketGenerator(walkableTerrain.currentMiddle - Vector2(200f,0f), Vector2(100f,100f),
-        getDirectionUnitVector(Direction.DOWN),location5)
+    val rocketGenerator = RocketGenerator(
+        Vector2(location5.topleft.x, location5.currentMiddle.y), Vector2(100f,100f),
+        getDirectionUnitVector(Direction.RIGHT),location5)
+    val rocketGenerator2 = RocketGenerator(Vector2(location5.topright.x - 100f, location5.currentMiddle.y), Vector2(100f,100f),
+        getDirectionUnitVector(Direction.LEFT),location5)
+
     return listOf(walkableTerrain, rocketGenerator, rocketGenerator2)
 }

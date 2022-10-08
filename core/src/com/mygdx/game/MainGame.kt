@@ -93,7 +93,7 @@ class MainGame : ApplicationAdapter() {
         //player.addAbility(FireballAbility())
         player.addAbility(AxeAbility())
         player.addAbility(ShieldAbility())
-        player.addAbility(DashAbilityUpgraded())
+        player.addAbility(DashAbility())
             /* val savedStates:List<DefaultSaveableObject> = saves.map { x -> Json.decodeFromString(x) }
              val savedEntities:List<SaveStateEntity> = AreaManager.getAllGameObjects()
                  .filter {it is SaveStateEntity}.map { it as SaveStateEntity }.filter {savedStates.map {it.entityId}.contains(it.entityId)}
