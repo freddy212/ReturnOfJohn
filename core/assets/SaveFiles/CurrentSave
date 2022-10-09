@@ -1,2 +1,5 @@
-{"playerXPos":241.0,"playerYPos":1160.0,"areaIdentifier":"MAINAREA","entityId":0}
-{"signaltype":"REMOVE_OBJECT","id":19}
+{"playerXPos":1503.25,"playerYPos":785.3042,"areaIdentifier":"MAINAREA","entityId":0}
+{"signaltype":"REMOVE_OBJECT","entityId":19}
+{"signaltype":"REMOVE_OBJECT","entityId":39}
+{"signaltype":"ADD_OBJECT","addMethod":"DOOR1","location":"location1","areaIdentifier":"MAINAREA"}
+{"signaltype":"ADD_OBJECT","addMethod":"DOOR2","location":"location10","areaIdentifier":"WASTELAND"}

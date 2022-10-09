@@ -9,8 +9,9 @@ import com.mygdx.game.GameObjects.MoveableEntities.Characters.Player
 import com.mygdx.game.GameObjects.Sensors.KeySensor
 import com.mygdx.game.Interfaces.KeyPressedCollition
 import com.mygdx.game.Managers.SignalManager
-import com.mygdx.game.Signal.SIGNALTYPE
 import com.mygdx.game.Signal.Signal
+import com.mygdx.game.Signal.Signals.RemoveObjectSignal
+import com.mygdx.game.Signal.Signals.UseItemsSignal
 import com.mygdx.game.player
 
 class CheckKeyCollition(val lockedDoor: LockedDoor): KeyPressedCollition {
@@ -20,8 +21,8 @@ class CheckKeyCollition(val lockedDoor: LockedDoor): KeyPressedCollition {
         if(entity is Player && collidedObject is KeySensor){
             if(player.inventory.getItemCount(ItemType.KEY) > 0 && player.direction == Direction.UP){
 
-                SignalManager.emitSignal(Signal( SIGNALTYPE.USE_ITEMS,ItemType.KEY.ordinal,1))
-                SignalManager.emitSignal(Signal(SIGNALTYPE.REMOVE_OBJECT,lockedDoor.entityId))
+                SignalManager.emitSignal(UseItemsSignal(ItemType.KEY,1))
+                SignalManager.emitSignal(RemoveObjectSignal(lockedDoor.entityId))
             }
         }
     }

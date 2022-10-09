@@ -14,8 +14,7 @@ import com.mygdx.game.Locations.DefaultLocation
 import com.mygdx.game.Managers.SignalManager
 import com.mygdx.game.SaveState.DefaultSaveStateHandler
 import com.mygdx.game.SaveState.SaveStateEntity
-import com.mygdx.game.Signal.SIGNALTYPE
-import com.mygdx.game.Signal.Signal
+import com.mygdx.game.Signal.Signals.ButtonAcceptedSignal
 
 class DoorButton(initPosition: Vector2, size: Vector2, defaultLocation: DefaultLocation?, doorButtonEvent: DoorButtonEvent) :
     GameObject(initPosition, size, defaultLocation), SaveStateEntity by DefaultSaveStateHandler() {
@@ -40,7 +39,7 @@ class DoorButtonCollition(val doorButtonEvent: DoorButtonEvent): MoveCollition {
     override fun collitionHappened(entity: GameObject, collidedObject: GameObject) {
         if(entity is Icicle && collidedObject is DoorButton && !collidedObject.activated){
             collidedObject.activated = true
-            SignalManager.emitSignal(Signal(SIGNALTYPE.BUTTON_ACCEPTED, collidedObject.entityId))
+            SignalManager.emitSignal(ButtonAcceptedSignal(collidedObject.entityId))
             doorButtonEvent.execute()
             entity.removeFromLocation()
         }

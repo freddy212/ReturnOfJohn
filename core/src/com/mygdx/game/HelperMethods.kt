@@ -25,8 +25,10 @@ import com.mygdx.game.Managers.LocationManager
 import com.mygdx.game.Managers.SignalManager
 import com.mygdx.game.SaveState.PlayerSaveState
 import com.mygdx.game.SaveState.SaveStateEntity
-import com.mygdx.game.Signal.SIGNALTYPE
 import com.mygdx.game.Signal.Signal
+import com.mygdx.game.Signal.Signals.ItemPickedUpSignal
+import com.mygdx.game.Signal.Signals.RemoveObjectSignal
+import com.mygdx.game.Signal.Signals.SIGNALTYPE
 import com.mygdx.game.Utils.RectanglePolygon
 import kotlin.math.PI
 import kotlin.math.atan2
@@ -256,9 +258,9 @@ fun getGameObjectWithEntityId(entityId: Int): GameObject? {
 
 
 fun itemObjectAddToInventory(itemType: ItemType, itemObject: GameObject) {
-        SignalManager.emitSignal(Signal(SIGNALTYPE.ITEM_PICKED_UP,itemType.ordinal))
+        SignalManager.emitSignal(ItemPickedUpSignal(itemType))
         val id = if(itemObject is SaveStateEntity) itemObject.entityId else NOTSAVEDID
-        SignalManager.emitSignal(Signal(SIGNALTYPE.REMOVE_OBJECT,id))
+        SignalManager.emitSignal(RemoveObjectSignal(id))
 
 }
 

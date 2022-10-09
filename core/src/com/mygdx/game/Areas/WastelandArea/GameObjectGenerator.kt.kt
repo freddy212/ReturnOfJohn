@@ -15,9 +15,10 @@ import com.mygdx.game.GameObjects.Terrain.WalkableTerrain
 import com.mygdx.game.Interfaces.AreaIdentifier
 import com.mygdx.game.Managers.LocationManager
 import com.mygdx.game.Managers.SignalManager
-import com.mygdx.game.Signal.SIGNALTYPE
 import com.mygdx.game.Signal.Signal
 import com.mygdx.game.Signal.SignalListeners.ADDMETHODS
+import com.mygdx.game.Signal.Signals.AddObjectSignal
+import com.mygdx.game.Signal.Signals.RemoveObjectSignal
 import com.mygdx.game.UI.Dialogue.Conversations.*
 
 fun getWastelandLocationOneObjects(): List<GameObject>{
@@ -80,17 +81,16 @@ fun getWastelandLocationTenObjects(): List<GameObject>{
 
     val thorns = Thorns(location10.topright - Vector2(32f,64f), Vector2(32f,64f), location10)
     thorns.onRemoveAction.add {
-        val thornsExists = SignalManager.pastSignals.List.find { it.id == thorns.entityId }
-        if(thornsExists == null){
+        val removeEvents: List<RemoveObjectSignal> = SignalManager.pastSignals.List.filter { it is RemoveObjectSignal }.map { it as RemoveObjectSignal }
+        val thornsRemoved = removeEvents.find { it.entityId == thorns.entityId }
+        if(thornsRemoved == null){
             SignalManager.emitSignal(
-                Signal(
-                    SIGNALTYPE.ADD_OBJECT,
-                    -1,0,0f,0f,"location1",AreaIdentifier.MAINAREA.ordinal,ADDMETHODS.DOOR1.ordinal)
+                AddObjectSignal(
+                    ADDMETHODS.DOOR1,"location1",AreaIdentifier.MAINAREA)
             )
             SignalManager.emitSignal(
-                Signal(
-                    SIGNALTYPE.ADD_OBJECT,
-                    -1,0,0f,0f,"location10",AreaIdentifier.WASTELAND.ordinal,ADDMETHODS.DOOR2.ordinal)
+                AddObjectSignal(
+                    ADDMETHODS.DOOR2,"location10",AreaIdentifier.WASTELAND)
             )
         }
     }

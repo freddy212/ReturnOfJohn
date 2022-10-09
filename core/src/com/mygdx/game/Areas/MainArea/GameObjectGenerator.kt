@@ -22,8 +22,8 @@ import com.mygdx.game.Managers.LocationManager
 import com.mygdx.game.Managers.SignalManager
 import com.mygdx.game.SaveHandling.DefaultRemoveObjectSaveState
 import com.mygdx.game.SaveState.SaveStateEntity
-import com.mygdx.game.Signal.SIGNALTYPE
 import com.mygdx.game.Signal.Signal
+import com.mygdx.game.Signal.Signals.RemoveObjectSignal
 
 fun getLocationOneObjects(): List<GameObject>{
     val location = LocationManager.findLocation("location1",AreaIdentifier.MAINAREA)
@@ -95,7 +95,7 @@ fun getIceLandsGateWayLocation():List<GameObject>{
     val fence = Fence(Vector2(walkableTerrain.topleft.x,walkableTerrain.topleft.y - 130f), Vector2(walkableTerrain.width,150f),location10, DefaultTextureHandler.getTexture("FenceGate.png"), false)
     val removeFenceEvent = object: Event {
         override fun execute() {
-            SignalManager.emitSignal(Signal(SIGNALTYPE.REMOVE_OBJECT,fence.entityId))
+            SignalManager.emitSignal(RemoveObjectSignal(fence.entityId))
         }
 
     }
@@ -124,7 +124,7 @@ fun getFireLandsGateWayLocation(): List<GameObject> {
     val fireGateCollition = object : MoveCollition by IllegalMoveCollition{
         override fun collitionHappened(entity: GameObject, collidedObject: GameObject) {
             if(entity is Boulder){
-                SignalManager.emitSignal(Signal(SIGNALTYPE.REMOVE_OBJECT,(collidedObject as SaveStateEntity).entityId))
+                SignalManager.emitSignal(RemoveObjectSignal((collidedObject as SaveStateEntity).entityId))
             }
         }
     }

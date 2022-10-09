@@ -7,24 +7,17 @@ import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch
 import com.badlogic.gdx.graphics.g3d.Environment
 import com.badlogic.gdx.graphics.g3d.ModelBatch
-import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute
-import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.math.Vector2
-import com.mygdx.game.Enums.ItemType
 import com.mygdx.game.GameObjects.ItemAbilities.*
 import com.mygdx.game.SaveHandling.FileHandler
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Player
-import com.mygdx.game.GameObjects.MoveableEntities.Projectiles.Fireball
 import com.mygdx.game.Interfaces.AreaIdentifier
 import com.mygdx.game.Managers.*
-import com.mygdx.game.SaveHandling.DefaultSaveableObject
 import com.mygdx.game.SaveState.PlayerSaveState
-import com.mygdx.game.SaveState.SaveStateEntity
 import com.mygdx.game.Managers.UIRendererManager
-import com.mygdx.game.Signal.Signal
-import com.mygdx.game.Signal.initListeners
+import com.mygdx.game.Signal.*
 import com.mygdx.game.Utils.RectanglePolygon
 import com.mygdx.game.Utils.RenderGraph
 import kotlinx.serialization.json.*
@@ -88,7 +81,7 @@ class MainGame : ApplicationAdapter() {
 
         val originalFile = FileHandler.readFromFile()
         val saves = originalFile.subList(1,originalFile.size)
-        val savedSignals:List<Signal> = saves.map { x -> Json.decodeFromString(x)}
+        val savedSignals:List<Signal> = saves.map (::signalConvert)
         savedSignals.forEach { SignalManager.emitSignal(it,false); SignalManager.pastSignals.add(it) }
         //player.addAbility(FireballAbility())
         player.addAbility(AxeAbility())
