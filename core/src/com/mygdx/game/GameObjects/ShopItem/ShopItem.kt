@@ -8,17 +8,13 @@ import com.mygdx.game.DefaultTextureHandler
 import com.mygdx.game.Enums.Item
 import com.mygdx.game.Enums.Layer
 import com.mygdx.game.GameObjects.Sensors.PlayerInsideSensor
-import com.mygdx.game.Inventory
 import com.mygdx.game.Locations.DefaultLocation
-import com.mygdx.game.SaveHandling.DefaultAbilityGainedSaveState
-import com.mygdx.game.SaveHandling.DefaultRemoveObjectSaveState
-import com.mygdx.game.SaveState.SaveStateEntity
-import com.mygdx.game.player
+import com.mygdx.game.Saving.DefaultSaveStateHandler
+import com.mygdx.game.Saving.SaveStateEntity
 
-class ShopItem(textureName: String,val requiredItems: List<Item>, Position: Vector2, size: Vector2, defaultLocation: DefaultLocation?, val ability:CharacterAbility,
-private val saveStateHandler: SaveStateEntity = DefaultAbilityGainedSaveState(ability)):
+class ShopItem(textureName: String,val requiredItems: List<Item>, Position: Vector2, size: Vector2, defaultLocation: DefaultLocation?, val ability:CharacterAbility):
     GameObject(Position, size, defaultLocation)
-    ,SaveStateEntity by saveStateHandler{
+    , SaveStateEntity by DefaultSaveStateHandler(){
     override val texture: Texture = DefaultTextureHandler.getTexture(textureName)
     override val layer = Layer.AIR
     val playerInsideSensor = PlayerInsideSensor(this,Position,size,defaultLocation)
@@ -29,10 +25,5 @@ private val saveStateHandler: SaveStateEntity = DefaultAbilityGainedSaveState(ab
     override fun removeFromLocation() {
         super.removeFromLocation()
         playerInsideSensor.removeFromLocation()
-    }
-
-    override fun onLoadAction() {
-        saveStateHandler.onLoadAction()
-        requiredItems.forEach { player.inventory.useItems(it.itemType,it.amount) }
     }
 }

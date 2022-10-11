@@ -11,11 +11,11 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.GameObjects.ItemAbilities.*
-import com.mygdx.game.SaveHandling.FileHandler
+import com.mygdx.game.Saving.FileHandler
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Player
 import com.mygdx.game.Interfaces.AreaIdentifier
 import com.mygdx.game.Managers.*
-import com.mygdx.game.SaveState.PlayerSaveState
+import com.mygdx.game.Saving.PlayerSaveState
 import com.mygdx.game.Managers.UIRendererManager
 import com.mygdx.game.Signal.*
 import com.mygdx.game.Utils.RectanglePolygon

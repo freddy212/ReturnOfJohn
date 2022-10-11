@@ -7,14 +7,12 @@ import com.mygdx.game.AbstractClasses.CharacterAbility
 import com.mygdx.game.Collitions.AbilityGainedCollition
 import com.mygdx.game.Enums.Layer
 import com.mygdx.game.Locations.DefaultLocation
-import com.mygdx.game.SaveHandling.DefaultAbilityGainedSaveState
-import com.mygdx.game.SaveHandling.DefaultRemoveObjectSaveState
-import com.mygdx.game.SaveState.SaveStateEntity
-import com.mygdx.game.player
+import com.mygdx.game.Saving.DefaultSaveStateHandler
+import com.mygdx.game.Saving.SaveStateEntity
 
 open class AbilityItemObject(Position: Vector2, size: Vector2, defaultLocation: DefaultLocation, val ability: CharacterAbility,
                                  override val texture: Texture)
-                                 : GameObject(Position, size,defaultLocation), SaveStateEntity by DefaultAbilityGainedSaveState(ability){
+                                 : GameObject(Position, size,defaultLocation), SaveStateEntity by DefaultSaveStateHandler(){
     override val collition = AbilityGainedCollition(ability)
     override val layer: Layer = Layer.ONGROUND
 }

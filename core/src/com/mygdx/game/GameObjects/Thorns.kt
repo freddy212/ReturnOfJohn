@@ -6,11 +6,11 @@ import com.mygdx.game.Collitions.ThornsCollition
 import com.mygdx.game.DefaultTextureHandler
 import com.mygdx.game.Enums.Layer
 import com.mygdx.game.Locations.DefaultLocation
-import com.mygdx.game.SaveHandling.DefaultRemoveObjectSaveState
-import com.mygdx.game.SaveState.SaveStateEntity
+import com.mygdx.game.Saving.DefaultSaveStateHandler
+import com.mygdx.game.Saving.SaveStateEntity
 
 class Thorns(Position: Vector2, size: Vector2, defaultLocation: DefaultLocation?) : GameObject(Position, size, defaultLocation),
-                                                                          SaveStateEntity by DefaultRemoveObjectSaveState(){
+                                                                          SaveStateEntity by DefaultSaveStateHandler() {
     override val texture = DefaultTextureHandler.getTexture("Thorns.png")
     override val layer = Layer.ONGROUND
     override val collition = ThornsCollition()

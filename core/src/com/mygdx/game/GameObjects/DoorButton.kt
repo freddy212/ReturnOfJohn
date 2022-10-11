@@ -12,8 +12,8 @@ import com.mygdx.game.GameObjects.MoveableEntities.Projectiles.Icicle
 import com.mygdx.game.Interfaces.MoveCollition
 import com.mygdx.game.Locations.DefaultLocation
 import com.mygdx.game.Managers.SignalManager
-import com.mygdx.game.SaveState.DefaultSaveStateHandler
-import com.mygdx.game.SaveState.SaveStateEntity
+import com.mygdx.game.Saving.DefaultSaveStateHandler
+import com.mygdx.game.Saving.SaveStateEntity
 import com.mygdx.game.Signal.Signals.ButtonAcceptedSignal
 
 class DoorButton(initPosition: Vector2, size: Vector2, defaultLocation: DefaultLocation?, doorButtonEvent: DoorButtonEvent) :

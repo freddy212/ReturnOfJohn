@@ -8,17 +8,16 @@ import com.mygdx.game.Enums.Direction
 import com.mygdx.game.Enums.Layer
 import com.mygdx.game.GameObjects.Sensors.TalkSensor
 import com.mygdx.game.Interfaces.ModelInstanceHandler
-import com.mygdx.game.SaveHandling.DefaultRemoveObjectSaveState
-import com.mygdx.game.SaveState.SaveStateEntity
+import com.mygdx.game.Saving.SaveStateEntity
 import com.mygdx.game.AbstractClasses.DefaultCharacter
 import com.mygdx.game.HealthStrategy.EnemyHealthStrategy
 import com.mygdx.game.Locations.DefaultLocation
+import com.mygdx.game.Saving.DefaultSaveStateHandler
 import com.mygdx.game.UI.Dialogue.Conversations.engineerFirst
 
-class NPC(Position: Vector2, size: Vector2 = Vector2(128f,128f),location: DefaultLocation?,
-          modelHandler: ModelInstanceHandler = DefaultModelInstanceHandler("ManBlender.g3db",Position,size))
+class NPC(Position: Vector2, size: Vector2 = Vector2(128f,128f),location: DefaultLocation?)
     : DefaultCharacter(Position, size, location),
-    SaveStateEntity by DefaultRemoveObjectSaveState(){
+    SaveStateEntity by DefaultSaveStateHandler() {
     override val texture = DefaultTextureHandler.getTexture("DefaultPerson.png")
     override val layer = Layer.ONGROUND
     override var baseSpeed = 2f

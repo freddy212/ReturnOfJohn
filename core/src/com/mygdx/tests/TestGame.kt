@@ -18,7 +18,7 @@ import com.mygdx.game.Locations.DefaultLocation
 import com.mygdx.game.Managers.AreaManager
 import com.mygdx.game.Managers.DefaultAssetHandler
 import com.mygdx.game.Managers.LocationManager
-import com.mygdx.game.SaveState.PlayerSaveState
+import com.mygdx.game.Saving.PlayerSaveState
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.mockito.Matchers.any

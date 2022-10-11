@@ -1,14 +1,10 @@
-package com.mygdx.game.SaveHandling
+package com.mygdx.game.Saving
 
-import com.mygdx.game.SaveState.SaveStateEntity
 import com.mygdx.game.Signal.Signal
-import com.mygdx.game.Signal.Signals.ItemPickedUpSignal
 import java.io.BufferedWriter
 import java.io.File
-import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.serializer
-import java.util.*
 
 class FileHandler {
     companion object{
@@ -23,7 +19,7 @@ class FileHandler {
                 lines[existingLineIndex] = content
             }
             fileWriter = file.bufferedWriter()
-            fileWriter.use {writer -> lines.forEach { writer.write(it)
+            fileWriter.use { writer -> lines.forEach { writer.write(it)
                                                       writer.newLine()}}
         }
         fun writeSignalToFile(signal: Signal){
@@ -32,7 +28,7 @@ class FileHandler {
             val signalContent = Json.encodeToString(serializer,signal)
             lines.add(signalContent)
             fileWriter = file.bufferedWriter()
-            fileWriter.use {writer -> lines.forEach { writer.write(it)
+            fileWriter.use { writer -> lines.forEach { writer.write(it)
                 writer.newLine()}}
 
         }

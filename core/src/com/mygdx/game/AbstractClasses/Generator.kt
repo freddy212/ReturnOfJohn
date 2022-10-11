@@ -5,8 +5,8 @@ import com.mygdx.game.Collitions.IllegalMoveCollition
 import com.mygdx.game.DefaultTextureHandler
 import com.mygdx.game.Enums.Layer
 import com.mygdx.game.Locations.DefaultLocation
-import com.mygdx.game.SaveState.DefaultSaveStateHandler
-import com.mygdx.game.SaveState.SaveStateEntity
+import com.mygdx.game.Saving.DefaultSaveStateHandler
+import com.mygdx.game.Saving.SaveStateEntity
 import com.mygdx.game.Timer.DefaultTimer
 import com.mygdx.game.Trimer.DelayTimer
 import com.mygdx.game.Utils.RectanglePolygon

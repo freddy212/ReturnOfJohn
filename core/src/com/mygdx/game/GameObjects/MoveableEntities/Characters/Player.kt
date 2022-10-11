@@ -13,8 +13,8 @@ import com.mygdx.game.Enums.getDirectionUnitVector
 import com.mygdx.game.Interfaces.ModelInstanceHandler
 import com.mygdx.game.Managers.LocationManager
 import com.mygdx.game.Managers.TooltipManager
-import com.mygdx.game.SaveState.DefaultSaveStateHandler
-import com.mygdx.game.SaveState.SaveStateEntity
+import com.mygdx.game.Saving.DefaultSaveStateHandler
+import com.mygdx.game.Saving.SaveStateEntity
 import com.mygdx.game.AbstractClasses.DefaultCharacter
 import com.mygdx.game.Collitions.ProjectileCanPassCollition
 import com.mygdx.game.HealthStrategy.PlayerHealthStrategy

@@ -8,21 +8,17 @@ import com.mygdx.game.Enums.*
 import com.mygdx.game.GameObjects.GenericGameObject
 import com.mygdx.game.GameObjects.*
 import com.mygdx.game.GameObjects.Generators.BoulderGenerator
-import com.mygdx.game.GameObjects.ItemAbilities.ShieldAbility
 import com.mygdx.game.GameObjects.ItemObjects.GenericInventoryItemObject
 import com.mygdx.game.GameObjects.MoveableEntities.Projectiles.Boulder
-import com.mygdx.game.GameObjects.ShopItem.ShopItem
 import com.mygdx.game.GameObjects.Terrain.IceObject
 import com.mygdx.game.GameObjects.Terrain.WalkableTerrain
 import com.mygdx.game.Interfaces.AreaIdentifier
 import com.mygdx.game.Interfaces.Event
 import com.mygdx.game.Interfaces.MoveCollition
-import com.mygdx.game.Locations.DefaultLocation
 import com.mygdx.game.Managers.LocationManager
 import com.mygdx.game.Managers.SignalManager
-import com.mygdx.game.SaveHandling.DefaultRemoveObjectSaveState
-import com.mygdx.game.SaveState.SaveStateEntity
-import com.mygdx.game.Signal.Signal
+import com.mygdx.game.Saving.DefaultSaveStateHandler
+import com.mygdx.game.Saving.SaveStateEntity
 import com.mygdx.game.Signal.Signals.RemoveObjectSignal
 
 fun getLocationOneObjects(): List<GameObject>{
@@ -137,7 +133,7 @@ fun getFireLandsGateWayLocation(): List<GameObject> {
     val gateTexture = DefaultTextureHandler.getTexture("FireGate.png")
 
     val fireGate = object : GenericGameObject(Vector2(fence.x,walkableTerrain.bottomleft.y),Vector2(gateTexture.width.toFloat(),walkableTerrain.topleft.y-
-                                    walkableTerrain.bottomleft.y),"FireGate.png",Layer.ONGROUND,location9,fireGateCollition), SaveStateEntity by DefaultRemoveObjectSaveState() {}
+                                    walkableTerrain.bottomleft.y),"FireGate.png",Layer.ONGROUND,location9,fireGateCollition), SaveStateEntity by DefaultSaveStateHandler() {}
     val walkableTerrain2 = WalkableTerrain(Vector2(location9.bottomleft.x,fireGate.y),Vector2(fireGate.x - location9.bottomleft.x, location2.topleft.y - location2.bottomleft.y) + Vector2(fireGate.size.x,0f), location9)
 
     val boulderGenSize = Vector2(128f,128f)

@@ -1,4 +1,4 @@
-package com.mygdx.game.SaveHandling
+package com.mygdx.game.Saving
 
 class SaveCounterHandler {
     companion object{

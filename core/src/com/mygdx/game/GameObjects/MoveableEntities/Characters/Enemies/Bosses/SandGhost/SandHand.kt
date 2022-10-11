@@ -12,17 +12,17 @@ import com.mygdx.game.Interfaces.FightableEntity
 import com.mygdx.game.Interfaces.HealthStrategy
 import com.mygdx.game.Interfaces.MoveCollition
 import com.mygdx.game.Locations.DefaultLocation
-import com.mygdx.game.SaveHandling.DefaultRemoveObjectSaveState
-import com.mygdx.game.SaveState.SaveStateEntity
+import com.mygdx.game.Saving.SaveStateEntity
 import kotlin.math.cos
 import kotlin.math.sin
 import com.mygdx.game.*
 import com.mygdx.game.GameObjects.ItemAbilities.Shield
+import com.mygdx.game.Saving.DefaultSaveStateHandler
 import com.mygdx.game.Trimer.DelayTimer
 
 class SandHand(Position: Vector2, size: Vector2, location: DefaultLocation?, val right: Boolean, val sandGhost: SandGhost)
     : MoveableObject(Position, size, location),
-    SaveStateEntity by DefaultRemoveObjectSaveState(),
+    SaveStateEntity by DefaultSaveStateHandler(),
     FightableEntity{
     override val collition = SandHandCollition(this)
     override val texture = DefaultTextureHandler.getTexture("Hand.png")

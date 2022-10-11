@@ -23,12 +23,10 @@ import com.mygdx.game.Locations.DefaultLocationData
 import com.mygdx.game.Managers.AreaManager
 import com.mygdx.game.Managers.LocationManager
 import com.mygdx.game.Managers.SignalManager
-import com.mygdx.game.SaveState.PlayerSaveState
-import com.mygdx.game.SaveState.SaveStateEntity
-import com.mygdx.game.Signal.Signal
+import com.mygdx.game.Saving.PlayerSaveState
+import com.mygdx.game.Saving.SaveStateEntity
 import com.mygdx.game.Signal.Signals.ItemPickedUpSignal
 import com.mygdx.game.Signal.Signals.RemoveObjectSignal
-import com.mygdx.game.Signal.Signals.SIGNALTYPE
 import com.mygdx.game.Utils.RectanglePolygon
 import kotlin.math.PI
 import kotlin.math.atan2

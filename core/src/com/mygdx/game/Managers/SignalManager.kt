@@ -1,7 +1,6 @@
 package com.mygdx.game.Managers
 
-import com.mygdx.game.Interfaces.Event
-import com.mygdx.game.SaveHandling.FileHandler.Companion.writeSignalToFile
+import com.mygdx.game.Saving.FileHandler.Companion.writeSignalToFile
 import com.mygdx.game.Signal.Signal
 import com.mygdx.game.Signal.SignaledEventListener
 import com.mygdx.game.Signal.Signals.SIGNALTYPE

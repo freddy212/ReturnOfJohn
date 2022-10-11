@@ -10,11 +10,11 @@ import com.mygdx.game.Events.RemoveGameObjectEvent
 import com.mygdx.game.Interfaces.MoveCollition
 import com.mygdx.game.Locations.DefaultLocation
 import com.mygdx.game.ObjectProperties.Fire
-import com.mygdx.game.SaveHandling.DefaultRemoveObjectSaveState
-import com.mygdx.game.SaveState.SaveStateEntity
+import com.mygdx.game.Saving.DefaultSaveStateHandler
+import com.mygdx.game.Saving.SaveStateEntity
 
 class FireObject(Position: Vector2, size: Vector2, objectAttached: GameObject, defaultLocation: DefaultLocation, collitionOnFire: MoveCollition) : GameObject(Position, size,defaultLocation),
-                                                                                                        SaveStateEntity by DefaultRemoveObjectSaveState(){
+                                                                                                        SaveStateEntity by DefaultSaveStateHandler() {
         val fire = Fire(RemoveGameObjectEvent(this),this)
         override val collition = FireCollition(objectAttached.collition,collitionOnFire)
         override val texture = DefaultTextureHandler.getTexture("Sensor.png")
