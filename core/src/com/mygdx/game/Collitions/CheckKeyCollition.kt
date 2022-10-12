@@ -14,7 +14,7 @@ import com.mygdx.game.Signal.Signals.RemoveObjectSignal
 import com.mygdx.game.Signal.Signals.UseItemsSignal
 import com.mygdx.game.player
 
-class CheckKeyCollition(val lockedDoor: LockedDoor): KeyPressedCollition {
+class CheckKeyCollition(val lockedDoor: LockedDoor): KeyPressedCollition() {
     override val specificButton = Input.Keys.SPACE
 
     override fun collitionHappened(entity: GameObject, collidedObject: GameObject) {

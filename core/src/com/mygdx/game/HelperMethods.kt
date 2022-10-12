@@ -149,6 +149,17 @@ fun handleCollitions(gameObject: GameObject,polygonToCheck: Polygon, objectsToCh
         return collitions.filterIsInstance<MoveCollition>().all { x -> x.canMoveAfterCollition }
 }
 
+fun handleKeyCollitions(objectsToCheck: List<GameObject>) {
+        val collidingObjects = GetCollidingObjects(player.polygon,objectsToCheck)
+        val collitions = collidingObjects.map { x -> x.collition as KeyPressedCollition}
+        collidingObjects.forEach { x -> x.collition.collitionHappened(player, x);}
+}
+
+fun handleKeyPressable(objectsToCheck: List<GameObject>){
+        val collidingObjects = GetCollidingObjects(player.polygon,objectsToCheck)
+        collidingObjects.forEach { (it.collition as KeyPressedCollition).renderKeyToUI (player,it) }
+}
+
 fun GameObject.rotate(rotationDegree: Float) {
         this.sprite.rotate(rotationDegree)
         this.polygon.rotate(rotationDegree)

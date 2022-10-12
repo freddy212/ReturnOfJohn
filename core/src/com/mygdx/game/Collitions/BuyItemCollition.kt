@@ -12,7 +12,7 @@ import com.mygdx.game.Signal.Signals.RemoveObjectSignal
 import com.mygdx.game.Signal.Signals.UseItemsSignal
 import com.mygdx.game.player
 
-class BuyItemCollition(val shopItem: ShopItem): KeyPressedCollition {
+class BuyItemCollition(val shopItem: ShopItem): KeyPressedCollition() {
     override val specificButton =  Input.Keys.B
 
     override fun collitionHappened(entity: GameObject, collidedObject: GameObject) {

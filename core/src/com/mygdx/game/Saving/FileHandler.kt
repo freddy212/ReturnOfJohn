@@ -38,9 +38,5 @@ class FileHandler {
         fun SaveFileEmpty(): Boolean{
             return file.length() == 0L
         }
-        /*fun writeSaveStateEntity(saveStateEntity: SaveStateEntity){
-            val defaultSaveableObject = DefaultSaveableObject(saveStateEntity.entityId)
-            writeToFile(defaultSaveableObject.entityId, Json.encodeToString(defaultSaveableObject))
-        }*/
     }
 }

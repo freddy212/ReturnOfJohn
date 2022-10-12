@@ -87,13 +87,6 @@ class MainGame : ApplicationAdapter() {
         player.addAbility(AxeAbility())
         player.addAbility(ShieldAbility())
         player.addAbility(DashAbility())
-            /* val savedStates:List<DefaultSaveableObject> = saves.map { x -> Json.decodeFromString(x) }
-             val savedEntities:List<SaveStateEntity> = AreaManager.getAllGameObjects()
-                 .filter {it is SaveStateEntity}.map { it as SaveStateEntity }.filter {savedStates.map {it.entityId}.contains(it.entityId)}
-             println("size of saved elements is : + " + savedStates.size + " and size of matching elements is : " + savedEntities.size)
-             savedEntities.forEach { it.onLoadAction() }
-             player.addAbility(IcicleAbility(Vector2(0f,0f),Vector2(0f,0f)))
-             */
     }
 
 

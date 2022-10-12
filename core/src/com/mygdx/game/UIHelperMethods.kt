@@ -10,6 +10,7 @@ import com.mygdx.game.Managers.UIRendererManager
 
 fun drawHealthBar(pos: Vector2, size: Vector2, health: Float, maxHealth: Float){
     val shapeRenderer = UIRendererManager.uiShapeRenderer
+
     shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
     shapeRenderer.color = Color.WHITE;
     shapeRenderer.rect(pos.x, pos.y, size.x, size.y);

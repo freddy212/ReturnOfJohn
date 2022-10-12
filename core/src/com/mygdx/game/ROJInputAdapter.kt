@@ -26,10 +26,7 @@ class ROJInputAdapter(private val camera : OrthographicCamera, val player: Playe
 
     override fun keyDown(keycode: Int): Boolean {
         val keyCollitions = LocationManager.ButtonCollitionGameObjects.filter {(it.collition as KeyPressedCollition).specificButton == keycode}
-       /* if (keycode ==Input.Keys.SPACE) {
-            handleCollitions(player, player.polygon, LocationManager.ButtonCollitionGameObjects.filter {(it.collition as KeyPressedCollition).specificButton == Input.Keys.SPACE })
-        }*/
-        handleCollitions(player, player.polygon,keyCollitions)
+        handleKeyCollitions(keyCollitions)
 
         if(player.characterState == CharacterState.FREE && player.canMove()) {
             for (itemAbility in player.itemAbilities.List) {
@@ -61,6 +58,8 @@ class ROJInputAdapter(private val camera : OrthographicCamera, val player: Playe
         return super.keyUp(keycode)
     }
     fun handleInput(player: Player) {
+        handleKeyPressable(LocationManager.ButtonCollitionGameObjects)
+
         if(player.characterState == CharacterState.FREE) {
             clickPosition = camera.unproject(Vector3(Gdx.input.x.toFloat(), Gdx.input.y.toFloat(), 0f))
             val unitVectorTowardsPoint = getUnitVectorTowardsPoint(
