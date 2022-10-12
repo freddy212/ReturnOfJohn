@@ -10,6 +10,8 @@ import com.mygdx.game.Signal.Signal
 import com.mygdx.game.Signal.Signals.AbilityGainedSignal
 import com.mygdx.game.Signal.Signals.RemoveObjectSignal
 import com.mygdx.game.Signal.Signals.UseItemsSignal
+import com.mygdx.game.UI.Items.RenderShopItem
+import com.mygdx.game.Utils.RenderGraph
 import com.mygdx.game.player
 
 class BuyItemCollition(val shopItem: ShopItem): KeyPressedCollition() {
@@ -35,5 +37,10 @@ class BuyItemCollition(val shopItem: ShopItem): KeyPressedCollition() {
             SignalManager.emitSignal(UseItemsSignal(it.itemType, it.amount))
         }
         return true
+    }
+
+    override fun renderKeyToUI(entity: GameObject, collidedObject: GameObject) {
+        super.renderKeyToUI(entity, collidedObject)
+        RenderGraph.addToSceneGraph(RenderShopItem(shopItem, player.inventory))
     }
 }

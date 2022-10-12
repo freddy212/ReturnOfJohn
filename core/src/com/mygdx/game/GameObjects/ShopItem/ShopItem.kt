@@ -7,7 +7,7 @@ import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.DefaultTextureHandler
 import com.mygdx.game.Enums.Item
 import com.mygdx.game.Enums.Layer
-import com.mygdx.game.GameObjects.Sensors.PlayerInsideSensor
+import com.mygdx.game.GameObjects.Sensors.BuySensor
 import com.mygdx.game.Locations.DefaultLocation
 import com.mygdx.game.Saving.DefaultSaveStateHandler
 import com.mygdx.game.Saving.SaveStateEntity
@@ -17,13 +17,13 @@ class ShopItem(textureName: String,val requiredItems: List<Item>, Position: Vect
     , SaveStateEntity by DefaultSaveStateHandler(){
     override val texture: Texture = DefaultTextureHandler.getTexture(textureName)
     override val layer = Layer.AIR
-    val playerInsideSensor = PlayerInsideSensor(this,Position,size,defaultLocation)
+    val buySensor = BuySensor(this,Position,size,defaultLocation)
     init {
-        this.defaultLocation!!.addGameObject(playerInsideSensor)
+        this.defaultLocation!!.addGameObject(buySensor)
     }
 
     override fun removeFromLocation() {
         super.removeFromLocation()
-        playerInsideSensor.removeFromLocation()
+        buySensor.removeFromLocation()
     }
 }

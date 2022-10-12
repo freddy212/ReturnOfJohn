@@ -1,13 +1,1 @@
-{"playerXPos":1497.2875,"playerYPos":794.7973,"areaIdentifier":"MAINAREA","entityId":0}
-{"signaltype":"CHANGE_OBJECT_LOCATION","entityId":34,"location":"location1","area":"MAINAREA"}
-{"signaltype":"MOVE_OBJECT","entityId":34,"x":1100.0,"y":1300.0}
-{"signaltype":"ADD_OBJECT","addMethod":"ENGINEER","location":"location1","areaIdentifier":"MAINAREA"}
-{"signaltype":"CHANGE_CONVERSATION","entityId":34,"conversationId":"engineer2"}
-{"signaltype":"ITEM_PICKED_UP","itemType":"WOOD"}
-{"signaltype":"REMOVE_OBJECT","entityId":35}
-{"signaltype":"ITEM_PICKED_UP","itemType":"FLINT"}
-{"signaltype":"REMOVE_OBJECT","entityId":41}
-{"signaltype":"ITEM_PICKED_UP","itemType":"FLINT"}
-{"signaltype":"REMOVE_OBJECT","entityId":42}
-{"signaltype":"ITEM_PICKED_UP","itemType":"FLINT"}
-{"signaltype":"REMOVE_OBJECT","entityId":43}
+{"playerXPos":480.0,"playerYPos":320.0,"areaIdentifier":"MAINAREA","entityId":0}

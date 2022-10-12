@@ -12,12 +12,15 @@ import com.mygdx.game.Enums.Layer
 import com.mygdx.game.GameObjects.ShopItem.ShopItem
 import com.mygdx.game.Locations.DefaultLocation
 
-class BuySensor(override val polygon: Polygon, shopItem: ShopItem, Position: Vector2, size: Vector2, defaultLocation: DefaultLocation?) :
+class BuySensor(shopItem: ShopItem, Position: Vector2, size: Vector2, defaultLocation: DefaultLocation?) :
     GameObject(Position, size, defaultLocation) {
     override val texture = DefaultTextureHandler.getTexture("sensor.png")
     override val layer = Layer.ONGROUND
     override fun render(batch: PolygonSpriteBatch) {
         sprite.draw(batch)
+    }
+    init {
+        polygon.setPosition(Position.x - polygon.vertices[0],sprite.y - polygon.vertices[1] - sprite.height)
     }
 
     override val collition = BuyItemCollition(shopItem)
