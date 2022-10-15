@@ -5,6 +5,7 @@ import com.mygdx.game.GameObjects.MoveableEntities.Characters.Player
 import com.mygdx.game.Interfaces.MovementStrategy
 import com.mygdx.game.Locations.DefaultLocation
 import com.mygdx.game.plus
+import com.mygdx.game.times
 
 abstract class MoveableObject(Position: Vector2, size: Vector2, defaultLocation: DefaultLocation?):GameObject(Position,size,defaultLocation){
     abstract var baseSpeed: Float
@@ -20,7 +21,8 @@ abstract class MoveableObject(Position: Vector2, size: Vector2, defaultLocation:
 
     open fun move(unitVectorDirection: Vector2): Boolean{
         if(canMove){
-            val moveSuccessfull = movementStrategy.moveEntity(this,unitVectorDirection + moveModifier)
+            val nextIncrement = unitVectorDirection * this.getCurrentSpeed()
+            val moveSuccessfull = movementStrategy.moveEntity(this,nextIncrement + moveModifier)
             return moveSuccessfull
         }else{
             return false

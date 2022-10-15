@@ -22,9 +22,9 @@ class ConveyerBeltCollition: EveryFrameCollition {
     }
     override fun collitionHappened(entity: GameObject, collidedObject: GameObject) {
         if(entity is Player && collidedObject is ConveyerBelt){
-            entity.moveModifier = Vector2(0f,-1f)
+            entity.moveModifier = Vector2(0f, - player.baseSpeed)
             if(!player.hasMovedThisFrame){
-                //entity.move(Vector2(0f,0f))
+                entity.move(Vector2(0f,0f))
                 entity.setCharacterRotation(Vector2(0f,-1f))
             }
             EventManager.eventManager.add(ResetModifier)
