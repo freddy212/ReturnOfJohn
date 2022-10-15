@@ -68,6 +68,9 @@ class ROJInputAdapter(private val camera : OrthographicCamera, val player: Playe
             )
             if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
                 player.move((unitVectorTowardsPoint))
+                player.hasMovedThisFrame = true
+            } else{
+                player.hasMovedThisFrame = false
             }
             if (Gdx.input.isButtonPressed(Input.Buttons.RIGHT)) {
                 player.setCharacterRotation(unitVectorTowardsPoint)

@@ -1,6 +1,5 @@
-{"playerXPos":476.74756,"playerYPos":-504.81403,"areaIdentifier":"WASTELAND","entityId":0}
-{"signaltype":"ITEM_PICKED_UP","itemType":"WOOD"}
-{"signaltype":"REMOVE_OBJECT","entityId":35}
-{"signaltype":"REMOVE_OBJECT","entityId":39}
-{"signaltype":"ADD_OBJECT","addMethod":"DOOR1","location":"location1","areaIdentifier":"MAINAREA"}
-{"signaltype":"ADD_OBJECT","addMethod":"DOOR2","location":"location10","areaIdentifier":"WASTELAND"}
+{"playerXPos":728.5,"playerYPos":610.0,"areaIdentifier":"MAINAREA","entityId":0}
+{"signaltype":"CHANGE_OBJECT_LOCATION","entityId":34,"location":"location1","area":"MAINAREA"}
+{"signaltype":"MOVE_OBJECT","entityId":34,"x":1100.0,"y":1300.0}
+{"signaltype":"ADD_OBJECT","addMethod":"ENGINEER","location":"location1","areaIdentifier":"MAINAREA"}
+{"signaltype":"CHANGE_CONVERSATION","entityId":34,"conversationId":"engineer2"}

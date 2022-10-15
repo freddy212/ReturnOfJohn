@@ -10,6 +10,9 @@ class EventManager {
         fun executeEvents(){
             for(event in eventManager.List){
                 event.execute()
+                if(event.runOnce()){
+                    eventManager.remove(event)
+                }
             }
         }
     }

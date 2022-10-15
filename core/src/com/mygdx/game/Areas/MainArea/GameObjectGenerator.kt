@@ -7,6 +7,7 @@ import com.mygdx.game.Collitions.*
 import com.mygdx.game.Enums.*
 import com.mygdx.game.GameObjects.GenericGameObject
 import com.mygdx.game.GameObjects.*
+import com.mygdx.game.GameObjects.Hazards.ConveyerBelt.ConveyerBelt
 import com.mygdx.game.GameObjects.Hazards.Generators.BoulderGenerator
 import com.mygdx.game.GameObjects.ItemObjects.GenericInventoryItemObject
 import com.mygdx.game.GameObjects.MoveableEntities.Projectiles.Boulder
@@ -26,7 +27,9 @@ fun getLocationOneObjects(): List<GameObject>{
     val shop = House(location.originalMiddle.x ,location.originalMiddle.y, 150f, 200f,location, doorMainAreaAndShop,AreaIdentifier.SHOP)
     val dojo = House(location.topleft.x + 300f,location.topleft.y - 200f,300f,200f,location, doorMainAreaAndDojo,AreaIdentifier.DOJO)
 
-    return listOf(shop,dojo,shop)
+    val conveyerBelt = ConveyerBelt(Vector2(500f,500f), Vector2(100f,160f),location, Direction.DOWN)
+
+    return listOf(shop,dojo,shop,conveyerBelt)
 }
 
 fun getLocationGraveyard(): List<GameObject>{
