@@ -83,7 +83,7 @@ class MainGame : ApplicationAdapter() {
         val saves = originalFile.subList(1,originalFile.size)
         val savedSignals:List<Signal> = saves.map (::signalConvert)
         savedSignals.forEach { SignalManager.emitSignal(it,false); SignalManager.pastSignals.add(it) }
-        //player.addAbility(FireballAbility())
+        player.addAbility(IcicleAbility())
         player.addAbility(AxeAbility())
         player.addAbility(ShieldAbility())
         player.addAbility(DashAbility())

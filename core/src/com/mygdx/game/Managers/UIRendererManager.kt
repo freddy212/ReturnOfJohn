@@ -21,7 +21,7 @@ class UIRendererManager {
         val toolTipPanel: ToolTipPanel = ToolTipPanel(uiBatch)
         fun render() {
             uiBatch.begin()
-            //toolTipPanel.renderToolTips()
+            toolTipPanel.renderToolTips()
             RenderList.forEach {
                 it.render(uiBatch) }
             RenderList.clear()
