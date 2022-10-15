@@ -1,4 +1,4 @@
-package com.mygdx.game.GameObjects.Generators
+package com.mygdx.game.GameObjects.Hazards.Generators
 
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.*

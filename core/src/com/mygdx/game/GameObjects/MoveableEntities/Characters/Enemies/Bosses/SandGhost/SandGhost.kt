@@ -50,7 +50,9 @@ class SandGhost(Position: Vector2, size: Vector2 = Vector2(150f,150f),location: 
     }
 
     override fun isHit(launchUnitVector: Vector2) {
-        setAggroed()
+        if(!isAggroed()){
+            setAggroed()
+        }
         loseHealth(10f)
     }
 

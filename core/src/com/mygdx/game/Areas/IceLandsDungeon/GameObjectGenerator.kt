@@ -6,9 +6,8 @@ import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.Collitions.DoorCollition
 import com.mygdx.game.Enums.Direction
 import com.mygdx.game.Enums.getDirectionUnitVector
-import com.mygdx.game.GameObjects.Abyss
 import com.mygdx.game.GameObjects.Door
-import com.mygdx.game.GameObjects.Generators.IceGenerator
+import com.mygdx.game.GameObjects.Hazards.Generators.IceGenerator
 import com.mygdx.game.GameObjects.ItemAbilities.IceCloneAbility
 import com.mygdx.game.GameObjects.ItemObjects.AbilityItemObject
 import com.mygdx.game.Interfaces.AreaIdentifier

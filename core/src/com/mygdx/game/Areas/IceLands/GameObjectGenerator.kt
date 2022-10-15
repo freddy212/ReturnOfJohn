@@ -9,7 +9,7 @@ import com.mygdx.game.Enums.Direction
 import com.mygdx.game.Enums.Layer
 import com.mygdx.game.Enums.getDirectionUnitVector
 import com.mygdx.game.GameObjects.Door
-import com.mygdx.game.GameObjects.Generators.RocketGenerator
+import com.mygdx.game.GameObjects.Hazards.Generators.RocketGenerator
 import com.mygdx.game.GameObjects.GenericGameObject
 import com.mygdx.game.GameObjects.IceButton
 import com.mygdx.game.GameObjects.Terrain.IceObject

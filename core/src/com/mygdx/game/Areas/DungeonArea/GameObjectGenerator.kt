@@ -8,7 +8,7 @@ import com.mygdx.game.Enums.Direction
 import com.mygdx.game.Enums.ItemType
 import com.mygdx.game.Enums.Layer
 import com.mygdx.game.Enums.getDirectionUnitVector
-import com.mygdx.game.GameObjects.Generators.BoulderGenerator
+import com.mygdx.game.GameObjects.Hazards.Generators.BoulderGenerator
 import com.mygdx.game.GameObjects.Door
 import com.mygdx.game.GameObjects.ItemObjects.GenericInventoryItemObject
 import com.mygdx.game.GameObjects.ItemObjects.ShieldItemObject

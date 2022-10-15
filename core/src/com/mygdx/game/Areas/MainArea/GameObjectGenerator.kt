@@ -7,7 +7,7 @@ import com.mygdx.game.Collitions.*
 import com.mygdx.game.Enums.*
 import com.mygdx.game.GameObjects.GenericGameObject
 import com.mygdx.game.GameObjects.*
-import com.mygdx.game.GameObjects.Generators.BoulderGenerator
+import com.mygdx.game.GameObjects.Hazards.Generators.BoulderGenerator
 import com.mygdx.game.GameObjects.ItemObjects.GenericInventoryItemObject
 import com.mygdx.game.GameObjects.MoveableEntities.Projectiles.Boulder
 import com.mygdx.game.GameObjects.Terrain.IceObject
