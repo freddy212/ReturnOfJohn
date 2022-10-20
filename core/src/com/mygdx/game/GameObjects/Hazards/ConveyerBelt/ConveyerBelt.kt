@@ -11,16 +11,18 @@ import com.mygdx.game.Locations.DefaultLocation
 import com.mygdx.game.minus
 import com.mygdx.game.plus
 
-class ConveyerBelt(initPosition: Vector2, size: Vector2, defaultLocation: DefaultLocation?, val direction: Direction, val speed: Float) :
+class ConveyerBelt(initPosition: Vector2, size: Vector2, defaultLocation: DefaultLocation?, val direction: Direction) :
     GameObject(initPosition, size, defaultLocation) {
     override val texture = DefaultTextureHandler.getTexture("Sensor.png")
-    override val layer = Layer.ONGROUND
-    val brickheight = size.y / 8
+    override val layer = Layer.PERSON
+    val brickCount = size.y / 20f
+    val brickheight = 20f
     val start = initPosition + Vector2(0f,size.y)
-    val endBrick = ConveyerBrick(initPosition, Vector2(100f,20f),speed,Direction.DOWN, DefaultTextureHandler.getTexture("ConveyerBrick.png"))
-    val startBrick = ConveyerBrick(start, Vector2(100f,20f),speed,Direction.DOWN, DefaultTextureHandler.getTexture("ConveyerBrick.png"))
+    val offsetStartBrick = if(direction == Direction.DOWN) Vector2(0f,0f) else Vector2(0f,20f)
+    val startBrick = ConveyerBrick(start + offsetStartBrick, Vector2(size.x,20f),1f,direction, DefaultTextureHandler.getTexture("ConveyerBrick.png"))
+    val endBrick = ConveyerBrick(initPosition + offsetStartBrick, Vector2(size.x,20f),1f,direction, DefaultTextureHandler.getTexture("ConveyerBrick.png"))
     val bricks = constructBricks()
-    override val collition = ConveyerBeltCollition()
+    override val collition = ConveyerBeltCollition(direction)
     override fun render(batch: PolygonSpriteBatch) {
         endBrick.draw(batch)
         startBrick.draw(batch)
@@ -34,9 +36,9 @@ class ConveyerBelt(initPosition: Vector2, size: Vector2, defaultLocation: Defaul
 
     fun constructBricks(): List<ConveyerBrick>{
         val list = mutableListOf<ConveyerBrick>()
-        for(i in 0 until 8){
+        for(i in 0 until brickCount.toInt()){
             val increment = Vector2(0f, i * brickheight)
-            val brick = ConveyerBrick(start - increment, Vector2(100f,20f),speed,Direction.DOWN, DefaultTextureHandler.getTexture("ConveyerBrick.png"))
+            val brick = ConveyerBrick(start - increment, Vector2(size.x,20f),1f,direction, DefaultTextureHandler.getTexture("ConveyerBrick.png"))
             list.add(brick)
         }
         return list.toList()

@@ -27,7 +27,7 @@ fun getLocationOneObjects(): List<GameObject>{
     val shop = House(location.originalMiddle.x ,location.originalMiddle.y, 150f, 200f,location, doorMainAreaAndShop,AreaIdentifier.SHOP)
     val dojo = House(location.topleft.x + 300f,location.topleft.y - 200f,300f,200f,location, doorMainAreaAndDojo,AreaIdentifier.DOJO)
 
-    val conveyerBelt = ConveyerBelt(Vector2(500f,500f), Vector2(100f,160f),location, Direction.DOWN, 1f)
+    val conveyerBelt = ConveyerBelt(Vector2(500f,500f), Vector2(100f,160f),location, Direction.DOWN)
 
     return listOf(shop,dojo,shop,conveyerBelt)
 }
