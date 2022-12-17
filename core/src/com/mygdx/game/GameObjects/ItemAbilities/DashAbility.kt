@@ -19,7 +19,7 @@ import com.mygdx.game.player
 
 open class DashAbility: CharacterAbility() {
     override val abilityId = AbilityId.DASH
-    override val triggerKey = Input.Keys.NUM_5
+    override val triggerKey = Input.Keys.NUM_3
     override val texture = DefaultTextureHandler.getTexture("fireball.png")
     override val cooldownTimer = DefaultTimer(2f)
     val fireDashEffect = FireDashEffect()

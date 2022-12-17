@@ -15,12 +15,20 @@ class ConveyerBelt(initPosition: Vector2, size: Vector2, defaultLocation: Defaul
     GameObject(initPosition, size, defaultLocation) {
     override val texture = DefaultTextureHandler.getTexture("Sensor.png")
     override val layer = Layer.PERSON
-    val brickCount = size.y / 20f
-    val brickheight = 20f
-    val start = initPosition + Vector2(0f,size.y)
-    val offsetStartBrick = if(direction == Direction.DOWN) Vector2(0f,0f) else Vector2(0f,20f)
-    val startBrick = ConveyerBrick(start + offsetStartBrick, Vector2(size.x,20f),1f,direction, DefaultTextureHandler.getTexture("ConveyerBrick.png"))
-    val endBrick = ConveyerBrick(initPosition + offsetStartBrick, Vector2(size.x,20f),1f,direction, DefaultTextureHandler.getTexture("ConveyerBrick.png"))
+    private val isVertical = (direction == Direction.DOWN || direction == Direction.UP)
+    private val brickLength = 20f
+    private val brickCount = if(isVertical) size.y / brickLength else size.x / brickLength
+    val offsetStartBrick = when(direction){
+        Direction.DOWN -> Vector2(0f,0f)
+        Direction.UP -> Vector2(0f,brickLength)
+        Direction.RIGHT -> Vector2(0f,0f)
+        Direction.LEFT -> Vector2(brickLength,0f)
+    }
+    val start = initPosition + if(isVertical) Vector2(0f,size.y) else Vector2(0f,0f)
+    val end = if(isVertical) initPosition + offsetStartBrick else bottomright - Vector2(brickLength,0f)
+    val brickImageFileName = if(isVertical) "ConveyerBrick.png" else "ConveyerBrickDown.png"
+    val startBrick = ConveyerBrick(start + offsetStartBrick, if(isVertical) Vector2(size.x,brickLength) else Vector2(brickLength,size.y),1f,direction, DefaultTextureHandler.getTexture(brickImageFileName))
+    val endBrick = ConveyerBrick(end, if(isVertical) Vector2(size.x,brickLength) else Vector2(brickLength,size.y),1f,direction, DefaultTextureHandler.getTexture(brickImageFileName))
     val bricks = constructBricks()
     override val collition = ConveyerBeltCollition(direction)
     override fun render(batch: PolygonSpriteBatch) {
@@ -37,8 +45,8 @@ class ConveyerBelt(initPosition: Vector2, size: Vector2, defaultLocation: Defaul
     fun constructBricks(): List<ConveyerBrick>{
         val list = mutableListOf<ConveyerBrick>()
         for(i in 0 until brickCount.toInt()){
-            val increment = Vector2(0f, i * brickheight)
-            val brick = ConveyerBrick(start - increment, Vector2(size.x,20f),1f,direction, DefaultTextureHandler.getTexture("ConveyerBrick.png"))
+            val increment = if(isVertical) Vector2(0f, i * brickLength) else Vector2(-(i * brickLength), 0f)
+            val brick = ConveyerBrick(start - increment, if(isVertical) Vector2(size.x,brickLength) else Vector2(brickLength,size.y),1f,direction, DefaultTextureHandler.getTexture(brickImageFileName))
             list.add(brick)
         }
         return list.toList()

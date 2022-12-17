@@ -7,6 +7,8 @@ import com.mygdx.game.Collitions.DoorCollition
 import com.mygdx.game.Enums.Direction
 import com.mygdx.game.GameObjects.Door
 import com.mygdx.game.GameObjects.Hazards.ConveyerBelt.ConveyerBelt
+import com.mygdx.game.GameObjects.ItemAbilities.DashAbility
+import com.mygdx.game.GameObjects.ItemObjects.AbilityItemObject
 import com.mygdx.game.GameObjects.Terrain.WalkableTerrain
 import com.mygdx.game.Interfaces.AreaIdentifier
 import com.mygdx.game.Managers.LocationManager
@@ -72,4 +74,25 @@ fun getFireLandsDungeonLocationNineObjects(): List<GameObject>{
     val walkableTerrain2 = WalkableTerrain(Vector2(walkableTerrain.bottomleft.x, location9.y), Vector2(400f, walkableTerrain.topright.y - location9.y), location9)
 
     return listOf(walkableTerrain, walkableTerrain2)
+}
+
+fun getFirelandsDungeonLocationFiveObjects(): List<GameObject>{
+    val location5 = LocationManager.findLocation("location5", AreaIdentifier.FIRELANDSDUNGEON)
+    val abilityItem = AbilityItemObject(location5.originalMiddle, Vector2(60f,60f), location5,DashAbility(),DefaultTextureHandler.getTexture("fireball.png"))
+    return listOf(abilityItem)
+}
+
+
+fun getFirelandsDungeonLocationElevenObjects(): List<GameObject>{
+    val location = LocationManager.findLocation("location11", AreaIdentifier.FIRELANDSDUNGEON)
+    val conveyerBeltRight= ConveyerBelt(location.bottomright - Vector2(200f,0f),
+        Vector2(199f, 100f),location,Direction.RIGHT)
+    return listOf(conveyerBeltRight)
+}
+
+fun getFirelandsDungeonLocationThirteenObjects(): List<GameObject>{
+    val location = LocationManager.findLocation("location13", AreaIdentifier.FIRELANDSDUNGEON)
+    val conveyerBeltLeft= ConveyerBelt(location.bottomleft,
+        Vector2(199f, 100f),location,Direction.LEFT)
+    return listOf(conveyerBeltLeft)
 }
