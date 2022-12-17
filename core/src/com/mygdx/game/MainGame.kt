@@ -99,7 +99,7 @@ class MainGame : ApplicationAdapter() {
         LocationManager.frameAction()
         RenderGraph.render(batch)
         inputAdapter.handleInput(player)
-        drawrects()
+        //drawrects()
         EventManager.executeEvents()
         UIRendererManager.render()
         SignalManager.useSignals()

@@ -36,9 +36,9 @@ class SandHand(Position: Vector2, size: Vector2, location: DefaultLocation?, val
     var increment = 1.5f
 
     init {
-        if (right){
+        if (!right){
             this.sprite.flip(true,false)
-            polygon.translate(polygon.x - 10f,polygon.y - 10f)
+            //polygon.translate(polygon.x - 10f,polygon.y - 10f)
         } else {
             polygon.translate(polygon.x + 10f,polygon.y - 10f)
         }

@@ -11,6 +11,7 @@ import com.mygdx.game.GameObjects.ItemObjects.GenericInventoryItemObject
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Bosses.SandGhost.SandGhost
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.NPC
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Mobs.RockMonster
+import com.mygdx.game.GameObjects.SensorObjects.SandGhostSleeping
 import com.mygdx.game.GameObjects.Terrain.WalkableTerrain
 import com.mygdx.game.Interfaces.AreaIdentifier
 import com.mygdx.game.Managers.LocationManager
@@ -63,8 +64,9 @@ fun getWastelandLocationSevenObjects(): List<GameObject>{
     val location7 = LocationManager.findLocation("location7", AreaIdentifier.WASTELAND)
     val walkableTerrain = WalkableTerrain(Vector2(location6.bottomleft) - Vector2(0f,400f), Vector2(300f,400f),location7)
     val walkableTerrain2 = WalkableTerrain(walkableTerrain.bottomleft - Vector2(350f,800f), Vector2(1000f,800f),location7)
-    val sandGhost = SandGhost(walkableTerrain2.currentMiddle - Vector2(75f, 0f),Vector2(150f,150f), location7)
-    return listOf(walkableTerrain,walkableTerrain2, sandGhost)
+   // val sandGhost = SandGhost(walkableTerrain2.currentMiddle - Vector2(75f, 0f),Vector2(150f,150f), location7)
+    val sandGhostSleeping = SandGhostSleeping(walkableTerrain2.currentMiddle - Vector2(75f, 0f),Vector2(150f,150f), location7)
+    return listOf(walkableTerrain,walkableTerrain2, sandGhostSleeping)
 }
 fun getWastelandLocationTenObjects(): List<GameObject>{
     val location9 = LocationManager.findLocation("location9",AreaIdentifier.WASTELAND)

@@ -1,4 +1,4 @@
-{"playerXPos":456.31152,"playerYPos":-503.44156,"areaIdentifier":"WASTELAND","entityId":0}
+{"playerXPos":498.46344,"playerYPos":-506.5579,"areaIdentifier":"WASTELAND","entityId":0}
 {"signaltype":"ABILITY_GAINED","abilityId":"SHIELD"}
 {"signaltype":"REMOVE_OBJECT","entityId":10}
 {"signaltype":"ITEM_PICKED_UP","itemType":"KEY"}
@@ -9,3 +9,8 @@
 {"signaltype":"REMOVE_OBJECT","entityId":6}
 {"signaltype":"ABILITY_GAINED","abilityId":"DASH"}
 {"signaltype":"REMOVE_OBJECT","entityId":27}
+{"signaltype":"ITEM_PICKED_UP","itemType":"WOOD"}
+{"signaltype":"REMOVE_OBJECT","entityId":35}
+{"signaltype":"REMOVE_OBJECT","entityId":39}
+{"signaltype":"ADD_OBJECT","addMethod":"DOOR1","location":"location1","areaIdentifier":"MAINAREA"}
+{"signaltype":"ADD_OBJECT","addMethod":"DOOR2","location":"location10","areaIdentifier":"WASTELAND"}
