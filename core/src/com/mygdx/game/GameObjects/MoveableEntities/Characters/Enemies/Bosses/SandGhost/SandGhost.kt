@@ -26,8 +26,8 @@ class SandGhost(Position: Vector2, size: Vector2 = Vector2(150f,150f),location: 
     override var direction = Direction.DOWN
     val sandHand1 = SandHand(currentPosition() - Vector2(200f,0f),Vector2(143f,128f), location, false, this)
     val sandHand2 = SandHand(currentPosition() + Vector2(200f,0f),Vector2(143f,128f), location, true, this)
-    private val randomAction = RandomAction(listOf( EnemyMove(100f,::getUnitVectorTowardsPoint)),DefaultTimer(1f))
-    override val enemyStrategy =  DefaultEnemyStrategy(listOf(randomAction, MoveRight(), ExtendArms(sandHand1,sandHand2,this), GhostBoulder(this)))
+    private val randomAction = RandomAction(listOf( EnemyMove(100f,::getUnitVectorTowardsPoint, this)),DefaultTimer(1f), this)
+    override val enemyStrategy =  DefaultEnemyStrategy(listOf(randomAction, MoveRight(this), ExtendArms(sandHand1,sandHand2,this), GhostBoulder(this)))
     override var health = 100f
     override val maxHealth = 100f
 

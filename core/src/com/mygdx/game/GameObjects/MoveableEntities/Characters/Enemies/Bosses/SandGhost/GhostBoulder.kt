@@ -14,12 +14,12 @@ class GhostBoulder(val sandGhost: SandGhost): EnemyAction() {
     private var counter = 0
     val originalTexture = sandGhost.sprite.texture
 
-    override fun executeEnemyAction(enemy: Enemy) {
+    override fun executeEnemyAction() {
         if(counter == 0){
             sandGhost.sprite.texture = DefaultTextureHandler.getTexture("BossFaceMouth.png")
         }
         if(counter == 30) {
-            generateEnemyProjectile(::SmallBoulder, enemy, Vector2(50f,50f))
+            generateEnemyProjectile(::SmallBoulder, sandGhost, Vector2(50f,50f))
             sandGhost.unitVectorDirection = Vector2(0f, 0f)
         }
         counter++

@@ -5,9 +5,9 @@ import com.mygdx.game.Enums.Direction
 import com.mygdx.game.Enums.getDirectionUnitVector
 import com.mygdx.game.Interfaces.EnemyAction
 
-class MoveRight: EnemyAction() {
+class MoveRight(val enemy:Enemy): EnemyAction() {
 
-    override fun executeEnemyAction(enemy: Enemy) {
+    override fun executeEnemyAction() {
         enemy.move(getDirectionUnitVector(Direction.RIGHT))
     }
 

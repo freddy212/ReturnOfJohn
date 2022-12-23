@@ -10,13 +10,13 @@ import com.mygdx.game.distance
 import com.mygdx.game.getUnitVectorTowardsPoint
 import com.mygdx.game.player
 
-class EnemyMove(private val distanceToStop: Float, private val directionFunction: (Vector2,Vector2) -> Vector2): EnemyAction() {
-    override fun executeEnemyAction(enemy: Enemy) {
+class EnemyMove(private val distanceToStop: Float, private val directionFunction: (Vector2,Vector2) -> Vector2, val enemy:Enemy): EnemyAction() {
+    override fun executeEnemyAction() {
         enemy.move(directionFunction(Vector2(enemy.sprite.x,enemy.sprite.y), Vector2(player.sprite.x, player.sprite.y)))
     }
 
     override val probability = 1.0
-    override fun condition(enemy: Enemy): Boolean {
+    override fun condition(): Boolean {
         val distanceBetween =  distance(Vector2(player.sprite.x, player.sprite.y), Vector2(enemy.sprite.x,enemy.sprite.y))
         return  distanceBetween >= distanceToStop
         /*val objectsColliding =  GetCollidingObjects(enemy.polygon,LocationManager.EveryFrameCollitionGameObjects)

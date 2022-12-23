@@ -7,9 +7,9 @@ import com.mygdx.game.Managers.EventManager
 
 
 abstract class EnemyAction {
-    abstract fun executeEnemyAction(enemy: Enemy)
+    abstract fun executeEnemyAction()
     abstract val probability: Double
-    open fun condition(enemy: Enemy): Boolean = true
+    open fun condition(): Boolean = true
     var blocking: Boolean = false
     open val shouldBlock = false
     open val framesToBlock = 150

@@ -14,15 +14,15 @@ import com.mygdx.game.Timer.DefaultTimer
 import kotlin.random.Random
 import kotlin.reflect.KFunction4
 
-class ShootProjectile(val projectileFactory: (Position: Vector2, Size: Vector2, defaultLocation: DefaultLocation, unitVectorDirection:Vector2, shooter:GameObject) -> Projectile, val size:Vector2): EnemyAction() {
+class ShootProjectile(val projectileFactory: (Position: Vector2, Size: Vector2, defaultLocation: DefaultLocation, unitVectorDirection:Vector2, shooter:GameObject) -> Projectile, val size:Vector2, val enemy:Enemy): EnemyAction() {
     val timer = DefaultTimer(2f)
-    override fun executeEnemyAction(enemy: Enemy) {
+    override fun executeEnemyAction() {
         generateEnemyProjectile(projectileFactory,enemy,size)
     }
 
     override val probability = 1.0
 
-    override fun condition(enemy: Enemy): Boolean {
+    override fun condition(): Boolean {
         return timer.tryUseCooldown()
     }
 

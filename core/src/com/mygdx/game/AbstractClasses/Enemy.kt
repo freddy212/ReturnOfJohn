@@ -32,7 +32,7 @@ abstract class Enemy(
 
     override fun frameTask() {
         if (aggroed) {
-            enemyStrategy.getActions(this).forEach {it.executeEnemyAction(this)}
+            enemyStrategy.getActions(this).forEach {it.executeEnemyAction()}
         } else {
             val aggroCircle = Circle(this.sprite.x, this.sprite.y, aggroRadius)
             checkAggroed(InsideCircle(aggroCircle))

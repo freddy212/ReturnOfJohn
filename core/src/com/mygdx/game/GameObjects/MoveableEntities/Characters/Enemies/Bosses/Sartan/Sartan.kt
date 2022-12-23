@@ -30,7 +30,7 @@ class Sartan(Position: Vector2, size: Vector2 = Vector2(150f,150f),location: Def
     override var baseSpeed = 3f
     override var unitVectorDirection = getDirectionUnitVector(Direction.DOWN)
     val trifork = Trifork(currentPosition() + Vector2(0f,-30f), Vector2(40f,100f), defaultLocation,this)
-    private val randomAction = RandomAction(listOf( EnemyMove(200f,::getUnitVectorTowardsPoint)),DefaultTimer(1f))
+    private val randomAction = RandomAction(listOf( EnemyMove(200f,::getUnitVectorTowardsPoint, this)),DefaultTimer(1f), this)
     override val enemyStrategy =  DefaultEnemyStrategy(listOf(randomAction,TriforkThrow(this,trifork)))
 
 

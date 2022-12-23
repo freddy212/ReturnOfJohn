@@ -26,11 +26,11 @@ class SmallDevil(Position: Vector2, size: Vector2 = Vector2(128f,128f),location:
     override var direction = Direction.UP
     override var health = 100f
     override val maxHealth = 100f
-    private val randomAction = RandomAction(listOf( EnemyMove(0f,::getUnitVectorTowardsPoint),
-                                            EnemyMove(200f,::getUnitVectorTowardsPoint),
-                                            EnemyMove(200f,::getOppositeUnitVector)),DefaultTimer(2f))
+    private val randomAction = RandomAction(listOf( EnemyMove(0f,::getUnitVectorTowardsPoint, this),
+                                            EnemyMove(200f,::getUnitVectorTowardsPoint, this),
+                                            EnemyMove(200f,::getOppositeUnitVector, this)),DefaultTimer(2f), this)
     override val enemyStrategy =  DefaultEnemyStrategy(listOf(randomAction,
-                                                              ShootProjectile(::Fireball, Vector2(100f, 50f))))
+                                                              ShootProjectile(::Fireball, Vector2(100f, 50f), this)))
 
 
 }

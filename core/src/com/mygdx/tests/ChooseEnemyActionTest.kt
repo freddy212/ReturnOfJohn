@@ -17,7 +17,7 @@ class ChooseEnemyActionTest: TestGame() {
     @Test
     fun TestOnlyValidActionsCanBeChosen() {
         //Given
-        Mockito.`when`(enemyAction.condition(enemy)).thenReturn(true)
+        Mockito.`when`(enemyAction.condition()).thenReturn(true)
         assertEquals(1, defaultEnemyStrategy.actionList.size)
         //When
         var action = defaultEnemyStrategy.getActions(enemy)
@@ -25,7 +25,7 @@ class ChooseEnemyActionTest: TestGame() {
         assertEquals(enemyAction,action)
 
         //Given
-        Mockito.`when`(enemyAction.condition(enemy)).thenReturn(false)
+        Mockito.`when`(enemyAction.condition()).thenReturn(false)
         //When
         action = defaultEnemyStrategy.getActions(enemy)
         //Then

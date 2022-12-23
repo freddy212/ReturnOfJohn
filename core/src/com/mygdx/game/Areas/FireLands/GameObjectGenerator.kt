@@ -7,15 +7,18 @@ import com.mygdx.game.Collitions.DoorCollition
 import com.mygdx.game.Collitions.IllegalMoveCollition
 import com.mygdx.game.DataClasses.DoorData
 import com.mygdx.game.Enums.Direction
+import com.mygdx.game.Enums.ItemType
 import com.mygdx.game.Enums.Layer
 import com.mygdx.game.GameObjects.Abyss
 import com.mygdx.game.GameObjects.Door
 import com.mygdx.game.GameObjects.GenericGameObject
+import com.mygdx.game.GameObjects.ItemObjects.GenericInventoryItemObject
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Bosses.SandGhost.Sartan
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Mobs.SmallDevil
 import com.mygdx.game.GameObjects.Terrain.FireObject
 import com.mygdx.game.GameObjects.Terrain.WalkableTerrain
 import com.mygdx.game.Interfaces.AreaIdentifier
+import com.mygdx.game.Interfaces.ItemObject
 import com.mygdx.game.Managers.LocationManager
 
 
@@ -78,6 +81,16 @@ fun getFireLandsLocationSevenObjects(): List<GameObject>{
     val door = createDoor(DoorData(Vector2(walkableTerrain.currentMiddle.x - 25f,location7.bottomleft.y),AreaIdentifier.FIRELANDS,AreaIdentifier.WASTELAND,
     "location7",Direction.DOWN,"WastelandFirelands"))
     return listOf(walkableTerrain, door)
+}
+
+fun getFireLandsLocationNineObjects(): List<GameObject>{
+    val location9 = LocationManager.findLocation("location9",AreaIdentifier.FIRELANDS)
+
+    val fluteItem  = GenericInventoryItemObject(location9.currentMiddle, Vector2(64f, 32f), location9,
+        ItemType.FLUTEOFAWAKENING)
+
+    return listOf(fluteItem)
+
 }
 
 

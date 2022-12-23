@@ -7,8 +7,8 @@ import com.mygdx.game.getOppositeUnitVector
 import com.mygdx.game.getUnitVectorTowardsPoint
 import com.mygdx.game.player
 
-class ChangeDirection: EnemyAction() {
-    override fun executeEnemyAction(enemy: Enemy) {
+class ChangeDirection(val enemy:Enemy): EnemyAction() {
+    override fun executeEnemyAction() {
         enemy.setCharacterRotation(getOppositeUnitVector(Vector2( player.sprite.x, player.sprite.y),Vector2(enemy.sprite.x,enemy.sprite.y)))
     }
 

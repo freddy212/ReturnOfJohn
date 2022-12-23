@@ -13,6 +13,7 @@ fun getItemTexture(itemType: ItemType): Texture {
         ItemType.WOOD -> DefaultTextureHandler.getTexture("wood.png")
         ItemType.KEY -> DefaultTextureHandler.getTexture("Key.png")
         ItemType.WORLDLEAF -> DefaultTextureHandler.getTexture("WorldLeaf.png")
+        ItemType.FLUTEOFAWAKENING -> DefaultTextureHandler.getTexture("FluteOfAwakening.png")
     }
 }
 

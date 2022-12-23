@@ -19,7 +19,7 @@ class TriforkThrow(val sartan: Sartan, val trifork: Trifork): EnemyAction() {
     val origin = Vector2(sartan.sprite.originX, sartan.sprite.originY)
     val distance = distance(sartan.currentPosition(), sartan.currentPosition() + origin)
 
-    override fun executeEnemyAction(enemy: Enemy) {
+    override fun executeEnemyAction() {
         if(counter == 0) {
             //val unitVector = getUnitVectorTowardsPoint(sartan.currentPosition(), player.currentPosition())
             //sartan.setCharacterRotation(unitVector)

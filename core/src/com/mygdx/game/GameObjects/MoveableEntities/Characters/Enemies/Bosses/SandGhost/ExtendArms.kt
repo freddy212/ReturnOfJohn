@@ -13,7 +13,7 @@ class ExtendArms(val sandHand1: SandHand, val sandHand2: SandHand, val sandGhost
     override val framesToBlock = 179
     val changeTime = framesToBlock / 2 + 1
 
-    override fun executeEnemyAction(enemy: Enemy) {
+    override fun executeEnemyAction() {
         if(counter == 0) {
             sandGhost.unitVectorDirection = Vector2(0f, 0f)
         }
@@ -34,8 +34,8 @@ class ExtendArms(val sandHand1: SandHand, val sandHand2: SandHand, val sandGhost
 
     override val shouldBlock = true
 
-    override fun condition(enemy: Enemy): Boolean {
-        return enemy.health * 2 <= enemy.maxHealth
+    override fun condition(): Boolean {
+        return sandGhost.health * 2 <= sandGhost.maxHealth
     }
 
     override fun cleanUp() {

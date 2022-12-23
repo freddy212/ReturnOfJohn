@@ -44,7 +44,7 @@ open class DefaultEnemyStrategy(override val actionList : List<EnemyAction>) : E
     }
 
     override fun getActions(enemy: Enemy): List<EnemyAction>{
-        val validActions = actionList.filter {it.condition(enemy)}
+        val validActions = actionList.filter {it.condition()}
         val random = Random.nextDouble(0.0,1.0)
         var current = 0.0
         var actions = mutableListOf<EnemyAction>()
