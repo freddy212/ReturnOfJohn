@@ -14,6 +14,9 @@ class RenderInventory: Renderable {
     override val layer = Layer.FOREGROUND
     val box = DefaultTextureHandler.getTexture("ItemDisplay.png")
     val spriteBox = Sprite(box,200,400)
+    val uiCircle = DefaultTextureHandler.getTexture("UICircle.png")
+    val uiCircleSprite = Sprite(uiCircle)
+    var currentIndex = 0
     //val sprites = items.map { Sprite(it.texture,64,32) }
 
     override fun render(batch: PolygonSpriteBatch) {
@@ -26,6 +29,15 @@ class RenderInventory: Renderable {
     }
     fun drawItems(batch: PolygonSpriteBatch, displayItems: List<Item>){
         val startPos = Vector2(spriteBox.x, spriteBox.y + spriteBox.height - 64f)
+        val uiCircleX = currentIndex.mod(3)
+        val uiCircleY = currentIndex / 3
+        uiCircleSprite.setPosition(startPos.x + (64f * uiCircleX),startPos.y - (64f * uiCircleY))
+        uiCircleSprite.draw(batch)
+
+        val currentItem = displayItems[currentIndex]
+        val description = getItemDescription(currentItem.itemType)
+        font.draw(batch,description,spriteBox.x - 200f, spriteBox.y + 300f)
+
         displayItems.forEachIndexed { index, item ->
             val column: Int = index / 3
             val row = index % 3
@@ -36,4 +48,5 @@ class RenderInventory: Renderable {
             sprite.draw(batch)
         }
     }
+
 }

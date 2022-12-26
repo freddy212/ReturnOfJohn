@@ -21,7 +21,8 @@ class RenderInventoryAction(val renderInventory: RenderInventory = RenderInvento
 
     }
 
-    override fun action() {
+    override fun action(keycode: Int) {
+        renderInventory.currentIndex = 0
         EventManager.eventManager.add(renderEvent)
     }
 

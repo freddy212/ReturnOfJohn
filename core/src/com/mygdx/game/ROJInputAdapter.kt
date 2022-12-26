@@ -9,6 +9,7 @@ import com.badlogic.gdx.math.Vector3
 import com.mygdx.game.Enums.CharacterState
 import com.mygdx.game.Events.DrawSentenceEvent
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Player
+import com.mygdx.game.InputActions.ChangeCurrentItemInventoryAction
 import com.mygdx.game.InputActions.ChangeDialogueOption
 import com.mygdx.game.InputActions.RenderInventoryAction
 import com.mygdx.game.Interfaces.KeyPressedCollition
@@ -16,12 +17,14 @@ import com.mygdx.game.Managers.EventManager
 import com.mygdx.game.Managers.InputActionManager
 import com.mygdx.game.Managers.LocationManager
 import com.mygdx.game.UI.Dialogue.OptionSentence
+import com.mygdx.game.UI.Items.RenderInventory
 
 class ROJInputAdapter(private val camera : OrthographicCamera, val player: Player) : InputAdapter(){
     var clickPosition = Vector3(0f,0f,0f)
 
     init {
-        InputActionManager.InputActionManager.addAll(listOf(ChangeDialogueOption(), RenderInventoryAction()))
+        val renderInventory = RenderInventory()
+        InputActionManager.InputActionManager.addAll(listOf(ChangeDialogueOption(), RenderInventoryAction(renderInventory), ChangeCurrentItemInventoryAction(renderInventory)))
     }
 
     override fun keyDown(keycode: Int): Boolean {
@@ -38,7 +41,7 @@ class ROJInputAdapter(private val camera : OrthographicCamera, val player: Playe
 
         InputActionManager.InputActionManager.List.forEach {
             if(it.keycodes.contains(keycode)){
-                it.action()
+                it.action(keycode)
             }
         }
         return super.keyDown(keycode)

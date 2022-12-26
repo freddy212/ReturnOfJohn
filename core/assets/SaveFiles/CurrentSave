@@ -1,4 +1,4 @@
-{"playerXPos":572.768,"playerYPos":0.44106293,"areaIdentifier":"WASTELAND","entityId":0}
+{"playerXPos":16.0,"playerYPos":10.0,"areaIdentifier":"MAINAREA","entityId":0}
 {"signaltype":"ITEM_PICKED_UP","itemType":"FLUTEOFAWAKENING"}
 {"signaltype":"REMOVE_OBJECT","entityId":27}
 {"signaltype":"ITEM_PICKED_UP","itemType":"FLINT"}
@@ -9,3 +9,12 @@
 {"signaltype":"REMOVE_OBJECT","entityId":42}
 {"signaltype":"ITEM_PICKED_UP","itemType":"FLINT"}
 {"signaltype":"REMOVE_OBJECT","entityId":41}
+{"signaltype":"ITEM_PICKED_UP","itemType":"WORLDLEAF"}
+{"signaltype":"REMOVE_OBJECT","entityId":16}
+{"signaltype":"ITEM_PICKED_UP","itemType":"WORLDLEAF"}
+{"signaltype":"REMOVE_OBJECT","entityId":15}
+{"signaltype":"ITEM_PICKED_UP","itemType":"WOOD"}
+{"signaltype":"REMOVE_OBJECT","entityId":36}
+{"signaltype":"REMOVE_OBJECT","entityId":40}
+{"signaltype":"ADD_OBJECT","addMethod":"DOOR1","location":"location1","areaIdentifier":"MAINAREA"}
+{"signaltype":"ADD_OBJECT","addMethod":"DOOR2","location":"location10","areaIdentifier":"WASTELAND"}

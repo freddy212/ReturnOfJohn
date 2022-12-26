@@ -17,6 +17,16 @@ fun getItemTexture(itemType: ItemType): Texture {
     }
 }
 
+fun getItemDescription(itemType: ItemType): String {
+    return when (itemType){
+        ItemType.FLINT -> "Flint"
+        ItemType.WOOD -> "Wood"
+        ItemType.KEY -> "Key"
+        ItemType.WORLDLEAF -> "Leaf"
+        ItemType.FLUTEOFAWAKENING -> "An ancient flute capable of awakening sleeping spirits"
+    }
+}
+
 class Inventory {
     private val InventoryList: MutableMap<ItemType,Int> = mutableMapOf()
     val inventoryList : Map<ItemType,Int>

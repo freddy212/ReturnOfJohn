@@ -9,7 +9,7 @@ import com.mygdx.game.UI.Dialogue.OptionSentence
 class ChangeDialogueOption: InputAction {
     override val keycodes = listOf(Input.Keys.LEFT,Input.Keys.RIGHT,Input.Keys.A,Input.Keys.D)
 
-    override fun action() {
+    override fun action(keycode : Int) {
         val readSentenceEvent = EventManager.eventManager.List.find {it is DrawSentenceEvent } as DrawSentenceEvent?
         if(readSentenceEvent != null){
             if(readSentenceEvent.conversationHandler.GetSentence() is OptionSentence){
