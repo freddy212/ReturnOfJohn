@@ -7,12 +7,14 @@ import com.mygdx.game.Collitions.DoorCollition
 import com.mygdx.game.Collitions.IllegalMoveCollition
 import com.mygdx.game.DataClasses.DoorData
 import com.mygdx.game.Enums.Direction
+import com.mygdx.game.Enums.Elements
 import com.mygdx.game.Enums.ItemType
 import com.mygdx.game.Enums.Layer
 import com.mygdx.game.GameObjects.Abyss
 import com.mygdx.game.GameObjects.Door
 import com.mygdx.game.GameObjects.GenericGameObject
 import com.mygdx.game.GameObjects.ItemObjects.GenericInventoryItemObject
+import com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Bosses.RockBoss.RockBoss
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Bosses.SandGhost.Sartan
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Mobs.SmallDevil
 import com.mygdx.game.GameObjects.Terrain.FireObject
@@ -77,10 +79,11 @@ fun getFireLandsLocationSevenObjects(): List<GameObject>{
     val location6 = LocationManager.findLocation("location6",AreaIdentifier.FIRELANDS)
 
     val walkableTerrain = WalkableTerrain(Vector2(location6.bottomleft.x,location7.bottomleft.y),Vector2(location6.width,location7.height),location7)
+    val RockBoss = RockBoss(location7.currentMiddle, Vector2(150f,160f), location7, Elements.FIRE)
 
     val door = createDoor(DoorData(Vector2(walkableTerrain.currentMiddle.x - 25f,location7.bottomleft.y),AreaIdentifier.FIRELANDS,AreaIdentifier.WASTELAND,
     "location7",Direction.DOWN,"WastelandFirelands"))
-    return listOf(walkableTerrain, door)
+    return listOf(walkableTerrain, door, RockBoss)
 }
 
 fun getFireLandsLocationNineObjects(): List<GameObject>{

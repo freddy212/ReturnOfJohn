@@ -6,12 +6,14 @@ import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.Collitions.DoorCollition
 import com.mygdx.game.Collitions.IllegalMoveCollition
 import com.mygdx.game.Enums.Direction
+import com.mygdx.game.Enums.Elements
 import com.mygdx.game.Enums.Layer
 import com.mygdx.game.Enums.getDirectionUnitVector
 import com.mygdx.game.GameObjects.Door
 import com.mygdx.game.GameObjects.Hazards.Generators.RocketGenerator
 import com.mygdx.game.GameObjects.GenericGameObject
 import com.mygdx.game.GameObjects.IceButton
+import com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Bosses.RockBoss.RockBoss
 import com.mygdx.game.GameObjects.Terrain.IceObject
 import com.mygdx.game.GameObjects.Terrain.WalkableTerrain
 import com.mygdx.game.GameObjects.Thorns
@@ -59,7 +61,7 @@ fun getIceLandsLocationThreeObjects(): List<GameObject>{
 fun getIceLandsLocationFiveObjects(): List<GameObject> {
     val location5 = LocationManager.findLocation("location5", AreaIdentifier.ICELANDS)
     val walkableTerrain = WalkableTerrain(
-        Vector2(location5.originalMiddle.x - 50f, location5.bottomleft.y),
+        Vector2(location5.originalMiddle.x - 100f, location5.bottomleft.y),
         Vector2(200f, location5.topleft.y - location5.bottomleft.y),
         location5
     )
@@ -70,4 +72,16 @@ fun getIceLandsLocationFiveObjects(): List<GameObject> {
         getDirectionUnitVector(Direction.LEFT),location5)
 
     return listOf(walkableTerrain, rocketGenerator, rocketGenerator2)
+}
+fun getIceLandsLocationSevenObjects(): List<GameObject> {
+    val location7 = LocationManager.findLocation("location7", AreaIdentifier.ICELANDS)
+    val walkableTerrain = WalkableTerrain(
+        Vector2(location7.originalMiddle.x - 100f, location7.bottomleft.y),
+        Vector2(200f, location7.topleft.y - location7.bottomleft.y),
+        location7
+    )
+
+    val rockBoss = RockBoss(walkableTerrain.currentMiddle, Vector2(150f, 160f), location7, Elements.ICE)
+
+    return listOf(walkableTerrain, rockBoss)
 }

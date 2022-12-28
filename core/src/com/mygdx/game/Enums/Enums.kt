@@ -9,6 +9,7 @@ enum class ItemType{WORLDLEAF,KEY, WOOD, FLINT, FLUTEOFAWAKENING}
 enum class Layer {BEFORELOCATION,GROUND,ONGROUND,PERSON,AIR,FOREGROUND}
 enum class ConversationState {BEFORE,ONGOING}
 enum class CharacterState {STUNNED,FREE,DASHING}
+enum class Elements {FIRE, ICE, EARTH}
 enum class QuestIdentifier{DOJO,FIRE}
 data class Item(val itemType: ItemType,var amount:Int, val texture: Texture)
 

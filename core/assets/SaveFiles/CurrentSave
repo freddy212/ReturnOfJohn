@@ -1,4 +1,4 @@
-{"playerXPos":16.0,"playerYPos":10.0,"areaIdentifier":"MAINAREA","entityId":0}
+{"playerXPos":200.0,"playerYPos":10.0,"areaIdentifier":"DUNGEONAREA","entityId":0}
 {"signaltype":"ITEM_PICKED_UP","itemType":"FLUTEOFAWAKENING"}
 {"signaltype":"REMOVE_OBJECT","entityId":27}
 {"signaltype":"ITEM_PICKED_UP","itemType":"FLINT"}
@@ -18,3 +18,18 @@
 {"signaltype":"REMOVE_OBJECT","entityId":40}
 {"signaltype":"ADD_OBJECT","addMethod":"DOOR1","location":"location1","areaIdentifier":"MAINAREA"}
 {"signaltype":"ADD_OBJECT","addMethod":"DOOR2","location":"location10","areaIdentifier":"WASTELAND"}
+{"signaltype":"ABILITY_GAINED","abilityId":"SHIELD"}
+{"signaltype":"REMOVE_OBJECT","entityId":10}
+{"signaltype":"ITEM_PICKED_UP","itemType":"KEY"}
+{"signaltype":"REMOVE_OBJECT","entityId":12}
+{"signaltype":"USE_ITEMS","itemType":"KEY","amount":1}
+{"signaltype":"REMOVE_OBJECT","entityId":5}
+{"signaltype":"ABILITY_GAINED","abilityId":"WATERBALL"}
+{"signaltype":"REMOVE_OBJECT","entityId":6}
+{"signaltype":"BUTTON_ACCEPTED","entityId":23}
+{"signaltype":"BUTTON_ACCEPTED","entityId":22}
+{"signaltype":"REMOVE_OBJECT","entityId":21}
+{"signaltype":"REMOVE_OBJECT","entityId":29}
+{"signaltype":"ABILITY_GAINED","abilityId":"ICECLONE"}
+{"signaltype":"REMOVE_OBJECT","entityId":33}
+{"signaltype":"REMOVE_OBJECT","entityId":19}

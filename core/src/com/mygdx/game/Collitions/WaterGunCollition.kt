@@ -12,7 +12,7 @@ class WaterGunCollition : ProjectileCollition() {
 
     override fun collitionHappened(entity: GameObject, collidedObject: GameObject) {
         super.collitionHappened(entity, collidedObject)
-        if (entity is WaterBall) {
+        if (entity is WaterBall && entity.defaultLocation != null) {
             val fire: Fire? = collidedObject.properties.List.find { it is Fire } as Fire?
             val ice: Ice? = collidedObject.properties.List.find { it is Ice } as Ice?
             fire?.fireExtinguised()

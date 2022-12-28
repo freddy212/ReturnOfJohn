@@ -3,10 +3,7 @@ package com.mygdx.game.Areas.FireLands
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.*
 import com.mygdx.game.Areas.DefaultArea
-import com.mygdx.game.Areas.IceLands.getIceLandsLocationFiveObjects
-import com.mygdx.game.Areas.IceLands.getIceLandsLocationOneObjects
-import com.mygdx.game.Areas.IceLands.getIceLandsLocationThreeObjects
-import com.mygdx.game.Areas.IceLands.getIceLandsLocationTwoObjects
+import com.mygdx.game.Areas.IceLands.*
 import com.mygdx.game.Interfaces.Area
 import com.mygdx.game.Interfaces.AreaIdentifier
 import com.mygdx.game.Interfaces.AreaInitializer
@@ -33,6 +30,13 @@ class IceLandsInitializer: AreaInitializer {
         val location5 = addLocationRelative(location4,Vector2(1000f,1000f),InsertDirection.UP,area,
             InsertDirection.MIDDLE, ::getIceLandsLocationFiveObjects,DamageLocationData(iceTexture)
         )
+        val location6 = addLocationRelative(location5,Vector2(200f,500f),InsertDirection.UP,area,
+            InsertDirection.MIDDLE
+        )
+        val location7 = addLocationRelative(location6,Vector2(1000f,1000f),InsertDirection.UP,area,
+            InsertDirection.MIDDLE, ::getIceLandsLocationSevenObjects,DamageLocationData(iceTexture)
+        )
+        location7.addAdjacentLocation(location5)
         return area
         //addLocationsToArea(area)
 

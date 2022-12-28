@@ -20,7 +20,6 @@ abstract class DefaultCharacter(Position: Vector2, size: Vector2, location: Defa
                                 Character,
                                 FightableEntity{
     override val font = BitmapFont()
-    override val texture = DefaultTextureHandler.getTexture("man.png")
     val speedDecrease = 0.95f
     var characterState: CharacterState = CharacterState.FREE
     open val stunDuration = 4
