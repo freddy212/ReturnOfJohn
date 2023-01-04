@@ -1,4 +1,4 @@
-{"playerXPos":200.0,"playerYPos":10.0,"areaIdentifier":"DUNGEONAREA","entityId":0}
+{"playerXPos":-2784.0,"playerYPos":2272.0,"areaIdentifier":"WASTELAND","entityId":0}
 {"signaltype":"ITEM_PICKED_UP","itemType":"FLUTEOFAWAKENING"}
 {"signaltype":"REMOVE_OBJECT","entityId":27}
 {"signaltype":"ITEM_PICKED_UP","itemType":"FLINT"}

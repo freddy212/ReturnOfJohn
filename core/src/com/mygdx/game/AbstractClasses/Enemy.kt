@@ -41,7 +41,9 @@ abstract class Enemy(
     }
 
     override fun isHit(launchUnitVector: Vector2) {
-        setAggroed()
+        if(!aggroed) {
+            setAggroed()
+        }
         super.isHit(launchUnitVector)
     }
 
