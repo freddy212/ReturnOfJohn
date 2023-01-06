@@ -10,7 +10,7 @@ import com.badlogic.gdx.graphics.g3d.ModelBatch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.math.Vector2
-import com.mygdx.game.GameObjects.ItemAbilities.*
+import com.mygdx.game.ItemAbilities.*
 import com.mygdx.game.Saving.FileHandler
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Player
 import com.mygdx.game.Interfaces.AreaIdentifier
@@ -84,10 +84,13 @@ class MainGame : ApplicationAdapter() {
         val savedSignals:List<Signal> = saves.map (::signalConvert)
         savedSignals.forEach { SignalManager.emitSignal(it,false); SignalManager.pastSignals.add(it) }
         //player.addAbility(IcicleAbility())
-        player.addAbility(AxeAbility())
+        //player.addAbility(AxeAbility())
         //player.addAbility(ShieldAbility())
         //player.addAbility(DashAbility())
-        //player.addAbility(WaterBallAbility())
+        val projectileAbility = ProjectileAbilityToggle
+        player.addAbility(projectileAbility)
+        projectileAbility.abilitiesToToggle.add(IcicleAbility())
+        projectileAbility.abilitiesToToggle.add(FireballAbility())
     }
 
 

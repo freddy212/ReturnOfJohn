@@ -1,10 +1,10 @@
 package com.mygdx.game.AbstractClasses
 
 import com.badlogic.gdx.graphics.Texture
-import com.mygdx.game.GameObjects.ItemAbilities.*
+import com.mygdx.game.ItemAbilities.*
 import com.mygdx.game.Interfaces.Timer
 
-enum class AbilityId{AXE,ICECLONE,ICICLE,SHIELD,WATERBALL, FIREBALL, DASH, DASHUPGRADE}
+enum class AbilityId{AXE,ICECLONE,ICICLE,SHIELD,WATERBALL, FIREBALL, DASH, DASHUPGRADE, PROJECTILE}
 abstract class CharacterAbility(){
     abstract val abilityId: AbilityId
     abstract val triggerKey: Int
@@ -12,15 +12,18 @@ abstract class CharacterAbility(){
     abstract val cooldownTimer: Timer
     open val toolTipTexture: Texture
     get() = texture
+    var showToolTip = true
+    var active = false
 
     abstract fun activeAction()
-    open fun InactiveAction(){
-
+    open fun inactiveAction(){
+        active = false
     }
 
-    fun tryUseAction() {
+    open fun tryUseAction() {
         if(cooldownTimer.tryUseCooldown()){
             this.activeAction()
+            active = true
         }
     }
 }
@@ -35,5 +38,6 @@ fun getAbility(abilityId: AbilityId): CharacterAbility{
         AbilityId.FIREBALL -> FireballAbility()
         AbilityId.DASH -> DashAbility()
         AbilityId.DASHUPGRADE -> DashAbilityUpgraded()
+        AbilityId.PROJECTILE -> ProjectileAbilityToggle
     }
 }

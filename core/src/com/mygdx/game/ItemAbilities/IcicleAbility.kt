@@ -1,13 +1,10 @@
-package com.mygdx.game.GameObjects.ItemAbilities
+package com.mygdx.game.ItemAbilities
 
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.*
 import com.mygdx.game.AbstractClasses.AbilityId
 import com.mygdx.game.AbstractClasses.CharacterAbility
-import com.mygdx.game.AbstractClasses.DefaultPositionChange
-import com.mygdx.game.Enums.Layer
 import com.mygdx.game.GameObjects.MoveableEntities.Projectiles.Icicle
-import com.mygdx.game.Interfaces.DynamicEntity
 import com.mygdx.game.Managers.LocationManager
 import com.mygdx.game.Timer.DefaultTimer
 

@@ -35,9 +35,9 @@ class LocationManager {
                 savePlayerStates()
             }
             ActiveGameObjects = activeDefaultLocations.flatMap { x -> x.gameObjects } + activeDefaultLocations
-            MoveCollitionGameObjects = ActiveGameObjects.filter{x -> x.collition is MoveCollition}
-            ButtonCollitionGameObjects = ActiveGameObjects.filter { x -> x.collition is KeyPressedCollition }
-            EveryFrameCollitionGameObjects = ActiveGameObjects.filter { x -> x.collition is EveryFrameCollition }
+            MoveCollitionGameObjects = ActiveGameObjects.filter{x -> x.collition is MoveCollition && x.shouldCollide}
+            ButtonCollitionGameObjects = ActiveGameObjects.filter { x -> x.collition is KeyPressedCollition && x.shouldCollide }
+            EveryFrameCollitionGameObjects = ActiveGameObjects.filter { x -> x.collition is EveryFrameCollition && x.shouldCollide }
             //Can be optimized at some point
         }
         fun changeLocation(){

@@ -1,13 +1,11 @@
 package com.mygdx.game.UI.Items
 
-import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch
 import com.badlogic.gdx.graphics.g2d.Sprite
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.*
 import com.mygdx.game.Enums.Item
 import com.mygdx.game.Enums.Layer
-import com.mygdx.game.GameObjects.ShopItem.ShopItem
 import com.mygdx.game.Interfaces.Renderable
 
 class RenderInventory: Renderable {
@@ -24,14 +22,16 @@ class RenderInventory: Renderable {
         spriteBox.draw(batch)
         //Could be optimized sometime
         val displayItems: List<Item> = player.inventory.inventoryList.entries.map {Item(it.key,it.value, getItemTexture(it.key))}
-        drawItems(batch,displayItems)
+        if(displayItems.isNotEmpty()){
+            drawItems(batch,displayItems)
+        }
 
     }
     fun drawItems(batch: PolygonSpriteBatch, displayItems: List<Item>){
         val startPos = Vector2(spriteBox.x, spriteBox.y + spriteBox.height - 64f)
-        val uiCircleX = currentIndex.mod(3)
-        val uiCircleY = currentIndex / 3
-        uiCircleSprite.setPosition(startPos.x + (64f * uiCircleX),startPos.y - (64f * uiCircleY))
+        val uiCircleOffsetX = currentIndex.mod(3)
+        val uiCircleOffsetY = currentIndex / 3
+        uiCircleSprite.setPosition(startPos.x + (64f * uiCircleOffsetX),startPos.y - (64f * uiCircleOffsetY))
         uiCircleSprite.draw(batch)
 
         val currentItem = displayItems[currentIndex]

@@ -4,7 +4,7 @@ import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.*
 import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.AbstractClasses.Projectile
-import com.mygdx.game.GameObjects.ItemAbilities.Shield
+import com.mygdx.game.ItemAbilities.Shield
 import com.mygdx.game.GameObjects.MoveableEntities.Projectiles.Boulder
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Player
 import com.mygdx.game.GameObjects.MoveableEntities.Projectiles.SmallBoulder

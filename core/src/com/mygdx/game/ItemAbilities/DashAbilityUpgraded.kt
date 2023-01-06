@@ -1,4 +1,4 @@
-package com.mygdx.game.GameObjects.ItemAbilities
+package com.mygdx.game.ItemAbilities
 
 import com.mygdx.game.player
 

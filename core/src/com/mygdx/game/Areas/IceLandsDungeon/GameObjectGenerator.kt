@@ -8,7 +8,7 @@ import com.mygdx.game.Enums.Direction
 import com.mygdx.game.Enums.getDirectionUnitVector
 import com.mygdx.game.GameObjects.Door
 import com.mygdx.game.GameObjects.Hazards.Generators.IceGenerator
-import com.mygdx.game.GameObjects.ItemAbilities.IceCloneAbility
+import com.mygdx.game.ItemAbilities.IceCloneAbility
 import com.mygdx.game.GameObjects.ItemObjects.AbilityItemObject
 import com.mygdx.game.Interfaces.AreaIdentifier
 import com.mygdx.game.Managers.LocationManager

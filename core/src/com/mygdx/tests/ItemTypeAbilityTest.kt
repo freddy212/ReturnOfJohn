@@ -1,7 +1,6 @@
 package com.mygdx.tests
 
-import com.badlogic.gdx.math.Vector2
-import com.mygdx.game.GameObjects.ItemAbilities.WaterBallAbility
+import com.mygdx.game.ItemAbilities.WaterBallAbility
 import com.mygdx.game.GameObjects.MoveableEntities.Projectiles.WaterBall
 import com.mygdx.game.Managers.LocationManager
 import org.junit.jupiter.api.Assertions

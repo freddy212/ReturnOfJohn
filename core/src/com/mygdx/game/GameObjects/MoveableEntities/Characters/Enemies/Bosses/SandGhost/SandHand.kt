@@ -16,7 +16,7 @@ import com.mygdx.game.Saving.SaveStateEntity
 import kotlin.math.cos
 import kotlin.math.sin
 import com.mygdx.game.*
-import com.mygdx.game.GameObjects.ItemAbilities.Shield
+import com.mygdx.game.ItemAbilities.Shield
 import com.mygdx.game.Saving.DefaultSaveStateHandler
 import com.mygdx.game.Trimer.DelayTimer
 

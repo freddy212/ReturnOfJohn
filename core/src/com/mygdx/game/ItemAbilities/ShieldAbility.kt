@@ -1,6 +1,5 @@
-package com.mygdx.game.GameObjects.ItemAbilities
+package com.mygdx.game.ItemAbilities
 
-import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.*
 import com.mygdx.game.AbstractClasses.*
@@ -8,7 +7,6 @@ import com.mygdx.game.Collitions.ShieldCollition
 import com.mygdx.game.Enums.Layer
 import com.mygdx.game.Events.ActionAfterFramesEvent
 import com.mygdx.game.Interfaces.DynamicEntity
-import com.mygdx.game.Interfaces.Timer
 import com.mygdx.game.Managers.EventManager
 import com.mygdx.game.Managers.LocationManager
 import com.mygdx.game.Timer.DefaultTimer
@@ -26,10 +24,11 @@ class ShieldAbility(): CharacterAbility(){
         shield.setActiveSide()
         LocationManager.newDefaultLocation.addGameObject(shield)
         player.freezeMoving()
-        EventManager.eventManager.add(ActionAfterFramesEvent(30f, ::InactiveAction))
+        EventManager.eventManager.add(ActionAfterFramesEvent(30f, ::inactiveAction))
     }
 
-    override fun InactiveAction() {
+    override fun inactiveAction() {
+        super.inactiveAction()
         shield.removeFromLocation()
         player.enableMoving()
     }

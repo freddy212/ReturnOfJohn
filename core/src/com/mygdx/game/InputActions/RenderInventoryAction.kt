@@ -15,10 +15,6 @@ class RenderInventoryAction(val renderInventory: RenderInventory = RenderInvento
             RenderGraph.addToSceneGraph(renderInventory)
         }
 
-        override fun runOnce(): Boolean {
-            return super.runOnce()
-        }
-
     }
 
     override fun action(keycode: Int) {

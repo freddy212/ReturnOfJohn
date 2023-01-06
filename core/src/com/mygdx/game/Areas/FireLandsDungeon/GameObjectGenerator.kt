@@ -7,7 +7,7 @@ import com.mygdx.game.Collitions.DoorCollition
 import com.mygdx.game.Enums.Direction
 import com.mygdx.game.GameObjects.Door
 import com.mygdx.game.GameObjects.Hazards.ConveyerBelt.ConveyerBelt
-import com.mygdx.game.GameObjects.ItemAbilities.DashAbility
+import com.mygdx.game.ItemAbilities.DashAbility
 import com.mygdx.game.GameObjects.ItemObjects.AbilityItemObject
 import com.mygdx.game.GameObjects.Terrain.WalkableTerrain
 import com.mygdx.game.Interfaces.AreaIdentifier

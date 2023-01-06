@@ -12,6 +12,7 @@ import com.mygdx.game.renderRepeatedTexture
 class Wall(Position: Vector2, size: Vector2, defaultLocation: DefaultLocation) : GameObject(Position, size) {
     override val texture = DefaultTextureHandler.getTexture("Brick.png")
     override val layer = Layer.BEFORELOCATION
+    override val shouldCollide = false
     init {
         texture.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat)
     }

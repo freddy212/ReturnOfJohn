@@ -33,6 +33,7 @@ abstract class GameObject  (val initPosition: Vector2, val size: Vector2, var de
     abstract val texture: Texture
     open val sprite: Sprite by lazy { InitSprite(texture)}
     open val polygon: Polygon by lazy {InitPolygon(sprite)}
+    open val shouldCollide = true
     open val collition: Collition = CanMoveCollition
     val properties = ResourceList<ObjectProperty>()
     override fun render(batch: PolygonSpriteBatch){

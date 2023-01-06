@@ -1,4 +1,4 @@
-package com.mygdx.game.GameObjects.ItemAbilities
+package com.mygdx.game.ItemAbilities
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.Input

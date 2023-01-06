@@ -40,7 +40,7 @@ class Player(Position: Vector2, size: Vector2, modelHandler: ModelInstanceHandle
         player.setPosition(playerLocation.initPosition)
     }
     fun addAbility(characterAbility: CharacterAbility) {
-        val toolTip = ToolTip(Sprite(characterAbility.toolTipTexture), Input.Keys.toString(characterAbility.triggerKey)[0],characterAbility.cooldownTimer)
+        val toolTip = ToolTip(Input.Keys.toString(characterAbility.triggerKey)[0],characterAbility)
         TooltipManager.tooltipManager.add(toolTip)
         itemAbilities.add(characterAbility)
     }
@@ -49,7 +49,7 @@ class Player(Position: Vector2, size: Vector2, modelHandler: ModelInstanceHandle
         player.move(getDirectionUnitVector(direction))
     }
     override fun isHit(launchUnitVector:Vector2){
-        itemAbilities.List.forEach { x -> x.InactiveAction() }
+        itemAbilities.List.forEach { x -> if(x.active) x.inactiveAction() }
         super.isHit(launchUnitVector)
     }
 
