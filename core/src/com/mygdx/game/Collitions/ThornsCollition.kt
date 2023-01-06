@@ -1,10 +1,10 @@
 package com.mygdx.game.Collitions
 
 import com.mygdx.game.AbstractClasses.GameObject
-import com.mygdx.game.GameObjects.Axe
+import com.mygdx.game.GameObjects.Other.Axe
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Player
 import com.mygdx.game.GameObjects.MoveableEntities.Projectiles.Icicle
-import com.mygdx.game.GameObjects.Thorns
+import com.mygdx.game.GameObjects.Other.Thorns
 import com.mygdx.game.Interfaces.MoveCollition
 import com.mygdx.game.Managers.SignalManager
 import com.mygdx.game.Signal.Signals.RemoveObjectSignal

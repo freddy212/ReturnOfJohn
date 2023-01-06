@@ -2,10 +2,9 @@ package com.mygdx.game.Collitions
 
 import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.Enums.CharacterState
-import com.mygdx.game.GameObjects.Abyss
+import com.mygdx.game.GameObjects.Other.Abyss
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Player
 import com.mygdx.game.Interfaces.MoveCollition
-import com.mygdx.game.Interfaces.DynamicEntity
 import com.mygdx.game.player
 
 object AbyssCollition: MoveCollition by CanMoveCollition {

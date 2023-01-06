@@ -4,11 +4,10 @@ import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.*
 import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.Enums.Direction
-import com.mygdx.game.GameObjects.Door
+import com.mygdx.game.GameObjects.Other.Door
 import com.mygdx.game.Interfaces.AreaIdentifier
 import com.mygdx.game.Interfaces.MoveCollition
 import com.mygdx.game.Managers.AreaManager
-import com.mygdx.game.Managers.LocationManager
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Player
 
 class DoorCollition(doorPosition: Vector2,val areaId: AreaIdentifier, val connection: DoorConnection,

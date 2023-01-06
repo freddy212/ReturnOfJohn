@@ -10,9 +10,9 @@ import com.mygdx.game.Enums.Direction
 import com.mygdx.game.Enums.Elements
 import com.mygdx.game.Enums.ItemType
 import com.mygdx.game.Enums.Layer
-import com.mygdx.game.GameObjects.Abyss
-import com.mygdx.game.GameObjects.Door
-import com.mygdx.game.GameObjects.GenericGameObject
+import com.mygdx.game.GameObjects.Other.Abyss
+import com.mygdx.game.GameObjects.Other.Door
+import com.mygdx.game.GameObjects.Other.GenericGameObject
 import com.mygdx.game.GameObjects.ItemObjects.GenericInventoryItemObject
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Bosses.RockBoss.RockBoss
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Bosses.SandGhost.Sartan
@@ -20,7 +20,6 @@ import com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Mobs.Small
 import com.mygdx.game.GameObjects.Terrain.FireObject
 import com.mygdx.game.GameObjects.Terrain.WalkableTerrain
 import com.mygdx.game.Interfaces.AreaIdentifier
-import com.mygdx.game.Interfaces.ItemObject
 import com.mygdx.game.Managers.LocationManager
 
 

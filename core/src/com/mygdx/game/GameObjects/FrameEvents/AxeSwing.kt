@@ -4,8 +4,7 @@ import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.DefaultTextureHandler
 import com.mygdx.game.Enums.Layer
-import com.mygdx.game.GameObjects.Axe
-import com.mygdx.game.Locations.DefaultLocation
+import com.mygdx.game.GameObjects.Other.Axe
 import com.mygdx.game.Managers.LocationManager
 import com.mygdx.game.player
 import com.mygdx.game.rotate

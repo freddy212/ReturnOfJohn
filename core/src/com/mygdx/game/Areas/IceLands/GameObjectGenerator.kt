@@ -3,22 +3,23 @@ package com.mygdx.game.Areas.IceLands
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.*
 import com.mygdx.game.AbstractClasses.GameObject
+import com.mygdx.game.Events.ButtonEvent
 import com.mygdx.game.Collitions.DoorCollition
 import com.mygdx.game.Collitions.IllegalMoveCollition
 import com.mygdx.game.Enums.Direction
 import com.mygdx.game.Enums.Elements
 import com.mygdx.game.Enums.Layer
 import com.mygdx.game.Enums.getDirectionUnitVector
-import com.mygdx.game.GameObjects.Door
+import com.mygdx.game.Events.RemoveObjectPermanentlyEvent
 import com.mygdx.game.GameObjects.Hazards.Generators.RocketGenerator
-import com.mygdx.game.GameObjects.GenericGameObject
-import com.mygdx.game.GameObjects.IceButton
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Bosses.RockBoss.RockBoss
+import com.mygdx.game.GameObjects.Other.*
 import com.mygdx.game.GameObjects.Terrain.IceObject
 import com.mygdx.game.GameObjects.Terrain.WalkableTerrain
-import com.mygdx.game.GameObjects.Thorns
 import com.mygdx.game.Interfaces.AreaIdentifier
 import com.mygdx.game.Managers.LocationManager
+import com.mygdx.game.Saving.DefaultSaveStateHandler
+import com.mygdx.game.Saving.SaveStateEntity
 
 fun getIceLandsLocationOneObjects(): List<GameObject>{
     val location1 = LocationManager.findLocation("location1",AreaIdentifier.ICELANDS)
@@ -35,12 +36,12 @@ fun getIceLandsLocationOneObjects(): List<GameObject>{
 }
 fun getIceLandsLocationTwoObjects(): List<GameObject>{
     val location2 = LocationManager.findLocation("location2",AreaIdentifier.ICELANDS)
-    val gateTexture = DefaultTextureHandler.getTexture("IceGate.png")
-    val iceGate = object : GenericGameObject(location2.bottomleft - Vector2(5f,0f),Vector2(location2.width,gateTexture.height.toFloat()),"IceGate.png",
-        Layer.ONGROUND,location2, IllegalMoveCollition) {}
-    val gateButton = IceButton(Vector2(location2.originalMiddle.x - 64f,location2.bottomleft.y - 250f),Vector2(128f,32f),location2,iceGate)
+    val iceGate = IceGate(location2.bottomleft - Vector2(5f,0f),Vector2(location2.width,100f), location2)
+    val removeGateEvent = ButtonEvent(RemoveObjectPermanentlyEvent(iceGate), true)
+    val gateButton = IceButton(Vector2(location2.originalMiddle.x - 158f,location2.bottomleft.y - 250f),Vector2(128f,32f),location2,iceGate, removeGateEvent)
+    val gateButton2 = IceButton(Vector2(location2.originalMiddle.x + 30f,location2.bottomleft.y - 250f),Vector2(128f,32f),location2,iceGate, removeGateEvent)
 
-    return listOf(iceGate, gateButton)
+    return listOf(iceGate, gateButton, gateButton2)
 }
 fun getIceLandsLocationThreeObjects(): List<GameObject>{
     val location3 = LocationManager.findLocation("location3",AreaIdentifier.ICELANDS)
@@ -51,12 +52,16 @@ fun getIceLandsLocationThreeObjects(): List<GameObject>{
 
     val doorCollition = DoorCollition(doorPosition,AreaIdentifier.ICELANDSDUNGEON, doorIceLandsAndDungeonConnection,Direction.UP)
 
-    val door = Door(doorPosition, Vector2(32f * 2,64f * 2),
+    val door = Door(doorPosition, Vector2(32f * 2,50f * 2),
         DefaultTextureHandler.getTexture("CaveDoor.png"),location3,Direction.UP,doorCollition)
-    val thorns = Thorns(door.initPosition - Vector2(8f,64f), Vector2(80f,64f),location3)
-    val iceObject = IceObject(thorns.initPosition - Vector2(-10f,200f),Vector2(64f,64f),location3)
+    val fence = Fence(Vector2(door.initPosition - Vector2(100f,120f)), Vector2(door.width + 200f,150f),location3, DefaultTextureHandler.getTexture("FenceGate.png"), false)
+    val removeFenceEvent = RemoveObjectPermanentlyEvent(fence)
+    val buttonEvent = ButtonEvent(removeFenceEvent)
+    val doorButton1 = DoorButton( Vector2(door.currentMiddle.x + 50f,door.initPosition.y), Vector2(40f,30f),location3,buttonEvent)
+    val doorButton2 = DoorButton(Vector2( door.currentMiddle.x - 100f,door.initPosition.y), Vector2(40f,30f),location3,buttonEvent)
+    val iceObject = IceObject(door.initPosition - Vector2(0f,200f),Vector2(64f,64f),location3)
 
-    return listOf(cave,door,thorns,iceObject)
+    return listOf(cave,door,fence,doorButton1,doorButton2,iceObject)
 }
 fun getIceLandsLocationFiveObjects(): List<GameObject> {
     val location5 = LocationManager.findLocation("location5", AreaIdentifier.ICELANDS)

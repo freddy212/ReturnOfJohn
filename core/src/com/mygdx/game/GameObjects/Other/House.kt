@@ -1,4 +1,4 @@
-package com.mygdx.game.GameObjects
+package com.mygdx.game.GameObjects.Other
 
 import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch
 import com.badlogic.gdx.math.Polygon

@@ -7,7 +7,7 @@ import com.mygdx.game.Collitions.DOTCollition
 import com.mygdx.game.Collitions.IceObjectCollition
 import com.mygdx.game.DefaultTextureHandler
 import com.mygdx.game.Enums.Layer
-import com.mygdx.game.GameObjects.GenericGameObject
+import com.mygdx.game.GameObjects.Other.GenericGameObject
 import com.mygdx.game.Locations.DefaultLocation
 import com.mygdx.game.ObjectProperties.Ice
 

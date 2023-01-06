@@ -1,31 +1,39 @@
-package com.mygdx.game.GameObjects
+package com.mygdx.game.GameObjects.Other
 
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch
 import com.badlogic.gdx.math.Polygon
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.AbstractClasses.GameObject
-import com.mygdx.game.Collitions.DoorButtonEvent
+import com.mygdx.game.Events.ButtonEvent
 import com.mygdx.game.DefaultTextureHandler
+import com.mygdx.game.Enums.Direction
 import com.mygdx.game.Enums.Layer
 import com.mygdx.game.GameObjects.MoveableEntities.Projectiles.Icicle
+import com.mygdx.game.Interfaces.Button
 import com.mygdx.game.Interfaces.MoveCollition
 import com.mygdx.game.Locations.DefaultLocation
 import com.mygdx.game.Managers.SignalManager
 import com.mygdx.game.Saving.DefaultSaveStateHandler
 import com.mygdx.game.Saving.SaveStateEntity
 import com.mygdx.game.Signal.Signals.ButtonAcceptedSignal
+import kotlin.math.sign
 
-class DoorButton(initPosition: Vector2, size: Vector2, defaultLocation: DefaultLocation?, doorButtonEvent: DoorButtonEvent) :
-    GameObject(initPosition, size, defaultLocation), SaveStateEntity by DefaultSaveStateHandler() {
-    var activated = false
+class DoorButton(initPosition: Vector2, size: Vector2, defaultLocation: DefaultLocation?, doorButtonEvent: ButtonEvent, val direction:Direction = Direction.UP) :
+    GameObject(initPosition, size, defaultLocation), SaveStateEntity by DefaultSaveStateHandler(), Button {
+    override var activated = false
     override val texture = DefaultTextureHandler.getTexture("DoorButton.png")
     override val layer = Layer.AIR
     override val polygon = Polygon()
     override val collition = DoorButtonCollition(doorButtonEvent)
 
     init {
-        polygon.vertices = floatArrayOf(x, y, x + size.x, y, x + size.x, y - 20f, x, y - 20f)
+        if(direction == Direction.UP){
+            polygon.vertices = floatArrayOf(x, y, x + size.x, y, x + size.x, y - 20f, x, y - 20f)
+        }
+        else if (direction == Direction.DOWN){
+            polygon.vertices = floatArrayOf(x, y + size.y, x + size.x, y + size.y, x + size.x, y + size.y + 20f, x, y + size.y + 20f)
+        }
         doorButtonEvent.addButton(this)
     }
 
@@ -35,7 +43,7 @@ class DoorButton(initPosition: Vector2, size: Vector2, defaultLocation: DefaultL
     }
 }
 
-class DoorButtonCollition(val doorButtonEvent: DoorButtonEvent): MoveCollition {
+class DoorButtonCollition(val doorButtonEvent: ButtonEvent): MoveCollition {
     override fun collitionHappened(entity: GameObject, collidedObject: GameObject) {
         if(entity is Icicle && collidedObject is DoorButton && !collidedObject.activated){
             collidedObject.activated = true

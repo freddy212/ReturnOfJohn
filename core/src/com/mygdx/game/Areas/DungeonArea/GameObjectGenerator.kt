@@ -9,11 +9,11 @@ import com.mygdx.game.Enums.ItemType
 import com.mygdx.game.Enums.Layer
 import com.mygdx.game.Enums.getDirectionUnitVector
 import com.mygdx.game.GameObjects.Hazards.Generators.BoulderGenerator
-import com.mygdx.game.GameObjects.Door
+import com.mygdx.game.GameObjects.Other.Door
 import com.mygdx.game.GameObjects.ItemObjects.GenericInventoryItemObject
 import com.mygdx.game.GameObjects.ItemObjects.ShieldItemObject
 import com.mygdx.game.GameObjects.ItemObjects.WaterGunItemObject
-import com.mygdx.game.GameObjects.LockedDoor
+import com.mygdx.game.GameObjects.Other.LockedDoor
 import com.mygdx.game.Interfaces.AreaIdentifier
 import com.mygdx.game.Managers.LocationManager
 import com.mygdx.game.doorWastelandAndDungeonConnection

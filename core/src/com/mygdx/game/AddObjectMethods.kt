@@ -8,8 +8,8 @@ import com.mygdx.game.Enums.Direction
 import com.mygdx.game.Enums.Item
 import com.mygdx.game.Enums.ItemType
 import com.mygdx.game.Enums.Layer
-import com.mygdx.game.GameObjects.Door
-import com.mygdx.game.GameObjects.GenericGameObject
+import com.mygdx.game.GameObjects.Other.Door
+import com.mygdx.game.GameObjects.Other.GenericGameObject
 import com.mygdx.game.ItemAbilities.ShieldAbility
 import com.mygdx.game.GameObjects.ShopItem.ShopItem
 import com.mygdx.game.Interfaces.AreaIdentifier

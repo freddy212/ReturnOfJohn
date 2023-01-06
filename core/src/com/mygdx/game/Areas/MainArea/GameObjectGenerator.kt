@@ -5,16 +5,16 @@ import com.mygdx.game.*
 import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.Collitions.*
 import com.mygdx.game.Enums.*
-import com.mygdx.game.GameObjects.GenericGameObject
-import com.mygdx.game.GameObjects.*
+import com.mygdx.game.Events.ButtonEvent
+import com.mygdx.game.Events.RemoveObjectPermanentlyEvent
 import com.mygdx.game.GameObjects.Hazards.ConveyerBelt.ConveyerBelt
 import com.mygdx.game.GameObjects.Hazards.Generators.BoulderGenerator
 import com.mygdx.game.GameObjects.ItemObjects.GenericInventoryItemObject
 import com.mygdx.game.GameObjects.MoveableEntities.Projectiles.Boulder
+import com.mygdx.game.GameObjects.Other.*
 import com.mygdx.game.GameObjects.Terrain.IceObject
 import com.mygdx.game.GameObjects.Terrain.WalkableTerrain
 import com.mygdx.game.Interfaces.AreaIdentifier
-import com.mygdx.game.Interfaces.Event
 import com.mygdx.game.Interfaces.MoveCollition
 import com.mygdx.game.Managers.LocationManager
 import com.mygdx.game.Managers.SignalManager
@@ -88,17 +88,9 @@ fun getIceLandsGateWayLocation():List<GameObject>{
     val iceGrounds = ConstructObjects(::IceObject,walkableTerrain.bottomleft.x.toInt(),100,walkableTerrain.bottomleft.x.toInt() + 199,
         walkableTerrain.bottomleft.y.toInt() + 400,100,walkableTerrain.bottomleft.y.toInt(),location10)
 
-    /*val thorns = ConstructObjects(::Thorns,walkableTerrain.topleft.x.toInt(),60,walkableTerrain.topright.x.toInt() - 1,
-        walkableTerrain.topleft.y.toInt() - 100, 100,walkableTerrain.topleft.y.toInt() - 200,
-        location10)*/
     val fence = Fence(Vector2(walkableTerrain.topleft.x,walkableTerrain.topleft.y - 130f), Vector2(walkableTerrain.width,150f),location10, DefaultTextureHandler.getTexture("FenceGate.png"), false)
-    val removeFenceEvent = object: Event {
-        override fun execute() {
-            SignalManager.emitSignal(RemoveObjectSignal(fence.entityId))
-        }
-
-    }
-    val buttonEvent = DoorButtonEvent(removeFenceEvent)
+    val removeFenceEvent = RemoveObjectPermanentlyEvent(fence)
+    val buttonEvent = ButtonEvent(removeFenceEvent)
     val doorButton1 = DoorButton(walkableTerrain.topleft + Vector2(50f,0f), Vector2(40f,30f),location10,buttonEvent)
     val doorButton2 = DoorButton(doorButton1.bottomleft + Vector2(150f,0f), Vector2(40f,30f),location10,buttonEvent)
 

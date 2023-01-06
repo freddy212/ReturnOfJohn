@@ -5,7 +5,7 @@ import com.mygdx.game.*
 import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.Collitions.DoorCollition
 import com.mygdx.game.Enums.Direction
-import com.mygdx.game.GameObjects.Door
+import com.mygdx.game.GameObjects.Other.Door
 import com.mygdx.game.GameObjects.Hazards.ConveyerBelt.ConveyerBelt
 import com.mygdx.game.ItemAbilities.DashAbility
 import com.mygdx.game.GameObjects.ItemObjects.AbilityItemObject

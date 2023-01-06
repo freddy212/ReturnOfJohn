@@ -1,7 +1,7 @@
 package com.mygdx.game.Collitions
 
 import com.mygdx.game.AbstractClasses.GameObject
-import com.mygdx.game.GameObjects.IceClone
+import com.mygdx.game.GameObjects.MoveableEntities.IceClone
 import com.mygdx.game.GameObjects.MoveableEntities.Projectiles.Fireball
 import com.mygdx.game.GameObjects.MoveableEntities.Projectiles.Icicle
 import com.mygdx.game.GameObjects.MoveableEntities.Projectiles.Rocket

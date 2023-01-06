@@ -15,8 +15,10 @@ import com.mygdx.game.Collitions.DoorCollition
 import com.mygdx.game.DataClasses.DoorData
 import com.mygdx.game.Enums.Direction
 import com.mygdx.game.Enums.ItemType
-import com.mygdx.game.GameObjects.*
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Player
+import com.mygdx.game.GameObjects.Other.Door
+import com.mygdx.game.GameObjects.MoveableEntities.IceClone
+import com.mygdx.game.GameObjects.Other.Tomb
 import com.mygdx.game.Interfaces.*
 import com.mygdx.game.Locations.DefaultLocation
 import com.mygdx.game.Locations.DefaultLocationData
@@ -306,7 +308,7 @@ fun generateEnemyProjectile(projectileFactory: (Position: Vector2, Size: Vector2
         enemy.defaultLocation!!.addGameObject(projectileFactory(enemyStart + (unitVector * 20f) - Vector2(size.x / 2,size.y / 2),size,enemy.defaultLocation!!,unitVector, enemy))
 }
 
-fun createDoor(doorData1: DoorData): Door{
+fun createDoor(doorData1: DoorData): Door {
         val locationFrom = LocationManager.findLocation(doorData1.location, doorData1.areaFrom)
 
         val doorConnection = doorConnectionMap.getOrPut(doorData1.connectionKey,{DoorConnection()})

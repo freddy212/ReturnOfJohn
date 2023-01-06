@@ -1,4 +1,4 @@
-package com.mygdx.game.GameObjects
+package com.mygdx.game.GameObjects.Other
 
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.math.Vector2

@@ -7,8 +7,8 @@ import com.mygdx.game.Collitions.IllegalMoveCollition
 import com.mygdx.game.DefaultTextureHandler
 import com.mygdx.game.Enums.Direction
 import com.mygdx.game.Enums.Layer
-import com.mygdx.game.GameObjects.Door
-import com.mygdx.game.GameObjects.GenericGameObject
+import com.mygdx.game.GameObjects.Other.Door
+import com.mygdx.game.GameObjects.Other.GenericGameObject
 import com.mygdx.game.Interfaces.AreaIdentifier
 import com.mygdx.game.Managers.LocationManager
 import com.mygdx.game.doorMainAreaAndShop
