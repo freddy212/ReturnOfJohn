@@ -18,10 +18,17 @@ import com.mygdx.game.Utils.ResourceList
 object ProjectileAbilityToggle: CharacterAbility() {
 
     val abilitiesToToggle = ResourceList<CharacterAbility>()
+    val sound = Gdx.audio.newSound(Gdx.files.internal("Sound/SoundEffect/clicksound.mp3"));
     init {
         abilitiesToToggle.add(WaterBallAbility())
     }
     var activeIndex = 0
+    set(newValue) {
+        if(field != newValue){
+            sound.play()
+        }
+        field = newValue
+    }
     private val activeAbility get() = abilitiesToToggle.List[activeIndex]
     override val abilityId = AbilityId.PROJECTILE
     override val triggerKey = Input.Keys.NUM_1

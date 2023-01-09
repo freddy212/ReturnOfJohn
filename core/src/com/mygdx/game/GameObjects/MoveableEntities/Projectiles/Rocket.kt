@@ -14,7 +14,7 @@ import com.mygdx.game.Managers.LocationManager
 import com.mygdx.game.getUnitVectorTowardsPoint
 
 class Rocket(Position: Vector2, size: Vector2, defaultLocation: DefaultLocation?, unitVectorDirection: Vector2, shooter: GameObject, val target: GameObject) : Projectile(Position, size, defaultLocation,unitVectorDirection, shooter) {
-    override var baseSpeed = 6f
+    override var baseSpeed = 8f
     override val movementStrategy = DefaultMovement(RemoveObject())
     override val texture = DefaultTextureHandler.getTexture("Rocket.png")
     override val layer = Layer.AIR

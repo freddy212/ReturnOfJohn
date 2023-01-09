@@ -1,5 +1,6 @@
 package com.mygdx.game.Collitions
 
+import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.*
 import com.mygdx.game.AbstractClasses.GameObject
@@ -16,6 +17,7 @@ class ShieldCollition: MoveCollition{
     val delayMap = mutableMapOf<GameObject,DelayTimer>()
 
     override var canMoveAfterCollition = true
+    val sound = Gdx.audio.newSound(Gdx.files.internal("Sound/SoundEffect/woodhit.mp3"));
     override fun collitionHappened(entity: GameObject, collidedObject: GameObject) {
         canMoveAfterCollition = entity is Boulder || entity is SmallBoulder
         if((entity is Boulder || entity is SmallBoulder) && collidedObject is Shield){
@@ -33,6 +35,7 @@ class ShieldCollition: MoveCollition{
                     val centerShield = Vector2(collidedObject.sprite.x + collidedObject.sprite.width / 2, collidedObject.sprite.y + collidedObject.sprite.height)
                     (entity as Projectile).shooter = player
                     entity.unitVectorDirection = getOppositeUnitVector(centerBoulder,centerShield)
+                    sound.play(0.25f)
                 }else{
                     BoulderCollition().collitionHappened(entity, player)
                 }

@@ -25,6 +25,8 @@ open class DashAbility: CharacterAbility() {
     val fireDashEffect = FireDashEffect()
     val dashFrames = 20f
 
+    val sound = Gdx.audio.newSound(Gdx.files.internal("Sound/SoundEffect/fireworks.mp3"));
+
     override fun activeAction() {
         player.setCurrentSpeed(player.getCurrentSpeed() * 3.0f)
         player.characterState = CharacterState.DASHING
@@ -35,6 +37,7 @@ open class DashAbility: CharacterAbility() {
         player.properties.add(fireDashEffect)
         fireDashEffect.particleEffect.reset()
         fireDashEffect.start()
+        sound.play(0.25f)
     }
 
    fun inDashAction(){

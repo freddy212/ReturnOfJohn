@@ -25,6 +25,7 @@ abstract class Generator(Position: Vector2, size: Vector2, defaultLocation: Defa
 
     val projectileTimer = DefaultTimer(shootCoolDown)
     val delayTimer = DelayTimer(timeUntilFire)
+    var shouldFire = true
 
     abstract fun generateProjectile(): Projectile
     init {
@@ -45,7 +46,7 @@ abstract class Generator(Position: Vector2, size: Vector2, defaultLocation: Defa
 
     override fun frameTask(){
         super.frameTask()
-        if(delayTimer.getTimeHasPassed()){
+        if(delayTimer.getTimeHasPassed() && shouldFire){
             if(projectileTimer.tryUseCooldown()){
                 val projectile = generateProjectile()
                 projectile.defaultLocation!!.addGameObject(projectile)

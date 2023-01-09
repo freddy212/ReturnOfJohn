@@ -9,12 +9,40 @@ import com.mygdx.game.Managers.EventManager
 import com.mygdx.game.player
 import kotlin.random.Random
 
-interface AggroStrategy{
-    fun isAggroed(): Boolean
+interface ShouldBeAggroedStrategy{
+    fun ShouldBeAggroed(): Boolean
 }
-class InsideCircle(val circle: Circle): AggroStrategy{
-    override fun isAggroed(): Boolean {
+
+class InsideCircle(val circle: Circle): ShouldBeAggroedStrategy{
+    override fun ShouldBeAggroed(): Boolean {
         return circle.contains(Vector2(player.sprite.x, player.sprite.y))
+    }
+}
+
+interface AggroableEntity{
+    fun isAggroed(): Boolean
+    fun setAggroed()
+    fun resetAggro()
+    fun setAggroIfShouldBeAggroed(shouldBeAggroedStrategy: ShouldBeAggroedStrategy)
+
+}
+open class DefaultAggroableEntity(): AggroableEntity {
+    private var aggroed = false
+    override fun resetAggro() {
+        aggroed = false
+    }
+    override fun setAggroed() {
+        aggroed = true
+    }
+
+    override fun isAggroed(): Boolean {
+        return aggroed
+    }
+
+    override fun setAggroIfShouldBeAggroed(shouldBeAggroedStrategy: ShouldBeAggroedStrategy, ) {
+        if(shouldBeAggroedStrategy.ShouldBeAggroed()){
+            setAggroed()
+        }
     }
 }
 

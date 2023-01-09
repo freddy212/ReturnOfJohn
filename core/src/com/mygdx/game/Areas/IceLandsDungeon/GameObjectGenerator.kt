@@ -10,6 +10,7 @@ import com.mygdx.game.Enums.getDirectionUnitVector
 import com.mygdx.game.Events.ButtonEvent
 import com.mygdx.game.Events.RemoveObjectPermanentlyEvent
 import com.mygdx.game.GameObjects.Hazards.Generators.IceGenerator
+import com.mygdx.game.GameObjects.Hazards.Generators.RocketGenerator
 import com.mygdx.game.ItemAbilities.IceCloneAbility
 import com.mygdx.game.GameObjects.ItemObjects.AbilityItemObject
 import com.mygdx.game.GameObjects.ItemObjects.GenericInventoryItemObject
@@ -52,4 +53,10 @@ fun getIceLandsDungeonLocationTwoObjects(): List<GameObject>{
 
     )
     return listOf(iceGenerator,iceCloneAbility)
+}
+
+fun getIceLandsDungeonLocationThreeObjects(): List<GameObject>{
+    val location3 = LocationManager.findLocation("location3",AreaIdentifier.ICELANDSDUNGEON)
+    val rocketGenerator = RocketGenerator(location3.topleft - Vector2(0f,250f), Vector2(100f,100f), getDirectionUnitVector(Direction.RIGHT), location3)
+    return listOf(rocketGenerator)
 }

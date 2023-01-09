@@ -16,9 +16,9 @@ abstract class Enemy(
     var location: DefaultLocation?,
     val aggroRadius: Float,
     collition:MoveCollition = PlayerHitCollition()
-) : DefaultCharacter(Position, size, location){
+) : DefaultCharacter(Position, size, location),
+    AggroableEntity by DefaultAggroableEntity(){
 
-    private var aggroed = false
     override val collition = collition
     override val healthStrategy: HealthStrategy = EnemyHealthStrategy()
     abstract val enemyStrategy:EnemyStrategy
@@ -31,30 +31,20 @@ abstract class Enemy(
     }
 
     override fun frameTask() {
-        if (aggroed) {
+        if (isAggroed()) {
             enemyStrategy.getActions(this).forEach {it.executeEnemyAction()}
         } else {
             val aggroCircle = Circle(this.sprite.x, this.sprite.y, aggroRadius)
-            checkAggroed(InsideCircle(aggroCircle))
+            setAggroIfShouldBeAggroed(InsideCircle(aggroCircle))
         }
         super.frameTask()
     }
 
     override fun isHit(launchUnitVector: Vector2) {
-        if(!aggroed) {
+        if(!isAggroed()) {
             setAggroed()
         }
         super.isHit(launchUnitVector)
-    }
-
-    fun isAggroed(): Boolean {
-        return aggroed
-    }
-
-    fun checkAggroed(aggroStrategy: AggroStrategy) {
-        if(aggroStrategy.isAggroed()){
-            setAggroed()
-        }
     }
 
     fun changeLocation(newLocation: DefaultLocation) {
@@ -65,14 +55,8 @@ abstract class Enemy(
             location?.addGameObject(this)
         }
     }
-    fun resetAggro() {
-        aggroed = false
-    }
     fun cleanUpAbilties(){
         enemyStrategy.actionList.forEach { it.cleanUp() }
-    }
-    open fun setAggroed(){
-        aggroed = true
     }
     fun resetHealth() {
         health = maxHealth
