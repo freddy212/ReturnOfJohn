@@ -8,14 +8,15 @@ abstract class Projectile(Position: Vector2, size: Vector2, defaultLocation: Def
     RotationalObject by DefaultRotationalObject(){
     var shooter = shooter
     init {
-        onLocationExitActions.add(::removeProjectile)
+        onLocationExitActions.add(::moveToNewLocation)
     }
     override fun frameTask() {
         super.frameTask()
         this.move(unitVectorDirection)
     }
 
-    fun removeProjectile(newLocation:DefaultLocation){
+    fun moveToNewLocation(newLocation:DefaultLocation){
         this.removeFromLocation()
+        newLocation.addGameObject(this)
     }
 }

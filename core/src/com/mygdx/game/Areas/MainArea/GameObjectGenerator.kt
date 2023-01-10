@@ -112,13 +112,6 @@ fun getIceLandsGateWayLocation():List<GameObject>{
 fun getFireLandsGateWayLocation(): List<GameObject> {
     val location2 = LocationManager.findLocation("location2", AreaIdentifier.MAINAREA)
     val location9 = LocationManager.findLocation("location9", AreaIdentifier.MAINAREA)
-    val fireGateCollition = object : MoveCollition by IllegalMoveCollition{
-        override fun collitionHappened(entity: GameObject, collidedObject: GameObject) {
-            if(entity is Boulder){
-                SignalManager.emitSignal(RemoveObjectSignal((collidedObject as SaveStateEntity).entityId))
-            }
-        }
-    }
     val walkableTerrain = WalkableTerrain(location2.bottomleft - Vector2(1000f, 0f), Vector2(1000f, location2.topleft.y - location2.bottomleft.y), location9)
 
     val texture = DefaultTextureHandler.getTexture("LavaFence.png")
@@ -128,7 +121,7 @@ fun getFireLandsGateWayLocation(): List<GameObject> {
     val gateTexture = DefaultTextureHandler.getTexture("FireGate.png")
 
     val fireGate = object : GenericGameObject(Vector2(fence.x,walkableTerrain.bottomleft.y),Vector2(gateTexture.width.toFloat(),walkableTerrain.topleft.y-
-                                    walkableTerrain.bottomleft.y),"FireGate.png",Layer.ONGROUND,location9,fireGateCollition), SaveStateEntity by DefaultSaveStateHandler() {}
+                                    walkableTerrain.bottomleft.y),"FireGate.png",Layer.ONGROUND,location9, BreakableCollition()), SaveStateEntity by DefaultSaveStateHandler() {}
     val walkableTerrain2 = WalkableTerrain(Vector2(location9.bottomleft.x,fireGate.y),Vector2(fireGate.x - location9.bottomleft.x, location2.topleft.y - location2.bottomleft.y) + Vector2(fireGate.size.x,0f), location9)
 
     val boulderGenSize = Vector2(128f,128f)

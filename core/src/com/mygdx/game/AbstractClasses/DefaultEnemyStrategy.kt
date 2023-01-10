@@ -2,10 +2,12 @@ package com.mygdx.game.AbstractClasses
 
 import com.badlogic.gdx.math.Circle
 import com.badlogic.gdx.math.Vector2
+import com.mygdx.game.GameObjects.MoveableEntities.IceClone
 import com.mygdx.game.Interfaces.EnemyStrategy
 import com.mygdx.game.Interfaces.EnemyAction
 import com.mygdx.game.Interfaces.Event
 import com.mygdx.game.Managers.EventManager
+import com.mygdx.game.Managers.LocationManager
 import com.mygdx.game.player
 import kotlin.random.Random
 
@@ -13,9 +15,9 @@ interface ShouldBeAggroedStrategy{
     fun ShouldBeAggroed(): Boolean
 }
 
-class InsideCircle(val circle: Circle): ShouldBeAggroedStrategy{
+class InsideCircle(val circle: Circle, val gameObject: GameObject = player): ShouldBeAggroedStrategy{
     override fun ShouldBeAggroed(): Boolean {
-        return circle.contains(Vector2(player.sprite.x, player.sprite.y))
+        return circle.contains(Vector2(gameObject.sprite.x, gameObject.sprite.y))
     }
 }
 
