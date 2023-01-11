@@ -1,4 +1,5 @@
 package com.mygdx.game.Interfaces
 
-interface EveryFrameCollition: Collition {
+interface EveryFrameCollition: BaseCollition{
+
 }

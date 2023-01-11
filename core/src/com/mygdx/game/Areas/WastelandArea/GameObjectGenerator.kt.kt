@@ -45,9 +45,8 @@ fun getWastelandLocationOneObjects(): List<GameObject>{
 
 fun getWastelandLocationThreeObjects(): List<GameObject>{
     val location3 = LocationManager.findLocation("location3", AreaIdentifier.WASTELAND)
-    val tree = Tree(location3.topleft + Vector2(300f,0f), Vector2(64f * 2, 128f * 2),location3)
-    val Wood = GenericInventoryItemObject(tree.topleft + Vector2(0f, -300f), Vector2(64f, 32f), location3, ItemType.WOOD)
-    return listOf(tree,Wood)
+    val Wood = GenericInventoryItemObject(location3.currentMiddle, Vector2(64f, 32f), location3, ItemType.WOOD)
+    return listOf(Wood)
 }
 
 fun getWastelandLocationFiveObjects(): List<GameObject>{

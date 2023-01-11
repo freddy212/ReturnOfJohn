@@ -2,12 +2,10 @@ package com.mygdx.game.AbstractClasses
 
 import com.badlogic.gdx.math.Circle
 import com.badlogic.gdx.math.Vector2
-import com.mygdx.game.GameObjects.MoveableEntities.IceClone
 import com.mygdx.game.Interfaces.EnemyStrategy
 import com.mygdx.game.Interfaces.EnemyAction
 import com.mygdx.game.Interfaces.Event
 import com.mygdx.game.Managers.EventManager
-import com.mygdx.game.Managers.LocationManager
 import com.mygdx.game.player
 import kotlin.random.Random
 
@@ -25,8 +23,6 @@ interface AggroableEntity{
     fun isAggroed(): Boolean
     fun setAggroed()
     fun resetAggro()
-    fun setAggroIfShouldBeAggroed(shouldBeAggroedStrategy: ShouldBeAggroedStrategy)
-
 }
 open class DefaultAggroableEntity(): AggroableEntity {
     private var aggroed = false
@@ -39,12 +35,6 @@ open class DefaultAggroableEntity(): AggroableEntity {
 
     override fun isAggroed(): Boolean {
         return aggroed
-    }
-
-    override fun setAggroIfShouldBeAggroed(shouldBeAggroedStrategy: ShouldBeAggroedStrategy, ) {
-        if(shouldBeAggroedStrategy.ShouldBeAggroed()){
-            setAggroed()
-        }
     }
 }
 

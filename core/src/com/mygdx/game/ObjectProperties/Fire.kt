@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.ParticleEffect
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.Enums.Layer
+import com.mygdx.game.Events.DefaultEvent
 import com.mygdx.game.Interfaces.Event
 
 class Fire(val extinguishFireEvent: Event, objectOnFire: GameObject) : ROJParticleObject(ParticleEffect(),objectOnFire) {

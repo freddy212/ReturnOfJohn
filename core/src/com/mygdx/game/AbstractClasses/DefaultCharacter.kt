@@ -64,7 +64,8 @@ abstract class DefaultCharacter(Position: Vector2, size: Vector2, location: Defa
         handleCollitions(this, this.polygon, LocationManager.EveryFrameCollitionGameObjects)
         super.frameTask()
     }
-    override fun isHit(launchUnitVector: Vector2){
+    override fun isHit(other: GameObject){
+        val launchUnitVector = getOppositeDirection(other)
         loseHealth(10f)
         characterState = CharacterState.STUNNED
         this.launchUnitVector = launchUnitVector

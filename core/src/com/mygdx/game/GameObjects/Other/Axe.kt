@@ -14,7 +14,7 @@ import com.mygdx.game.rotate
 class Axe(Position: Vector2, size: Vector2, defaultLocation: DefaultLocation): GameObject(Position,size,defaultLocation) {
         override val texture = DefaultTextureHandler.getTexture("Axe.png")
         override val layer = Layer.ONGROUND
-        override val collition = AxeSwingCollision()
+        override val collition = AxeSwingCollision(this)
         init {
             sprite.color = Color.YELLOW
             sprite.setOrigin(this.size.x,0f)

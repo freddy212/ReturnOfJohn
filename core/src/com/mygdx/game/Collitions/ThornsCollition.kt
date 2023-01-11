@@ -9,18 +9,16 @@ import com.mygdx.game.Interfaces.MoveCollition
 import com.mygdx.game.Managers.SignalManager
 import com.mygdx.game.Signal.Signals.RemoveObjectSignal
 
-class ThornsCollition: MoveCollition{
+class ThornsCollition(val thorns: Thorns) : MoveCollition {
     override var canMoveAfterCollition = false
 
-    override fun collitionHappened(entity: GameObject, collidedObject: GameObject) {
-        if(collidedObject is Thorns){
-            if(entity is Icicle || entity is Axe){
-                canMoveAfterCollition = true
-                SignalManager.emitSignal(RemoveObjectSignal(collidedObject.entityId))
-            }
-            if(entity is Player){
-                PlayerHitCollition().collitionHappened(entity,collidedObject)
-            }
+    override fun collitionHappened(collidedObject: GameObject) {
+        if (collidedObject is Icicle || collidedObject is Axe) {
+            canMoveAfterCollition = true
+            SignalManager.emitSignal(RemoveObjectSignal(thorns.entityId))
+        }
+        if (collidedObject is Player) {
+            collidedObject.isHit(thorns)
         }
     }
 }

@@ -9,22 +9,22 @@ import com.mygdx.game.GameObjects.Sensors.TalkSensor
 import com.mygdx.game.Interfaces.KeyPressedCollition
 import com.mygdx.game.checkOpposingDirections
 
-class TalkCollition(private val conversationEvent: ConversationEvent): KeyPressedCollition() {
+class TalkCollition(private val conversationEvent: ConversationEvent, val talkSensor: TalkSensor): KeyPressedCollition() {
     override val specificButton = Input.Keys.SPACE
-    override fun collitionHappened(entity: GameObject, collidedObject: GameObject) {
-        if(entity is Player && collidedObject is TalkSensor){
-            if(checkOpposingDirections(entity, collidedObject)){
-                val characterRotation = getDirectionUnitVector(collidedObject.direction)
-                collidedObject.npc.setCharacterRotation(characterRotation)
+    override fun collitionHappened(collidedObject: GameObject) {
+        if(collidedObject is Player){
+            if(checkOpposingDirections(collidedObject, talkSensor)){
+                val characterRotation = getDirectionUnitVector(talkSensor.direction)
+                talkSensor.npc.setCharacterRotation(characterRotation)
                 conversationEvent.execute()
             }
         }
     }
 
     override fun renderKeyToUI(entity: GameObject, collidedObject: GameObject) {
-        if(entity is Player && collidedObject is TalkSensor) {
-            if (checkOpposingDirections(entity, collidedObject)) {
-                super.renderKeyToUI(entity,collidedObject)
+        if(entity is TalkSensor && collidedObject is Player) {
+            if (checkOpposingDirections(collidedObject, entity)) {
+                super.renderKeyToUI(collidedObject,entity)
             }
         }
     }

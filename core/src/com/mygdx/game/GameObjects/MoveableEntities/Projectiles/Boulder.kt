@@ -17,5 +17,5 @@ class Boulder(Position: Vector2, size: Vector2, defaultLocation: DefaultLocation
     override val texture = DefaultTextureHandler.getTexture("Boulder.png")
     override var baseSpeed = 5f
     override val layer = Layer.AIR
-    override val collition = BoulderCollition()
+    override val collition = BoulderCollition(this)
 }

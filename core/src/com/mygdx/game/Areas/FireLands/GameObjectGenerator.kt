@@ -10,7 +10,6 @@ import com.mygdx.game.Enums.Direction
 import com.mygdx.game.Enums.Elements
 import com.mygdx.game.Enums.ItemType
 import com.mygdx.game.Enums.Layer
-import com.mygdx.game.GameObjects.Other.Abyss
 import com.mygdx.game.GameObjects.Other.Door
 import com.mygdx.game.GameObjects.Other.GenericGameObject
 import com.mygdx.game.GameObjects.ItemObjects.GenericInventoryItemObject
@@ -44,9 +43,7 @@ fun getFireLandsLocationTwoObjects(): List<GameObject>{
     return listOf(walkableTerrain1,walkableTerrain2)
 }
 fun getFireLandsLocationThreeObjects(): List<GameObject>{
-    val location3 = LocationManager.findLocation("location3",AreaIdentifier.FIRELANDS)
-    val abyss = Abyss(location3.bottomleft, Vector2(location3.width,200f),location3)
-    return listOf(abyss)
+    return listOf()
 }
 fun getFireLandsLocationFourObjects():List<GameObject>{
     val location4 = LocationManager.findLocation("location4",AreaIdentifier.FIRELANDS)

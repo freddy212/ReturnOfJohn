@@ -9,12 +9,13 @@ import com.mygdx.game.Enums.ItemType
 import com.mygdx.game.Enums.Layer
 import com.mygdx.game.Enums.getDirectionUnitVector
 import com.mygdx.game.GameObjects.Hazards.Generators.BoulderGenerator
+import com.mygdx.game.GameObjects.ItemObjects.AbilityItemObject
 import com.mygdx.game.GameObjects.Other.Door
 import com.mygdx.game.GameObjects.ItemObjects.GenericInventoryItemObject
-import com.mygdx.game.GameObjects.ItemObjects.ShieldItemObject
-import com.mygdx.game.GameObjects.ItemObjects.WaterGunItemObject
 import com.mygdx.game.GameObjects.Other.LockedDoor
 import com.mygdx.game.Interfaces.AreaIdentifier
+import com.mygdx.game.ItemAbilities.ShieldAbility
+import com.mygdx.game.ItemAbilities.WaterBallAbility
 import com.mygdx.game.Managers.LocationManager
 import com.mygdx.game.doorWastelandAndDungeonConnection
 import com.mygdx.game.middleOfObject
@@ -40,7 +41,7 @@ fun getLocationFourCaveObjects():List<GameObject>{
     val position = location.initPosition
     val door = LockedDoor(position, Vector2(location.size.x,100f),location)
     val waterGunSize = Vector2(60f,40f)
-    val waterGun = WaterGunItemObject(middleOfObject(location.originalMiddle,waterGunSize),waterGunSize,Layer.AIR,location)
+    val waterGun = AbilityItemObject(middleOfObject(location.originalMiddle,waterGunSize),waterGunSize,location,WaterBallAbility(),DefaultTextureHandler.getTexture("WaterBall.png"))
     return listOf(door,waterGun)
 
 }
@@ -65,7 +66,7 @@ fun getLocationTenCaveObjects():List<GameObject>{
 fun getLocationEightCaveObjects(): List<GameObject> {
     val location = LocationManager.findLocation("location8",AreaIdentifier.DUNGEONAREA)
     val size = Vector2(80f,80f)
-    val shieldItem = ShieldItemObject(middleOfObject(location.originalMiddle,size),size,location)
+    val shieldItem = AbilityItemObject(middleOfObject(location.originalMiddle,size),size,location, ShieldAbility(), DefaultTextureHandler.getTexture("shield-front.png"))
     return listOf(shieldItem)
 }
 fun getLocationElevenCaveObjects(): List<GameObject> {

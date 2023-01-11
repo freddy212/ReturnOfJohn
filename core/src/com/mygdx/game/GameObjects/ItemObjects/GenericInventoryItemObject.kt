@@ -14,7 +14,7 @@ import com.mygdx.game.getItemTexture
 class GenericInventoryItemObject(Position: Vector2, size: Vector2, defaultLocation: DefaultLocation, itemType: ItemType) : GameObject(Position, size,defaultLocation),ItemObject,
                                                           SaveStateEntity by DefaultSaveStateHandler(){
     override val texture = getItemTexture(itemType)
-    override val collition = ItemCollition
+    override val collition = ItemCollition(this)
     override val itemType = itemType
     override val layer = Layer.ONGROUND
 }

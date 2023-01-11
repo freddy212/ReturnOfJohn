@@ -7,7 +7,7 @@ import com.badlogic.gdx.math.Polygon
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.*
 import com.mygdx.game.Collitions.CanMoveCollition
-import com.mygdx.game.Interfaces.Collition
+import com.mygdx.game.Interfaces.BaseCollition
 import com.mygdx.game.Interfaces.ObjectProperty
 import com.mygdx.game.Interfaces.Renderable
 import com.mygdx.game.Locations.DefaultLocation
@@ -34,7 +34,7 @@ abstract class GameObject  (val initPosition: Vector2, val size: Vector2, var de
     open val sprite: Sprite by lazy { InitSprite(texture)}
     open val polygon: Polygon by lazy {InitPolygon(sprite)}
     open val shouldCollide = true
-    open val collition: Collition = CanMoveCollition
+    open val collition: BaseCollition = CanMoveCollition
     val properties = ResourceList<ObjectProperty>()
     override fun render(batch: PolygonSpriteBatch){
         sprite.draw(batch)

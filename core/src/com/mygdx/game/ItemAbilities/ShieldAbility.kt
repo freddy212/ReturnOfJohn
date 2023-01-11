@@ -24,7 +24,7 @@ class ShieldAbility(): CharacterAbility(){
         shield.setActiveSide()
         LocationManager.newDefaultLocation.addGameObject(shield)
         player.freezeMoving()
-        EventManager.eventManager.add(ActionAfterFramesEvent(30f, ::inactiveAction))
+        EventManager.eventManager.add(ActionAfterFramesEvent(60f, ::inactiveAction))
     }
 
     override fun inactiveAction() {
@@ -37,7 +37,7 @@ class ShieldAbility(): CharacterAbility(){
 class Shield(Position: Vector2, size: Vector2): GameObject(Position, size),DynamicEntity by DefaultPositionChange,
     RotationalObject by DefaultRotationalObject() {
     override val texture = DefaultTextureHandler.getTexture("shield-side.png")
-    override val collition = ShieldCollition()
+    override val collition = ShieldCollition(this)
     override val layer = Layer.AIR
 
     fun getPos():Vector2{

@@ -16,6 +16,7 @@ import com.mygdx.game.Managers.TooltipManager
 import com.mygdx.game.Saving.DefaultSaveStateHandler
 import com.mygdx.game.Saving.SaveStateEntity
 import com.mygdx.game.AbstractClasses.DefaultCharacter
+import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.Collitions.ProjectileCanPassCollition
 import com.mygdx.game.HealthStrategy.PlayerHealthStrategy
 import com.mygdx.game.Interfaces.FightableEntity
@@ -29,7 +30,7 @@ class Player(Position: Vector2, size: Vector2, modelHandler: ModelInstanceHandle
     override val layer = Layer.PERSON
     val inventory = Inventory()
     override var direction = Direction.UP
-    override val collition = ProjectileCanPassCollition()
+    override val collition = ProjectileCanPassCollition(this)
     override var health = 100f
     override val maxHealth = 100f
     override val healthStrategy = PlayerHealthStrategy()
@@ -48,9 +49,9 @@ class Player(Position: Vector2, size: Vector2, modelHandler: ModelInstanceHandle
     fun move(direction: Direction){
         player.move(getDirectionUnitVector(direction))
     }
-    override fun isHit(launchUnitVector:Vector2){
+    override fun isHit(other:GameObject){
         itemAbilities.List.forEach { x -> if(x.active) x.inactiveAction() }
-        super.isHit(launchUnitVector)
+        super.isHit(other)
     }
 
     override fun death() {

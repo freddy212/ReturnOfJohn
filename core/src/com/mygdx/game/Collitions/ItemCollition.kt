@@ -6,11 +6,11 @@ import com.mygdx.game.Interfaces.ItemObject
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Player
 import com.mygdx.game.itemObjectAddToInventory
 
-object ItemCollition: MoveCollition by CanMoveCollition {
-    override fun collitionHappened(entity: GameObject, collidedObject: GameObject) {
-        if(entity is Player && collidedObject is ItemObject){
-            val item = collidedObject.itemType
-            itemObjectAddToInventory(item, collidedObject)
+open class ItemCollition(val gameObject: GameObject): MoveCollition by CanMoveCollition{
+    override fun collitionHappened(collidedObject: GameObject) {
+        if(collidedObject is Player){
+            val item = (gameObject as ItemObject).itemType
+            itemObjectAddToInventory(item, gameObject)
         }
     }
 }

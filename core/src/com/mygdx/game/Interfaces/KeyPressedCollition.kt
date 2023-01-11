@@ -4,7 +4,7 @@ import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.UI.Actions.RenderKeyAction
 import com.mygdx.game.Utils.RenderGraph
 
-abstract class KeyPressedCollition: Collition {
+abstract class KeyPressedCollition: BaseCollition {
     abstract val specificButton: Int
 
     open fun renderKeyToUI(entity: GameObject, collidedObject: GameObject) {

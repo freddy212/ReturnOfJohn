@@ -1,7 +1,6 @@
 package com.mygdx.game.Signal.SignalListeners
 
 import com.badlogic.gdx.math.Vector2
-import com.mygdx.game.SetFixedPosition
 import com.mygdx.game.Signal.Signal
 import com.mygdx.game.Signal.SignaledEventListener
 import com.mygdx.game.Signal.Signals.MoveObjectSignal

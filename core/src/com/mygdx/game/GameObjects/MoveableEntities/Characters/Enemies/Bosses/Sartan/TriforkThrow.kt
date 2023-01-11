@@ -21,14 +21,10 @@ class TriforkThrow(val sartan: Sartan, val trifork: Trifork): EnemyAction() {
 
     override fun executeEnemyAction() {
         if(counter == 0) {
-            //val unitVector = getUnitVectorTowardsPoint(sartan.currentPosition(), player.currentPosition())
-            //sartan.setCharacterRotation(unitVector)
             prevPosition = trifork.currentPosition()
             val currentPos = Vector2(75 * cos(Radians(sartan.angle)), 75 * sin(Radians(sartan.angle))) - Vector2(75f,50f)
             trifork.sprite.setOriginCenter()
             trifork.polygon.setOrigin(trifork.initPosition.x + trifork.sprite.originX, trifork.initPosition.y + trifork.sprite.originY)
-            trifork.setPosition(trifork.currentPosition() - currentPos)
-            //trifork.polygon.setPosition(trifork.sprite.x - trifork.polygon.vertices[0],trifork.sprite.y - trifork.polygon.vertices[1])
             trifork.neutralState = false
             trifork.setCurrentSpeed(8f)
             val goalPos = player.currentPosition()

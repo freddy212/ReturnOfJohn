@@ -15,7 +15,7 @@ class WaterBall(Position: Vector2, size: Vector2, defaultLocation: DefaultLocati
     override val movementStrategy = DefaultMovement(RemoveObject())
     override val texture = DefaultTextureHandler.getTexture("WaterBall.png")
     override val layer = Layer.AIR
-    override val collition = WaterGunCollition()
+    override val collition = WaterGunCollition(this)
 
     init {
         setRotation(unitVectorDirection,this,90f)

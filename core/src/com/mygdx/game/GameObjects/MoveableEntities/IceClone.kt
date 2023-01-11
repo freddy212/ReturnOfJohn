@@ -19,7 +19,7 @@ class IceClone(Position: Vector2, size: Vector2, defaultLocation: DefaultLocatio
     override var unitVectorDirection = Vector2(0f,0f)
     override val texture = DefaultTextureHandler.getTexture("man.png")
     override val layer = Layer.ONGROUND
-    override val collition = IceCloneCollition()
+    override val collition = IceCloneCollition(this)
 
     init {
         sprite.setAlpha(0.8f)

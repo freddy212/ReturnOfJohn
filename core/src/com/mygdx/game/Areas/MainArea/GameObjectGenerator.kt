@@ -23,13 +23,8 @@ import com.mygdx.game.Saving.SaveStateEntity
 import com.mygdx.game.Signal.Signals.RemoveObjectSignal
 
 fun getLocationOneObjects(): List<GameObject>{
-    val location = LocationManager.findLocation("location1",AreaIdentifier.MAINAREA)
-    val shop = House(location.originalMiddle.x ,location.originalMiddle.y, 150f, 200f,location, doorMainAreaAndShop,AreaIdentifier.SHOP)
-    val dojo = House(location.topleft.x + 300f,location.topleft.y - 200f,300f,200f,location, doorMainAreaAndDojo,AreaIdentifier.DOJO)
 
-    val conveyerBelt = ConveyerBelt(Vector2(500f,500f), Vector2(100f,160f),location, Direction.DOWN)
-
-    return listOf(shop,dojo,shop,conveyerBelt)
+    return listOf()
 }
 
 fun getLocationGraveyard(): List<GameObject>{
@@ -43,43 +38,22 @@ fun getLocationGraveyard(): List<GameObject>{
 
     val doorCollition = DoorCollition(doorPosition,AreaIdentifier.DUNGEONAREA, doorWastelandAndDungeonConnection,Direction.UP)
 
-    //val toggleCollition = ToggleCollition(IllegalMoveCollition,doorCollition)
-
     val door = Door(doorPosition, Vector2(32f * 2,36f * 2),
         DefaultTextureHandler.getTexture("CaveDoor.png"),graveyardLoc,Direction.UP,doorCollition)
 
-    /*val fireExtinguishedEvent = ToggleCollitionEvent(toggleCollition)
-    val fire = Fire(door.Position,door.size,fireExtinguishedEvent,door)
-
-    door.properties.add(fire)*/
-
-    /*val npc = NPC(middleOfObject(graveyardLoc.originalMiddle,Vector2(120f,120f)) - Vector2(0f,450f),Vector2(120f,120f),graveyardLoc)
-
-    val quest = DefaultQuest(npc,QuestIdentifier.FIRE)
-    quest.StartQuest()
-
-    npc.conversationsHandler.addConversation("first", GetFireConversation(npc))
-    npc.conversationsHandler.addConversation("firefixed", GetFireFixedConversation(npc))
-    npc.conversationsHandler.addConversation("firenotfixed", GetFireNotFixedConversation(npc))*/
-
-    return constructTombs(graveyardLoc) + listOf(fence, fence2,cave,door)
+    return  listOf(fence, fence2,cave,door)
 
 }
 
 fun getLocationFourObjects(): List<GameObject>{
-    val location4 = LocationManager.findLocation("location4",AreaIdentifier.MAINAREA)
-    val bridge = Bridge(Vector2(location4.originalMiddle.x,location4.originalMiddle.y - 100f), Vector2(500f, 200f),location4)
-    val abyss = Abyss(Vector2(location4.originalMiddle.x,location4.bottomleft.y),Vector2(bridge.bottomright.x - bridge.bottomleft.x
-            ,bridge.bottomleft.y - location4.bottomleft.y),location4)
-    return (listOf(bridge,abyss))
+    return (listOf())
 }
 
 fun getWorldTreeObjects(): List<GameObject>{
     val location = LocationManager.findLocation("location8",AreaIdentifier.MAINAREA)
-    val tree = Tree(location.originalMiddle, Vector2(64f * 2, 128f * 2),location)
-    val WorldLeaf = GenericInventoryItemObject(tree.topleft + Vector2(0f, 0f), Vector2(64f, 32f), location,ItemType.WORLDLEAF)
-    val WorldLeaf2 = GenericInventoryItemObject(tree.bottomright + Vector2(0f, 0f), Vector2(64f, 32f), location,ItemType.WORLDLEAF)
-    return listOf(tree,WorldLeaf,WorldLeaf2)
+    val WorldLeaf = GenericInventoryItemObject(location.currentMiddle, Vector2(64f, 32f), location,ItemType.WORLDLEAF)
+    val WorldLeaf2 = GenericInventoryItemObject(location.currentMiddle + Vector2(100f,100f), Vector2(64f, 32f), location,ItemType.WORLDLEAF)
+    return listOf(WorldLeaf,WorldLeaf2)
 }
 fun getIceLandsGateWayLocation():List<GameObject>{
     val location10 = LocationManager.findLocation("location10", AreaIdentifier.MAINAREA)
@@ -121,7 +95,9 @@ fun getFireLandsGateWayLocation(): List<GameObject> {
     val gateTexture = DefaultTextureHandler.getTexture("FireGate.png")
 
     val fireGate = object : GenericGameObject(Vector2(fence.x,walkableTerrain.bottomleft.y),Vector2(gateTexture.width.toFloat(),walkableTerrain.topleft.y-
-                                    walkableTerrain.bottomleft.y),"FireGate.png",Layer.ONGROUND,location9, BreakableCollition()), SaveStateEntity by DefaultSaveStateHandler() {}
+                                    walkableTerrain.bottomleft.y),"FireGate.png",Layer.ONGROUND,location9), SaveStateEntity by DefaultSaveStateHandler() {}
+    val breakableCollition = BreakableCollition(fireGate)
+    fireGate.collition = breakableCollition
     val walkableTerrain2 = WalkableTerrain(Vector2(location9.bottomleft.x,fireGate.y),Vector2(fireGate.x - location9.bottomleft.x, location2.topleft.y - location2.bottomleft.y) + Vector2(fireGate.size.x,0f), location9)
 
     val boulderGenSize = Vector2(128f,128f)

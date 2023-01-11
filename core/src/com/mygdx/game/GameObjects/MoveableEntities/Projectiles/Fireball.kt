@@ -16,7 +16,7 @@ class Fireball(Position: Vector2, size: Vector2, defaultLocation: DefaultLocatio
     override val movementStrategy = DefaultMovement(RemoveObject())
     override val texture = DefaultTextureHandler.getTexture("fireball.png")
     override val layer = Layer.AIR
-    override val collition = FireballCollition()
+    override val collition = FireballCollition(this)
     init {
         setRotation(unitVectorDirection,this,0f)
     }

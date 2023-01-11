@@ -1,16 +1,12 @@
 package com.mygdx.game.Areas.WastelandArea
 
-import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.Areas.DefaultArea
-import com.mygdx.game.Areas.DojoArea.getDojoObjects
-import com.mygdx.game.Areas.DungeonArea.getLocationThreeCaveObjects
 import com.mygdx.game.DefaultTextureHandler
 import com.mygdx.game.InsertDirection
 import com.mygdx.game.Interfaces.Area
 import com.mygdx.game.Interfaces.AreaIdentifier
 import com.mygdx.game.Interfaces.AreaInitializer
-import com.mygdx.game.Locations.DamageLocationData
 import com.mygdx.game.Locations.DefaultLocation
 import com.mygdx.game.Locations.DefaultLocationData
 import com.mygdx.game.Locations.RepeatedTextureLocationData

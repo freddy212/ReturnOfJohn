@@ -6,8 +6,8 @@ import com.mygdx.game.Interfaces.EveryFrameCollition
 import com.mygdx.game.player
 
 object DOTCollition: EveryFrameCollition {
-    override fun collitionHappened(entity: GameObject, collidedObject: GameObject) {
-        if(entity is Player){
+    override fun collitionHappened(collidedObject: GameObject) {
+        if(collidedObject is Player){
             player.loseHealth(0.5f, false)
         }
     }

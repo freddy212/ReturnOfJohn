@@ -16,7 +16,7 @@ class Icicle(Position: Vector2, size: Vector2, defaultLocation: DefaultLocation?
     override val movementStrategy = DefaultMovement(RemoveObject())
     override val texture = DefaultTextureHandler.getTexture("Icicle.png")
     override val layer = Layer.AIR
-    override var collition: ProjectileCollition = DefaultProjectileCollition()
+    override var collition: ProjectileCollition = DefaultProjectileCollition(this)
     init {
         setRotation(unitVectorDirection,this,0f)
     }

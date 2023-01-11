@@ -7,15 +7,15 @@ import com.mygdx.game.GameObjects.MoveableEntities.Projectiles.Icicle
 import com.mygdx.game.GameObjects.MoveableEntities.Projectiles.Rocket
 import com.mygdx.game.Interfaces.MoveCollition
 
-class IceCloneCollition: MoveCollition {
-    override var canMoveAfterCollition = true
+class IceCloneCollition(val iceClone: IceClone): MoveCollition by CanMoveCollition {
 
-    override fun collitionHappened(entity: GameObject, collidedObject: GameObject) {
-        canMoveAfterCollition = !((entity is Icicle || entity is Rocket) && collidedObject is IceClone)
-
-        if(entity is Fireball && collidedObject is IceClone){
-            entity.defaultLocation!!.removeGameObject(entity)
-            collidedObject.defaultLocation!!.removeGameObject(collidedObject)
+    override fun collitionHappened(collidedObject: GameObject) {
+        if(collidedObject is Fireball){
+            iceClone.removeFromLocation()
+            collidedObject.removeFromLocation()
+        }
+        if(collidedObject is Rocket || collidedObject is Icicle){
+            collidedObject.removeFromLocation()
         }
     }
 }

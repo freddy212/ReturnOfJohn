@@ -45,11 +45,7 @@ class SandGhost(Position: Vector2, size: Vector2 = Vector2(150f,150f),location: 
         listOf(sandHand1,sandHand2).forEach { it.removeFromLocation() }
     }
 
-    override fun HitAction(other: GameObject, thisEntity: FightableEntity) {
-        isHit(Vector2(0f,0f))
-    }
-
-    override fun isHit(launchUnitVector: Vector2) {
+    override fun isHit(other:GameObject) {
         if(!isAggroed()){
             setAggroed()
         }

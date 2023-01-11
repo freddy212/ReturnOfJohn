@@ -27,7 +27,7 @@ class Rocket(
     override val movementStrategy = DefaultMovement(RemoveObject())
     override val texture = DefaultTextureHandler.getTexture("Rocket.png")
     override val layer = Layer.AIR
-    override val collition: RocketCollition = RocketCollition()
+    override val collition: RocketCollition = RocketCollition(this)
 
     init {
         setRotation(unitVectorDirection, this, 0f)
@@ -47,18 +47,18 @@ class Rocket(
             unitVectorDirection = getUnitVectorTowardsPoint(this.currentPosition(), clone.currentPosition())
             setRotation(unitVectorDirection, this, 0f)
         }
-        else if (InsideCircle(Circle(this.sprite.x, this.sprite.y, aggroRadius)).ShouldBeAggroed()) {
-            unitVectorDirection = getUnitVectorTowardsPoint(this.currentPosition(), player.currentPosition())
+        else if (InsideCircle(Circle(this.sprite.x, this.sprite.y, aggroRadius), target).ShouldBeAggroed()) {
+            unitVectorDirection = getUnitVectorTowardsPoint(this.currentPosition(), target.currentPosition())
             setRotation(unitVectorDirection, this, 0f)
         }
     }
 }
 
-class RocketCollition: ProjectileCollition() {
-    override fun collitionHappened(entity: GameObject, collidedObject: GameObject) {
-        super.collitionHappened(entity, collidedObject)
-        if(entity is Icicle || collidedObject is Icicle){
-            entity.removeFromLocation()
+class RocketCollition(val rocket: Rocket): ProjectileCollition(rocket) {
+    override fun collitionHappened(collidedObject: GameObject) {
+        super.collitionHappened(collidedObject)
+        if(collidedObject is Icicle){
+            rocket.removeFromLocation()
             collidedObject.removeFromLocation()
         }
     }

@@ -8,11 +8,11 @@ import com.mygdx.game.Managers.SignalManager
 import com.mygdx.game.Saving.SaveStateEntity
 import com.mygdx.game.Signal.Signals.RemoveObjectSignal
 
-class BreakableCollition() : MoveCollition by IllegalMoveCollition {
+class BreakableCollition(val saveStateObject: SaveStateEntity): MoveCollition by IllegalMoveCollition {
 
-    override fun collitionHappened(entity: GameObject, collidedObject: GameObject) {
-        if(entity is Boulder || entity is Rocket){
-            SignalManager.emitSignal(RemoveObjectSignal((collidedObject as SaveStateEntity).entityId))
+    override fun collitionHappened(collidedObject: GameObject) {
+        if(collidedObject is Boulder || collidedObject is Rocket){
+            SignalManager.emitSignal(RemoveObjectSignal(saveStateObject.entityId))
         }
     }
 }

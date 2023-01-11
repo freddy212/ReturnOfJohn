@@ -4,20 +4,21 @@ import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch
 import com.badlogic.gdx.graphics.g2d.Sprite
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.AbstractClasses.*
-import com.mygdx.game.Collitions.PlayerHitCollition
 import com.mygdx.game.DefaultTextureHandler
 import com.mygdx.game.EdgeOfLocationStrategies.NoAction
 import com.mygdx.game.Enums.Layer
-import com.mygdx.game.Interfaces.FightableEntity
+
 import com.mygdx.game.Interfaces.HealthStrategy
 import com.mygdx.game.Interfaces.MoveCollition
 import com.mygdx.game.Locations.DefaultLocation
-import com.mygdx.game.Saving.SaveStateEntity
 import kotlin.math.cos
 import kotlin.math.sin
 import com.mygdx.game.*
+import com.mygdx.game.GameObjects.MoveableEntities.Characters.Player
+import com.mygdx.game.Interfaces.FightableEntity
 import com.mygdx.game.ItemAbilities.Shield
 import com.mygdx.game.Saving.DefaultSaveStateHandler
+import com.mygdx.game.Saving.SaveStateEntity
 import com.mygdx.game.Trimer.DelayTimer
 
 class SandHand(Position: Vector2, size: Vector2, location: DefaultLocation?, val right: Boolean, val sandGhost: SandGhost)
@@ -73,13 +74,8 @@ class SandHand(Position: Vector2, size: Vector2, location: DefaultLocation?, val
         }
 
     }
-
-    override fun HitAction(other: GameObject, thisEntity: FightableEntity) {
-        this.isHit(Vector2(0f,0f))
-    }
-
-    override fun isHit(launchUnitVector: Vector2) {
-        sandGhost.isHit(launchUnitVector)
+    override fun isHit(other: GameObject) {
+        sandGhost.isHit(other)
     }
 
     override fun render(batch: PolygonSpriteBatch) {
@@ -93,20 +89,21 @@ class SandHand(Position: Vector2, size: Vector2, location: DefaultLocation?, val
 }
 
 class SandHandCollition(val sandHand: SandHand): MoveCollition{
-    val playerHitCollition = PlayerHitCollition()
     override val canMoveAfterCollition = true
-    override fun collitionHappened(entity: GameObject, collidedObject: GameObject) {
-        playerHitCollition.collitionHappened(entity,collidedObject)
-        if(entity is SandHand && collidedObject is Shield){
+    override fun collitionHappened(collidedObject: GameObject) {
+        if(collidedObject is Player){
+            collidedObject.isHit(sandHand)
+        }
+        if(collidedObject is Shield){
             val collition = collidedObject.collition
-            if(entity in collition.delayMap.keys){
-                val delayTimer = collition.delayMap[entity]!!
+            if(sandHand in collition.delayMap.keys){
+                val delayTimer = collition.delayMap[sandHand]!!
                 if(delayTimer.getTimeHasPassed()){
-                    collition.delayMap.remove(entity)
+                    collition.delayMap.remove(sandHand)
                 }
             } else {
                 val delayTimer = DelayTimer(1f)
-                collition.delayMap[entity] = delayTimer
+                collition.delayMap[sandHand] = delayTimer
                 sandHand.increment = -sandHand.increment
             }
         }

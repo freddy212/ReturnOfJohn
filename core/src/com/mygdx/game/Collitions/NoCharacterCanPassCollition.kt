@@ -6,18 +6,18 @@ import com.mygdx.game.AbstractClasses.Projectile
 import com.mygdx.game.Interfaces.Character
 import com.mygdx.game.Interfaces.MoveCollition
 
-class NoCharacterCanPassCollition:MoveCollition {
+class NoCharacterCanPassCollition(val gameObject: GameObject) : MoveCollition {
     override var canMoveAfterCollition = false
-    override fun collitionHappened(entity: GameObject, collidedObject: GameObject) {
-        canMoveAfterCollition = !(entity is Character || collidedObject is Character)
+    override fun collitionHappened(collidedObject: GameObject) {
+        canMoveAfterCollition = !(gameObject is Character || collidedObject is Character)
     }
 }
 
-class ProjectileCanPassCollition: MoveCollition {
+class ProjectileCanPassCollition(val gameObject: GameObject): MoveCollition{
     override var canMoveAfterCollition = true
-    override fun collitionHappened(entity: GameObject, collidedObject: GameObject) {
-        canMoveAfterCollition = (entity is Projectile && collidedObject is DefaultCharacter)
-                                ||(entity is DefaultCharacter && collidedObject is Projectile)
+    override fun collitionHappened(collidedObject: GameObject) {
+        canMoveAfterCollition = (gameObject is Projectile && collidedObject is DefaultCharacter)
+                                ||(gameObject is DefaultCharacter && collidedObject is Projectile)
     }
 }
 

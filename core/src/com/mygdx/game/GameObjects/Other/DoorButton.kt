@@ -25,7 +25,7 @@ class DoorButton(initPosition: Vector2, size: Vector2, defaultLocation: DefaultL
     override val texture = DefaultTextureHandler.getTexture("DoorButton.png")
     override val layer = Layer.AIR
     override val polygon = Polygon()
-    override val collition = DoorButtonCollition(doorButtonEvent)
+    override val collition = DoorButtonCollition(doorButtonEvent, this)
 
     init {
         if(direction == Direction.UP){
@@ -43,13 +43,13 @@ class DoorButton(initPosition: Vector2, size: Vector2, defaultLocation: DefaultL
     }
 }
 
-class DoorButtonCollition(val doorButtonEvent: ButtonEvent): MoveCollition {
-    override fun collitionHappened(entity: GameObject, collidedObject: GameObject) {
-        if(entity is Icicle && collidedObject is DoorButton && !collidedObject.activated){
-            collidedObject.activated = true
-            SignalManager.emitSignal(ButtonAcceptedSignal(collidedObject.entityId))
+class DoorButtonCollition(val doorButtonEvent: ButtonEvent, val doorButton: DoorButton): MoveCollition {
+    override fun collitionHappened(collidedObject: GameObject) {
+        if(collidedObject is Icicle && !doorButton.activated){
+            doorButton.activated = true
+            SignalManager.emitSignal(ButtonAcceptedSignal(doorButton.entityId))
             doorButtonEvent.execute()
-            entity.removeFromLocation()
+            collidedObject.removeFromLocation()
         }
     }
 

@@ -73,7 +73,8 @@ fun getIceLandsDungeonLocationFiveObjects(): List<GameObject>{
 
 fun getIceLandsDungeonLocationFourObjects(): List<GameObject>{
     val location4 = LocationManager.findLocation("location4",AreaIdentifier.ICELANDSDUNGEON)
-    val breakableWall = object : GenericGameObject(Vector2(location4.bottomright.x - 300f, location4.bottomleft.y),Vector2(100f,100f),"FireGate.png", Layer.ONGROUND,location4, BreakableCollition()
-    ), SaveStateEntity by DefaultSaveStateHandler() {}
-    return listOf( breakableWall)
+    val breakableWall = object : GenericGameObject(Vector2(location4.bottomright.x - 300f, location4.bottomleft.y),Vector2(100f,100f),"FireGate.png", Layer.ONGROUND,location4), SaveStateEntity by DefaultSaveStateHandler(){}
+    val breakeAbleCollition = BreakableCollition(breakableWall)
+    breakableWall.collition = breakeAbleCollition
+    return listOf(breakableWall)
 }

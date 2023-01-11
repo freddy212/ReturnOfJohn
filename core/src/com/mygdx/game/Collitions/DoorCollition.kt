@@ -22,21 +22,22 @@ class DoorCollition(doorPosition: Vector2,val areaId: AreaIdentifier, val connec
             connection.firstEntrance = Vector2(doorPosition)
         }
     }
-    override fun collitionHappened(entity: GameObject, collidedObject: GameObject) {
+    override fun collitionHappened(collidedObject: GameObject) {
         canMoveAfterCollition = true
-        if(entity is Player && collidedObject is Door)
+        if(collidedObject is Player)
         {
-            if(entity.direction == triggerDirection){
+            if(player.direction == triggerDirection){
                 val playerPosAfter = getPlayerPos(connection,triggerDirection)
                 if(areaId != AreaIdentifier.NOTIMPLEMENTED){
                     val playerPosMiddle = Vector2(playerPosAfter.x + playerSize.x / 2, playerPosAfter.y)
-                    entity.setPosition(playerPosMiddle)
+                    player.setPosition(playerPosMiddle)
                     AreaManager.SetArea(AreaManager.getArea(areaId))
                     canMoveAfterCollition = false
                 }
             }
         }
     }
+
     fun getPlayerPos(connection: DoorConnection,triggerDirection: Direction): Vector2{
         return when(triggerDirection){
             Direction.UP -> (Vector2(connection.secondEntrance.x, connection.secondEntrance.y + playerSize.y / 4))

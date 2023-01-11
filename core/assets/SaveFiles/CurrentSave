@@ -1,12 +1,4 @@
-{"playerXPos":-1506.4204,"playerYPos":378.97192,"areaIdentifier":"DUNGEONAREA","entityId":0}
+{"playerXPos":750.0,"playerYPos":10.0,"areaIdentifier":"FIRELANDS","entityId":0}
 {"signaltype":"REMOVE_OBJECT","entityId":54}
 {"signaltype":"ADD_OBJECT","addMethod":"DOOR1","location":"location1","areaIdentifier":"MAINAREA"}
 {"signaltype":"ADD_OBJECT","addMethod":"DOOR2","location":"location10","areaIdentifier":"WASTELAND"}
-{"signaltype":"BUTTON_ACCEPTED","entityId":22}
-{"signaltype":"BUTTON_ACCEPTED","entityId":23}
-{"signaltype":"REMOVE_OBJECT","entityId":21}
-{"signaltype":"BUTTON_ACCEPTED","entityId":33}
-{"signaltype":"BUTTON_ACCEPTED","entityId":34}
-{"signaltype":"REMOVE_OBJECT","entityId":32}
-{"signaltype":"ABILITY_GAINED","abilityId":"ICECLONE"}
-{"signaltype":"REMOVE_OBJECT","entityId":44}

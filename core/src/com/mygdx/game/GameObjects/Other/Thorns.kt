@@ -13,5 +13,5 @@ class Thorns(Position: Vector2, size: Vector2, defaultLocation: DefaultLocation?
                                                                           SaveStateEntity by DefaultSaveStateHandler() {
     override val texture = DefaultTextureHandler.getTexture("Thorns.png")
     override val layer = Layer.ONGROUND
-    override val collition = ThornsCollition()
+    override val collition = ThornsCollition(this)
 }

@@ -16,8 +16,8 @@ import com.mygdx.game.player
 class CheckKeyCollition(val lockedDoor: LockedDoor): KeyPressedCollition() {
     override val specificButton = Input.Keys.SPACE
 
-    override fun collitionHappened(entity: GameObject, collidedObject: GameObject) {
-        if(entity is Player && collidedObject is KeySensor){
+    override fun collitionHappened(collidedObject: GameObject) {
+        if(collidedObject is Player){
             if(player.inventory.getItemCount(ItemType.KEY) > 0 && player.direction == Direction.UP){
 
                 SignalManager.emitSignal(UseItemsSignal(ItemType.KEY,1))

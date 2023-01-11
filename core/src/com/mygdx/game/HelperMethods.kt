@@ -18,7 +18,6 @@ import com.mygdx.game.Enums.ItemType
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Player
 import com.mygdx.game.GameObjects.Other.Door
 import com.mygdx.game.GameObjects.MoveableEntities.IceClone
-import com.mygdx.game.GameObjects.Other.Tomb
 import com.mygdx.game.Interfaces.*
 import com.mygdx.game.Locations.DefaultLocation
 import com.mygdx.game.Locations.DefaultLocationData
@@ -145,16 +144,15 @@ fun addLocationsToArea(area: Area){
 
 fun handleCollitions(gameObject: GameObject,polygonToCheck: Polygon, objectsToCheck: List<GameObject>):Boolean {
         val collidingObjects = GetCollidingObjects(polygonToCheck ,objectsToCheck - gameObject)
-        val collitions = collidingObjects.map { x -> x.collition }
-        collidingObjects.forEach { x -> x.collition.collitionHappened(gameObject, x);
-                                        gameObject.collition.collitionHappened(gameObject,x)}
+        val collitions: List<BaseCollition> = collidingObjects.map { x -> x.collition }
+        collidingObjects.forEach { x -> x.collition.collitionHappened(gameObject)
+                                        gameObject.collition.collitionHappened(x)}
         return collitions.filterIsInstance<MoveCollition>().all { x -> x.canMoveAfterCollition }
 }
 
 fun handleKeyCollitions(objectsToCheck: List<GameObject>) {
         val collidingObjects = GetCollidingObjects(player.polygon,objectsToCheck)
-        val collitions = collidingObjects.map { x -> x.collition as KeyPressedCollition}
-        collidingObjects.forEach { x -> x.collition.collitionHappened(player, x);}
+        collidingObjects.forEach { x -> x.collition.collitionHappened(player);}
 }
 
 fun handleKeyPressable(objectsToCheck: List<GameObject>){
@@ -174,10 +172,6 @@ fun GameObject.InitSprite(texture: Texture): Sprite{
         sprite.setPosition(initPosition.x,initPosition.y)
         return sprite
 }
-fun GameObject.SetFixedPosition(position: Vector2){
-        sprite.setPosition(500f,500f)
-        polygon.setPosition(sprite.x - polygon.vertices[0],sprite.y - polygon.vertices[1])
-}
 fun GameObject.InitPolygon(sprite: Sprite): Polygon{
         val polygon = RectanglePolygon(sprite.boundingRectangle)
         polygon.setOrigin(sprite.x + sprite.originX, sprite.y + sprite.originY)
@@ -196,11 +190,6 @@ inline fun ConstructObjects(gameobjectFactory: (Position: Vector2, Size: Vector2
                 }
         }
         return objects.toList()
-}
-
-fun constructTombs(defaultLocation: DefaultLocation): List<GameObject>{
-        return ConstructObjects(::Tomb,defaultLocation.bottomleft.x.toInt() + 20, 120, defaultLocation.bottomright.x.toInt(),
-                defaultLocation.bottomleft.y.toInt() + 200, 128, defaultLocation.bottomleft.y.toInt(),defaultLocation)
 }
 
 fun middleOfObject(Position: Vector2,size: Vector2): Vector2{
@@ -275,17 +264,16 @@ fun itemObjectAddToInventory(itemType: ItemType, itemObject: GameObject) {
 
 }
 
-fun HitOppositeDirection(
-        entity: GameObject,
-        fightableEntity: FightableEntity
-) {
-        val character = fightableEntity as DefaultCharacter
+fun GameObject.getOppositeDirection(
+        other: GameObject,
+): Vector2 {
+        val character = this as DefaultCharacter
         val centerPointObject =
-                Vector2(entity.sprite.x + entity.sprite.width / 2, entity.sprite.y + entity.sprite.height / 2)
+                Vector2(other.sprite.x + other.sprite.width / 2, other.sprite.y + other.sprite.height / 2)
         val centerPointPlayer =
                 Vector2(character.sprite.x + character.sprite.width / 2, character.sprite.y + character.sprite.height / 2)
         val oppositeDirection = getOppositeUnitVector(centerPointPlayer, centerPointObject)
-        character.isHit(oppositeDirection)
+        return oppositeDirection
 }
 fun ResetPlayer(playerSaveState: PlayerSaveState){
         LocationManager.ActiveGameObjects.forEach {it.onLocationEnterActions.forEach { it() }}
@@ -319,4 +307,10 @@ fun createDoor(doorData1: DoorData): Door {
         val doorFrom = Door(doorData1.position, doorData1.size, DefaultTextureHandler.getTexture(doorData1.textureName),locationFrom,
                 doorData1.direction,doorCollitionFrom)
         return doorFrom
+}
+
+fun setAggroIfShouldBeAggroed(shouldBeAggroedStrategy: ShouldBeAggroedStrategy, aggroableEntity: AggroableEntity) {
+        if(shouldBeAggroedStrategy.ShouldBeAggroed()){
+                aggroableEntity.setAggroed()
+        }
 }
