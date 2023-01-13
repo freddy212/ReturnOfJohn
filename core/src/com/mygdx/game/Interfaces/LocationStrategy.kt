@@ -8,7 +8,7 @@ import com.mygdx.game.Locations.DefaultLocation
 interface LocationDataStrategy {
     val texture: Texture
     val initialization: (DefaultLocation) -> Unit
-    val collition: BaseCollition
+    val collition: Collition
 
     fun render(batch: PolygonSpriteBatch, sprite: Sprite){
         sprite.draw(batch)

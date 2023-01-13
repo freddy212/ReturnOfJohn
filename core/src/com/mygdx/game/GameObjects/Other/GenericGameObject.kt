@@ -4,9 +4,9 @@ import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.Collitions.CanMoveCollition
 import com.mygdx.game.DefaultTextureHandler
 import com.mygdx.game.Enums.Layer
-import com.mygdx.game.Interfaces.BaseCollition
+import com.mygdx.game.Interfaces.Collition
 import com.mygdx.game.Locations.DefaultLocation
 
-open class GenericGameObject(Position: Vector2, size: Vector2, textureName: String, override val layer: Layer, defaultLocation: DefaultLocation?, override var collition: BaseCollition = CanMoveCollition): GameObject(Position, size,defaultLocation) {
+open class GenericGameObject(Position: Vector2, size: Vector2, textureName: String, override val layer: Layer, defaultLocation: DefaultLocation?, override var collition: Collition = CanMoveCollition): GameObject(Position, size,defaultLocation) {
     override val texture = DefaultTextureHandler.getTexture(textureName)
 }

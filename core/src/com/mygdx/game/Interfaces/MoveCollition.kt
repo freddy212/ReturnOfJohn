@@ -1,5 +1,5 @@
 package com.mygdx.game.Interfaces
 
-interface MoveCollition: BaseCollition {
+interface MoveCollition: Collition {
     val canMoveAfterCollition: Boolean
 }

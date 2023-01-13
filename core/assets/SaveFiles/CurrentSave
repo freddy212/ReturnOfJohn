@@ -1,4 +1,4 @@
-{"playerXPos":750.0,"playerYPos":10.0,"areaIdentifier":"FIRELANDS","entityId":0}
-{"signaltype":"REMOVE_OBJECT","entityId":54}
-{"signaltype":"ADD_OBJECT","addMethod":"DOOR1","location":"location1","areaIdentifier":"MAINAREA"}
-{"signaltype":"ADD_OBJECT","addMethod":"DOOR2","location":"location10","areaIdentifier":"WASTELAND"}
+{"playerXPos":1.6692343,"playerYPos":941.05273,"areaIdentifier":"ICELANDS","entityId":0}
+{"signaltype":"BUTTON_ACCEPTED","entityId":23}
+{"signaltype":"BUTTON_ACCEPTED","entityId":22}
+{"signaltype":"REMOVE_OBJECT","entityId":21}

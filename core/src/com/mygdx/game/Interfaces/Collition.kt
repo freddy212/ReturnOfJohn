@@ -2,7 +2,7 @@ package com.mygdx.game.Interfaces
 
 import com.mygdx.game.AbstractClasses.GameObject
 
-interface BaseCollition {
+interface Collition {
     fun collitionHappened(collidedObject: GameObject)
     fun filterCollitions(gameObjects: List<GameObject>): List<GameObject>{
         return gameObjects
