@@ -20,7 +20,9 @@ open class DefaultAreaEntranceCollition(): AreaEntranceCollition{
     }
 
     override fun collitionHappened(collidedObject: GameObject) {
-
+        if(!insideCollition){
+            movedInsideAction()
+        }
     }
 
 }

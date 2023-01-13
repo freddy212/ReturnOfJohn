@@ -15,18 +15,16 @@ class IceCloneAbility(): CharacterAbility(){
     override val texture = DefaultTextureHandler.getTexture("man.png")
 
     override val cooldownTimer = DefaultTimer(1f)
+    val iceClone = IceClone(
+        player.currentMiddle,
+        Vector2(35f, 65f),
+        null
+    )
 
     override fun activeAction() {
-        val iceClone = IceClone(
-            player.currentMiddle,
-            Vector2(35f, 65f),
-            LocationManager.newDefaultLocation
-        )
-        AreaManager.getAllGameObjects().forEach {
-            if (it is IceClone) {
-                it.removeFromLocation()
-            }
-        }
-        iceClone.defaultLocation!!.addGameObject(iceClone)
+        iceClone.removeFromLocation()
+        iceClone.addToLocation(player.defaultLocation!!)
+        iceClone.setPosition(player.currentMiddle)
+        iceClone.move(Vector2(0f,0f))
     }
 }

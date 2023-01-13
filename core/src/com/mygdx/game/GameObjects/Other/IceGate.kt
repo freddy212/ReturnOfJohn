@@ -15,18 +15,13 @@ class IceGate(initPosition: Vector2, size: Vector2, defaultLocation: DefaultLoca
     override val texture = DefaultTextureHandler.getTexture("IceGate.png")
     override val layer = Layer.ONGROUND
     override val collition = IllegalMoveCollition
-    private var openedHalfWay = false
 
     // UGLY, BUT LAZY
     override fun buttonPressed(){
         sprite.texture = DefaultTextureHandler.getTexture("IceGateHalf.png")
-        openedHalfWay = true
     }
 
     override fun buttonReleased(){
-        if(!openedHalfWay){
-            sprite.texture = DefaultTextureHandler.getTexture("IceGate.png")
-        }
-        openedHalfWay = false
+        sprite.texture = DefaultTextureHandler.getTexture("IceGate.png")
     }
 }

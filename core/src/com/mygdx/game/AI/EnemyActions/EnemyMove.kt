@@ -19,8 +19,6 @@ class EnemyMove(private val distanceToStop: Float, private val directionFunction
     override fun condition(): Boolean {
         val distanceBetween =  distance(Vector2(player.sprite.x, player.sprite.y), Vector2(enemy.sprite.x,enemy.sprite.y))
         return  distanceBetween >= distanceToStop
-        /*val objectsColliding =  GetCollidingObjects(enemy.polygon,LocationManager.EveryFrameCollitionGameObjects)
-        return objectsColliding.map{it.collition}.any{it is DOTCollition}*/
     }
 
 }

@@ -30,9 +30,7 @@ class DOTCollition: DefaultAreaEntranceCollition() {
 
     override fun collitionHappened(collidedObject: GameObject) {
         if(collidedObject is Player){
-            if(!insideCollition){
-                movedInsideAction()
-            }
+            super.collitionHappened(collidedObject)
         }
     }
 
