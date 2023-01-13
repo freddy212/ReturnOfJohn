@@ -15,7 +15,6 @@ class LocationManager {
         lateinit var activeDefaultLocations: Set<DefaultLocation>
         lateinit var MoveCollitionGameObjects: List<GameObject>
         lateinit var ButtonCollitionGameObjects: List<GameObject>
-        lateinit var EveryFrameCollitionGameObjects: List<GameObject>
         lateinit var newDefaultLocation: DefaultLocation
         var  ActiveGameObjects: List<GameObject>
         init {
@@ -37,7 +36,6 @@ class LocationManager {
             ActiveGameObjects = activeDefaultLocations.flatMap { x -> x.gameObjects } + activeDefaultLocations
             MoveCollitionGameObjects = ActiveGameObjects.filter{x -> x.collition is MoveCollition && x.shouldCollide}
             ButtonCollitionGameObjects = ActiveGameObjects.filter { x -> x.collition is KeyPressedCollition && x.shouldCollide }
-            EveryFrameCollitionGameObjects = ActiveGameObjects.filter { x -> x.collition is EveryFrameCollition && x.shouldCollide }
             //Can be optimized at some point
         }
         fun changeLocation(){

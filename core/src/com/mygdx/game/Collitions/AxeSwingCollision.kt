@@ -6,9 +6,23 @@ import com.mygdx.game.Enums.ItemType
 import com.mygdx.game.GameObjects.Other.Axe
 import com.mygdx.game.GameObjects.ItemObjects.GenericInventoryItemObject
 import com.mygdx.game.GameObjects.MoveableEntities.Projectiles.SmallBoulder
-import com.mygdx.game.Interfaces.EveryFrameCollition
+import com.mygdx.game.Interfaces.AreaEntranceCollition
 
-class AxeSwingCollision(val axe: Axe): EveryFrameCollition {
+class AxeSwingCollision(val axe: Axe): AreaEntranceCollition {
+    override var insideCollition: Boolean
+        get() = TODO("Not yet implemented")
+        set(value) {}
+
+    override fun movedOutsideAction() {
+        TODO("Not yet implemented")
+    }
+
+    override fun movedInsideAction() {
+        TODO("Not yet implemented")
+    }
+
+    override val canMoveAfterCollition = true
+
     override fun collitionHappened(collidedObject: GameObject) {
         if(collidedObject is SmallBoulder){
             collidedObject.defaultLocation!!.removeGameObject(collidedObject)

@@ -2,6 +2,7 @@ package com.mygdx.game
 
 import com.badlogic.gdx.ApplicationAdapter
 import com.badlogic.gdx.Gdx
+import com.badlogic.gdx.graphics.FPSLogger
 import com.badlogic.gdx.graphics.GL20
 import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch
@@ -29,6 +30,7 @@ val camera: OrthographicCamera = OrthographicCamera()
 lateinit var player: Player
 lateinit var playerSize: Vector2
 lateinit var playerSaveState: PlayerSaveState
+val logger = FPSLogger()
 class MainGame : ApplicationAdapter() {
     lateinit internal var batch: PolygonSpriteBatch
     lateinit var firstpoly: RectanglePolygon
@@ -105,6 +107,7 @@ class MainGame : ApplicationAdapter() {
         drawrects()
         EventManager.executeEvents()
         UIRendererManager.render()
+        logger.log()
         SignalManager.useSignals()
         camera.position.set(player.sprite.x, player.sprite.y,0f)
         camera.update()

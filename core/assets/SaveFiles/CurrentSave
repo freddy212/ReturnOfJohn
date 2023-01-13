@@ -1,4 +1,5 @@
-{"playerXPos":1.6692343,"playerYPos":941.05273,"areaIdentifier":"ICELANDS","entityId":0}
+{"playerXPos":750.0,"playerYPos":10.0,"areaIdentifier":"ICELANDS","entityId":0}
 {"signaltype":"BUTTON_ACCEPTED","entityId":23}
 {"signaltype":"BUTTON_ACCEPTED","entityId":22}
 {"signaltype":"REMOVE_OBJECT","entityId":21}
+{"signaltype":"BUTTON_ACCEPTED","entityId":33}

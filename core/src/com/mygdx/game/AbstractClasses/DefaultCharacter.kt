@@ -61,7 +61,6 @@ abstract class DefaultCharacter(Position: Vector2, size: Vector2, location: Defa
         if(characterState == CharacterState.STUNNED){
             handleStunned(launchUnitVector)
         }
-        handleCollitions(this, this.polygon, LocationManager.EveryFrameCollitionGameObjects)
         super.frameTask()
     }
     override fun isHit(other: GameObject){

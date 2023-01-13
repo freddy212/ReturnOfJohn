@@ -8,7 +8,7 @@ import com.mygdx.game.DefaultTextureHandler
 import com.mygdx.game.Enums.Layer
 import com.mygdx.game.Locations.DefaultLocation
 import com.mygdx.game.Managers.LocationManager
-import com.mygdx.game.handleCollitions
+import com.mygdx.game.handleMoveCollitions
 import com.mygdx.game.rotate
 
 class Axe(Position: Vector2, size: Vector2, defaultLocation: DefaultLocation): GameObject(Position,size,defaultLocation) {
@@ -28,6 +28,6 @@ class Axe(Position: Vector2, size: Vector2, defaultLocation: DefaultLocation): G
 
     override fun frameTask() {
         super.frameTask()
-        handleCollitions(this, this.polygon, LocationManager.ActiveGameObjects)
+        handleMoveCollitions(this, this.polygon, LocationManager.ActiveGameObjects)
         }
     }

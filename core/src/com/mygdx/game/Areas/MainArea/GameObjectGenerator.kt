@@ -57,8 +57,7 @@ fun getWorldTreeObjects(): List<GameObject>{
 }
 fun getIceLandsGateWayLocation():List<GameObject>{
     val location10 = LocationManager.findLocation("location10", AreaIdentifier.MAINAREA)
-    val walkableTerrain = GenericGameObject(location10.bottomleft +  Vector2(location10.width / 2 - 150f,0f), Vector2(300f,location10.height ),
-        "MainB.jpg", Layer.ONGROUND, location10, RemoveDotDamageCollition)
+    val walkableTerrain = WalkableTerrain(location10.bottomleft +  Vector2(location10.width / 2 - 150f,0f), Vector2(300f,location10.height ), location10)
     val iceGrounds = ConstructObjects(::IceObject,walkableTerrain.bottomleft.x.toInt(),100,walkableTerrain.bottomleft.x.toInt() + 199,
         walkableTerrain.bottomleft.y.toInt() + 400,100,walkableTerrain.bottomleft.y.toInt(),location10)
 

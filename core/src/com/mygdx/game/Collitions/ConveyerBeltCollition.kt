@@ -6,12 +6,13 @@ import com.mygdx.game.Enums.Direction
 import com.mygdx.game.Enums.getDirectionUnitVector
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Player
 import com.mygdx.game.Interfaces.Event
-import com.mygdx.game.Interfaces.EveryFrameCollition
+import com.mygdx.game.Interfaces.AreaEntranceCollition
+import com.mygdx.game.Interfaces.DefaultAreaEntranceCollition
 import com.mygdx.game.Managers.EventManager
 import com.mygdx.game.player
 import com.mygdx.game.times
 
-class ConveyerBeltCollition(val direction: Direction): EveryFrameCollition {
+class ConveyerBeltCollition(val direction: Direction): AreaEntranceCollition by DefaultAreaEntranceCollition() {
     object ResetModifier : Event {
         override fun execute() {
             player.moveModifier = Vector2(0f,0f)
