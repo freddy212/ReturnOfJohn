@@ -21,7 +21,7 @@ class MainAreaInitializer: AreaInitializer {
         val location2 = addLocationRelative(location1, horizontalHallway, InsertDirection.LEFT, area, InsertDirection.MIDDLE)
         val location3 = addLocationRelative(location1, verticalHallway, InsertDirection.UP, area, InsertDirection.MIDDLE)
         val location4 = addLocationRelative(location1, horizontalHallway, InsertDirection.RIGHT, area, InsertDirection.MIDDLE, ::getLocationFourObjects)
-        val location5 = addLocationRelative(location1, verticalHallway, InsertDirection.DOWN, area, InsertDirection.MIDDLE, ::getWastelandGatewayLocation, DefaultLocationData(DefaultTextureHandler.getTexture("wasteland.jpg")))
+        val location5 = addLocationRelative(location1, verticalHallway, InsertDirection.DOWN, area, InsertDirection.MIDDLE, ::getWastelandGatewayLocation, DefaultLocationData("wasteland.jpg"))
         val location6 = addLocationRelative(location2, verticalHallway, InsertDirection.UP, area, InsertDirection.MIDDLE)
         val graveyardLoc = addLocationRelative(location4, Vector2(1000f, 2300f), InsertDirection.RIGHT, area, InsertDirection.MIDDLE, ::getLocationGraveyard)
         val worldTreeLoc = addLocationRelative(location6, Vector2(1000f, 1000f), InsertDirection.UP, area, InsertDirection.MIDDLE, ::getWorldTreeObjects)
@@ -34,7 +34,7 @@ class MainAreaInitializer: AreaInitializer {
         val location9 = addLocationRelative(defaultLocation2, Vector2(2000f, 1500f), InsertDirection.LEFT, area, InsertDirection.MIDDLE,::getFireLandsGateWayLocation,DamageLocationData())
     }
     private fun createIceLands(defaultLocation3: DefaultLocation, area: Area){
-        val iceLandsMainGround = DefaultTextureHandler.getTexture("IceGround.png")
+        val iceLandsMainGround = "IceGround.png"
         val location10 = addLocationRelative(defaultLocation3, Vector2(1500f, 1100f), InsertDirection.UP, area, InsertDirection.MIDDLE,::getIceLandsGateWayLocation,DamageLocationData(iceLandsMainGround))
     }
 }

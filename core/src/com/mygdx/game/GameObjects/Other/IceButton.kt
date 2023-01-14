@@ -18,21 +18,25 @@ import com.mygdx.game.Saving.SaveStateEntity
 import com.mygdx.game.player
 
 
-
-class IceButton(Position: Vector2, size: Vector2, defaultLocation: DefaultLocation?, val iceGate: ButtonGate, val iceButtonEvent: ButtonEvent) :
-    GameObject(Position, size, defaultLocation), Button , SaveStateEntity by DefaultSaveStateHandler(){
+class IceButton(
+    Position: Vector2,
+    size: Vector2,
+    defaultLocation: DefaultLocation?,
+    val iceGate: ButtonGate,
+    val iceButtonEvent: ButtonEvent
+) :
+    GameObject(Position, size, defaultLocation), Button, SaveStateEntity by DefaultSaveStateHandler() {
     override val texture = DefaultTextureHandler.getTexture("GateButton.png")
     override val layer = Layer.ONGROUND
     override var activated = false
     override val collition = IceButtonCollition(this, iceGate, iceButtonEvent)
-    var beforeActivated = false
 
     init {
         iceButtonEvent.addButton(this)
     }
 
     override fun render(batch: PolygonSpriteBatch) {
-        sprite.color = if(activated) Color.GREEN else Color.RED
+        sprite.color = if (activated) Color.GREEN else Color.RED
         super.render(batch)
     }
 
@@ -40,27 +44,35 @@ class IceButton(Position: Vector2, size: Vector2, defaultLocation: DefaultLocati
     //OPTIMIZING TIME
 }
 
-class IceButtonCollition(val iceButton: IceButton, val gate: ButtonGate, val event: ButtonEvent): DefaultAreaEntranceCollition(){
+class IceButtonCollition(val iceButton: IceButton, val gate: ButtonGate, val event: ButtonEvent) :
+    DefaultAreaEntranceCollition() {
     override val canMoveAfterCollition = true
 
     override fun collitionHappened(collidedObject: GameObject) {
-        if(collidedObject is Player || collidedObject is IceClone){
+        if (collidedObject is Player || collidedObject is IceClone) {
             super.collitionHappened(collidedObject)
         }
     }
 
     override fun movedInsideAction() {
-        super.movedInsideAction()
-        iceButton.activated = true
-        gate.buttonPressed()
-        event.execute()
+        if (!event.emitWhenActivated || !event.isAllButtonsActivated()) {
+            iceButton.activated = true
+            gate.buttonPressed()
+            event.execute()
+        }
+    }
+
+    override fun movedOutside() {
+        val collidingObjects = GetCollidingObjects(iceButton.polygon, LocationManager.MoveCollitionGameObjects)
+        val iceCloneDoesNotExist = collidingObjects.filterIsInstance<IceClone>().isEmpty()
+        if (iceCloneDoesNotExist && insideCollition) {
+            insideCollition = false
+            movedOutsideAction()
+        }
     }
 
     override fun movedOutsideAction() {
-        val collidingObjects = GetCollidingObjects(iceButton.polygon, LocationManager.MoveCollitionGameObjects)
-        val iceCloneDoesNotExist = collidingObjects.filterIsInstance<IceClone>().isEmpty()
-        if(iceCloneDoesNotExist){
-            super.movedOutsideAction()
+        if (!event.emitWhenActivated || !event.isAllButtonsActivated()) {
             iceButton.activated = false
             gate.buttonReleased()
         }

@@ -21,12 +21,11 @@ import getWastelandLocationThreeObjects
 class WastelandAreaInitializer: AreaInitializer {
     override fun initializeArea(): Area {
         val area = DefaultArea(AreaIdentifier.WASTELAND)
-        val wasteLandTexture = DefaultTextureHandler.getTexture("wasteland.jpg")
         val spikeTexture = DefaultTextureHandler.getTexture("Spike.png")
-        val wastelandLocationData =  DefaultLocationData(wasteLandTexture)
-        val wastelandDamageLocation = RepeatedTextureLocationData(wasteLandTexture, spikeTexture)
+        val wastelandLocationData =  DefaultLocationData("wasteland.jpg")
+        val wastelandDamageLocation = RepeatedTextureLocationData("wasteland.jpg", spikeTexture)
         val location1 = DefaultLocation(Vector2(1024f, 1024f), Vector2(0f, 0f),::getWastelandLocationOneObjects,
-            DefaultLocationData(DefaultTextureHandler.getTexture("WastelandLocation1.png")))
+            DefaultLocationData("WastelandLocation1.png"))
         addLocation(location1, area)
         val location2 = addLocationRelative(location1,Vector2(1000f, 300f), InsertDirection.RIGHT,area,InsertDirection.MIDDLE,{ listOf()}, wastelandLocationData)
         val location3 = addLocationRelative(location2,Vector2(700f, 700f), InsertDirection.RIGHT,area,InsertDirection.MIDDLE,::getWastelandLocationThreeObjects, wastelandLocationData)

@@ -3,12 +3,17 @@ package com.mygdx.game.Locations
 import com.badlogic.gdx.graphics.Texture
 import com.mygdx.game.Collitions.DOTCollition
 import com.mygdx.game.DefaultTextureHandler
+import com.mygdx.game.Enums.Element
 import com.mygdx.game.GameObjects.Other.Wall
 import com.mygdx.game.Interfaces.LocationDataStrategy
 
-open class DamageLocationData(textureGiven: Texture = DefaultTextureHandler.getTexture("Lava.jpg"),
-): LocationDataStrategy {
-    override val texture = textureGiven
+open class DamageLocationData(textureGiven: String = "Lava.jpg"): LocationDataStrategy {
+    override val texture = DefaultTextureHandler.getTexture(textureGiven)
+    val element: Element = when(textureGiven){
+        "Lava.jpg" -> Element.FIRE
+        "IceGround.png" -> Element.ICE
+        else -> Element.EARTH
+    }
     override val initialization = {
             x: DefaultLocation -> x.addGameObject(Wall(x.initPosition, x.size, x))
     }

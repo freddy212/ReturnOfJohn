@@ -3,6 +3,7 @@ package com.mygdx.game.Interfaces
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch
 import com.badlogic.gdx.graphics.g2d.Sprite
+import com.mygdx.game.Enums.Element
 import com.mygdx.game.Locations.DefaultLocation
 
 interface LocationDataStrategy {

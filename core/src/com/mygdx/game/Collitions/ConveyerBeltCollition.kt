@@ -12,24 +12,26 @@ import com.mygdx.game.Managers.EventManager
 import com.mygdx.game.player
 import com.mygdx.game.times
 
-class ConveyerBeltCollition(val direction: Direction): AreaEntranceCollition by DefaultAreaEntranceCollition() {
-    object ResetModifier : Event {
-        override fun execute() {
-            player.moveModifier = Vector2(0f,0f)
-        }
-
-        override fun runOnce(): Boolean {
-            return true
+class HandleConveyerBeltEvent(val direction: Direction) : Event {
+    override fun execute() {
+        player.moveModifier = Vector2(getDirectionUnitVector(direction) * player.baseSpeed)
+        if (!player.hasMovedThisFrame) {
+            player.move(Vector2(0f, 0f))
+            player.setCharacterRotation(getDirectionUnitVector(direction))
         }
     }
-    override fun collitionHappened(collidedObject: GameObject) {
-        if(collidedObject is Player){
-            player.moveModifier = Vector2(getDirectionUnitVector(direction) * player.baseSpeed)
-            if(!player.hasMovedThisFrame){
-                player.move(Vector2(0f,0f))
-                player.setCharacterRotation(getDirectionUnitVector(direction))
-            }
-            EventManager.eventManager.add(ResetModifier)
-        }
+
+}
+
+class ConveyerBeltCollition(val direction: Direction) : DefaultAreaEntranceCollition() {
+    val handleConveyerBeltEvent = HandleConveyerBeltEvent(direction)
+
+    override fun movedInsideAction() {
+        EventManager.eventManager.add(handleConveyerBeltEvent)
+    }
+
+    override fun movedOutsideAction() {
+        EventManager.eventManager.remove(handleConveyerBeltEvent)
+        player.moveModifier = Vector2(0f,0f)
     }
 }

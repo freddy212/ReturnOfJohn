@@ -6,8 +6,8 @@ import com.mygdx.game.DefaultTextureHandler
 import com.mygdx.game.GameObjects.Other.Wall
 import com.mygdx.game.Interfaces.LocationDataStrategy
 
-class DefaultLocationData(textureGiven: Texture = DefaultTextureHandler.getTexture("MainB.jpg")): LocationDataStrategy {
-    override val texture = textureGiven
+class DefaultLocationData(textureGivenName: String = "MainB.jpg"):  LocationDataStrategy {
+    override val texture = DefaultTextureHandler.getTexture(textureGivenName)
     override val initialization = {
         x: DefaultLocation -> x.addGameObject(Wall(x.initPosition, x.size, x))
     }

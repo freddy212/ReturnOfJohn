@@ -7,7 +7,7 @@ import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.DefaultTextureHandler
 import com.mygdx.game.renderRepeatedTexture
 
-class RepeatedTextureLocationData(texture: Texture, val repeatedTexture: Texture): DamageLocationData(texture) {
+class RepeatedTextureLocationData(val baseTextureName: String, val repeatedTexture: Texture): DamageLocationData(baseTextureName) {
 
     override fun render(batch: PolygonSpriteBatch, sprite: Sprite) {
         super.render(batch, sprite)

@@ -4,25 +4,30 @@ import com.mygdx.game.AbstractClasses.GameObject
 
 interface AreaEntranceCollition: MoveCollition{
     var insideCollition: Boolean
-    fun movedOutsideAction()
+    fun movedInside()
+    fun movedOutside()
     fun movedInsideAction()
+    fun movedOutsideAction()
 }
 
-open class DefaultAreaEntranceCollition(): AreaEntranceCollition{
+abstract class DefaultAreaEntranceCollition(): AreaEntranceCollition{
     override val canMoveAfterCollition = true
     override var insideCollition = false
-    override fun movedOutsideAction() {
-        insideCollition = false
-    }
 
-    override fun movedInsideAction() {
-        insideCollition = true
+    override fun movedOutside(){
+        if(insideCollition){
+            insideCollition = false
+            movedOutsideAction()
+        }
     }
-
-    override fun collitionHappened(collidedObject: GameObject) {
+    override fun movedInside(){
         if(!insideCollition){
+            insideCollition = true
             movedInsideAction()
         }
     }
 
+    override fun collitionHappened(collidedObject: GameObject) {
+            movedInside()
+    }
 }

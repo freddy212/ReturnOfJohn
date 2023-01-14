@@ -13,12 +13,16 @@ class AxeSwingCollision(val axe: Axe): AreaEntranceCollition {
         get() = TODO("Not yet implemented")
         set(value) {}
 
+    override fun movedInside() {
+    }
+
+    override fun movedOutside() {
+    }
+
     override fun movedOutsideAction() {
-        TODO("Not yet implemented")
     }
 
     override fun movedInsideAction() {
-        TODO("Not yet implemented")
     }
 
     override val canMoveAfterCollition = true

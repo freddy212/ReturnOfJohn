@@ -8,34 +8,33 @@ import com.mygdx.game.Interfaces.Event
 import com.mygdx.game.Managers.EventManager
 import com.mygdx.game.player
 
-class InsideAreaEvent(val areaEntranceCollition: AreaEntranceCollition): Event{
+class InsideAreaEvent() : Event {
     override fun execute() {
-        if(areaEntranceCollition.insideCollition){
-            player.loseHealth(0.5f, false)
-        } else{
-            EventManager.eventManager.remove(this)
-        }
+        player.loseHealth(0.5f, false)
     }
 
 }
 
-class DOTCollition: DefaultAreaEntranceCollition() {
+class DOTCollition : DefaultAreaEntranceCollition() {
 
-    val insideAreaEvent = InsideAreaEvent(this)
+    val insideAreaEvent = InsideAreaEvent()
 
     override fun movedInsideAction() {
-        super.movedInsideAction()
         EventManager.eventManager.add(insideAreaEvent)
     }
 
+    override fun movedOutsideAction() {
+        EventManager.eventManager.remove(insideAreaEvent)
+    }
+
     override fun collitionHappened(collidedObject: GameObject) {
-        if(collidedObject is Player){
+        if (collidedObject is Player) {
             super.collitionHappened(collidedObject)
         }
     }
 
     override fun filterCollitions(gameObjects: List<GameObject>): List<GameObject> {
-        val dotCollitionObjects = gameObjects.filter{it.collition is DOTCollition}
+        val dotCollitionObjects = gameObjects.filter { it.collition is DOTCollition }
         return gameObjects.minus(dotCollitionObjects.toSet()) + dotCollitionObjects.take(1)
     }
 }

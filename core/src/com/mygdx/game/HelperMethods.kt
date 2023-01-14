@@ -177,7 +177,7 @@ fun handleMoveCollitions(gameObject: GameObject, polygonToCheck: Polygon, object
     // Handle moving object away from previous colliding object.
     val oldCollitions = gameObject.collidingObjects.minus(collidingObjects.toSet()).map { it.collition }
     oldCollitions.filterIsInstance<AreaEntranceCollition>().forEach {
-        if(it.insideCollition) {it.movedOutsideAction()}
+        if(it.insideCollition) {it.movedOutside()}
     }
     gameObject.collidingObjects = collidingObjects
 
@@ -335,7 +335,7 @@ fun ResetPlayer(playerSaveState: PlayerSaveState) {
         it.onLocationEnterActions.forEach { it() }
         val collition = it.collition
         if (collition is AreaEntranceCollition) {
-            collition.movedOutsideAction()
+            collition.movedOutside()
         }
     }
     player.setPosition(Vector2(playerSaveState.playerXPos, playerSaveState.playerYPos))
@@ -370,19 +370,19 @@ fun generateEnemyProjectile(
     )
 }
 
-fun createDoor(doorData1: DoorData): Door {
-    val locationFrom = LocationManager.findLocation(doorData1.location, doorData1.areaFrom)
+fun createDoor(doorData: DoorData): Door {
+    val locationFrom = LocationManager.findLocation(doorData.locationFrom, doorData.areaFrom)
 
-    val doorConnection = doorConnectionMap.getOrPut(doorData1.connectionKey, { DoorConnection() })
+    val doorConnection = doorConnectionMap.getOrPut(doorData.connectionKey, { DoorConnection() })
 
     val doorCollitionFrom = DoorCollition(
-        doorData1.position,
-        doorData1.areaTo, doorConnection,
-        doorData1.direction
+        doorData.position,
+        doorData.areaTo, doorConnection,
+        doorData.direction
     )
     val doorFrom = Door(
-        doorData1.position, doorData1.size, DefaultTextureHandler.getTexture(doorData1.textureName), locationFrom,
-        doorData1.direction, doorCollitionFrom
+        doorData.position, doorData.size, DefaultTextureHandler.getTexture(doorData.textureName), locationFrom,
+        doorData.direction, doorCollitionFrom
     )
     return doorFrom
 }

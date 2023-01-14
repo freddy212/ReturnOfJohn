@@ -15,7 +15,7 @@ class ShopAreaInitializer():AreaInitializer {
         val area = DefaultArea(AreaIdentifier.SHOP)
         val location1 =
             DefaultLocation(Vector2(600f, 600f), Vector2(0f, 0f), ::getShopObjects, DefaultLocationData(
-                DefaultTextureHandler.getTexture("HouseFloor.jpg")))
+                "HouseFloor.jpg"))
         addLocation(location1, area)
         return area
     }

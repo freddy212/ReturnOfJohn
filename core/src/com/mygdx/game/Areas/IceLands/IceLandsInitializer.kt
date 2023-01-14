@@ -13,7 +13,7 @@ import com.mygdx.game.Locations.DefaultLocationData
 
 class IceLandsInitializer: AreaInitializer {
     override fun initializeArea(): Area {
-        val iceTexture = DefaultTextureHandler.getTexture("IceGround.png")
+        val iceTexture = "IceGround.png"
         val area = DefaultArea(AreaIdentifier.ICELANDS)
         val location1 = DefaultLocation(
             Vector2(1500f, 1500f), Vector2(0f, 0f), ::getIceLandsLocationOneObjects, DamageLocationData(iceTexture)
@@ -38,7 +38,7 @@ class IceLandsInitializer: AreaInitializer {
         )
         location7.addAdjacentLocation(location5)
         val location8 = addLocationRelative(location1, Vector2(800f, 300f), InsertDirection.LEFT, area, InsertDirection.MIDDLE, { listOf()}, DefaultLocationData(), Vector2(0f,150f))
-        val location9 = addLocationRelative(location8, Vector2(300f, 800f), InsertDirection.UP, area, InsertDirection.LEFT, ::getIceLandsLocationNineObjects)
+        val location9 = addLocationRelative(location8, Vector2(300f, 1200f), InsertDirection.UP, area, InsertDirection.LEFT, ::getIceLandsLocationNineObjects)
         return area
         //addLocationsToArea(area)
 
