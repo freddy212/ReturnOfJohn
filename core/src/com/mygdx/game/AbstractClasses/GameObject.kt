@@ -7,9 +7,7 @@ import com.badlogic.gdx.math.Polygon
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.*
 import com.mygdx.game.Collitions.CanMoveCollition
-import com.mygdx.game.Interfaces.Collition
-import com.mygdx.game.Interfaces.ObjectProperty
-import com.mygdx.game.Interfaces.Renderable
+import com.mygdx.game.Interfaces.*
 import com.mygdx.game.Locations.DefaultLocation
 import com.mygdx.game.ObjectProperties.ROJParticleObject
 import com.mygdx.game.Utils.RenderGraph.Companion.addToSceneGraph
@@ -50,6 +48,7 @@ abstract class GameObject  (val initPosition: Vector2, val size: Vector2, var de
     val onLocationEnterActions: MutableList<()-> Unit> = mutableListOf({})
     val onLocationExitActions: MutableList<(newLocation: DefaultLocation)->Unit> = mutableListOf({})
     val onRemoveAction: MutableList<()->Unit> = mutableListOf({})
+    open val collitionMask: CollitionMask = DefaultCollitionMask()
     constructor(Position: Vector2, size: Vector2): this(Position,size,null)
 
     open fun removeFromLocation(){
