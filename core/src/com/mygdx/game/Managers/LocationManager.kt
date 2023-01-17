@@ -33,7 +33,7 @@ class LocationManager {
                 changeLocation()
                 savePlayerStates()
             }
-            ActiveGameObjects = activeDefaultLocations.flatMap { x -> x.gameObjects } + activeDefaultLocations
+            ActiveGameObjects = activeDefaultLocations.flatMap { x -> x.gameObjects.List } + activeDefaultLocations
             MoveCollitionGameObjects = ActiveGameObjects.filter{x -> x.collition is MoveCollition && x.shouldCollide}
             ButtonCollitionGameObjects = ActiveGameObjects.filter { x -> x.collition is KeyPressedCollition && x.shouldCollide }
             //Can be optimized at some point
@@ -44,7 +44,7 @@ class LocationManager {
             oldDefaultLocation = newDefaultLocation
             activeDefaultLocations = (setOf(oldDefaultLocation) + oldDefaultLocation.adjacentDefaultLocations)
             val oldActiveGameObjects = ActiveGameObjects
-            ActiveGameObjects = activeDefaultLocations.flatMap { x -> x.gameObjects } + activeDefaultLocations
+            ActiveGameObjects = activeDefaultLocations.flatMap { x -> x.gameObjects.List } + activeDefaultLocations
             val newGameObjects = ActiveGameObjects - oldActiveGameObjects.toSet()
             val oldGameObjects = oldActiveGameObjects - ActiveGameObjects.toSet()
             newGameObjects.forEach{it.onLocationEnterActions.forEach { it() }}

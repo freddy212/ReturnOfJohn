@@ -4,6 +4,8 @@ import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Player
 import com.mygdx.game.Interfaces.MovementStrategy
 import com.mygdx.game.Locations.DefaultLocation
+import com.mygdx.game.Managers.LocationManager
+import com.mygdx.game.handleMoveCollitions
 import com.mygdx.game.plus
 import com.mygdx.game.times
 
@@ -23,6 +25,10 @@ abstract class MoveableObject(Position: Vector2, size: Vector2, defaultLocation:
         if(canMove){
             val nextIncrement = unitVectorDirection * this.getCurrentSpeed()
             val moveSuccessfull = movementStrategy.moveEntity(this,nextIncrement + moveModifier)
+            properties.List.forEach {
+                it.polygon.setPosition(polygon.x, polygon.y)
+                handleMoveCollitions(it, it.polygon, LocationManager.MoveCollitionGameObjects)
+            }
             return moveSuccessfull
         }else{
             return false

@@ -12,12 +12,12 @@ class ItemTypeAbilityTest : TestGame() {
     @Test
     fun TestWaterBall() {
         val location = LocationManager.newDefaultLocation
-        Assertions.assertEquals(1, location.gameObjects.size)
+        Assertions.assertEquals(1, location.gameObjects.List.size)
         itemAbility.tryUseAction()
-        Assertions.assertEquals(2, location.gameObjects.size)
-        Assertions.assertTrue(location.gameObjects[1] is WaterBall)
+        Assertions.assertEquals(2, location.gameObjects.List.size)
+        Assertions.assertTrue(location.gameObjects.List[1] is WaterBall)
         itemAbility.tryUseAction()
-        Assertions.assertEquals(2, location.gameObjects.size)
-        Assertions.assertTrue(location.gameObjects[1] is WaterBall)
+        Assertions.assertEquals(2, location.gameObjects.List.size)
+        Assertions.assertTrue(location.gameObjects.List[1] is WaterBall)
     }
 }

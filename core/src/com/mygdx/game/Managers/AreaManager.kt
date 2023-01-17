@@ -19,7 +19,7 @@ class AreaManager{
             return areaManager.List
         }
         fun getAllGameObjects(): List<GameObject>{
-            return getAllAreas().flatMap {it.defaultLocations}.flatMap {it.gameObjects}
+            return getAllAreas().flatMap {it.defaultLocations}.flatMap {it.gameObjects.List}
         }
         fun SetArea(area: Area){
             activeArea = area

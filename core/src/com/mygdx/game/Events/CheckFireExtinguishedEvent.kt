@@ -10,7 +10,7 @@ class CheckFireExtinguishedEvent(val npc: NPC) : Event {
     override fun execute() {
         EndConversationEvent(npc).execute()
 
-        val listOfProperties:List<ObjectProperty> = npc.defaultLocation!!.gameObjects.flatMap { it.properties.List }
+        val listOfProperties:List<ObjectProperty> = npc.defaultLocation!!.gameObjects.List.flatMap { it.properties.List }
         val fire = listOfProperties.find { it is Fire } as Fire?
         /*if(fire!= null){
             StartConversationEvent("firenotfixed",npc).execute()

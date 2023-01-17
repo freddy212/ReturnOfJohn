@@ -107,7 +107,7 @@ class MainGame : ApplicationAdapter() {
         drawrects()
         EventManager.executeEvents()
         UIRendererManager.render()
-        logger.log()
+        //logger.log()
         SignalManager.useSignals()
         camera.position.set(player.sprite.x, player.sprite.y,0f)
         camera.update()
@@ -115,7 +115,8 @@ class MainGame : ApplicationAdapter() {
 
     fun drawrects(){
         val gameObjects = LocationManager.ActiveGameObjects
-        gameObjects.forEach{x -> drawPolygonShape(x.polygon,shapeRenderer)}
+        gameObjects.forEach{x -> drawPolygonShape(x.polygon,shapeRenderer)
+                            x.properties.List.forEach { drawPolygonShape(it.polygon,shapeRenderer)}}
     }
 
     override fun dispose() {

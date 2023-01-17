@@ -11,6 +11,7 @@ import com.mygdx.game.Interfaces.Collition
 import com.mygdx.game.Interfaces.ObjectProperty
 import com.mygdx.game.Interfaces.Renderable
 import com.mygdx.game.Locations.DefaultLocation
+import com.mygdx.game.ObjectProperties.ROJParticleObject
 import com.mygdx.game.Utils.RenderGraph.Companion.addToSceneGraph
 import com.mygdx.game.Utils.ResourceList
 
@@ -36,7 +37,7 @@ abstract class GameObject  (val initPosition: Vector2, val size: Vector2, var de
     open val shouldCollide = true
     open val collition: Collition = CanMoveCollition
     var collidingObjects: List<GameObject> = listOf()
-    val properties = ResourceList<ObjectProperty>()
+    val properties = ResourceList<ROJParticleObject>()
     override fun render(batch: PolygonSpriteBatch){
         sprite.draw(batch)
     }
@@ -55,10 +56,18 @@ abstract class GameObject  (val initPosition: Vector2, val size: Vector2, var de
         defaultLocation?.removeGameObject(this)
         this.defaultLocation = null
         onRemoveAction.forEach { it() }
+
+        for(property in properties.List){
+            property.removeFromLocation()
+        }
     }
     open fun addToLocation(location: DefaultLocation){
         location.addGameObject(this)
         this.defaultLocation = location
+
+        for(property in properties.List){
+            property.addToLocation(location)
+        }
     }
 
     open fun setPosition(position: Vector2) {

@@ -170,15 +170,12 @@ fun addLocationsToArea(area: Area) {
 fun handleMoveCollitions(gameObject: GameObject, polygonToCheck: Polygon, objectsToCheck: List<GameObject>): Boolean {
     val collidingObjects = GetCollidingObjects(polygonToCheck, objectsToCheck - gameObject)
     val collitions: List<MoveCollition> = collidingObjects.map { x -> x.collition as MoveCollition }
-    collidingObjects.forEach { x ->
-        x.collition.collitionHappened(gameObject)
-        gameObject.collition.collitionHappened(x)
+    collidingObjects.forEach {
+        it.collition.collitionHappened(gameObject)
+        gameObject.collition.collitionHappened(it)
     }
     // Handle moving object away from previous colliding object.
-    val oldCollitions = gameObject.collidingObjects.minus(collidingObjects.toSet()).map { it.collition }
-    oldCollitions.filterIsInstance<AreaEntranceCollition>().forEach {
-        if(it.insideCollition) {it.movedOutside()}
-    }
+    handleAreaExitCollitions(gameObject,collidingObjects)
     gameObject.collidingObjects = collidingObjects
 
 
@@ -208,7 +205,7 @@ fun GameObject.InitSprite(texture: Texture): Sprite {
     return sprite
 }
 
-fun GameObject.InitPolygon(sprite: Sprite): Polygon {
+fun InitPolygon(sprite: Sprite): Polygon {
     val polygon = RectanglePolygon(sprite.boundingRectangle)
     polygon.setOrigin(sprite.x + sprite.originX, sprite.y + sprite.originY)
     polygon.setPosition(sprite.x - polygon.vertices[0], sprite.y - polygon.vertices[1])
@@ -354,7 +351,7 @@ fun generateEnemyProjectile(
     var unitVector =
         getUnitVectorTowardsPoint(Vector2(enemy.sprite.x, enemy.sprite.y), Vector2(player.sprite.x, player.sprite.y))
     val random = Random.nextInt(2)
-    val clone = LocationManager.newDefaultLocation.gameObjects.find { it is IceClone }
+    val clone = LocationManager.newDefaultLocation.gameObjects.List.find { it is IceClone }
     if (random == 1 && clone != null) {
         unitVector =
             getUnitVectorTowardsPoint(Vector2(enemy.sprite.x, enemy.sprite.y), Vector2(clone.sprite.x, clone.sprite.y))
@@ -393,3 +390,22 @@ fun setAggroIfShouldBeAggroed(shouldBeAggroedStrategy: ShouldBeAggroedStrategy, 
     }
 }
 
+fun handleAreaExitCollitions(gameObject: GameObject,collidingObjects: List<GameObject>){
+    val oldCollitions = gameObject.collidingObjects.minus(collidingObjects.toSet())
+    if(oldCollitions.isNotEmpty()){
+        oldCollitions.forEach {
+            val collition = it.collition
+            handleAreaExitCheckAndAction(collition)
+            handleAreaExitCheckAndAction(gameObject.collition)
+        }
+
+    }
+}
+
+fun handleAreaExitCheckAndAction(collition: Collition){
+    if(collition is AreaEntranceCollition){
+        if(collition.insideCollition){
+            collition.movedOutside()
+        }
+    }
+}

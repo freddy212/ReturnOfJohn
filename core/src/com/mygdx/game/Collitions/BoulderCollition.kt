@@ -14,6 +14,7 @@ import com.mygdx.game.Locations.DamageLocationData
 import com.mygdx.game.Locations.DefaultLocation
 import com.mygdx.game.ObjectProperties.Fire
 import com.mygdx.game.ObjectProperties.Ice
+import com.mygdx.game.ObjectProperties.ROJParticleObject
 
 
 class BoulderCollition(val boulder: Projectile) : ProjectileCollition(boulder) {
@@ -35,13 +36,14 @@ class BoulderCollition(val boulder: Projectile) : ProjectileCollition(boulder) {
             }
             collidedObject.removeFromLocation()
         }
-        if(collidedObject is DefaultLocation && collidedObject.locationStrategy is DamageLocationData ){
+        if(collidedObject is DefaultLocation && collidedObject.locationStrategy is DamageLocationData && boulder.defaultLocation != null){
             val locationData = collidedObject.locationStrategy
-            if(locationData.element == Element.FIRE && boulder.properties.List.filterIsInstance<Fire>().isEmpty()){
+            val location = boulder.defaultLocation!!
+            if(locationData.element == Element.FIRE && !boulder.properties.List.any { it is Fire }){
                 boulder.properties.clear()
                 boulder.properties.add(Fire(DefaultEvent(), boulder))
             }
-            if(locationData.element == Element.ICE && boulder.properties.List.filterIsInstance<Ice>().isEmpty()){
+            if(locationData.element == Element.ICE && !boulder.properties.List.any { it is Ice }){
                 boulder.properties.clear()
                 boulder.properties.add(Ice(boulder))
             }

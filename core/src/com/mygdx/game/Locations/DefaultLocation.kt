@@ -7,17 +7,17 @@ import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.Enums.Layer
 import com.mygdx.game.Interfaces.AreaIdentifier
 import com.mygdx.game.Interfaces.LocationDataStrategy
+import com.mygdx.game.Utils.ResourceList
 import com.mygdx.game.font
+import java.util.concurrent.locks.Condition
 
 class DefaultLocation(size: Vector2, Position: Vector2, private val initGameObjectsFunction: () -> List<GameObject> = {listOf()},
                      val locationStrategy: LocationDataStrategy = DefaultLocationData()): GameObject(Position,size){
     override val texture: Texture = locationStrategy.texture
     private val AdjacentLocations = mutableListOf<DefaultLocation>()
-    private val ChildrenGameObjects: MutableList<GameObject> = mutableListOf()
     val adjacentDefaultLocations : List<DefaultLocation>
         get() = AdjacentLocations.toList()
-    val gameObjects: List<GameObject>
-        get() = ChildrenGameObjects.toList()
+    val gameObjects = ResourceList<GameObject>()
     override val layer = Layer.GROUND
     override val collition = locationStrategy.collition
 
@@ -34,11 +34,11 @@ class DefaultLocation(size: Vector2, Position: Vector2, private val initGameObje
     }
 
     fun addGameObject(gameObject: GameObject){
-        ChildrenGameObjects.add(gameObject)
+       gameObjects.add(gameObject)
         gameObject.defaultLocation = this
     }
     fun removeGameObject(gameObject: GameObject){
-        ChildrenGameObjects.remove(gameObject)
+       gameObjects.remove(gameObject)
     }
     fun initLocation() {
         val objects = initGameObjectsFunction()
@@ -52,4 +52,5 @@ class DefaultLocation(size: Vector2, Position: Vector2, private val initGameObje
         AdjacentLocations.remove(defaultLocation)
         defaultLocation.AdjacentLocations.remove(this)
     }
+
 }
