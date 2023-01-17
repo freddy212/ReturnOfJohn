@@ -15,7 +15,7 @@ plugins {
 
 apply plugin: "java"
 
-sourceCompatibility = 1.6
+sourceCompatibility = 1.8
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
 sourceSets.main.java.srcDirs = [ "src/" ]
@@ -30,8 +30,8 @@ repositories {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.1.0-RC'
-    compile "org.mockito:mockito-all:1.9.+"
-    compile 'org.junit.jupiter:junit-jupiter-api:5.3.1'
+    implementation "org.mockito:mockito-all:1.9.+"
+    implementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
     testImplementation('org.mockito:mockito-inline:3.4.0')
 }
 test{
