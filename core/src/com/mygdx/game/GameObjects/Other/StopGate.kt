@@ -21,7 +21,7 @@ class StopGate(Position: Vector2, size: Vector2, val location: DefaultLocation) 
 
     override fun buttonReleased() {
         this.addToLocation(location)
-        val collidingObjects = GetCollidingObjects(this, listOf(player))
+        val collidingObjects = GetCollidingObjects(this, this.polygon,listOf(player))
         if(player in collidingObjects){
             val playerBottomDistance = (player.sprite.y + player.size.y / 2) - this.bottomleft.y
             val playerTopDistance = this.topleft.y - (player.sprite.y + player.size.y / 2)

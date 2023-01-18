@@ -168,7 +168,7 @@ fun addLocationsToArea(area: Area) {
 }
 
 fun handleMoveCollitions(gameObject: GameObject, polygonToCheck: Polygon, objectsToCheck: List<GameObject>): Boolean {
-    val collidingObjects = GetCollidingObjects(gameObject, objectsToCheck - gameObject)
+    val collidingObjects = GetCollidingObjects(gameObject, polygonToCheck, objectsToCheck - gameObject)
     val collitions: List<MoveCollition> = collidingObjects.map { x -> x.collition as MoveCollition }
     collidingObjects.forEach {
         it.collition.collitionHappened(gameObject)
@@ -183,12 +183,12 @@ fun handleMoveCollitions(gameObject: GameObject, polygonToCheck: Polygon, object
 }
 
 fun handleKeyCollitions(objectsToCheck: List<GameObject>) {
-    val collidingObjects = GetCollidingObjects(player, objectsToCheck)
+    val collidingObjects = GetCollidingObjects(player, player.polygon,objectsToCheck)
     collidingObjects.forEach { x -> x.collition.collitionHappened(player); }
 }
 
 fun handleKeyPressable(objectsToCheck: List<GameObject>) {
-    val collidingObjects = GetCollidingObjects(player, objectsToCheck)
+    val collidingObjects = GetCollidingObjects(player, player.polygon,objectsToCheck)
     collidingObjects.forEach { (it.collition as KeyPressedCollition).renderKeyToUI(player, it) }
 }
 
@@ -254,8 +254,8 @@ fun checkOpposingDirections(player: Player, directionalObject: DirectionalObject
     }
 }
 
-fun GetCollidingObjects(gameObjectToCheck: GameObject, gameObjects: List<GameObject>): List<GameObject> {
-    val collidingObjects = gameObjects.filter {gameObjectToCheck.collitionMask.canCollideWith(it) && isPolygonsColliding(gameObjectToCheck.polygon, it.polygon) }
+fun GetCollidingObjects(gameObjectToCheck: GameObject, polygonToCheck: Polygon, gameObjects: List<GameObject>): List<GameObject> {
+    val collidingObjects = gameObjects.filter {gameObjectToCheck.collitionMask.canCollideWith(it) && isPolygonsColliding(polygonToCheck, it.polygon) }
     val filteredCollitions = collidingObjects.fold(
         collidingObjects
     ) { objects, nextObject -> nextObject.collition.filterCollitions(objects) }
