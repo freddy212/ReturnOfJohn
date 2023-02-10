@@ -17,7 +17,7 @@ class ShieldCollition(val shield: Shield): MoveCollition{
     val delayMap = mutableMapOf<GameObject,DelayTimer>()
 
     override var canMoveAfterCollition = true
-    val sound = Gdx.audio.newSound(Gdx.files.internal("Sound/SoundEffect/woodhit.mp3"));
+    val sound = Gdx.audio.newSound(Gdx.files.local("Sound/SoundEffect/woodhit.mp3"));
     override fun collitionHappened(collidedObject: GameObject) {
         canMoveAfterCollition = collidedObject is Boulder || collidedObject is SmallBoulder
         if((collidedObject is Boulder || collidedObject is SmallBoulder)){

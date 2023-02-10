@@ -14,7 +14,7 @@ import com.mygdx.game.ObjectProperties.Ice
 class IceObject(Position: Vector2, size: Vector2, defaultLocation: DefaultLocation?) :
     GameObject(Position, size, defaultLocation) {
     override val collition = DOTCollition()
-    override val texture = DefaultTextureHandler.getTexture("Sensor.png")
+    override val texture = DefaultTextureHandler.getTexture("sensor.png")
     override val layer = Layer.ONGROUND
     override fun render(batch: PolygonSpriteBatch) {}
 

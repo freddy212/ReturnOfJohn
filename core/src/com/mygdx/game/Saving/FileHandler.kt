@@ -1,14 +1,22 @@
 package com.mygdx.game.Saving
 
+import com.badlogic.gdx.Files
+import com.badlogic.gdx.Gdx
+import com.badlogic.gdx.files.FileHandle
 import com.mygdx.game.Signal.Signal
-import java.io.BufferedWriter
-import java.io.File
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.serializer
+import java.io.BufferedWriter
+import java.io.File
+import java.io.IOException
+import kotlin.system.exitProcess
+
 
 class FileHandler {
     companion object{
-        private val file = File("SaveFiles/CurrentSave")
+
+        val handle: FileHandle = Gdx.files.local("SaveFiles/CurrentSave")
+        private val file: File = handle.file()
         private lateinit var fileWriter: BufferedWriter
         fun writeToFile(entityId : Int,content: String){
             val lines = readFromFile().toMutableList()

@@ -11,18 +11,24 @@ import com.badlogic.gdx.graphics.g3d.ModelBatch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.math.Vector2
-import com.mygdx.game.ItemAbilities.*
-import com.mygdx.game.Saving.FileHandler
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Player
 import com.mygdx.game.Interfaces.AreaIdentifier
+import com.mygdx.game.ItemAbilities.FireballAbility
+import com.mygdx.game.ItemAbilities.IcicleAbility
+import com.mygdx.game.ItemAbilities.ProjectileAbilityToggle
 import com.mygdx.game.Managers.*
+import com.mygdx.game.Saving.FileHandler
 import com.mygdx.game.Saving.PlayerSaveState
-import com.mygdx.game.Managers.UIRendererManager
-import com.mygdx.game.Signal.*
+import com.mygdx.game.Signal.Signal
+import com.mygdx.game.Signal.initListeners
+import com.mygdx.game.Signal.signalConvert
 import com.mygdx.game.Utils.RectanglePolygon
 import com.mygdx.game.Utils.RenderGraph
-import kotlinx.serialization.json.*
-import kotlinx.serialization.*
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.json.Json
+import java.io.File
+import java.io.FileOutputStream
+
 
 val modelBatch by lazy{ModelBatch()}
 val environment by lazy{Environment()}
@@ -42,6 +48,13 @@ class MainGame : ApplicationAdapter() {
     lateinit var inputAdapter: ROJInputAdapter
 
     override fun create() {
+
+        val f = File("SaveFiles/CurrentSave")
+        if (!f.exists()) {
+            f.parentFile.mkdir()
+            f.createNewFile()
+            val s = FileOutputStream(f, false)
+        }
 
         Gdx.gl.glClearColor(0f,0f,0f,0f)
         DefaultAssetHandler.setAssetManager(InitAssets())

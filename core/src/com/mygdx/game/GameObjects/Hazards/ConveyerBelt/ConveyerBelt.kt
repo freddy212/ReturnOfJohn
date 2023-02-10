@@ -13,7 +13,7 @@ import com.mygdx.game.plus
 
 class ConveyerBelt(initPosition: Vector2, size: Vector2, defaultLocation: DefaultLocation?, val direction: Direction) :
     GameObject(initPosition, size, defaultLocation) {
-    override val texture = DefaultTextureHandler.getTexture("Sensor.png")
+    override val texture = DefaultTextureHandler.getTexture("sensor.png")
     override val layer = Layer.PERSON
     private val isVertical = (direction == Direction.DOWN || direction == Direction.UP)
     private val brickLength = 20f

@@ -17,7 +17,7 @@ class FireObject(Position: Vector2, size: Vector2, objectAttached: GameObject, d
                                                                                                         SaveStateEntity by DefaultSaveStateHandler() {
         val fire = Fire(RemoveGameObjectEvent(this),this)
         override val collition = FireCollition(objectAttached.collition,collitionOnFire)
-        override val texture = DefaultTextureHandler.getTexture("Sensor.png")
+        override val texture = DefaultTextureHandler.getTexture("sensor.png")
         override val layer = Layer.ONGROUND
         override val polygon = objectAttached.polygon
         override fun render(batch: PolygonSpriteBatch) {}
