@@ -23,6 +23,6 @@ fun getFrostFireLocationOneObjects(): List<GameObject>{
 }
 fun getFrostFireLocationFourObjects(): List<GameObject>{
     val location = LocationManager.findLocation("location4", AreaIdentifier.FROSTFIRE)
-    val boulderGenerator = BoulderGenerator(location.bottomleft + Vector2(0f,100f), Vector2(128f,128f), getDirectionUnitVector(Direction.RIGHT),  location)
+    val boulderGenerator = BoulderGenerator(location.bottomleft + Vector2(0f,100f), Vector2(128f,128f), getDirectionUnitVector(Direction.RIGHT), location)
     return listOf(boulderGenerator)
 }

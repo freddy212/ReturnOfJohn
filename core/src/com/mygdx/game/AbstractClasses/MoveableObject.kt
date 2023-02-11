@@ -25,10 +25,10 @@ abstract class MoveableObject(Position: Vector2, size: Vector2, defaultLocation:
         if(canMove){
             val nextIncrement = unitVectorDirection * this.getCurrentSpeed()
             val moveSuccessfull = movementStrategy.moveEntity(this,nextIncrement + moveModifier)
-            /*properties.List.forEach {
+            properties.List.forEach {
                 it.polygon.setPosition(polygon.x, polygon.y)
                 handleMoveCollitions(it, it.polygon, LocationManager.MoveCollitionGameObjects)
-            }*/
+            }
             return moveSuccessfull
         }else{
             return false

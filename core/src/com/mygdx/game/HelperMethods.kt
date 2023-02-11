@@ -332,7 +332,7 @@ fun ResetPlayer(playerSaveState: PlayerSaveState) {
         it.onLocationEnterActions.forEach { it() }
         val collition = it.collition
         if (collition is AreaEntranceCollition) {
-            collition.movedOutside()
+            collition.movedOutside(player)
         }
     }
     player.setPosition(Vector2(playerSaveState.playerXPos, playerSaveState.playerYPos))
@@ -395,17 +395,17 @@ fun handleAreaExitCollitions(gameObject: GameObject,collidingObjects: List<GameO
     if(oldCollitions.isNotEmpty()){
         oldCollitions.forEach {
             val collition = it.collition
-            handleAreaExitCheckAndAction(collition)
-            handleAreaExitCheckAndAction(gameObject.collition)
+            handleAreaExitCheckAndAction(it.collition, gameObject)
+            handleAreaExitCheckAndAction(gameObject.collition, it)
         }
 
     }
 }
 
-fun handleAreaExitCheckAndAction(collition: Collition){
+fun handleAreaExitCheckAndAction(collition: Collition, objectLeaved: GameObject){
     if(collition is AreaEntranceCollition){
         if(collition.insideCollition){
-            collition.movedOutside()
+            collition.movedOutside(objectLeaved)
         }
     }
 }

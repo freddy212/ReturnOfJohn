@@ -10,6 +10,8 @@ import com.mygdx.game.Interfaces.Event
 
 class Fire(val extinguishFireEvent: Event, objectOnFire: GameObject) : ROJParticleObject(ParticleEffect(),objectOnFire) {
     override val layer = Layer.FOREGROUND
+    override val soundEffectWhenEntered = SoundEffectWhenEntered.FIRE
+
     init {
         particleEffect.load(Gdx.files.internal("ParticleEmitters/Fire.p"), Gdx.files.internal(""))
         particleEffect.emitters.first().xOffsetValue.setLow(0f,objectOnFire.size.x)

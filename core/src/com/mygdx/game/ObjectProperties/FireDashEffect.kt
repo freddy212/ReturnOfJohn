@@ -8,6 +8,7 @@ import com.mygdx.game.player
 
 class FireDashEffect: ROJParticleObject(ParticleEffect(), player, Vector2(player.sprite.width/2, player.sprite.height/2)) {
     override val layer = Layer.FOREGROUND
+    override val soundEffectWhenEntered = SoundEffectWhenEntered.NONE
 
     init {
         particleEffect.load(Gdx.files.internal("ParticleEmitters/Dash.p"), Gdx.files.internal(""))

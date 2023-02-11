@@ -30,7 +30,7 @@ class ConveyerBeltCollition(val direction: Direction) : DefaultAreaEntranceColli
         EventManager.eventManager.add(handleConveyerBeltEvent)
     }
 
-    override fun movedOutsideAction() {
+    override fun movedOutsideAction(objectLeaved: GameObject) {
         EventManager.eventManager.remove(handleConveyerBeltEvent)
         player.moveModifier = Vector2(0f,0f)
     }

@@ -16,10 +16,10 @@ class AxeSwingCollision(val axe: Axe): AreaEntranceCollition {
     override fun movedInside() {
     }
 
-    override fun movedOutside() {
+    override fun movedOutside(objectLeaved: GameObject) {
     }
 
-    override fun movedOutsideAction() {
+    override fun movedOutsideAction(objectLeaved: GameObject) {
     }
 
     override fun movedInsideAction() {

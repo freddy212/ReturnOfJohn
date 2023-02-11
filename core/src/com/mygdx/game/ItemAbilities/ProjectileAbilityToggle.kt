@@ -18,7 +18,7 @@ import com.mygdx.game.Utils.ResourceList
 object ProjectileAbilityToggle: CharacterAbility() {
 
     val abilitiesToToggle = ResourceList<CharacterAbility>()
-    val sound = Gdx.audio.newSound(Gdx.files.internal("Sound/SoundEffect/clicksound.mp3"));
+    val sound = Gdx.audio.newSound(Gdx.files.local("Sound/SoundEffect/clicksound.mp3"));
     init {
         abilitiesToToggle.add(WaterBallAbility())
     }

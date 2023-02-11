@@ -5,6 +5,7 @@ import com.mygdx.game.AbstractClasses.DefaultMovement
 import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.AbstractClasses.Projectile
 import com.mygdx.game.Collitions.BoulderCollition
+import com.mygdx.game.Collitions.BreakableCollition
 import com.mygdx.game.Collitions.DefaultProjectileCollition
 import com.mygdx.game.Collitions.IllegalMoveCollition
 import com.mygdx.game.DefaultTextureHandler
@@ -13,6 +14,7 @@ import com.mygdx.game.Enums.Layer
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Player
 import com.mygdx.game.Interfaces.DefaultCollitionMask
 import com.mygdx.game.ItemAbilities.Shield
+import com.mygdx.game.Locations.DamageLocationData
 import com.mygdx.game.Locations.DefaultLocation
 import com.mygdx.game.middleOfObject
 
@@ -23,5 +25,5 @@ class Boulder(Position: Vector2, size: Vector2, defaultLocation: DefaultLocation
     override var baseSpeed = 5f
     override val layer = Layer.AIR
     override val collition = BoulderCollition(this)
-    override val collitionMask = DefaultCollitionMask {x -> x is Player || x is Projectile || x.collition is IllegalMoveCollition || x is Shield }
+    override val collitionMask = DefaultCollitionMask {x -> x is Player || x is Projectile || x.collition is IllegalMoveCollition || x is Shield || x.collition is BreakableCollition || (x is DefaultLocation && x.locationStrategy is DamageLocationData)}
 }

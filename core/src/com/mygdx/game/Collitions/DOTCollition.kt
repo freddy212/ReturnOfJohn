@@ -23,7 +23,7 @@ class DOTCollition : DefaultAreaEntranceCollition() {
         EventManager.eventManager.add(insideAreaEvent)
     }
 
-    override fun movedOutsideAction() {
+    override fun movedOutsideAction(objectLeaved: GameObject) {
         EventManager.eventManager.remove(insideAreaEvent)
     }
 
