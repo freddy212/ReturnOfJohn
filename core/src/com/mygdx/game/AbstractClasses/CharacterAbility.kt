@@ -31,7 +31,7 @@ abstract class CharacterAbility(){
 fun getAbility(abilityId: AbilityId): CharacterAbility{
     return when(abilityId){
         AbilityId.AXE -> AxeAbility()
-        AbilityId.ICECLONE-> IceCloneAbility()
+        AbilityId.ICECLONE-> IceCloneAbilityUpgraded()
         AbilityId.SHIELD -> ShieldAbility()
         AbilityId.WATERBALL -> WaterBallAbility()
         AbilityId.ICICLE -> IcicleAbility()

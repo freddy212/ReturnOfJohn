@@ -1,4 +1,4 @@
-{"playerXPos":-792.96387,"playerYPos":297.2879,"areaIdentifier":"FROSTFIRE","entityId":0}
+{"playerXPos":-2934.341,"playerYPos":1154.6774,"areaIdentifier":"FROSTFIRE","entityId":0}
 {"signaltype":"BUTTON_ACCEPTED","entityId":23}
 {"signaltype":"BUTTON_ACCEPTED","entityId":22}
 {"signaltype":"REMOVE_OBJECT","entityId":21}
@@ -25,3 +25,6 @@
 {"signaltype":"BUTTON_ACCEPTED","entityId":30}
 {"signaltype":"BUTTON_ACCEPTED","entityId":31}
 {"signaltype":"REMOVE_OBJECT","entityId":19}
+{"signaltype":"REMOVE_OBJECT","entityId":61}
+{"signaltype":"BUTTON_ACCEPTED","entityId":63}
+{"signaltype":"BUTTON_ACCEPTED","entityId":64}

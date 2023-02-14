@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.Areas.DefaultArea
 import com.mygdx.game.Areas.FrostfireArea.getFrostFireLocationFourObjects
 import com.mygdx.game.Areas.FrostfireArea.getFrostFireLocationOneObjects
+import com.mygdx.game.Areas.FrostfireArea.getFrostFireLocationSevenObjects
 import com.mygdx.game.DefaultTextureHandler
 import com.mygdx.game.InsertDirection
 import com.mygdx.game.Interfaces.Area
@@ -29,6 +30,10 @@ class FrostFireInitializer():AreaInitializer {
             addLocationRelative(location3, Vector2(600f, 1500f), InsertDirection.LEFT, area, InsertDirection.MIDDLE, ::getFrostFireLocationFourObjects, DamageLocationData())
         val location5 =
             addLocationRelative(location3, Vector2(600f, 1500f), InsertDirection.RIGHT, area, InsertDirection.MIDDLE, { listOf()}, DamageLocationData("IceGround.png"))
+        val location6 =
+            addLocationRelative(location4, Vector2(1500f, 200f), InsertDirection.LEFT, area, InsertDirection.MIDDLE, { listOf()})
+        val location7 =
+            addLocationRelative(location6, Vector2(600f, 2000f), InsertDirection.UP, area, InsertDirection.LEFT, ::getFrostFireLocationSevenObjects)
 
         location2.addAdjacentLocation(location4)
         location2.addAdjacentLocation(location5)
