@@ -19,7 +19,7 @@ class DOTCollition : DefaultAreaEntranceCollition() {
 
     val insideAreaEvent = InsideAreaEvent()
 
-    override fun movedInsideAction() {
+    override fun movedInsideAction(objectEntered: GameObject) {
         EventManager.eventManager.add(insideAreaEvent)
     }
 

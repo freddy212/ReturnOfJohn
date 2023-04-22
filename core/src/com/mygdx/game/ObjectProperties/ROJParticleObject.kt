@@ -43,7 +43,7 @@ class ParticleAreaCollition(val objectAttached: GameObject,val  royROJParticleOb
             super.collitionHappened(collidedObject)
         }
     }
-    override fun movedInsideAction() {
+    override fun movedInsideAction(objectEntered: GameObject) {
         if(royROJParticleObject.soundEffectWhenEntered == SoundEffectWhenEntered.FIRE){
             val distance = distance(player.currentPosition(), objectAttached.currentPosition())
             music.volume = 2f

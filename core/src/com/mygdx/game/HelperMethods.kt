@@ -404,7 +404,7 @@ fun handleAreaExitCollitions(gameObject: GameObject,collidingObjects: List<GameO
 
 fun handleAreaExitCheckAndAction(collition: Collition, objectLeaved: GameObject){
     if(collition is AreaEntranceCollition){
-        if(collition.insideCollition){
+        if(collition.insideCollition.getOrDefault(objectLeaved, true)){
             collition.movedOutside(objectLeaved)
         }
     }

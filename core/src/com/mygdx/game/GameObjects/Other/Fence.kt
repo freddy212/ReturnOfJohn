@@ -14,7 +14,7 @@ import com.mygdx.game.renderRepeatedTexture
 
 class Fence(Position: Vector2, size: Vector2, defaultLocation: DefaultLocation, override val texture: Texture = DefaultTextureHandler.getTexture("Fence-Start.png"), val repeat: Boolean = true)
     : GameObject(Position,size,defaultLocation), SaveStateEntity by DefaultSaveStateHandler() {
-    override val collition = NoCharacterCanPassCollition(this)
+    override val collition = NoCharacterCanPassCollition()
     override val layer = Layer.ONGROUND
     override fun render(batch: PolygonSpriteBatch){
         if(repeat){

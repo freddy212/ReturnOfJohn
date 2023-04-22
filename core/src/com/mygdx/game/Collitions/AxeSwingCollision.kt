@@ -9,11 +9,11 @@ import com.mygdx.game.GameObjects.MoveableEntities.Projectiles.SmallBoulder
 import com.mygdx.game.Interfaces.AreaEntranceCollition
 
 class AxeSwingCollision(val axe: Axe): AreaEntranceCollition {
-    override var insideCollition: Boolean
+    override var insideCollition: MutableMap<GameObject,Boolean>
         get() = TODO("Not yet implemented")
         set(value) {}
 
-    override fun movedInside() {
+    override fun movedInside(objectEntered: GameObject) {
     }
 
     override fun movedOutside(objectLeaved: GameObject) {
@@ -22,7 +22,7 @@ class AxeSwingCollision(val axe: Axe): AreaEntranceCollition {
     override fun movedOutsideAction(objectLeaved: GameObject) {
     }
 
-    override fun movedInsideAction() {
+    override fun movedInsideAction(objectEntered: GameObject) {
     }
 
     override val canMoveAfterCollition = true
