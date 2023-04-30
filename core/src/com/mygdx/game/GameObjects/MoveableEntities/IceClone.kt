@@ -9,8 +9,11 @@ import com.mygdx.game.Collitions.IceCloneCollition
 import com.mygdx.game.DefaultTextureHandler
 import com.mygdx.game.EdgeOfLocationStrategies.NoAction
 import com.mygdx.game.Enums.Layer
+import com.mygdx.game.GetCollidingObjects
+import com.mygdx.game.Interfaces.AreaEntranceCollition
 import com.mygdx.game.Interfaces.MovementStrategy
 import com.mygdx.game.Locations.DefaultLocation
+import com.mygdx.game.Managers.LocationManager
 
 class IceClone(Position: Vector2, size: Vector2, defaultLocation: DefaultLocation?) :
     MoveableObject(Position, size, defaultLocation) {
@@ -23,6 +26,15 @@ class IceClone(Position: Vector2, size: Vector2, defaultLocation: DefaultLocatio
 
     init {
         sprite.setAlpha(0.8f)
+    }
+
+    override fun removeFromLocation() {
+        val collidingObjects = GetCollidingObjects(this, polygon, LocationManager.ActiveGameObjects)
+        val collidingAreaObjects = collidingObjects.map { it.collition }.filterIsInstance<AreaEntranceCollition>()
+        collidingAreaObjects.forEach {
+            it.movedOutside(this)
+        }
+        super.removeFromLocation()
     }
 
 }

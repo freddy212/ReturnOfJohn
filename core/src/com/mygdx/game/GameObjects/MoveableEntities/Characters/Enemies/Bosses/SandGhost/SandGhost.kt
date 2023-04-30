@@ -1,7 +1,7 @@
 package com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Bosses.SandGhost
 
 import com.badlogic.gdx.math.Vector2
-import com.mygdx.game.AI.EnemyActions.EnemyMove
+import com.mygdx.game.AI.EnemyActions.EnemyMoveBasedOnPlayer
 import com.mygdx.game.AI.EnemyActions.RandomAction
 import com.mygdx.game.AbstractClasses.DefaultEnemyStrategy
 import com.mygdx.game.DefaultTextureHandler
@@ -15,7 +15,6 @@ import com.mygdx.game.*
 import com.mygdx.game.AI.EnemyActions.MoveRight
 import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Bosses.Boss
-import com.mygdx.game.Interfaces.FightableEntity
 import com.mygdx.game.Saving.DefaultSaveStateHandler
 
 class SandGhost(Position: Vector2, size: Vector2 = Vector2(150f,150f),location: DefaultLocation?)
@@ -26,8 +25,8 @@ class SandGhost(Position: Vector2, size: Vector2 = Vector2(150f,150f),location: 
     override var direction = Direction.DOWN
     val sandHand1 = SandHand(currentPosition() - Vector2(200f,0f),Vector2(143f,128f), location, false, this)
     val sandHand2 = SandHand(currentPosition() + Vector2(200f,0f),Vector2(143f,128f), location, true, this)
-    private val randomAction = RandomAction(listOf( EnemyMove(100f,::getUnitVectorTowardsPoint, this)),DefaultTimer(1f), this)
-    override val enemyStrategy =  DefaultEnemyStrategy(listOf(randomAction, MoveRight(this), ExtendArms(sandHand1,sandHand2,this), GhostBoulder(this)))
+    private val enemyMove = EnemyMoveBasedOnPlayer(100f,::getUnitVectorTowardsPoint, this)
+    override val enemyStrategy =  DefaultEnemyStrategy(listOf(enemyMove, ExtendArms(sandHand1,sandHand2,this), GhostBoulder(this)))
     override var health = 100f
     override val maxHealth = 100f
 

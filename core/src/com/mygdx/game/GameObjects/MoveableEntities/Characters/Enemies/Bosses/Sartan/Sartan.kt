@@ -1,7 +1,7 @@
 package com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Bosses.SandGhost
 
 import com.badlogic.gdx.math.Vector2
-import com.mygdx.game.AI.EnemyActions.EnemyMove
+import com.mygdx.game.AI.EnemyActions.EnemyMoveBasedOnPlayer
 import com.mygdx.game.AI.EnemyActions.RandomAction
 import com.mygdx.game.AbstractClasses.DefaultEnemyStrategy
 import com.mygdx.game.DefaultTextureHandler
@@ -30,7 +30,7 @@ class Sartan(Position: Vector2, size: Vector2 = Vector2(150f,150f),location: Def
     override var baseSpeed = 3f
     override var unitVectorDirection = getDirectionUnitVector(Direction.DOWN)
     val trifork = Trifork(currentPosition() + Vector2(0f,-30f), Vector2(40f,100f), defaultLocation,this)
-    private val randomAction = RandomAction(listOf( EnemyMove(200f,::getUnitVectorTowardsPoint, this)),DefaultTimer(1f), this)
+    private val randomAction = RandomAction(listOf( EnemyMoveBasedOnPlayer(200f,::getUnitVectorTowardsPoint, this)),DefaultTimer(1f), this)
     override val enemyStrategy =  DefaultEnemyStrategy(listOf(randomAction,TriforkThrow(this,trifork)))
 
 

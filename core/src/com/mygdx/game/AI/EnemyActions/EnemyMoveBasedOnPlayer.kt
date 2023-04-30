@@ -6,7 +6,7 @@ import com.mygdx.game.Interfaces.EnemyAction
 import com.mygdx.game.distance
 import com.mygdx.game.player
 
-class EnemyMove(private val distanceToStop: Float, private val directionFunction: (Vector2,Vector2) -> Vector2, val enemy:Enemy): EnemyAction() {
+class EnemyMoveBasedOnPlayer(private val distanceToStop: Float, private val directionFunction: (Vector2, Vector2) -> Vector2, val enemy:Enemy): EnemyAction() {
     override fun executeEnemyAction() {
         enemy.move(directionFunction(Vector2(enemy.sprite.x,enemy.sprite.y), Vector2(player.sprite.x, player.sprite.y)))
     }

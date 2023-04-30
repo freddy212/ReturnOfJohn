@@ -1,7 +1,7 @@
 package com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Bosses.RockBoss
 
 import com.badlogic.gdx.math.Vector2
-import com.mygdx.game.AI.EnemyActions.EnemyMove
+import com.mygdx.game.AI.EnemyActions.EnemyMoveBasedOnPlayer
 import com.mygdx.game.AI.EnemyActions.EnemyRoll
 import com.mygdx.game.AI.EnemyActions.ShootProjectile
 import com.mygdx.game.AbstractClasses.DefaultEnemyStrategy
@@ -37,7 +37,7 @@ class RockBoss(Position: Vector2, size: Vector2, location: DefaultLocation?, ele
         Element.ICE -> Vector2(100f,33f)
         Element.EARTH -> Vector2(50f,50f)
     }
-    override val enemyStrategy =  DefaultEnemyStrategy(listOf(ShootProjectile(projectile,projSize,this), EnemyRoll(EnemyMove(0f,::getUnitVectorTowardsPoint, this),this)
+    override val enemyStrategy =  DefaultEnemyStrategy(listOf(ShootProjectile(projectile,projSize,this), EnemyRoll(EnemyMoveBasedOnPlayer(0f,::getUnitVectorTowardsPoint, this),this)
     ))
 
     init {

@@ -13,7 +13,9 @@ import com.mygdx.game.Enums.getDirectionUnitVector
 import com.mygdx.game.Events.DefaultEvent
 import com.mygdx.game.Events.RemoveObjectPermanentlyEvent
 import com.mygdx.game.GameObjects.Hazards.Generators.RocketGenerator
+import com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Bosses.IceQueen.IceQueen
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Bosses.RockBoss.RockBoss
+import com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Bosses.SandGhost.Sartan
 import com.mygdx.game.GameObjects.Other.*
 import com.mygdx.game.GameObjects.Terrain.IceObject
 import com.mygdx.game.GameObjects.Terrain.WalkableTerrain
@@ -104,3 +106,14 @@ fun getIceLandsLocationNineObjects(): List<GameObject>{
 
     return listOf(stopGate, stopGate2, iceButton1, iceButton2, door)
 }
+
+fun getIceLandsLocationTwelveObjects(): List<GameObject>{
+    val location5 = LocationManager.findLocation("location12",AreaIdentifier.ICELANDS)
+
+    val walkableTerrain = WalkableTerrain(Vector2(location5.originalMiddle.x - 100f,location5.bottomright.y),Vector2(200f,500f),location5)
+    val walkableTerrain2 = WalkableTerrain(Vector2(walkableTerrain.topleft - Vector2(300f,0f)), Vector2(800f,600f),location5)
+    val iceQueen = IceQueen(walkableTerrain2.currentMiddle - Vector2(75f, 0f),Vector2(150f,150f), location5)
+
+    return listOf(walkableTerrain,walkableTerrain2, iceQueen)
+}
+

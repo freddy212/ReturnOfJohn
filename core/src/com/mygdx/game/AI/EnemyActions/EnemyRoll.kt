@@ -3,7 +3,7 @@ package com.mygdx.game.AI.EnemyActions
 import com.mygdx.game.AbstractClasses.Enemy
 import com.mygdx.game.DefaultTextureHandler
 import com.mygdx.game.Interfaces.EnemyAction
-class EnemyRoll(val enemyMove: EnemyMove, val enemy: Enemy): EnemyAction() {
+class EnemyRoll(val enemyMoveBasedOnPlayer: EnemyMoveBasedOnPlayer, val enemy: Enemy): EnemyAction() {
 
     private var counter = 0
     val originalTexture = enemy.sprite.texture
@@ -13,7 +13,7 @@ class EnemyRoll(val enemyMove: EnemyMove, val enemy: Enemy): EnemyAction() {
             enemy.sprite.texture = DefaultTextureHandler.getTexture("RockManCrouched.png")
             enemy.setCurrentSpeed(enemy.getCurrentSpeed() * 2.5f)
         }
-        enemyMove.executeEnemyAction()
+        enemyMoveBasedOnPlayer.executeEnemyAction()
         counter++
     }
 

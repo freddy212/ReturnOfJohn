@@ -21,7 +21,7 @@ abstract class DefaultAreaEntranceCollition(): AreaEntranceCollition{
         }
     }
     override fun movedInside(objectEntered: GameObject){
-        if(! (insideCollition.getOrDefault(objectEntered,false))){
+        if(!(insideCollition.getOrDefault(objectEntered,false))){
             insideCollition[objectEntered] = true
             movedInsideAction(objectEntered)
         }

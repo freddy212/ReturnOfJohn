@@ -19,7 +19,7 @@ class IceLandsInitializer: AreaInitializer {
             Vector2(1500f, 1500f), Vector2(0f, 0f), ::getIceLandsLocationOneObjects, DamageLocationData(iceTexture)
         )
         addLocation(location1, area)
-        val location2 = addLocationRelative(location1, Vector2(300f,1000f),InsertDirection.UP,area,
+        val location2 = addLocationRelative(location1, Vector2(300f,800f),InsertDirection.UP,area,
                                             InsertDirection.MIDDLE, ::getIceLandsLocationTwoObjects,DefaultLocationData(), Vector2(16f,0f))
         val location3 = addLocationRelative(location1,Vector2(1200f,400f),InsertDirection.RIGHT,area,
             InsertDirection.MIDDLE, ::getIceLandsLocationThreeObjects,DefaultLocationData(), Vector2(0f,150f)
@@ -39,6 +39,12 @@ class IceLandsInitializer: AreaInitializer {
         location7.addAdjacentLocation(location5)
         val location8 = addLocationRelative(location1, Vector2(800f, 300f), InsertDirection.LEFT, area, InsertDirection.MIDDLE, { listOf()}, DefaultLocationData(), Vector2(0f,150f))
         val location9 = addLocationRelative(location8, Vector2(300f, 1200f), InsertDirection.UP, area, InsertDirection.LEFT, ::getIceLandsLocationNineObjects)
+        val location10 = addLocationRelative(location2, Vector2(800f, 300f), InsertDirection.LEFT, area,
+            InsertDirection.UP)
+        val location11 = addLocationRelative(location10, Vector2(300f, 500f), InsertDirection.UP, area,
+            InsertDirection.LEFT)
+        val location12 = addLocationRelative(location11, Vector2(1500f, 1500f), InsertDirection.UP, area,
+            InsertDirection.MIDDLE, ::getIceLandsLocationTwelveObjects,DamageLocationData(iceTexture))
         return area
         //addLocationsToArea(area)
 

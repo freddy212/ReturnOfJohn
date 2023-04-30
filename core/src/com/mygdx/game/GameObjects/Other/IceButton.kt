@@ -63,11 +63,15 @@ class IceButtonCollition(val iceButton: IceButton, val gate: ButtonGate, val eve
     }
 
     override fun movedOutside(objectLeaved: GameObject) {
-        val collidingObjects = GetCollidingObjects(iceButton, iceButton.polygon, LocationManager.MoveCollitionGameObjects)
-        val iceCloneDoesNotExist = collidingObjects.filterIsInstance<IceClone>().isEmpty()
-        if (iceCloneDoesNotExist && insideCollition.getOrDefault(objectLeaved, true)) {
-            insideCollition[objectLeaved] = false
-            movedOutsideAction(player)
+        if(objectLeaved is Player || objectLeaved is IceClone){
+            val collidingObjects = GetCollidingObjects(iceButton, iceButton.polygon, LocationManager.MoveCollitionGameObjects)
+            val playerOrIceclone = collidingObjects.filter{it is Player || it is IceClone}.minus(objectLeaved)
+            if(playerOrIceclone.isEmpty()){
+                super.movedOutside(objectLeaved)
+            }
+            if(insideCollition.getOrDefault(objectLeaved,true)) {
+                insideCollition[objectLeaved] = false
+            }
         }
     }
 

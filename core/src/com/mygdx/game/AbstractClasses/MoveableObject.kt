@@ -67,12 +67,6 @@ abstract class MoveableObject(Position: Vector2, size: Vector2, defaultLocation:
     }
 
     override fun removeFromLocation() {
-        LocationManager.ActiveGameObjects.forEach {
-            val collition = it.collition
-            if (collition is AreaEntranceCollition) {
-                collition.movedOutside(this)
-            }
-        }
         super.removeFromLocation()
     }
 
