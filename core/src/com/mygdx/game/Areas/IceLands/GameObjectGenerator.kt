@@ -18,6 +18,7 @@ import com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Bosses.Roc
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Bosses.SandGhost.Sartan
 import com.mygdx.game.GameObjects.Other.*
 import com.mygdx.game.GameObjects.Terrain.IceObject
+import com.mygdx.game.GameObjects.Terrain.TeleportPad
 import com.mygdx.game.GameObjects.Terrain.WalkableTerrain
 import com.mygdx.game.Interfaces.AreaIdentifier
 import com.mygdx.game.Managers.LocationManager
@@ -112,8 +113,14 @@ fun getIceLandsLocationTwelveObjects(): List<GameObject>{
 
     val walkableTerrain = WalkableTerrain(Vector2(location5.originalMiddle.x - 100f,location5.bottomright.y),Vector2(200f,500f),location5)
     val walkableTerrain2 = WalkableTerrain(Vector2(walkableTerrain.topleft - Vector2(300f,0f)), Vector2(800f,600f),location5)
-    val iceQueen = IceQueen(walkableTerrain2.currentMiddle - Vector2(75f, 0f),Vector2(150f,150f), location5)
 
-    return listOf(walkableTerrain,walkableTerrain2, iceQueen)
+    val teleportBottomLeft = TeleportPad(walkableTerrain2.bottomleft + Vector2(100f,50f), Vector2(100f,50f), location5)
+    val teleportBottomRight = TeleportPad(walkableTerrain2.bottomright - Vector2(200f, -50f), Vector2(100f,50f), location5)
+    val teleportTopLeft = TeleportPad(walkableTerrain2.topleft - Vector2(-100f,100f), Vector2(100f,50f), location5)
+    val teleportTopRight = TeleportPad(walkableTerrain2.topright - Vector2(200f,100f), Vector2(100f,50f), location5)
+
+    val iceQueen = IceQueen(walkableTerrain2.currentMiddle - Vector2(75f, 0f),Vector2(150f,150f), location5, listOf<TeleportPad>(teleportBottomLeft,teleportBottomRight, teleportTopLeft, teleportTopRight))
+
+    return listOf(walkableTerrain,walkableTerrain2, iceQueen, teleportBottomLeft, teleportBottomRight, teleportTopLeft, teleportTopRight)
 }
 

@@ -1,4 +1,4 @@
-{"playerXPos":16.0,"playerYPos":10.0,"areaIdentifier":"MAINAREA","entityId":0}
+{"playerXPos":41.53345,"playerYPos":2803.4001,"areaIdentifier":"ICELANDS","entityId":0}
 {"signaltype":"BUTTON_ACCEPTED","entityId":23}
 {"signaltype":"BUTTON_ACCEPTED","entityId":22}
 {"signaltype":"REMOVE_OBJECT","entityId":21}
@@ -25,3 +25,8 @@
 {"signaltype":"ADD_OBJECT","addMethod":"DOOR2","location":"location10","areaIdentifier":"WASTELAND"}
 {"signaltype":"USE_ITEMS","itemType":"KEY","amount":1}
 {"signaltype":"REMOVE_OBJECT","entityId":5}
+{"signaltype":"ABILITY_GAINED","abilityId":"DASH"}
+{"signaltype":"REMOVE_OBJECT","entityId":28}
+{"signaltype":"REMOVE_OBJECT","entityId":29}
+{"signaltype":"BUTTON_ACCEPTED","entityId":30}
+{"signaltype":"BUTTON_ACCEPTED","entityId":31}

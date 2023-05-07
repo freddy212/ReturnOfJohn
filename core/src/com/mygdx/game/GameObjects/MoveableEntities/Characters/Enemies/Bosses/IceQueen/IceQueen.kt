@@ -1,30 +1,38 @@
 package com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Bosses.IceQueen
 
 import com.badlogic.gdx.math.Vector2
-import com.mygdx.game.AI.EnemyActions.EnemyMoveBasedOnPlayer
-import com.mygdx.game.AI.EnemyActions.EnemyMoveTowardsPoint
+import com.mygdx.game.AI.EnemyActions.MoveTowardsPoint
 import com.mygdx.game.AI.EnemyActions.RandomAction
 import com.mygdx.game.AI.EnemyActions.ShootProjectile
+import com.mygdx.game.AI.EnemyActions.TeleportToPoint
 import com.mygdx.game.AbstractClasses.DefaultEnemyStrategy
 import com.mygdx.game.DefaultTextureHandler
 import com.mygdx.game.Enums.Direction
 import com.mygdx.game.Enums.Layer
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Bosses.Boss
 import com.mygdx.game.GameObjects.MoveableEntities.Projectiles.Icicle
+import com.mygdx.game.GameObjects.Terrain.TeleportPad
 import com.mygdx.game.Locations.DefaultLocation
 import com.mygdx.game.Timer.DefaultTimer
-import com.mygdx.game.getUnitVectorTowardsPoint
 import com.mygdx.game.minus
 
-class IceQueen(Position: Vector2, size: Vector2, location: DefaultLocation?) : Boss(Position, size, location) {
-    val topLeftMove = EnemyMoveTowardsPoint( this, (location?.currentMiddle!! - Vector2(350f, -200f)))
-    val topRightMove = EnemyMoveTowardsPoint( this, (location?.currentMiddle!! - Vector2(- 250f, -200f)))
+class IceQueen(Position: Vector2, size: Vector2, location: DefaultLocation?, teleportPoints: List<TeleportPad>) : Boss(Position, size, location) {
+    val halfPadSize = Vector2(teleportPoints[0].size.x / 4, teleportPoints[0].size.y)
+    val bottomLeftMove = MoveTowardsPoint( this, teleportPoints[0].bottomleft - halfPadSize)
+    val bottomRightMove = MoveTowardsPoint( this, teleportPoints[1].bottomleft - halfPadSize)
+    val topLeftMove = MoveTowardsPoint( this, teleportPoints[2].bottomleft - halfPadSize)
+    val topRightMove = MoveTowardsPoint( this, teleportPoints[3].bottomleft - halfPadSize)
 
-    val bottomLeftMove = EnemyMoveTowardsPoint( this, (location?.currentMiddle!! - Vector2(350f, 200f)))
-    val bottomRightMove = EnemyMoveTowardsPoint( this, (location?.currentMiddle!! - Vector2(- 250f, 200f)))
-    private val randomAction = RandomAction(listOf(bottomLeftMove, bottomRightMove, topLeftMove, topRightMove),
-        DefaultTimer(2.5f), this, false)
-    override val enemyStrategy = DefaultEnemyStrategy(listOf(randomAction,  ShootProjectile(::Icicle, Vector2(100f, 34f),this)))
+    val bottomLeftTeleport = TeleportToPoint( this, teleportPoints[0].bottomleft - halfPadSize)
+    val bottomRightTeleport = TeleportToPoint( this, teleportPoints[1].bottomleft - halfPadSize)
+    val topLeftTeleport = TeleportToPoint( this, teleportPoints[2].bottomleft - halfPadSize)
+    val topRightTeleport = TeleportToPoint( this, teleportPoints[3].bottomleft - halfPadSize)
+    private val randomMoveAction = RandomAction(listOf(bottomLeftMove, bottomRightMove, topLeftMove, topRightMove),
+        DefaultTimer(1.5f), this, false)
+    private val randomTeleportAction = RandomAction(listOf(bottomLeftTeleport, bottomRightTeleport, topLeftTeleport, topRightTeleport),
+        DefaultTimer(2.5f), this, canRepeat = false, changeAfterExecute = true
+    )
+    override val enemyStrategy = DefaultEnemyStrategy(listOf(randomMoveAction, randomTeleportAction,  ShootProjectile(::Icicle, Vector2(100f, 34f),this)))
     override var baseSpeed = 5f
     override val texture = DefaultTextureHandler.getTexture("IceQueen.png")
     override val layer = Layer.PERSON

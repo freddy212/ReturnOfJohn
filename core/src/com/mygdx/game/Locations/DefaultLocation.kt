@@ -18,7 +18,7 @@ class DefaultLocation(size: Vector2, Position: Vector2, private val initGameObje
     val adjacentDefaultLocations : List<DefaultLocation>
         get() = AdjacentLocations.toList()
     val gameObjects = ResourceList<GameObject>()
-    override val layer = Layer.GROUND
+    override val layer = Layer.BEFOREGROUND
     override val collition = locationStrategy.collition
 
     lateinit var areaIdentifier: AreaIdentifier

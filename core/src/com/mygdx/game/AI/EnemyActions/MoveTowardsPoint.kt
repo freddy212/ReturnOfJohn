@@ -5,9 +5,8 @@ import com.mygdx.game.AbstractClasses.Enemy
 import com.mygdx.game.Interfaces.EnemyAction
 import com.mygdx.game.distance
 import com.mygdx.game.getUnitVectorTowardsPoint
-import com.mygdx.game.player
 
-class EnemyMoveTowardsPoint(val enemy: Enemy, val point: Vector2): EnemyAction() {
+class MoveTowardsPoint(val enemy: Enemy, val point: Vector2): EnemyAction() {
     val distanceToStop = 2
     override fun executeEnemyAction() {
         enemy.move(getUnitVectorTowardsPoint(Vector2(enemy.sprite.x,enemy.sprite.y), point))

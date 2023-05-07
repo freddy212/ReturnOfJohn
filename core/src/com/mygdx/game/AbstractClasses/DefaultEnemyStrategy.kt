@@ -56,10 +56,6 @@ open class DefaultEnemyStrategy(override val actionList : List<EnemyAction>) : E
                 }
             }
 
-            override fun runOnce(): Boolean {
-                return super.runOnce()
-            }
-
         })
     }
 
