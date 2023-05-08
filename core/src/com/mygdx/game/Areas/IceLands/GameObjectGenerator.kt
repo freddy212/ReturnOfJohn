@@ -119,6 +119,11 @@ fun getIceLandsLocationTwelveObjects(): List<GameObject>{
     val teleportTopLeft = TeleportPad(walkableTerrain2.topleft - Vector2(-100f,100f), Vector2(100f,50f), location5)
     val teleportTopRight = TeleportPad(walkableTerrain2.topright - Vector2(200f,100f), Vector2(100f,50f), location5)
 
+    teleportBottomLeft.connectedTeleportPads.addAll(mutableListOf(teleportBottomRight, teleportTopLeft, teleportTopRight))
+    teleportBottomRight.connectedTeleportPads.addAll(mutableListOf(teleportBottomLeft, teleportTopLeft, teleportTopRight))
+    teleportTopLeft.connectedTeleportPads.addAll(mutableListOf(teleportBottomRight, teleportBottomLeft, teleportTopRight))
+    teleportTopRight.connectedTeleportPads.addAll(mutableListOf(teleportBottomRight, teleportTopLeft, teleportBottomLeft))
+
     val iceQueen = IceQueen(walkableTerrain2.currentMiddle - Vector2(75f, 0f),Vector2(150f,150f), location5, listOf<TeleportPad>(teleportBottomLeft,teleportBottomRight, teleportTopLeft, teleportTopRight))
 
     return listOf(walkableTerrain,walkableTerrain2, iceQueen, teleportBottomLeft, teleportBottomRight, teleportTopLeft, teleportTopRight)

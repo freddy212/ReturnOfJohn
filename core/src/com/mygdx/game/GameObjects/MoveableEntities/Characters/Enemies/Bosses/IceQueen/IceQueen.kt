@@ -22,18 +22,14 @@ class IceQueen(Position: Vector2, size: Vector2, location: DefaultLocation?, tel
     val bottomRightMove = MoveTowardsPoint( this, teleportPoints[1].bottomleft - halfPadSize)
     val topLeftMove = MoveTowardsPoint( this, teleportPoints[2].bottomleft - halfPadSize)
     val topRightMove = MoveTowardsPoint( this, teleportPoints[3].bottomleft - halfPadSize)
-
-    val bottomLeftTeleport = TeleportToPoint( this, teleportPoints[0].bottomleft - halfPadSize)
-    val bottomRightTeleport = TeleportToPoint( this, teleportPoints[1].bottomleft - halfPadSize)
-    val topLeftTeleport = TeleportToPoint( this, teleportPoints[2].bottomleft - halfPadSize)
-    val topRightTeleport = TeleportToPoint( this, teleportPoints[3].bottomleft - halfPadSize)
-    private val randomMoveAction = RandomAction(listOf(bottomLeftMove, bottomRightMove, topLeftMove, topRightMove),
+    val randomMoveAction = RandomAction(listOf(bottomLeftMove, bottomRightMove, topLeftMove, topRightMove),
         DefaultTimer(1.5f), this, false)
-    private val randomTeleportAction = RandomAction(listOf(bottomLeftTeleport, bottomRightTeleport, topLeftTeleport, topRightTeleport),
+    /*private val randomTeleportAction = RandomAction(listOf(bottomLeftTeleport, bottomRightTeleport, topLeftTeleport, topRightTeleport),
         DefaultTimer(2.5f), this, canRepeat = false, changeAfterExecute = true
-    )
-    override val enemyStrategy = DefaultEnemyStrategy(listOf(randomMoveAction, randomTeleportAction,  ShootProjectile(::Icicle, Vector2(100f, 34f),this)))
-    override var baseSpeed = 5f
+    )*/
+    val iceQueenCloneAction = IceQueenCloneAction(this, listOf(teleportPoints[0], teleportPoints[1], teleportPoints[2], teleportPoints[3]))
+    override val enemyStrategy = DefaultEnemyStrategy(listOf(randomMoveAction,  ShootProjectile(::Icicle, Vector2(100f, 34f),this),iceQueenCloneAction))
+    override var baseSpeed = 3.5f
     override val texture = DefaultTextureHandler.getTexture("IceQueen.png")
     override val layer = Layer.PERSON
     override var direction = Direction.DOWN

@@ -15,7 +15,7 @@ class ShootProjectile(val projectileFactory: (Position: Vector2, Size: Vector2, 
         generateEnemyProjectile(projectileFactory,enemy,size)
     }
 
-    override val probability = 0.25
+    override val probability = 0.2
 
     override fun condition(): Boolean {
         return timer.tryUseCooldown()

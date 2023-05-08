@@ -24,7 +24,6 @@ abstract class Enemy(
 
 
     init {
-        this.onLocationExitActions.add(::changeLocation)
         this.onLocationEnterActions.add(::resetAggro)
         this.onLocationEnterActions.add(::resetHealth)
         this.onLocationEnterActions.add(::cleanUpAbilties)
@@ -45,15 +44,6 @@ abstract class Enemy(
             setAggroed()
         }
         super.isHit(other)
-    }
-
-    fun changeLocation(newLocation: DefaultLocation) {
-        val sameArea = this.defaultLocation!!.areaIdentifier == AreaManager.activeArea.identifier
-        if (sameArea) {
-            location?.removeGameObject(this)
-            location = newLocation
-            location?.addGameObject(this)
-        }
     }
     fun cleanUpAbilties(){
         enemyStrategy.actionList.forEach { it.cleanUp() }
