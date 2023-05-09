@@ -14,10 +14,13 @@ import com.mygdx.game.Managers.EventManager
 import com.mygdx.game.player
 import com.mygdx.game.times
 
-class HandleConveyerBeltEvent(val direction: Direction, val moveableObject: MoveableObject) : Event {
+enum class ConveyerBeltStrength{NORMAL, STRONG}
+
+class HandleConveyerBeltEvent(val direction: Direction, val moveableObject: MoveableObject,val conveyerBeltStrength: ConveyerBeltStrength) : Event {
     override fun execute() {
         if(moveableObject is Player){
-            player.moveModifier = Vector2(getDirectionUnitVector(direction) * player.baseSpeed)
+            val movementAmount = if(conveyerBeltStrength == ConveyerBeltStrength.NORMAL)  Vector2(getDirectionUnitVector(direction) * player.baseSpeed) else  Vector2(getDirectionUnitVector(direction) * player.baseSpeed * 1.5f)
+            player.moveModifier = movementAmount
             if (!player.hasMovedThisFrame) {
                 player.move(Vector2(0f, 0f))
                 player.setCharacterRotation(getDirectionUnitVector(direction))
@@ -37,17 +40,12 @@ class HandleConveyerBeltEvent(val direction: Direction, val moveableObject: Move
 
 }
 
-class ConveyerBeltCollition(val direction: Direction) : DefaultAreaEntranceCollition() {
-    val handleConveyerBeltEvent = HandleConveyerBeltEvent(direction, player)
+class ConveyerBeltCollition(val direction: Direction, val conveyerBeltStrength: ConveyerBeltStrength) : DefaultAreaEntranceCollition() {
+    val handleConveyerBeltEvent = HandleConveyerBeltEvent(direction, player, conveyerBeltStrength)
 
     override fun collitionHappened(collidedObject: GameObject) {
         if(collidedObject is Player || collidedObject is IceClone){
             movedInside(collidedObject)
-            if(collidedObject is IceClone){
-                println("here IceClone")
-            }
-            if(collidedObject is Player){
-            }
         }
     }
 
@@ -56,7 +54,7 @@ class ConveyerBeltCollition(val direction: Direction) : DefaultAreaEntranceColli
             EventManager.eventManager.add(handleConveyerBeltEvent)
         } else if (objectEntered is IceClone){
             println("is ice clone")
-            EventManager.eventManager.add(HandleConveyerBeltEvent(direction, objectEntered))
+            EventManager.eventManager.add(HandleConveyerBeltEvent(direction, objectEntered, conveyerBeltStrength))
         }
     }
 

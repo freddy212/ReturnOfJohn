@@ -29,10 +29,7 @@ import com.mygdx.game.Saving.SaveStateEntity
 import com.mygdx.game.Signal.Signals.ItemPickedUpSignal
 import com.mygdx.game.Signal.Signals.RemoveObjectSignal
 import com.mygdx.game.Utils.RectanglePolygon
-import kotlin.math.PI
-import kotlin.math.atan2
-import kotlin.math.pow
-import kotlin.math.sqrt
+import kotlin.math.*
 import kotlin.random.Random
 
 
@@ -255,7 +252,7 @@ fun checkOpposingDirections(player: Player, directionalObject: DirectionalObject
 }
 
 fun GetCollidingObjects(gameObjectToCheck: GameObject, polygonToCheck: Polygon, gameObjects: List<GameObject>): List<GameObject> {
-    val collidingObjects = gameObjects.filter {gameObjectToCheck.collitionMask.canCollideWith(it) && isPolygonsColliding(polygonToCheck, it.polygon) }
+    val collidingObjects = gameObjects.filter {gameObjectToCheck.collitionMask.canCollideWith(it) && it.collitionMask.canCollideWith(gameObjectToCheck) && isPolygonsColliding(polygonToCheck, it.polygon) }
     val filteredCollitions = collidingObjects.fold(
         collidingObjects
     ) { objects, nextObject -> nextObject.collition.filterCollitions(objects) }
@@ -348,14 +345,8 @@ fun generateEnemyProjectile(
     enemy: Enemy,
     size: Vector2
 ) {
-    var unitVector =
-        getUnitVectorTowardsPoint(Vector2(enemy.sprite.x, enemy.sprite.y), Vector2(player.sprite.x, player.sprite.y))
-    val random = Random.nextInt(2)
-    val clone = LocationManager.newDefaultLocation.gameObjects.List.find { it is IceClone }
-    if (random == 1 && clone != null) {
-        unitVector =
-            getUnitVectorTowardsPoint(Vector2(enemy.sprite.x, enemy.sprite.y), Vector2(clone.sprite.x, clone.sprite.y))
-    }
+    val cloneOrPlayer = getCloneOrPlayer()
+    val unitVector = getUnitVectorTowardsPoint(Vector2(enemy.sprite.x, enemy.sprite.y), Vector2(cloneOrPlayer.sprite.x, cloneOrPlayer.sprite.y))
     val enemyStart = enemy.currentMiddle
     enemy.defaultLocation!!.addGameObject(
         projectileFactory(
@@ -365,6 +356,16 @@ fun generateEnemyProjectile(
             ), size, enemy.defaultLocation!!, unitVector, enemy
         )
     )
+}
+
+fun getCloneOrPlayer(): GameObject{
+    var result: GameObject = player
+    val random = Random.nextInt(2)
+    val clone = LocationManager.newDefaultLocation.gameObjects.List.find { it is IceClone }
+    if (random == 1 && clone != null) {
+        result = clone
+    }
+    return result
 }
 
 fun createDoor(doorData: DoorData): Door {
@@ -408,4 +409,10 @@ fun handleAreaExitCheckAndAction(collition: Collition, objectLeaved: GameObject)
             collition.movedOutside(objectLeaved)
         }
     }
+}
+fun MoveableObject.circularMove(radius: Float, prevAngle: Float, angle: Float) {
+    val currentPos = Vector2(radius * cos(Radians(prevAngle)), radius * sin(Radians(prevAngle)))
+    val newPos = Vector2(radius * cos(Radians(angle)), radius * sin(Radians(angle)))
+    this.unitVectorDirection = (newPos - currentPos)
+    this.move(this.unitVectorDirection)
 }

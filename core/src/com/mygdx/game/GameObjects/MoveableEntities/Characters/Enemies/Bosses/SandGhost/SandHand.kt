@@ -15,6 +15,7 @@ import kotlin.math.cos
 import kotlin.math.sin
 import com.mygdx.game.*
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Player
+import com.mygdx.game.Interfaces.CollitionMask
 import com.mygdx.game.Interfaces.FightableEntity
 import com.mygdx.game.ItemAbilities.Shield
 import com.mygdx.game.Saving.DefaultSaveStateHandler
@@ -31,6 +32,7 @@ class SandHand(Position: Vector2, size: Vector2, location: DefaultLocation?, val
     override var baseSpeed = 1f
     override val movementStrategy = DefaultMovement(NoAction())
     override var unitVectorDirection = Vector2(0f,0f)
+    override val collitionMask = sandGhost.collitionMask
     val baseRadius = 200f
     var radius = baseRadius
     var angle = if(right) 0f else 180f
@@ -59,7 +61,7 @@ class SandHand(Position: Vector2, size: Vector2, location: DefaultLocation?, val
             this.setPosition(sandGhost.currentPosition() + currentPos)
             angle = (angle + increment) % 360f
             val newPos = Vector2(radius * cos(Radians(angle)), radius * sin(Radians(angle)))
-            unitVectorDirection = (newPos - currentPos)
+            this.unitVectorDirection = (newPos - currentPos)
             super.move(unitVectorDirection)
         }
 

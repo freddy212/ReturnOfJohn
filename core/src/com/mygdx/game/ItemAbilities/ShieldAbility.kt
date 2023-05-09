@@ -24,7 +24,7 @@ class ShieldAbility(): CharacterAbility(){
         shield.setActiveSide()
         LocationManager.newDefaultLocation.addGameObject(shield)
         player.freezeMoving()
-        EventManager.eventManager.add(ActionAfterFramesEvent(60f, ::inactiveAction))
+        EventManager.eventManager.add(ActionAfterFramesEvent(120f, ::inactiveAction))
     }
 
     override fun inactiveAction() {

@@ -8,7 +8,9 @@ import com.mygdx.game.Enums.Layer
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Bosses.Boss
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Bosses.SandGhost.Sartan
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Player
+import com.mygdx.game.GameObjects.MoveableEntities.IceClone
 import com.mygdx.game.Interfaces.MoveCollition
+import com.mygdx.game.ItemAbilities.Shield
 import com.mygdx.game.Locations.DefaultLocation
 import com.mygdx.game.plus
 
@@ -21,6 +23,7 @@ class Trifork(Position: Vector2, size: Vector2, defaultLocation: DefaultLocation
     override val layer = Layer.ONGROUND
     override val collition = TriforkCollision(this)
     var neutralState = true;
+    var movingTowards = false;
 
     val origOrigin = Vector2(sartan.sprite.originX, sartan.sprite.originY + 30f);
 
@@ -44,7 +47,15 @@ class Trifork(Position: Vector2, size: Vector2, defaultLocation: DefaultLocation
 class TriforkCollision(val trifork: Trifork) : MoveCollition {
     override fun collitionHappened(collidedObject: GameObject) {
         if (collidedObject is Player) {
+            trifork.movingTowards = false
             collidedObject.isHit(trifork)
+        }
+        if (collidedObject is Shield) {
+            trifork.movingTowards = false
+        }
+        if (collidedObject is IceClone){
+            collidedObject.removeFromLocation()
+            trifork.movingTowards = false
         }
     }
 

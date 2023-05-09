@@ -14,10 +14,10 @@ class FireLandsInitializer: AreaInitializer {
     override fun initializeArea(): Area {
         val area = DefaultArea(AreaIdentifier.FIRELANDS)
         val location1 = DefaultLocation(
-            Vector2(1500f, 1000f), Vector2(0f, 0f), ::getFireLandsLocationOneObjects, DamageLocationData()
+            Vector2(500f, 500f), Vector2(0f, 0f), ::getFireLandsLocationOneObjects
         )
         addLocation(location1, area)
-        val location2 = addLocationRelative(location1, Vector2(2800f, 1000f), InsertDirection.UP, area,
+        val location2 = addLocationRelative(location1, Vector2(1200f, 1000f), InsertDirection.UP, area,
             InsertDirection.MIDDLE, ::getFireLandsLocationTwoObjects,DamageLocationData())
         val location3 = addLocationRelative(location2, Vector2(200f, 1000f), InsertDirection.UP, area,
             InsertDirection.MIDDLE, ::getFireLandsLocationThreeObjects,DefaultLocationData())
@@ -33,6 +33,15 @@ class FireLandsInitializer: AreaInitializer {
         val location8 = addLocationRelative(location4, Vector2(800f,200f),InsertDirection.LEFT,area,InsertDirection.LEFT,{ listOf()})
 
         val location9 = addLocationRelative(location8, Vector2(600f,600f),InsertDirection.LEFT,area,InsertDirection.LEFT,::getFireLandsLocationNineObjects)
+        val location10 = addLocationRelative(location2, Vector2(400f, 200f), InsertDirection.RIGHT, area,
+            InsertDirection.MIDDLE, { listOf() }, DefaultLocationData(), Vector2(0f,100f)
+        )
+
+        val location11 = addLocationRelative(location10, Vector2(2000f, 500f), InsertDirection.RIGHT, area,
+            InsertDirection.MIDDLE, ::getFireLandsLocationElevenObjects, DamageLocationData())
+
+        location11.addAdjacentLocation(location2)
+
 
         return area
         //addLocationsToArea(area)

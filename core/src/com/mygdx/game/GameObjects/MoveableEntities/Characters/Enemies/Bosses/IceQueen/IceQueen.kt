@@ -1,5 +1,6 @@
 package com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Bosses.IceQueen
 
+import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.AI.EnemyActions.MoveTowardsPoint
 import com.mygdx.game.AI.EnemyActions.RandomAction

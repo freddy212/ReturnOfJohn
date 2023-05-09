@@ -3,10 +3,13 @@ package com.mygdx.game.Areas.FireLandsDungeon
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.*
 import com.mygdx.game.AbstractClasses.GameObject
+import com.mygdx.game.Collitions.ConveyerBeltStrength
 import com.mygdx.game.Collitions.DoorCollition
 import com.mygdx.game.Enums.Direction
+import com.mygdx.game.Enums.getDirectionUnitVector
 import com.mygdx.game.GameObjects.Other.Door
 import com.mygdx.game.GameObjects.Hazards.ConveyerBelt.ConveyerBelt
+import com.mygdx.game.GameObjects.Hazards.Generators.BoulderGenerator
 import com.mygdx.game.ItemAbilities.DashAbility
 import com.mygdx.game.GameObjects.ItemObjects.AbilityItemObject
 import com.mygdx.game.GameObjects.Terrain.WalkableTerrain
@@ -90,9 +93,20 @@ fun getFirelandsDungeonLocationElevenObjects(): List<GameObject>{
     return listOf(conveyerBeltRight)
 }
 
-fun getFirelandsDungeonLocationThirteenObjects(): List<GameObject>{
-    val location = LocationManager.findLocation("location13", AreaIdentifier.FIRELANDSDUNGEON)
-    val conveyerBeltLeft= ConveyerBelt(location.bottomleft,
-        Vector2(199f, 100f),location,Direction.LEFT)
-    return listOf(conveyerBeltLeft)
+fun getFirelandsDungeonLocationFifteenObjects(): List<GameObject>{
+    val location = LocationManager.findLocation("location15", AreaIdentifier.FIRELANDSDUNGEON)
+    val conveyerBeltDown= ConveyerBelt(location.bottomleft,
+        Vector2(location.width - 1, 50f),location,Direction.RIGHT, ConveyerBeltStrength.STRONG)
+    val conveyerBeltUp= ConveyerBelt(location.topleft - Vector2(0f,50f),
+        Vector2(location.width - 1, 50f),location,Direction.RIGHT, ConveyerBeltStrength.STRONG)
+    val boulderGenerator = BoulderGenerator(Vector2(location.currentMiddle.x, location.topleft.y), Vector2(128f,128f), getDirectionUnitVector(Direction.DOWN), location, 0f, 1.0f)
+    val boulderGenerator2 = BoulderGenerator(Vector2(location.currentMiddle.x - 156f, location.topleft.y), Vector2(128f,128f), getDirectionUnitVector(Direction.DOWN), location, 0f, 1.0f)
+    return listOf(conveyerBeltDown, conveyerBeltUp, boulderGenerator, boulderGenerator2)
+}
+
+fun getFirelandsDungeonLocationSixteenObjects(): List<GameObject>{
+    val location = LocationManager.findLocation("location16", AreaIdentifier.FIRELANDSDUNGEON)
+    val conveyerBeltDown= ConveyerBelt(location.bottomleft,
+        Vector2(location.width, location.height),location,Direction.DOWN, ConveyerBeltStrength.STRONG)
+    return listOf(conveyerBeltDown)
 }

@@ -30,7 +30,17 @@ class FireLandsDungeonInitializer: AreaInitializer {
         val location10 = addLocationRelative(location9, Vector2(400f,400f),DOWN,area,LEFT)
         val location11 = addLocationRelative(location1, Vector2(800f,100f), LEFT, area, DOWN, ::getFirelandsDungeonLocationElevenObjects)
         val location12 = addLocationRelative(location11, Vector2(100f,500f), UP, area, LEFT, { listOf()})
-        val location13 = addLocationRelative(location12, Vector2(500f,100f), RIGHT, area, UP, ::getFirelandsDungeonLocationThirteenObjects)
+        val location13 = addLocationRelative(location12, Vector2(1000f,300f), RIGHT, area, UP, { listOf() }, DefaultLocationData(), Vector2(-550f, 0f))
+        val location14 = addLocationRelative(location13, Vector2(100f,500f), UP, area, RIGHT, { listOf() }, DefaultLocationData())
+        val location15 = addLocationRelative(location14, Vector2(900f,200f), LEFT, area, UP, ::getFirelandsDungeonLocationFifteenObjects, DefaultLocationData())
+        val location16 = addLocationRelative(location15, Vector2(200f,300f), DOWN, area, LEFT, ::getFirelandsDungeonLocationSixteenObjects, DefaultLocationData())
+
+        location14.addAdjacentLocation(location13)
+        location14.addAdjacentLocation(location15)
+        location13.addAdjacentLocation(location15)
+        location16.addAdjacentLocation(location13)
+
+
 
         location10.addAdjacentLocation(location1)
         location8.addAdjacentLocation(location6)

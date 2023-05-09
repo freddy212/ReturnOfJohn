@@ -34,7 +34,7 @@ class DOTCollition : DefaultAreaEntranceCollition() {
     }
 
     override fun filterCollitions(gameObjects: List<GameObject>): List<GameObject> {
-        val dotCollitionObjects = gameObjects.filter { it.collition is DOTCollition }
+        val dotCollitionObjects = gameObjects.filter { it.collition is DOTCollition}
         return gameObjects.minus(dotCollitionObjects.toSet()) + dotCollitionObjects.take(1)
     }
 }

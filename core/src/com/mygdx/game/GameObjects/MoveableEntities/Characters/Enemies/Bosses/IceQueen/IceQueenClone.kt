@@ -2,6 +2,7 @@ package com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Bosses.Ic
 
 import EnemyCollition
 import com.badlogic.gdx.graphics.Texture
+import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.AI.EnemyActions.MoveTowardsPoint
 import com.mygdx.game.AI.EnemyActions.RandomAction
@@ -9,6 +10,7 @@ import com.mygdx.game.AbstractClasses.DefaultEnemyStrategy
 import com.mygdx.game.AbstractClasses.Enemy
 import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.Collitions.IllegalMoveCollition
+import com.mygdx.game.DefaultTextureHandler
 import com.mygdx.game.Enums.Direction
 import com.mygdx.game.Enums.Layer
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Bosses.Boss
@@ -49,6 +51,14 @@ class IceQueenClone(Position: Vector2, size: Vector2, location: DefaultLocation?
 
     override fun isHit(other: GameObject) {
         death()
+    }
+
+    init {
+        sprite.setAlpha(0.8f)
+    }
+
+    override fun render(batch: PolygonSpriteBatch) {
+        sprite.draw(batch)
     }
 }
 

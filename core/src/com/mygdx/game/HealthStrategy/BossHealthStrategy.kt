@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.g2d.Sprite
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.math.Vector3
 import com.mygdx.game.AbstractClasses.Enemy
-import com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Bosses.BoolHolder
 import com.mygdx.game.Interfaces.HealthStrategy
 import com.mygdx.game.camera
 import com.mygdx.game.drawHealthBar

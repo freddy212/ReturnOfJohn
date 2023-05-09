@@ -8,7 +8,7 @@ import com.mygdx.game.Interfaces.MoveCollition
 import com.mygdx.game.Locations.DefaultLocation
 import com.mygdx.game.player
 
-class RemoveDotDamageCollition(val collition: Collition) : MoveCollition {
+open class RemoveDotDamageCollition(val collition: Collition) : MoveCollition {
     override val canMoveAfterCollition = true
 
     override fun collitionHappened(collidedObject: GameObject) {
