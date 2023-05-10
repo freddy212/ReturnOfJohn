@@ -42,7 +42,7 @@ abstract class GameObject  (val initPosition: Vector2, val size: Vector2, var de
     open fun frameTask(){
         addToSceneGraph(this)
         for(property in properties.List){
-            property.frameTask()
+            addToSceneGraph(property)
         }
     }
     val onLocationEnterActions: MutableList<()-> Unit> = mutableListOf({})
@@ -55,18 +55,10 @@ abstract class GameObject  (val initPosition: Vector2, val size: Vector2, var de
         defaultLocation?.removeGameObject(this)
         this.defaultLocation = null
         onRemoveAction.forEach { it() }
-
-        for(property in properties.List){
-            property.removeFromLocation()
-        }
     }
     open fun addToLocation(location: DefaultLocation){
         location.addGameObject(this)
         this.defaultLocation = location
-
-        for(property in properties.List){
-            property.addToLocation(location)
-        }
     }
 
     open fun setPosition(position: Vector2) {

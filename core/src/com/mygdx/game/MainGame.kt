@@ -128,8 +128,7 @@ class MainGame : ApplicationAdapter() {
 
     fun drawrects(){
         val gameObjects = LocationManager.ActiveGameObjects
-        gameObjects.forEach{x -> drawPolygonShape(x.polygon,shapeRenderer)
-                            x.properties.List.forEach { drawPolygonShape(it.polygon,shapeRenderer)}}
+        gameObjects.forEach{x -> drawPolygonShape(x.polygon,shapeRenderer)}
     }
 
     override fun dispose() {

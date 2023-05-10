@@ -40,6 +40,15 @@ class FireLandsInitializer: AreaInitializer {
         val location11 = addLocationRelative(location10, Vector2(2000f, 500f), InsertDirection.RIGHT, area,
             InsertDirection.MIDDLE, ::getFireLandsLocationElevenObjects, DamageLocationData())
 
+        val location12 = addLocationRelative(location11, Vector2(800f, 300f), InsertDirection.RIGHT, area,
+            InsertDirection.MIDDLE)
+
+        val location13 = addLocationRelative(location12, Vector2(300f, 800f), InsertDirection.UP, area,
+            InsertDirection.RIGHT)
+
+        val location14 = addLocationRelative(location13, Vector2(1200f, 800f), InsertDirection.UP, area,
+            InsertDirection.MIDDLE, ::getFirelandsLocationFourteenObjects, DamageLocationData())
+
         location11.addAdjacentLocation(location2)
 
 

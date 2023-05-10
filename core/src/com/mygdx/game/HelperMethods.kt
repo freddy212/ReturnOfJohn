@@ -14,6 +14,7 @@ import com.mygdx.game.AbstractClasses.*
 import com.mygdx.game.Collitions.DoorCollition
 import com.mygdx.game.DataClasses.DoorData
 import com.mygdx.game.Enums.Direction
+import com.mygdx.game.Enums.Element
 import com.mygdx.game.Enums.ItemType
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Player
 import com.mygdx.game.GameObjects.Other.Door
@@ -24,6 +25,9 @@ import com.mygdx.game.Locations.DefaultLocationData
 import com.mygdx.game.Managers.AreaManager
 import com.mygdx.game.Managers.LocationManager
 import com.mygdx.game.Managers.SignalManager
+import com.mygdx.game.ObjectProperties.Fire
+import com.mygdx.game.ObjectProperties.Ice
+import com.mygdx.game.ObjectProperties.ROJParticleObject
 import com.mygdx.game.Saving.PlayerSaveState
 import com.mygdx.game.Saving.SaveStateEntity
 import com.mygdx.game.Signal.Signals.ItemPickedUpSignal
@@ -415,4 +419,12 @@ fun MoveableObject.circularMove(radius: Float, prevAngle: Float, angle: Float) {
     val newPos = Vector2(radius * cos(Radians(angle)), radius * sin(Radians(angle)))
     this.unitVectorDirection = (newPos - currentPos)
     this.move(this.unitVectorDirection)
+}
+
+fun getPropertyBasedOnElement(element: Element, gameObject: GameObject): ROJParticleObject?{
+    return when(element) {
+        Element.FIRE -> Fire(gameObject)
+        Element.ICE -> Ice(gameObject)
+        Element.EARTH -> null
+    }
 }

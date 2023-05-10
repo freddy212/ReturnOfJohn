@@ -6,17 +6,14 @@ import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.Collitions.DoorCollition
 import com.mygdx.game.Collitions.IllegalMoveCollition
 import com.mygdx.game.DataClasses.DoorData
-import com.mygdx.game.Enums.Direction
-import com.mygdx.game.Enums.Element
-import com.mygdx.game.Enums.ItemType
-import com.mygdx.game.Enums.Layer
+import com.mygdx.game.Enums.*
 import com.mygdx.game.GameObjects.Hazards.CircularPlatform
+import com.mygdx.game.GameObjects.Hazards.Generators.BoulderGenerator
 import com.mygdx.game.GameObjects.Other.Door
 import com.mygdx.game.GameObjects.Other.GenericGameObject
 import com.mygdx.game.GameObjects.ItemObjects.GenericInventoryItemObject
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Bosses.RockBoss.RockBoss
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Bosses.SandGhost.Sartan
-import com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Mobs.SmallDevil
 import com.mygdx.game.GameObjects.Terrain.FireObject
 import com.mygdx.game.GameObjects.Terrain.WalkableTerrain
 import com.mygdx.game.Interfaces.AreaIdentifier
@@ -104,6 +101,21 @@ fun getFireLandsLocationElevenObjects(): List<GameObject>{
     val circularPlatform3 = CircularPlatform(circularPlatform2.bottomright + Vector2(600f, 0f), Vector2(150f,100f), location11, 0f)
 
     return listOf(circularPlatform, circularPlatform2, circularPlatform3)
+}
+
+fun getFirelandsLocationFourteenObjects(): List<GameObject>{
+    val location13 = LocationManager.findLocation("location13",AreaIdentifier.FIRELANDS)
+    val location14 = LocationManager.findLocation("location14",AreaIdentifier.FIRELANDS)
+
+    val walkableTerrain = WalkableTerrain(location13.topleft, Vector2(location13.width, location14.height), location14)
+
+    val boulderGenerator1 = BoulderGenerator(location14.bottomleft + Vector2(0f,128f), Vector2(128f,128f), getDirectionUnitVector( Direction.RIGHT), location14, element = Element.FIRE)
+
+    val boulderGenerator2 = BoulderGenerator(location14.bottomright + Vector2(-128f,128 + 225f), Vector2(128f,128f), getDirectionUnitVector( Direction.LEFT), location14, element = Element.FIRE)
+
+    val boulderGenerator3 = BoulderGenerator(location14.bottomleft + Vector2(0f,128 + 450f), Vector2(128f,128f), getDirectionUnitVector( Direction.RIGHT), location14, element = Element.FIRE)
+
+    return listOf(walkableTerrain, boulderGenerator1, boulderGenerator2, boulderGenerator3)
 }
 
 

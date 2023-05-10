@@ -15,7 +15,7 @@ import com.mygdx.game.Saving.SaveStateEntity
 
 class FireObject(Position: Vector2, size: Vector2, objectAttached: GameObject, defaultLocation: DefaultLocation, collitionOnFire: MoveCollition) : GameObject(Position, size,defaultLocation),
                                                                                                         SaveStateEntity by DefaultSaveStateHandler() {
-        val fire = Fire(RemoveGameObjectEvent(this),this)
+        val fire = Fire(this,RemoveGameObjectEvent(this))
         override val collition = FireCollition(objectAttached.collition,collitionOnFire)
         override val texture = DefaultTextureHandler.getTexture("sensor.png")
         override val layer = Layer.ONGROUND

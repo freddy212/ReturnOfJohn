@@ -42,7 +42,7 @@ class RockBoss(Position: Vector2, size: Vector2, location: DefaultLocation?, ele
 
     init {
         val property = when(element){
-            Element.FIRE -> Fire(DefaultEvent(), this)
+            Element.FIRE -> Fire( this)
             Element.ICE -> Ice(this)
             Element.EARTH -> null
         }

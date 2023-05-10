@@ -9,6 +9,7 @@ import com.mygdx.game.Interfaces.AreaEntranceCollition
 import com.mygdx.game.Interfaces.Collition
 import com.mygdx.game.Interfaces.DefaultAreaEntranceCollition
 import com.mygdx.game.Locations.DefaultLocation
+import com.mygdx.game.minus
 
 class TeleportPad(initPosition: Vector2, size: Vector2, defaultLocation: DefaultLocation?) :
     GameObject(initPosition, size, defaultLocation) {
@@ -23,7 +24,7 @@ class TeleportPadCollition(val otherTeleportPads: MutableList<TeleportPad>): Def
     override val canMoveAfterCollition = true
     override fun movedInsideAction(objectEntered: GameObject) {
         val randomPad = getRandomTeleportPad()
-        objectEntered.setPosition(randomPad.currentPosition())
+        objectEntered.setPosition(randomPad.currentMiddle - Vector2(objectEntered.sprite.width/2, objectEntered.sprite.height / 2))
         randomPad.collition.insideCollition[objectEntered] = true
     }
 

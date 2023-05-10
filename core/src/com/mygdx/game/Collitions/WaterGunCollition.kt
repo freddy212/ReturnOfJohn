@@ -15,7 +15,8 @@ class WaterGunCollition(val waterBall: WaterBall) : ProjectileCollition(waterBal
         super.collitionHappened(collidedObject)
             val fire: Fire? = collidedObject.properties.List.find { it is Fire } as Fire?
             val ice: Ice? = collidedObject.properties.List.find { it is Ice } as Ice?
-            fire?.fireExtinguised()
+            if(fire != null) collidedObject.properties.remove(fire)
+            fire?.extinguishFireEvent?.execute()
             ice?.changeWater(waterBall)
             if(collidedObject is Projectile){
                 if(collidedObject is Fireball){

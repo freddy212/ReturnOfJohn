@@ -29,24 +29,12 @@ class BoulderCollition(val boulder: Projectile) : ProjectileCollition(boulder) {
 
         if(collidedObject is Projectile){
             if(collidedObject is Fireball && boulder.properties.List.filterIsInstance<Fire>().isEmpty()){
-                boulder.properties.add(Fire(DefaultEvent(),boulder))
+                boulder.properties.add(Fire(boulder))
             }
             if(collidedObject is Icicle && boulder.properties.List.filterIsInstance<Ice>().isEmpty()){
                 boulder.properties.add(Ice(boulder))
             }
             collidedObject.removeFromLocation()
-        }
-        if(collidedObject is DefaultLocation && collidedObject.locationStrategy is DamageLocationData && boulder.defaultLocation != null){
-            val locationData = collidedObject.locationStrategy
-            val location = boulder.defaultLocation!!
-            if(locationData.element == Element.FIRE && !boulder.properties.List.any { it is Fire }){
-                boulder.properties.clear()
-                boulder.properties.add(Fire(DefaultEvent(), boulder))
-            }
-            if(locationData.element == Element.ICE && !boulder.properties.List.any { it is Ice }){
-                boulder.properties.clear()
-                boulder.properties.add(Ice(boulder))
-            }
         }
     }
     override var canMoveAfterCollition = true

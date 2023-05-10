@@ -14,7 +14,6 @@ import com.mygdx.game.minus
 class Ice(objectOnIce: GameObject) :
     ROJParticleObject(ParticleEffect(), objectOnIce) {
     override val layer = Layer.FOREGROUND
-    override val soundEffectWhenEntered = SoundEffectWhenEntered.NONE
 
     init {
         val size = objectOnIce.size

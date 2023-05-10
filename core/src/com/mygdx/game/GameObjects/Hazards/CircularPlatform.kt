@@ -25,6 +25,7 @@ class CircularMovementEvent(val platform: CircularPlatform) : Event {
         if (!player.hasMovedThisFrame) {
             player.move(Vector2(0f, 0f))
         }
+        player.moveModifier = Vector2(0f,0f)
     }
 
 }

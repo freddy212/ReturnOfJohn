@@ -42,7 +42,7 @@ class IceLandsInitializer: AreaInitializer {
         val location10 = addLocationRelative(location2, Vector2(800f, 300f), InsertDirection.LEFT, area,
             InsertDirection.UP)
         val location11 = addLocationRelative(location10, Vector2(300f, 500f), InsertDirection.UP, area,
-            InsertDirection.LEFT)
+            InsertDirection.LEFT, ::getIceLandsLocationElevenObjects)
         val location12 = addLocationRelative(location11, Vector2(1500f, 1500f), InsertDirection.UP, area,
             InsertDirection.MIDDLE, ::getIceLandsLocationTwelveObjects,DamageLocationData(iceTexture))
         return area

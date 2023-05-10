@@ -8,9 +8,8 @@ import com.mygdx.game.Enums.Layer
 import com.mygdx.game.Events.DefaultEvent
 import com.mygdx.game.Interfaces.Event
 
-class Fire(val extinguishFireEvent: Event, objectOnFire: GameObject) : ROJParticleObject(ParticleEffect(),objectOnFire) {
+class Fire(objectOnFire: GameObject, val extinguishFireEvent: Event = DefaultEvent()) : ROJParticleObject(ParticleEffect(),objectOnFire) {
     override val layer = Layer.FOREGROUND
-    override val soundEffectWhenEntered = SoundEffectWhenEntered.FIRE
 
     init {
         particleEffect.load(Gdx.files.internal("ParticleEmitters/Fire.p"), Gdx.files.internal(""))
@@ -19,8 +18,4 @@ class Fire(val extinguishFireEvent: Event, objectOnFire: GameObject) : ROJPartic
 
         particleEffect.start()
 }
-    fun fireExtinguised(){
-        extinguishFireEvent.execute()
-        objectAttached.properties.remove(this)
-    }
 }

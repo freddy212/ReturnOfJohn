@@ -108,6 +108,20 @@ fun getIceLandsLocationNineObjects(): List<GameObject>{
     return listOf(stopGate, stopGate2, iceButton1, iceButton2, door)
 }
 
+fun getIceLandsLocationElevenObjects(): List<GameObject>{
+    val location11 = LocationManager.findLocation("location11",AreaIdentifier.ICELANDS)
+
+    val fence = Fence(location11.bottomleft + Vector2(0f,200f), Vector2(location11.width, 100f), location11)
+
+    val teleportBelowFence = TeleportPad(fence.bottomleft - Vector2(-location11.width/2 + 50,100f), Vector2(100f,50f), location11)
+    val teleportAboveFence = TeleportPad(fence.topleft - Vector2(-location11.width/2 + 50,- 100f), Vector2(100f,50f), location11)
+
+    teleportAboveFence.connectedTeleportPads.add(teleportBelowFence)
+    teleportBelowFence.connectedTeleportPads.add(teleportAboveFence)
+
+    return listOf(fence, teleportAboveFence, teleportBelowFence)
+}
+
 fun getIceLandsLocationTwelveObjects(): List<GameObject>{
     val location5 = LocationManager.findLocation("location12",AreaIdentifier.ICELANDS)
 

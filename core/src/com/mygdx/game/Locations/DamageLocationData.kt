@@ -9,11 +9,11 @@ import com.mygdx.game.Interfaces.LocationDataStrategy
 
 open class DamageLocationData(textureGiven: String = "Lava.jpg"): LocationDataStrategy {
     override val texture = DefaultTextureHandler.getTexture(textureGiven)
-    val element: Element = when(textureGiven){
+    /*val element: Element = when(textureGiven){
         "Lava.jpg" -> Element.FIRE
         "IceGround.png" -> Element.ICE
         else -> Element.EARTH
-    }
+    }*/
     override val initialization = {
             x: DefaultLocation -> x.addGameObject(Wall(x.initPosition, x.size, x))
     }
