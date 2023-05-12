@@ -14,10 +14,16 @@ import com.mygdx.game.GameObjects.Other.GenericGameObject
 import com.mygdx.game.GameObjects.ItemObjects.GenericInventoryItemObject
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Bosses.RockBoss.RockBoss
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Bosses.SandGhost.Sartan
+import com.mygdx.game.GameObjects.Other.DefaultBreakableObject
+import com.mygdx.game.GameObjects.Other.Thorns
 import com.mygdx.game.GameObjects.Terrain.FireObject
 import com.mygdx.game.GameObjects.Terrain.WalkableTerrain
 import com.mygdx.game.Interfaces.AreaIdentifier
 import com.mygdx.game.Managers.LocationManager
+import com.mygdx.game.Managers.SignalManager
+import com.mygdx.game.Signal.SignalListeners.ADDMETHODS
+import com.mygdx.game.Signal.Signals.AddObjectSignal
+import com.mygdx.game.Signal.Signals.RemoveObjectSignal
 
 
 fun getFireLandsLocationOneObjects(): List<GameObject>{
@@ -115,7 +121,23 @@ fun getFirelandsLocationFourteenObjects(): List<GameObject>{
 
     val boulderGenerator3 = BoulderGenerator(location14.bottomleft + Vector2(0f,128 + 450f), Vector2(128f,128f), getDirectionUnitVector( Direction.RIGHT), location14, element = Element.FIRE)
 
-    return listOf(walkableTerrain, boulderGenerator1, boulderGenerator2, boulderGenerator3)
+    val breakableObject = DefaultBreakableObject(Vector2(location14.currentMiddle.x - 100f, location14.topleft.y - 64f), Vector2(64f,64f), location14)
+    breakableObject.onRemoveAction.add {
+        val removeEvents: List<RemoveObjectSignal> = SignalManager.pastSignals.List.filter { it is RemoveObjectSignal }.map { it as RemoveObjectSignal }
+        val objectRemoved = removeEvents.find { it.entityId == breakableObject.entityId }
+        if(objectRemoved == null){
+            SignalManager.emitSignal(
+                AddObjectSignal(
+                    ADDMETHODS.FIRELANDSTOFROSTFIREDOOR,"location14",AreaIdentifier.FIRELANDS)
+            )
+            SignalManager.emitSignal(
+                AddObjectSignal(
+                    ADDMETHODS.FROSTFIRETOFIRELANDSDOOR,"location2",AreaIdentifier.FROSTFIRE)
+            )
+        }
+    }
+
+    return listOf(walkableTerrain, boulderGenerator1, boulderGenerator2, boulderGenerator3, breakableObject)
 }
 
 
