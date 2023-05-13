@@ -39,24 +39,14 @@ fun getFrostFireLocationFourObjects(): List<GameObject>{
 
 fun getFrostFireLocationSevenObjects(): List<GameObject>{
     val location = LocationManager.findLocation("location7", AreaIdentifier.FROSTFIRE)
-    val conveyerBelt = ConveyerBelt(location.initPosition, location.size - Vector2(100f, 0f), location, Direction.UP)
-    val fence = Fence(conveyerBelt.initPosition + Vector2(100f,200f), Vector2(location.width - 100f, 100f), location)
-    val fence2 = Fence(conveyerBelt.initPosition + Vector2(0f,500f), Vector2(location.width / 2 - 100f, 100f), location)
-    val fence3 = Fence(fence2.bottomright + Vector2(100f,0f), Vector2(200f, 100f), location)
+    val location6 = LocationManager.findLocation("location6", AreaIdentifier.FROSTFIRE)
 
-    val iceGate = IceGate(fence2.initPosition + Vector2(0f, 300f),Vector2(location.width - 100f,150f), location)
-    val fence4 = Fence(iceGate.bottomright, Vector2(100f,100f), location)
+    val iceGate = IceGate(location.bottomleft,Vector2(location.width,150f), location)
     val removeGateEvent = ButtonEvent(RemoveObjectPermanentlyEvent(iceGate), true)
-    val gateButton = IceButton(Vector2(fence2.bottomright + Vector2(0f, 150f)),Vector2(128f,32f),location,iceGate, removeGateEvent)
-    val gateButton2 = IceButton(Vector2(fence3.bottomright + Vector2(0f,150f)),Vector2(128f,32f),location,iceGate, removeGateEvent)
+    val gateButton = IceButton(Vector2(location6.bottomleft+  Vector2(100f, 100f)),Vector2(128f,32f),location,iceGate, removeGateEvent)
+    val gateButton2 = IceButton(Vector2(location6.bottomleft + Vector2(350f,100f)),Vector2(128f,32f),location,iceGate, removeGateEvent)
 
-    val finalGate = Fence(location.topleft - Vector2(0f,150f), Vector2(location.width - 100f,150f),location, DefaultTextureHandler.getTexture("FenceGate.png"), false)
-    val removeFenceEvent = RemoveObjectPermanentlyEvent(fence)
-    val buttonEvent = ButtonEvent(removeFenceEvent)
-    val doorButton1 = DoorButton(finalGate.topleft + Vector2(150f, 0f), Vector2(40f,30f),location,buttonEvent)
-    val doorButton2 = DoorButton(Vector2( finalGate.topright - Vector2(150f,0f)), Vector2(40f,30f),location,buttonEvent)
-
-    val fenceBeforeGateLeft = Fence(finalGate.initPosition - Vector2(0f,150f), Vector2(location.width / 2 - 100f, 100f), location)
-    val fenceBeforeGateRight= Fence(fenceBeforeGateLeft.bottomright + Vector2(100f,0f), Vector2(200f, 100f), location)
-    return listOf(conveyerBelt, fence, fence2, fence3, iceGate, gateButton,gateButton2, fence4, finalGate, doorButton1, doorButton2, fenceBeforeGateRight, fenceBeforeGateLeft)
+    //val fenceBeforeGateLeft = Fence(finalGate.initPosition - Vector2(0f,150f), Vector2(location.width / 2 - 100f, 100f), location)
+    //val fenceBeforeGateRight= Fence(fenceBeforeGateLeft.bottomright + Vector2(100f,0f), Vector2(200f, 100f), location)
+    return listOf(iceGate, gateButton,gateButton2)
 }

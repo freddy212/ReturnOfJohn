@@ -1,13 +1,10 @@
-{"playerXPos":1503.5708,"playerYPos":986.3816,"areaIdentifier":"ICELANDS","entityId":0}
+{"playerXPos":-1501.9939,"playerYPos":1040.8579,"areaIdentifier":"FROSTFIRE","entityId":0}
 {"signaltype":"ABILITY_GAINED","abilityId":"ICECLONE"}
 {"signaltype":"ABILITY_GAINED","abilityId":"SHIELD"}
 {"signaltype":"ABILITY_GAINED","abilityId":"DASH"}
-{"signaltype":"BUTTON_ACCEPTED","entityId":22}
 {"signaltype":"BUTTON_ACCEPTED","entityId":23}
+{"signaltype":"BUTTON_ACCEPTED","entityId":22}
 {"signaltype":"REMOVE_OBJECT","entityId":21}
 {"signaltype":"BUTTON_ACCEPTED","entityId":44}
 {"signaltype":"BUTTON_ACCEPTED","entityId":43}
 {"signaltype":"REMOVE_OBJECT","entityId":42}
-{"signaltype":"REMOVE_OBJECT","entityId":34}
-{"signaltype":"BUTTON_ACCEPTED","entityId":35}
-{"signaltype":"BUTTON_ACCEPTED","entityId":36}
