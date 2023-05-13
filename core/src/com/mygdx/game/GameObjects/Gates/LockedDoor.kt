@@ -1,4 +1,4 @@
-package com.mygdx.game.GameObjects.Other
+package com.mygdx.game.GameObjects.Gates
 
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.AbstractClasses.GameObject

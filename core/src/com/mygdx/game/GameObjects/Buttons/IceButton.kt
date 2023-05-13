@@ -1,4 +1,4 @@
-package com.mygdx.game.GameObjects.Other
+package com.mygdx.game.GameObjects.Buttons
 
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch
@@ -15,7 +15,6 @@ import com.mygdx.game.Locations.DefaultLocation
 import com.mygdx.game.Managers.LocationManager
 import com.mygdx.game.Saving.DefaultSaveStateHandler
 import com.mygdx.game.Saving.SaveStateEntity
-import com.mygdx.game.player
 
 
 class IceButton(

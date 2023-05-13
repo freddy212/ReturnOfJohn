@@ -1,4 +1,4 @@
-package com.mygdx.game.GameObjects.Other
+package com.mygdx.game.GameObjects.Gates
 
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.AbstractClasses.GameObject
@@ -16,7 +16,6 @@ class StopGate(Position: Vector2, size: Vector2, val location: DefaultLocation) 
     override val collition = IllegalMoveCollition
     override fun buttonPressed() {
         this.removeFromLocation()
-        println("here")
     }
 
     override fun buttonReleased() {

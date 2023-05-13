@@ -11,6 +11,10 @@ import com.mygdx.game.Enums.Layer
 import com.mygdx.game.Enums.getDirectionUnitVector
 import com.mygdx.game.Events.ButtonEvent
 import com.mygdx.game.Events.RemoveObjectPermanentlyEvent
+import com.mygdx.game.GameObjects.Buttons.DoorButton.DoorButton
+import com.mygdx.game.GameObjects.Buttons.IceButton
+import com.mygdx.game.GameObjects.Gates.Fence
+import com.mygdx.game.GameObjects.Gates.IceGate
 import com.mygdx.game.GameObjects.Hazards.Generators.IceGenerator
 import com.mygdx.game.GameObjects.Hazards.Generators.RocketGenerator
 import com.mygdx.game.ItemAbilities.IceCloneAbility

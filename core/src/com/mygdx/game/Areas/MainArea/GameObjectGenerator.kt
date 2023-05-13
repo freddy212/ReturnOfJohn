@@ -7,20 +7,17 @@ import com.mygdx.game.Collitions.*
 import com.mygdx.game.Enums.*
 import com.mygdx.game.Events.ButtonEvent
 import com.mygdx.game.Events.RemoveObjectPermanentlyEvent
-import com.mygdx.game.GameObjects.Hazards.ConveyerBelt.ConveyerBelt
+import com.mygdx.game.GameObjects.Buttons.DoorButton.DoorButton
+import com.mygdx.game.GameObjects.Gates.Fence
 import com.mygdx.game.GameObjects.Hazards.Generators.BoulderGenerator
 import com.mygdx.game.GameObjects.ItemObjects.GenericInventoryItemObject
-import com.mygdx.game.GameObjects.MoveableEntities.Projectiles.Boulder
 import com.mygdx.game.GameObjects.Other.*
 import com.mygdx.game.GameObjects.Terrain.IceObject
 import com.mygdx.game.GameObjects.Terrain.WalkableTerrain
 import com.mygdx.game.Interfaces.AreaIdentifier
-import com.mygdx.game.Interfaces.MoveCollition
 import com.mygdx.game.Managers.LocationManager
-import com.mygdx.game.Managers.SignalManager
 import com.mygdx.game.Saving.DefaultSaveStateHandler
 import com.mygdx.game.Saving.SaveStateEntity
-import com.mygdx.game.Signal.Signals.RemoveObjectSignal
 
 fun getLocationOneObjects(): List<GameObject>{
 

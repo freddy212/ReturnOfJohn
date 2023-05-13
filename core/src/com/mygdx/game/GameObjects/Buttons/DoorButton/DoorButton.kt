@@ -1,4 +1,4 @@
-package com.mygdx.game.GameObjects.Other
+package com.mygdx.game.GameObjects.Buttons.DoorButton
 
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch
@@ -17,15 +17,14 @@ import com.mygdx.game.Managers.SignalManager
 import com.mygdx.game.Saving.DefaultSaveStateHandler
 import com.mygdx.game.Saving.SaveStateEntity
 import com.mygdx.game.Signal.Signals.ButtonAcceptedSignal
-import kotlin.math.sign
 
-class DoorButton(initPosition: Vector2, size: Vector2, defaultLocation: DefaultLocation?, doorButtonEvent: ButtonEvent, val direction:Direction = Direction.UP) :
+open class DoorButton(initPosition: Vector2, size: Vector2, defaultLocation: DefaultLocation?,val doorButtonEvent: ButtonEvent, val direction:Direction = Direction.UP) :
     GameObject(initPosition, size, defaultLocation), SaveStateEntity by DefaultSaveStateHandler(), Button {
     override var activated = false
     override val texture = DefaultTextureHandler.getTexture("DoorButton.png")
     override val layer = Layer.AIR
     override val polygon = Polygon()
-    override val collition = DoorButtonCollition(doorButtonEvent, this)
+    override val collition by lazy { DoorButtonCollition(this) }
 
     init {
         if(direction == Direction.UP){
@@ -41,15 +40,17 @@ class DoorButton(initPosition: Vector2, size: Vector2, defaultLocation: DefaultL
         sprite.color = if(activated) Color.GREEN else Color.RED
         super.render(batch)
     }
+    fun acceptButton(){
+        this.activated = true
+        SignalManager.emitSignal(ButtonAcceptedSignal(this.entityId))
+        doorButtonEvent.execute()
+    }
 }
 
-class DoorButtonCollition(val doorButtonEvent: ButtonEvent, val doorButton: DoorButton): MoveCollition {
+open class DoorButtonCollition(val doorButton: DoorButton): MoveCollition {
     override fun collitionHappened(collidedObject: GameObject) {
         if(collidedObject is Icicle && !doorButton.activated){
-            doorButton.activated = true
-            SignalManager.emitSignal(ButtonAcceptedSignal(doorButton.entityId))
-            doorButtonEvent.execute()
-            collidedObject.removeFromLocation()
+            doorButton.acceptButton()
         }
     }
 

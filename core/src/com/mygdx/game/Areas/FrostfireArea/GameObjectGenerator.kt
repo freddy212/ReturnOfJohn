@@ -10,10 +10,10 @@ import com.mygdx.game.Events.ButtonEvent
 import com.mygdx.game.Events.RemoveObjectPermanentlyEvent
 import com.mygdx.game.GameObjects.Hazards.ConveyerBelt.ConveyerBelt
 import com.mygdx.game.GameObjects.Hazards.Generators.BoulderGenerator
-import com.mygdx.game.GameObjects.Other.DoorButton
-import com.mygdx.game.GameObjects.Other.Fence
-import com.mygdx.game.GameObjects.Other.IceButton
-import com.mygdx.game.GameObjects.Other.IceGate
+import com.mygdx.game.GameObjects.Buttons.DoorButton.DoorButton
+import com.mygdx.game.GameObjects.Gates.Fence
+import com.mygdx.game.GameObjects.Buttons.IceButton
+import com.mygdx.game.GameObjects.Gates.IceGate
 import com.mygdx.game.GameObjects.Terrain.WalkableTerrain
 import com.mygdx.game.Interfaces.AreaIdentifier
 import com.mygdx.game.Managers.LocationManager

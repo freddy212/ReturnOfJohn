@@ -3,6 +3,7 @@ package com.mygdx.game.Areas.IceLands
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.*
 import com.mygdx.game.AbstractClasses.GameObject
+import com.mygdx.game.Collitions.ConveyerBeltStrength
 import com.mygdx.game.Events.ButtonEvent
 import com.mygdx.game.Collitions.DoorCollition
 import com.mygdx.game.DataClasses.DoorData
@@ -12,10 +13,16 @@ import com.mygdx.game.Enums.Layer
 import com.mygdx.game.Enums.getDirectionUnitVector
 import com.mygdx.game.Events.DefaultEvent
 import com.mygdx.game.Events.RemoveObjectPermanentlyEvent
+import com.mygdx.game.GameObjects.Buttons.DoorButton.DoorButton
+import com.mygdx.game.GameObjects.Buttons.DoorButton.DoorButtonDelayed
+import com.mygdx.game.GameObjects.Buttons.IceButton
+import com.mygdx.game.GameObjects.Gates.Fence
+import com.mygdx.game.GameObjects.Gates.IceGate
+import com.mygdx.game.GameObjects.Gates.StopGate
+import com.mygdx.game.GameObjects.Hazards.ConveyerBelt.ConveyerBelt
 import com.mygdx.game.GameObjects.Hazards.Generators.RocketGenerator
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Bosses.IceQueen.IceQueen
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Bosses.RockBoss.RockBoss
-import com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Bosses.SandGhost.Sartan
 import com.mygdx.game.GameObjects.Other.*
 import com.mygdx.game.GameObjects.Terrain.IceObject
 import com.mygdx.game.GameObjects.Terrain.TeleportPad
@@ -93,21 +100,39 @@ fun getIceLandsLocationSevenObjects(): List<GameObject> {
     return listOf(walkableTerrain, rockBoss)
 }
 
+fun getIceLandsLocationEightObjects(): List<GameObject> {
+    val location8 = LocationManager.findLocation("location8", AreaIdentifier.ICELANDS)
+    val location9 = LocationManager.findLocation("location9", AreaIdentifier.ICELANDS)
+
+    val fence = Fence(location9.bottomleft, Vector2(location9.width - 100f,100f),location8, DefaultTextureHandler.getTexture("FenceGate.png"), false)
+    val removeFenceEvent = RemoveObjectPermanentlyEvent(fence)
+    val buttonEvent = ButtonEvent(removeFenceEvent)
+    val doorButton1 = DoorButtonDelayed(Vector2( location8.topright.x - 80f, location8.topright.y), Vector2(40f,30f),location8,buttonEvent)
+    val doorButton2 = DoorButtonDelayed(Vector2( location8.currentMiddle.x + 40f, location8.topright.y), Vector2(40f,30f),location8,buttonEvent)
+
+    doorButton1.otherButtons.add(doorButton2)
+    doorButton2.otherButtons.add(doorButton1)
+
+    return listOf(fence, doorButton1, doorButton2)
+}
+
+
 fun getIceLandsLocationNineObjects(): List<GameObject>{
     val location9 = LocationManager.findLocation("location9", AreaIdentifier.ICELANDS)
 
     val dummyEvent = ButtonEvent(DefaultEvent())
-    val stopGate = StopGate(location9.bottomleft + Vector2(0f,300f), Vector2(location9.width, 82f * 2), location9)
-    val stopGate2 = StopGate(location9.bottomleft + Vector2(0f,600f), Vector2(location9.width, 82f * 2), location9)
+    val stopGate = StopGate(location9.bottomleft + Vector2(0f,300f), Vector2(location9.width - 100f, 82f * 2), location9)
+    val stopGate2 = StopGate(location9.bottomleft + Vector2(0f,600f), Vector2(location9.width - 100f, 82f * 2), location9)
 
-    val iceButton1 = IceButton(Vector2(location9.currentMiddle.x - 64f, location9.bottomleft.y + 150f), Vector2(128f, 32f), location9,stopGate, dummyEvent)
-    val iceButton2 = IceButton(Vector2(location9.currentMiddle.x - 64f, location9.bottomleft.y + 500f), Vector2(128f, 32f), location9,stopGate2, dummyEvent)
+    val iceButton1 = IceButton(Vector2(location9.currentMiddle.x - 114f, location9.bottomleft.y + 150f), Vector2(128f, 32f), location9,stopGate, dummyEvent)
+    val iceButton2 = IceButton(Vector2(location9.currentMiddle.x - 114f, location9.bottomleft.y + 500f), Vector2(128f, 32f), location9,stopGate2, dummyEvent)
+
+    val conveyerBelt = ConveyerBelt(Vector2(location9.topright.x - 100f, location9.bottomright.y), Vector2(100f, location9.height), location9, Direction.DOWN, ConveyerBeltStrength.STRONG)
 
     val door = createDoor(DoorData(Vector2(location9.originalMiddle.x - 32f, location9.topleft.y),AreaIdentifier.ICELANDS, AreaIdentifier.FROSTFIRE,"location9",Direction.UP,"IcelandsFrostfire"))
 
-    return listOf(stopGate, stopGate2, iceButton1, iceButton2, door)
+    return listOf(stopGate, stopGate2, iceButton1, iceButton2, door, conveyerBelt)
 }
-
 fun getIceLandsLocationElevenObjects(): List<GameObject>{
     val location11 = LocationManager.findLocation("location11",AreaIdentifier.ICELANDS)
 

@@ -18,7 +18,7 @@ enum class ConveyerBeltStrength{NORMAL, STRONG}
 
 class HandleConveyerBeltEvent(val direction: Direction, val moveableObject: MoveableObject,val conveyerBeltStrength: ConveyerBeltStrength) : Event {
     override fun execute() {
-        if(moveableObject is Player){
+        if(moveableObject is Player && this in EventManager.eventManager.List){
             val movementAmount = if(conveyerBeltStrength == ConveyerBeltStrength.NORMAL)  Vector2(getDirectionUnitVector(direction) * player.baseSpeed) else  Vector2(getDirectionUnitVector(direction) * player.baseSpeed * 1.5f)
             player.moveModifier = movementAmount
             if (!player.hasMovedThisFrame) {
@@ -30,7 +30,6 @@ class HandleConveyerBeltEvent(val direction: Direction, val moveableObject: Move
         if(moveableObject is IceClone){
             moveableObject.moveModifier = Vector2(getDirectionUnitVector(direction) * (player.baseSpeed / 2))
             moveableObject.move(Vector2(0f,0f))
-            println("here")
 
             if(moveableObject !in player.defaultLocation!!.gameObjects.List){
                 EventManager.eventManager.remove(this)
