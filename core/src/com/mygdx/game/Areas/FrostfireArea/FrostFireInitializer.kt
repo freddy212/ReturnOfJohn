@@ -34,6 +34,8 @@ class FrostFireInitializer():AreaInitializer {
             addLocationRelative(location4, Vector2(1500f, 200f), InsertDirection.LEFT, area, InsertDirection.MIDDLE, { listOf()})
         val location7 =
             addLocationRelative(location6, Vector2(600f, 1300f), InsertDirection.UP, area, InsertDirection.LEFT, ::getFrostFireLocationSevenObjects)
+        val location8 =
+            addLocationRelative(location7, Vector2(200f, 400f), InsertDirection.UP, area, InsertDirection.MIDDLE)
 
         location2.addAdjacentLocation(location4)
         location2.addAdjacentLocation(location5)

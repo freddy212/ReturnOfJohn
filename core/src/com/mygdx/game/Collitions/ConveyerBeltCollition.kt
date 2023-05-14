@@ -28,12 +28,13 @@ class HandleConveyerBeltEvent(val direction: Direction, val moveableObject: Move
         }
 
         if(moveableObject is IceClone){
-            moveableObject.moveModifier = Vector2(getDirectionUnitVector(direction) * (player.baseSpeed / 2))
-            moveableObject.move(Vector2(0f,0f))
-
             if(moveableObject !in player.defaultLocation!!.gameObjects.List){
                 EventManager.eventManager.remove(this)
+            } else {
+                moveableObject.moveModifier = Vector2(getDirectionUnitVector(direction) * (player.baseSpeed / 2))
+                moveableObject.move(Vector2(0f,0f))
             }
+
         }
     }
 
@@ -41,6 +42,7 @@ class HandleConveyerBeltEvent(val direction: Direction, val moveableObject: Move
 
 class ConveyerBeltCollition(val direction: Direction, val conveyerBeltStrength: ConveyerBeltStrength) : DefaultAreaEntranceCollition() {
     val handleConveyerBeltEvent = HandleConveyerBeltEvent(direction, player, conveyerBeltStrength)
+    var handleIceCloneConveyerBeltEvent: HandleConveyerBeltEvent? = null
 
     override fun collitionHappened(collidedObject: GameObject) {
         if(collidedObject is Player || collidedObject is IceClone){
@@ -53,7 +55,8 @@ class ConveyerBeltCollition(val direction: Direction, val conveyerBeltStrength: 
             EventManager.eventManager.add(handleConveyerBeltEvent)
         } else if (objectEntered is IceClone){
             println("is ice clone")
-            EventManager.eventManager.add(HandleConveyerBeltEvent(direction, objectEntered, conveyerBeltStrength))
+            handleIceCloneConveyerBeltEvent = HandleConveyerBeltEvent(direction, objectEntered, conveyerBeltStrength)
+            EventManager.eventManager.add(handleIceCloneConveyerBeltEvent!!)
         }
     }
 
@@ -61,6 +64,9 @@ class ConveyerBeltCollition(val direction: Direction, val conveyerBeltStrength: 
         if(objectLeaved is Player){
             EventManager.eventManager.remove(handleConveyerBeltEvent)
             player.moveModifier = Vector2(0f,0f)
+        }
+        else if(objectLeaved is IceClone){
+            EventManager.eventManager.remove(handleIceCloneConveyerBeltEvent!!)
         }
     }
 }

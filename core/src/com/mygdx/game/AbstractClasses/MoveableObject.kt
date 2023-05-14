@@ -61,9 +61,4 @@ abstract class MoveableObject(Position: Vector2, size: Vector2, defaultLocation:
     fun setCurrentSpeed(float: Float) {
         currentSpeed = float
     }
-
-    override fun removeFromLocation() {
-        super.removeFromLocation()
-    }
-
 }

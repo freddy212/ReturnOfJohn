@@ -1,4 +1,4 @@
-{"playerXPos":-1501.9939,"playerYPos":1040.8579,"areaIdentifier":"FROSTFIRE","entityId":0}
+{"playerXPos":-902.9781,"playerYPos":1088.9609,"areaIdentifier":"FROSTFIRE","entityId":0}
 {"signaltype":"ABILITY_GAINED","abilityId":"ICECLONE"}
 {"signaltype":"ABILITY_GAINED","abilityId":"SHIELD"}
 {"signaltype":"ABILITY_GAINED","abilityId":"DASH"}
@@ -8,3 +8,9 @@
 {"signaltype":"BUTTON_ACCEPTED","entityId":44}
 {"signaltype":"BUTTON_ACCEPTED","entityId":43}
 {"signaltype":"REMOVE_OBJECT","entityId":42}
+{"signaltype":"REMOVE_OBJECT","entityId":67}
+{"signaltype":"BUTTON_ACCEPTED","entityId":68}
+{"signaltype":"BUTTON_ACCEPTED","entityId":69}
+{"signaltype":"BUTTON_ACCEPTED","entityId":74}
+{"signaltype":"BUTTON_ACCEPTED","entityId":73}
+{"signaltype":"REMOVE_OBJECT","entityId":72}
