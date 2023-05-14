@@ -7,6 +7,7 @@ import com.mygdx.game.Collitions.DoorCollition
 import com.mygdx.game.Collitions.IllegalMoveCollition
 import com.mygdx.game.DataClasses.DoorData
 import com.mygdx.game.Enums.*
+import com.mygdx.game.GameObjects.Gates.FireGate
 import com.mygdx.game.GameObjects.Hazards.CircularPlatform
 import com.mygdx.game.GameObjects.Hazards.Generators.BoulderGenerator
 import com.mygdx.game.GameObjects.Other.Door
@@ -75,6 +76,14 @@ fun getFireLandsLocationFiveObjects(): List<GameObject>{
     return listOf(walkableTerrain,walkableTerrain2, sartan)
 }
 
+fun getFireLandsLocationSixObjects(): List<GameObject>{
+    val location6 = LocationManager.findLocation("location6",AreaIdentifier.FIRELANDS)
+
+    val fireGate = FireGate(location6.bottomleft, Vector2(location6.width, 100f), location6)
+
+    return listOf(fireGate)
+}
+
 fun getFireLandsLocationSevenObjects(): List<GameObject>{
     val location7 = LocationManager.findLocation("location7",AreaIdentifier.FIRELANDS)
     val location6 = LocationManager.findLocation("location6",AreaIdentifier.FIRELANDS)
@@ -86,6 +95,8 @@ fun getFireLandsLocationSevenObjects(): List<GameObject>{
     "location7",Direction.DOWN,"WastelandFirelands"))
     return listOf(walkableTerrain, door, RockBoss)
 }
+
+
 
 fun getFireLandsLocationNineObjects(): List<GameObject>{
     val location9 = LocationManager.findLocation("location9",AreaIdentifier.FIRELANDS)

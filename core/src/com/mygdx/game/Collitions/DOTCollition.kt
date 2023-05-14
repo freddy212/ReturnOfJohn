@@ -10,7 +10,7 @@ import com.mygdx.game.player
 
 class InsideAreaEvent() : Event {
     override fun execute() {
-        player.loseHealth(0.5f, false)
+        player.loseHealth(1f, false)
     }
 
 }

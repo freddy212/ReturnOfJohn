@@ -1,4 +1,4 @@
-{"playerXPos":-902.9781,"playerYPos":1088.9609,"areaIdentifier":"FROSTFIRE","entityId":0}
+{"playerXPos":-4.209361,"playerYPos":904.5171,"areaIdentifier":"ICELANDS","entityId":0}
 {"signaltype":"ABILITY_GAINED","abilityId":"ICECLONE"}
 {"signaltype":"ABILITY_GAINED","abilityId":"SHIELD"}
 {"signaltype":"ABILITY_GAINED","abilityId":"DASH"}
@@ -14,3 +14,12 @@
 {"signaltype":"BUTTON_ACCEPTED","entityId":74}
 {"signaltype":"BUTTON_ACCEPTED","entityId":73}
 {"signaltype":"REMOVE_OBJECT","entityId":72}
+{"signaltype":"REMOVE_OBJECT","entityId":19}
+{"signaltype":"REMOVE_OBJECT","entityId":30}
+{"signaltype":"ADD_OBJECT","addMethod":"FIRELANDSTOFROSTFIREDOOR","location":"location14","areaIdentifier":"FIRELANDS"}
+{"signaltype":"ADD_OBJECT","addMethod":"FROSTFIRETOFIRELANDSDOOR","location":"location2","areaIdentifier":"FROSTFIRE"}
+{"signaltype":"ITEM_PICKED_UP","itemType":"FLUTEOFAWAKENING"}
+{"signaltype":"REMOVE_OBJECT","entityId":26}
+{"signaltype":"REMOVE_OBJECT","entityId":65}
+{"signaltype":"ADD_OBJECT","addMethod":"DOOR1","location":"location1","areaIdentifier":"MAINAREA"}
+{"signaltype":"ADD_OBJECT","addMethod":"DOOR2","location":"location10","areaIdentifier":"WASTELAND"}
