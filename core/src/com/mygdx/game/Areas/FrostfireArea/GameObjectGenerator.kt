@@ -14,6 +14,8 @@ import com.mygdx.game.GameObjects.Buttons.DoorButton.DoorButtonDelayed
 import com.mygdx.game.GameObjects.Gates.Fence
 import com.mygdx.game.GameObjects.Buttons.IceButton
 import com.mygdx.game.GameObjects.Gates.IceGate
+import com.mygdx.game.GameObjects.Hazards.Generators.RocketGenerator
+import com.mygdx.game.GameObjects.Other.DefaultBreakableObject
 import com.mygdx.game.GameObjects.Terrain.TeleportPad
 import com.mygdx.game.GameObjects.Terrain.WalkableTerrain
 import com.mygdx.game.Interfaces.AreaIdentifier
@@ -47,6 +49,24 @@ fun getFrostFireLocationSevenObjects(): List<GameObject>{
     val gateButton = IceButton(Vector2(location6.bottomleft+  Vector2(100f, 100f)),Vector2(128f,32f),location,iceGate, removeGateEvent)
     val gateButton2 = IceButton(Vector2(location6.bottomleft + Vector2(350f,100f)),Vector2(128f,32f),location,iceGate, removeGateEvent)
 
+    val rocketGenerator = RocketGenerator(location.bottomleft + Vector2(0f,200f), Vector2(100f,100f), getDirectionUnitVector(Direction.RIGHT), location, 0f,3f,500f,4.5f)
+
+    val breakableObject = DefaultBreakableObject(rocketGenerator.bottomright + Vector2(250f, -25f), Vector2(150f,150f), location)
+
+    val fenceAfterTeleportPadBreakableObject = Fence(rocketGenerator.bottomleft + Vector2(0f,150f), Vector2(location.width, 100f), location)
+
+    val teleportPadBreakableObject = TeleportPad(breakableObject.initPosition + Vector2(25f,50f), Vector2(100f,50f), location)
+
+    val teleportPadAfterFence = TeleportPad(fenceAfterTeleportPadBreakableObject.topleft + Vector2(50f,50f), Vector2(100f,50f), location)
+
+    teleportPadBreakableObject.connectedTeleportPads.add(teleportPadAfterFence)
+    teleportPadAfterFence.connectedTeleportPads.add(teleportPadBreakableObject)
+
+    val fenceAfterBreakableObjectLeft = Fence(location.topleft - Vector2(0f,1000f), Vector2(location.width / 2 -50f, 100f), location)
+    val fenceAfterBreakableObjectRight= Fence(fenceAfterBreakableObjectLeft.bottomright + Vector2(100f,0f), Vector2(250f, 100f), location)
+
+    val breakableObjectBeforeFence = DefaultBreakableObject(fenceAfterBreakableObjectLeft.bottomright - Vector2(0f,100f), Vector2(100f,150f), location)
+
     val fenceBeforeGateLeft = Fence(location.topleft - Vector2(0f,800f), Vector2(location.width / 2 -50f, 100f), location)
     val fenceBeforeGateRight= Fence(fenceBeforeGateLeft.bottomright + Vector2(100f,0f), Vector2(250f, 100f), location)
 
@@ -75,5 +95,5 @@ fun getFrostFireLocationSevenObjects(): List<GameObject>{
     teleportRightConveyerBelt.connectedTeleportPads.add(teleportAboveFenceRight)
     teleportAboveFenceRight.connectedTeleportPads.add(teleportRightConveyerBelt)
     //teleportBelowFence.connectedTeleportPads.add(teleportAboveFence)
-    return listOf(iceGate, gateButton,gateButton2, fenceBeforeGateRight, fenceBeforeGateLeft, conveyerBelt, gateFence, doorButton1, doorButton2, teleportLeftConveyerBelt, teleportRightConveyerBelt, teleportFence, teleportAboveFenceLeft, teleportAboveFenceRight)
+    return listOf(iceGate, gateButton,gateButton2, fenceBeforeGateRight, fenceBeforeGateLeft, conveyerBelt, gateFence, doorButton1, doorButton2, teleportLeftConveyerBelt, teleportRightConveyerBelt, teleportFence, teleportAboveFenceLeft, teleportAboveFenceRight, rocketGenerator, breakableObject, teleportPadBreakableObject, fenceAfterTeleportPadBreakableObject, teleportPadAfterFence, fenceAfterBreakableObjectLeft, fenceAfterBreakableObjectRight, breakableObjectBeforeFence)
 }

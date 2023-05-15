@@ -14,7 +14,7 @@ import com.mygdx.game.minus
 class TeleportPad(initPosition: Vector2, size: Vector2, defaultLocation: DefaultLocation?) :
     GameObject(initPosition, size, defaultLocation) {
     override val texture = DefaultTextureHandler.getTexture("TeleportPad.png")
-    override val layer = Layer.ONGROUND
+    override val layer = Layer.GROUND
     val connectedTeleportPads: MutableList<TeleportPad> = mutableListOf()
     override val collition = TeleportPadCollition(connectedTeleportPads)
 }

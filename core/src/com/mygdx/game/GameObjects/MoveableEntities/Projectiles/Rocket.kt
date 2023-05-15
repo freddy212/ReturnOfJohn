@@ -10,6 +10,7 @@ import com.mygdx.game.Enums.Layer
 import com.mygdx.game.GameObjects.MoveableEntities.IceClone
 import com.mygdx.game.Locations.DefaultLocation
 import com.mygdx.game.Managers.LocationManager
+import com.mygdx.game.distance
 import com.mygdx.game.getUnitVectorTowardsPoint
 import com.mygdx.game.player
 
@@ -36,28 +37,49 @@ class Rocket(
     override fun frameTask() {
         super.frameTask()
         val clone = LocationManager.ActiveGameObjects.find { it is IceClone }
-        if (clone != null && InsideCircle(
+
+        val cloneInRange = checkInRange(clone)
+        val playerInRange = checkInRange(player)
+
+        var objectToFollow: GameObject? = null
+
+        if(cloneInRange && playerInRange){
+            if(distance(this.currentPosition(), player.currentPosition()) > distance(this.currentPosition(),clone!!.currentPosition()) ){
+                objectToFollow = clone
+            }else{
+                objectToFollow = player
+            }
+        }else if(playerInRange){
+            objectToFollow = player
+        }
+        else if(cloneInRange){
+            objectToFollow = clone
+        }
+
+        if(objectToFollow != null){
+            unitVectorDirection = getUnitVectorTowardsPoint(this.currentPosition(), objectToFollow.currentPosition())
+            setRotation(unitVectorDirection, this, 0f)
+        }
+    }
+
+    fun checkInRange(gameObject: GameObject?): Boolean {
+        if(gameObject != null){
+            return InsideCircle(
                 Circle(
                     this.sprite.x,
                     this.sprite.y,
                     aggroRadius
-                ), clone
+                ), gameObject
             ).ShouldBeAggroed()
-        ) {
-            unitVectorDirection = getUnitVectorTowardsPoint(this.currentPosition(), clone.currentPosition())
-            setRotation(unitVectorDirection, this, 0f)
         }
-        else if (InsideCircle(Circle(this.sprite.x, this.sprite.y, aggroRadius), target).ShouldBeAggroed()) {
-            unitVectorDirection = getUnitVectorTowardsPoint(this.currentPosition(), target.currentPosition())
-            setRotation(unitVectorDirection, this, 0f)
-        }
+        return false
     }
 }
 
-class RocketCollition(val rocket: Rocket): ProjectileCollition(rocket) {
+class RocketCollition(val rocket: Rocket) : ProjectileCollition(rocket) {
     override fun collitionHappened(collidedObject: GameObject) {
         super.collitionHappened(collidedObject)
-        if(collidedObject is Icicle){
+        if (collidedObject is Icicle) {
             rocket.removeFromLocation()
             collidedObject.removeFromLocation()
         }

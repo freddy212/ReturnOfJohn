@@ -20,16 +20,14 @@ class DOTCollition : DefaultAreaEntranceCollition() {
     val insideAreaEvent = InsideAreaEvent()
 
     override fun movedInsideAction(objectEntered: GameObject) {
-        EventManager.eventManager.add(insideAreaEvent)
+        if(objectEntered is Player){
+            EventManager.eventManager.add(insideAreaEvent)
+        }
     }
 
     override fun movedOutsideAction(objectLeaved: GameObject) {
-        EventManager.eventManager.remove(insideAreaEvent)
-    }
-
-    override fun collitionHappened(collidedObject: GameObject) {
-        if (collidedObject is Player) {
-            super.collitionHappened(collidedObject)
+        if(objectLeaved is Player){
+            EventManager.eventManager.remove(insideAreaEvent)
         }
     }
 

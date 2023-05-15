@@ -5,13 +5,14 @@ import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.AbstractClasses.Projectile
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Player
 import com.mygdx.game.GameObjects.MoveableEntities.IceClone
+import com.mygdx.game.GameObjects.MoveableEntities.Projectiles.Icicle
 import com.mygdx.game.Interfaces.Character
 import com.mygdx.game.Interfaces.MoveCollition
 
 class NoCharacterCanPassCollition() : MoveCollition {
     override var canMoveAfterCollition = false
     override fun collitionHappened(collidedObject: GameObject) {
-        canMoveAfterCollition = !(collidedObject is IceClone || collidedObject is Player)
+        canMoveAfterCollition = collidedObject is Icicle
     }
 }
 
