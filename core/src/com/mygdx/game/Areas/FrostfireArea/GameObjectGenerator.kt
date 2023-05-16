@@ -5,8 +5,10 @@ import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.DataClasses.DoorData
 import com.mygdx.game.DefaultTextureHandler
 import com.mygdx.game.Enums.Direction
+import com.mygdx.game.Enums.Element
 import com.mygdx.game.Enums.getDirectionUnitVector
 import com.mygdx.game.Events.ButtonEvent
+import com.mygdx.game.Events.DefaultEvent
 import com.mygdx.game.Events.RemoveObjectPermanentlyEvent
 import com.mygdx.game.GameObjects.Hazards.ConveyerBelt.ConveyerBelt
 import com.mygdx.game.GameObjects.Hazards.Generators.BoulderGenerator
@@ -14,6 +16,7 @@ import com.mygdx.game.GameObjects.Buttons.DoorButton.DoorButtonDelayed
 import com.mygdx.game.GameObjects.Gates.Fence
 import com.mygdx.game.GameObjects.Buttons.IceButton
 import com.mygdx.game.GameObjects.Gates.IceGate
+import com.mygdx.game.GameObjects.Gates.StopGate
 import com.mygdx.game.GameObjects.Hazards.Generators.RocketGenerator
 import com.mygdx.game.GameObjects.Other.DefaultBreakableObject
 import com.mygdx.game.GameObjects.Terrain.TeleportPad
@@ -35,14 +38,39 @@ fun getFrostFireLocationOneObjects(): List<GameObject>{
 }
 fun getFrostFireLocationFourObjects(): List<GameObject>{
     val location = LocationManager.findLocation("location4", AreaIdentifier.FROSTFIRE)
-    val boulderGenerator = BoulderGenerator(location.bottomleft + Vector2(0f,100f), Vector2(128f,128f), getDirectionUnitVector(Direction.RIGHT), location)
+    val boulderGenerator = BoulderGenerator(location.bottomleft + Vector2(0f,100f), Vector2(128f,128f), getDirectionUnitVector(Direction.RIGHT), location, element = Element.FIRE)
     val walkableTerrain = WalkableTerrain(location.bottomleft + Vector2(0f,650f), Vector2(location.width, 200f), location)
+    //val walkableTerrain = WalkableTerrain(location.bottomleft + Vector2(0f,650f), Vector2(location.width, 200f), location)
+    return listOf(boulderGenerator, walkableTerrain)
+}
+
+fun getFrostFireLocationFiveObjects(): List<GameObject>{
+    val location = LocationManager.findLocation("location5", AreaIdentifier.FROSTFIRE)
+    val boulderGenerator = BoulderGenerator(location.bottomright + Vector2(0f,300f), Vector2(128f,128f), getDirectionUnitVector(Direction.LEFT), location, element = Element.ICE)
+    val walkableTerrain = WalkableTerrain(location.bottomleft + Vector2(0f,650f), Vector2(location.width, 200f), location)
+    //val walkableTerrain = WalkableTerrain(location.bottomleft + Vector2(0f,650f), Vector2(location.width, 200f), location)
     return listOf(boulderGenerator, walkableTerrain)
 }
 
 fun getFrostFireLocationSevenObjects(): List<GameObject>{
     val location = LocationManager.findLocation("location7", AreaIdentifier.FROSTFIRE)
     val location6 = LocationManager.findLocation("location6", AreaIdentifier.FROSTFIRE)
+    val location8 = LocationManager.findLocation("location8", AreaIdentifier.FROSTFIRE)
+
+    val teleportPad2 = TeleportPad(location6.bottomleft + Vector2(200f, 25f), Vector2(100f,50f), location, "padBottom")
+
+    teleportPad2.onLocationEnterActions.add {
+        val teleportPad = location8.gameObjects.List.firstOrNull { it is TeleportPad && it.id == "padTop" }
+        if(teleportPad != null) {
+            val teleportPadCasted = teleportPad as TeleportPad
+            if(teleportPadCasted.connectedTeleportPads.isEmpty()){
+                teleportPad2.connectedTeleportPads.add(teleportPadCasted)
+                teleportPadCasted.connectedTeleportPads.add(teleportPad2)
+            }
+        }
+    }
+
+
 
     val iceGate = IceGate(location.bottomleft,Vector2(location.width,150f), location)
     val removeGateEvent = ButtonEvent(RemoveObjectPermanentlyEvent(iceGate), true)
@@ -95,5 +123,30 @@ fun getFrostFireLocationSevenObjects(): List<GameObject>{
     teleportRightConveyerBelt.connectedTeleportPads.add(teleportAboveFenceRight)
     teleportAboveFenceRight.connectedTeleportPads.add(teleportRightConveyerBelt)
     //teleportBelowFence.connectedTeleportPads.add(teleportAboveFence)
-    return listOf(iceGate, gateButton,gateButton2, fenceBeforeGateRight, fenceBeforeGateLeft, conveyerBelt, gateFence, doorButton1, doorButton2, teleportLeftConveyerBelt, teleportRightConveyerBelt, teleportFence, teleportAboveFenceLeft, teleportAboveFenceRight, rocketGenerator, breakableObject, teleportPadBreakableObject, fenceAfterTeleportPadBreakableObject, teleportPadAfterFence, fenceAfterBreakableObjectLeft, fenceAfterBreakableObjectRight, breakableObjectBeforeFence)
+    return listOf(iceGate, gateButton,gateButton2, fenceBeforeGateRight, fenceBeforeGateLeft, conveyerBelt, gateFence, doorButton1, doorButton2, teleportLeftConveyerBelt, teleportRightConveyerBelt, teleportFence, teleportAboveFenceLeft, teleportAboveFenceRight, rocketGenerator, breakableObject, teleportPadBreakableObject, fenceAfterTeleportPadBreakableObject, teleportPadAfterFence, fenceAfterBreakableObjectLeft, fenceAfterBreakableObjectRight, breakableObjectBeforeFence, teleportPad2)
+}
+
+fun getFrostFireLocationEightObjects(): List<GameObject>{
+    val location6 = LocationManager.findLocation("location6",AreaIdentifier.FROSTFIRE)
+    val location8 = LocationManager.findLocation("location8",AreaIdentifier.FROSTFIRE)
+    val teleportPad = TeleportPad(location8.topleft - Vector2(-100f, 100f), Vector2(100f,50f), defaultLocation = location8, id = "padTop")
+
+    val stopGate= StopGate(Vector2(location8.bottomleft.x, teleportPad.y - 300f), Vector2(location8.width, 200f), location8)
+
+    val dummyEvent = ButtonEvent(DefaultEvent())
+
+    val iceButton1 = IceButton(Vector2(stopGate.bottomleft - Vector2(-100f, 100f)), Vector2(128f, 32f), location8,stopGate, dummyEvent)
+
+    teleportPad.onLocationEnterActions.add {
+        val teleportPad2 = location6.gameObjects.List.firstOrNull { it is TeleportPad && it.id == "padBottom" }
+        if(teleportPad2 != null) {
+            val teleportPad2Casted = teleportPad2 as TeleportPad
+            if(teleportPad2.connectedTeleportPads.isEmpty()){
+                teleportPad.connectedTeleportPads.add(teleportPad2Casted)
+                teleportPad2Casted.connectedTeleportPads.add(teleportPad)
+            }
+        }
+
+    }
+    return listOf(teleportPad, stopGate, iceButton1, location6)
 }

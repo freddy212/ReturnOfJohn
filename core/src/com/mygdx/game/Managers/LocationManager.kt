@@ -47,7 +47,9 @@ class LocationManager {
             ActiveGameObjects = activeDefaultLocations.flatMap { x -> x.gameObjects.List } + activeDefaultLocations
             val newGameObjects = ActiveGameObjects - oldActiveGameObjects.toSet()
             val oldGameObjects = oldActiveGameObjects - ActiveGameObjects.toSet()
-            newGameObjects.forEach{it.onLocationEnterActions.forEach { it() }}
+            newGameObjects.forEach{
+                it.onLocationEnterActions.forEach { it() }
+            }
             oldGameObjects.forEach {it.onLocationExitActions.forEach { it(newDefaultLocation) }}
         }
         fun findLocation(name: String, areaIdentifier: AreaIdentifier): DefaultLocation {

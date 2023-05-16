@@ -2,9 +2,7 @@ package com.mygdx.game.Areas.ShopArea
 
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.Areas.DefaultArea
-import com.mygdx.game.Areas.FrostfireArea.getFrostFireLocationFourObjects
-import com.mygdx.game.Areas.FrostfireArea.getFrostFireLocationOneObjects
-import com.mygdx.game.Areas.FrostfireArea.getFrostFireLocationSevenObjects
+import com.mygdx.game.Areas.FrostfireArea.*
 import com.mygdx.game.DefaultTextureHandler
 import com.mygdx.game.InsertDirection
 import com.mygdx.game.Interfaces.Area
@@ -29,13 +27,13 @@ class FrostFireInitializer():AreaInitializer {
         val location4 =
             addLocationRelative(location3, Vector2(600f, 1500f), InsertDirection.LEFT, area, InsertDirection.MIDDLE, ::getFrostFireLocationFourObjects, DamageLocationData())
         val location5 =
-            addLocationRelative(location3, Vector2(600f, 1500f), InsertDirection.RIGHT, area, InsertDirection.MIDDLE, { listOf()}, DamageLocationData("IceGround.png"))
+            addLocationRelative(location3, Vector2(600f, 1500f), InsertDirection.RIGHT, area, InsertDirection.MIDDLE, ::getFrostFireLocationFiveObjects, DamageLocationData("IceGround.png"))
         val location6 =
             addLocationRelative(location4, Vector2(1500f, 200f), InsertDirection.LEFT, area, InsertDirection.MIDDLE, { listOf()})
         val location7 =
             addLocationRelative(location6, Vector2(600f, 1700f), InsertDirection.UP, area, InsertDirection.LEFT, ::getFrostFireLocationSevenObjects)
         val location8 =
-            addLocationRelative(location7, Vector2(200f, 400f), InsertDirection.UP, area, InsertDirection.MIDDLE)
+            addLocationRelative(location7, Vector2(300f, 700f), InsertDirection.UP, area, InsertDirection.MIDDLE, objectCreationMethod = ::getFrostFireLocationEightObjects)
 
         location2.addAdjacentLocation(location4)
         location2.addAdjacentLocation(location5)

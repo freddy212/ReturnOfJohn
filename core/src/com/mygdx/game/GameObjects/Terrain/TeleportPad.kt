@@ -11,7 +11,7 @@ import com.mygdx.game.Interfaces.DefaultAreaEntranceCollition
 import com.mygdx.game.Locations.DefaultLocation
 import com.mygdx.game.minus
 
-class TeleportPad(initPosition: Vector2, size: Vector2, defaultLocation: DefaultLocation?) :
+class TeleportPad(initPosition: Vector2, size: Vector2, defaultLocation: DefaultLocation?, val id: String? = null) :
     GameObject(initPosition, size, defaultLocation) {
     override val texture = DefaultTextureHandler.getTexture("TeleportPad.png")
     override val layer = Layer.GROUND
