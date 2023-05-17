@@ -19,7 +19,8 @@ fun initListeners() {
             AddGameObject(::spawnDoorTwo, ADDMETHODS.DOOR2),
             AddGameObject(::spawnFrostFireFireLandsDoor, ADDMETHODS.FROSTFIRETOFIRELANDSDOOR),
             AddGameObject(::spawnFireLandsFrostFireDoor, ADDMETHODS.FIRELANDSTOFROSTFIREDOOR),
-            ButtonAccepted()
+            ButtonAccepted(),
+            MaxHealthGained()
         )
     )
 }

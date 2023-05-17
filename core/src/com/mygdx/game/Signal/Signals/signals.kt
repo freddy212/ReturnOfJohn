@@ -7,7 +7,7 @@ import com.mygdx.game.Signal.Signal
 import com.mygdx.game.Signal.SignalListeners.ADDMETHODS
 import kotlinx.serialization.Serializable
 
-enum class SIGNALTYPE{ITEM_PICKED_UP,REMOVE_OBJECT, ABILITY_GAINED, USE_ITEMS, CHANGE_OBJECT_LOCATION, MOVE_OBJECT, ADD_OBJECT, CHANGE_CONVERSATION, BUTTON_ACCEPTED}
+enum class SIGNALTYPE{ITEM_PICKED_UP,REMOVE_OBJECT, ABILITY_GAINED, USE_ITEMS, CHANGE_OBJECT_LOCATION, MOVE_OBJECT, ADD_OBJECT, CHANGE_CONVERSATION, BUTTON_ACCEPTED, MAX_HEALTH_GAINED }
 
 @Serializable
 class ItemPickedUpSignal(val itemType: ItemType): Signal(SIGNALTYPE.ITEM_PICKED_UP) {
@@ -53,3 +53,6 @@ class ChangeConversationSignal(val entityId: Int, val conversationId: String): S
 class ButtonAcceptedSignal(val entityId: Int): Signal(SIGNALTYPE.BUTTON_ACCEPTED) {
 
 }
+
+@Serializable
+class MaxHealthGainedSignal(val health: Int): Signal(SIGNALTYPE.MAX_HEALTH_GAINED)

@@ -19,5 +19,6 @@ fun signalConvert(signalString: String): Signal{
         SIGNALTYPE.CHANGE_OBJECT_LOCATION-> Json.decodeFromString<ChangeObjectLocationSignal>(signalString)
         SIGNALTYPE.ABILITY_GAINED-> Json.decodeFromString<AbilityGainedSignal>(signalString)
         SIGNALTYPE.REMOVE_OBJECT-> Json.decodeFromString<RemoveObjectSignal>(signalString)
+        SIGNALTYPE.MAX_HEALTH_GAINED -> Json.decodeFromString<MaxHealthGainedSignal>(signalString)
     }
 }

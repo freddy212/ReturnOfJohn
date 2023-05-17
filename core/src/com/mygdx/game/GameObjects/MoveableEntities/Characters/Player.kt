@@ -32,7 +32,7 @@ class Player(Position: Vector2, size: Vector2, modelHandler: ModelInstanceHandle
     override var direction = Direction.UP
     override val collition = ProjectileCanPassCollition(this)
     override var health = 100f
-    override val maxHealth = 100f
+    override var maxHealth = 100f
     override val healthStrategy = PlayerHealthStrategy()
     var hasMovedThisFrame = false
     val itemAbilities = ResourceList<CharacterAbility>()

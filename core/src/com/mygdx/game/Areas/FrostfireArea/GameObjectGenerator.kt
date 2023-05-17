@@ -18,6 +18,7 @@ import com.mygdx.game.GameObjects.Buttons.IceButton
 import com.mygdx.game.GameObjects.Gates.IceGate
 import com.mygdx.game.GameObjects.Gates.StopGate
 import com.mygdx.game.GameObjects.Hazards.Generators.RocketGenerator
+import com.mygdx.game.GameObjects.ItemObjects.HealthObject
 import com.mygdx.game.GameObjects.Other.DefaultBreakableObject
 import com.mygdx.game.GameObjects.Terrain.TeleportPad
 import com.mygdx.game.GameObjects.Terrain.WalkableTerrain
@@ -57,7 +58,7 @@ fun getFrostFireLocationSevenObjects(): List<GameObject>{
     val location6 = LocationManager.findLocation("location6", AreaIdentifier.FROSTFIRE)
     val location8 = LocationManager.findLocation("location8", AreaIdentifier.FROSTFIRE)
 
-    val teleportPad2 = TeleportPad(location6.bottomleft + Vector2(200f, 25f), Vector2(100f,50f), location, "padBottom")
+    val teleportPad2 = TeleportPad(location6.bottomleft + Vector2(200f, 100f), Vector2(100f,50f), location, "padBottom")
 
     teleportPad2.onLocationEnterActions.add {
         val teleportPad = location8.gameObjects.List.firstOrNull { it is TeleportPad && it.id == "padTop" }
@@ -74,8 +75,8 @@ fun getFrostFireLocationSevenObjects(): List<GameObject>{
 
     val iceGate = IceGate(location.bottomleft,Vector2(location.width,150f), location)
     val removeGateEvent = ButtonEvent(RemoveObjectPermanentlyEvent(iceGate), true)
-    val gateButton = IceButton(Vector2(location6.bottomleft+  Vector2(100f, 100f)),Vector2(128f,32f),location,iceGate, removeGateEvent)
-    val gateButton2 = IceButton(Vector2(location6.bottomleft + Vector2(350f,100f)),Vector2(128f,32f),location,iceGate, removeGateEvent)
+    val gateButton = IceButton(Vector2(location6.bottomright +  Vector2(-200f, 100f)),Vector2(128f,32f),location,iceGate, removeGateEvent)
+    val gateButton2 = IceButton(Vector2(location6.bottomright + Vector2(-550f,100f)),Vector2(128f,32f),location,iceGate, removeGateEvent)
 
     val rocketGenerator = RocketGenerator(location.bottomleft + Vector2(0f,200f), Vector2(100f,100f), getDirectionUnitVector(Direction.RIGHT), location, 0f,3f,500f,4.5f)
 
@@ -137,6 +138,8 @@ fun getFrostFireLocationEightObjects(): List<GameObject>{
 
     val iceButton1 = IceButton(Vector2(stopGate.bottomleft - Vector2(-100f, 100f)), Vector2(128f, 32f), location8,stopGate, dummyEvent)
 
+    val healthObject = HealthObject(iceButton1.initPosition - Vector2(0f,200f), Vector2(60f,60f), location8)
+
     teleportPad.onLocationEnterActions.add {
         val teleportPad2 = location6.gameObjects.List.firstOrNull { it is TeleportPad && it.id == "padBottom" }
         if(teleportPad2 != null) {
@@ -148,5 +151,5 @@ fun getFrostFireLocationEightObjects(): List<GameObject>{
         }
 
     }
-    return listOf(teleportPad, stopGate, iceButton1, location6)
+    return listOf(teleportPad, stopGate, iceButton1, location6, healthObject)
 }
