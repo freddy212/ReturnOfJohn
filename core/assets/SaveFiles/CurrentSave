@@ -1,7 +1,13 @@
-{"playerXPos":-896.2318,"playerYPos":1043.4851,"areaIdentifier":"FROSTFIRE","entityId":0}
+{"playerXPos":400.4241,"playerYPos":803.70844,"areaIdentifier":"MAINAREA","entityId":0}
 {"signaltype":"ABILITY_GAINED","abilityId":"ICECLONE"}
 {"signaltype":"ABILITY_GAINED","abilityId":"SHIELD"}
 {"signaltype":"ABILITY_GAINED","abilityId":"DASH"}
-{"signaltype":"REMOVE_OBJECT","entityId":84}
-{"signaltype":"MAX_HEALTH_GAINED","health":25}
-{"signaltype":"REMOVE_OBJECT","entityId":72}
+{"signaltype":"BUTTON_ACCEPTED","entityId":22}
+{"signaltype":"BUTTON_ACCEPTED","entityId":23}
+{"signaltype":"REMOVE_OBJECT","entityId":21}
+{"signaltype":"REMOVE_OBJECT","entityId":34}
+{"signaltype":"BUTTON_ACCEPTED","entityId":35}
+{"signaltype":"BUTTON_ACCEPTED","entityId":36}
+{"signaltype":"REMOVE_OBJECT","entityId":19}
+{"signaltype":"ITEM_PICKED_UP","itemType":"FLUTEOFAWAKENING"}
+{"signaltype":"REMOVE_OBJECT","entityId":26}

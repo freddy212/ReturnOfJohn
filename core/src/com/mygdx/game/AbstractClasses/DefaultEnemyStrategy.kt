@@ -9,26 +9,30 @@ import com.mygdx.game.Managers.EventManager
 import com.mygdx.game.player
 import kotlin.random.Random
 
-interface ShouldBeAggroedStrategy{
+interface ShouldBeAggroedStrategy {
     fun ShouldBeAggroed(): Boolean
 }
 
-class InsideCircle(val circle: Circle, val gameObject: GameObject = player): ShouldBeAggroedStrategy{
+class InsideCircle(val circle: Circle, val gameObject: GameObject = player) : ShouldBeAggroedStrategy {
     override fun ShouldBeAggroed(): Boolean {
         return circle.contains(Vector2(gameObject.sprite.x, gameObject.sprite.y))
     }
 }
 
-interface AggroableEntity{
+interface AggroableEntity {
     fun isAggroed(): Boolean
     fun setAggroed()
     fun resetAggro()
+
+    var aggroed: Boolean
 }
-open class DefaultAggroableEntity(): AggroableEntity {
-    private var aggroed = false
+
+open class DefaultAggroableEntity() : AggroableEntity {
+    override var aggroed = false
     override fun resetAggro() {
         aggroed = false
     }
+
     override fun setAggroed() {
         aggroed = true
     }
@@ -38,17 +42,17 @@ open class DefaultAggroableEntity(): AggroableEntity {
     }
 }
 
-open class DefaultEnemyStrategy(override val actionList : List<EnemyAction>) : EnemyStrategy {
+open class DefaultEnemyStrategy(override val actionList: List<EnemyAction>) : EnemyStrategy {
 
     var lockedAction: EnemyAction? = null
 
-    fun lockAction(action: EnemyAction){
+    fun lockAction(action: EnemyAction) {
         lockedAction = action
         EventManager.eventManager.add(object : Event {
             var counter = 0
             override fun execute() {
                 counter++
-                if(counter > action.framesToBlock){
+                if (counter > action.framesToBlock) {
                     lockedAction = null
                     action.active = false
                     action.cleanUp()
@@ -59,23 +63,23 @@ open class DefaultEnemyStrategy(override val actionList : List<EnemyAction>) : E
         })
     }
 
-    override fun getActions(enemy: Enemy): List<EnemyAction>{
-        val validActions = actionList.filter {it.condition()}
-        val random = Random.nextDouble(0.0,1.0)
+    override fun getActions(enemy: Enemy): List<EnemyAction> {
+        val validActions = actionList.filter { it.condition() }
+        val random = Random.nextDouble(0.0, 1.0)
         var current = 0.0
         var actions = mutableListOf<EnemyAction>()
 
-            for (action in validActions.shuffled()) {
-                current = action.probability
+        for (action in validActions.shuffled()) {
+            current = action.probability
 
-                if (current >= random && (lockedAction == null || action == lockedAction)) {
-                    if(action.shouldBlock && lockedAction == null){
-                        action.active = true
-                        lockAction(action)
-                    }
-                    actions.add(action)
+            if (current >= random && (lockedAction == null || action == lockedAction)) {
+                if (action.shouldBlock && lockedAction == null) {
+                    action.active = true
+                    lockAction(action)
                 }
+                actions.add(action)
             }
+        }
         return actions
     }
 

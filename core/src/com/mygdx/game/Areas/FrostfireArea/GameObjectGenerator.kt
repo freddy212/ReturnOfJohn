@@ -19,6 +19,7 @@ import com.mygdx.game.GameObjects.Gates.IceGate
 import com.mygdx.game.GameObjects.Gates.StopGate
 import com.mygdx.game.GameObjects.Hazards.Generators.RocketGenerator
 import com.mygdx.game.GameObjects.ItemObjects.HealthObject
+import com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Bosses.Hydra.Hydra
 import com.mygdx.game.GameObjects.Other.DefaultBreakableObject
 import com.mygdx.game.GameObjects.Terrain.TeleportPad
 import com.mygdx.game.GameObjects.Terrain.WalkableTerrain
@@ -152,4 +153,24 @@ fun getFrostFireLocationEightObjects(): List<GameObject>{
 
     }
     return listOf(teleportPad, stopGate, iceButton1, location6, healthObject)
+}
+
+fun getFrostFireLocationTenObjects(): List<GameObject>{
+
+    val location10 = LocationManager.findLocation("location10", AreaIdentifier.FROSTFIRE)
+
+    val walkableTerrain = WalkableTerrain(location10.initPosition, Vector2(location10.width, 700f), location10)
+
+    val walkableTerrain2 = WalkableTerrain(walkableTerrain.topleft + Vector2(0f,400f), Vector2(location10.width, 400f), location10)
+
+    val walkableTerrain3 = WalkableTerrain(walkableTerrain.topleft - Vector2(350f,300f), Vector2(1000f, 300f), location10)
+    val walkableTerrain4 = WalkableTerrain(walkableTerrain2.bottomleft - Vector2(350f,0f), Vector2(1000f, 300f), location10)
+
+    val walkableTerrain5 = WalkableTerrain(walkableTerrain3.topleft, Vector2(350f, walkableTerrain4.bottomleft.y - walkableTerrain3.topleft.y), location10)
+
+    val walkableTerrain6 = WalkableTerrain(walkableTerrain3.topright - Vector2(350f, 0f), Vector2(350f, walkableTerrain4.bottomleft.y - walkableTerrain3.topleft.y), location10)
+
+    val hydra: Hydra = Hydra(walkableTerrain.topleft + Vector2(50f,100f), Vector2(165f,210f), location10)
+
+    return listOf(walkableTerrain, walkableTerrain2, walkableTerrain3, walkableTerrain4,walkableTerrain5, walkableTerrain6, hydra)
 }

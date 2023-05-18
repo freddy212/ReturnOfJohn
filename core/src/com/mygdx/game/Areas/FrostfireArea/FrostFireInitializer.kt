@@ -11,12 +11,16 @@ import com.mygdx.game.Interfaces.AreaInitializer
 import com.mygdx.game.Locations.DamageLocationData
 import com.mygdx.game.Locations.DefaultLocation
 import com.mygdx.game.Locations.DefaultLocationData
+import com.mygdx.game.Locations.RepeatedTextureLocationData
 import com.mygdx.game.addLocation
 import com.mygdx.game.addLocationRelative
 
 class FrostFireInitializer():AreaInitializer {
     override fun initializeArea(): Area {
         val area = DefaultArea(AreaIdentifier.FROSTFIRE)
+
+        val spikeTexture = DefaultTextureHandler.getTexture("Spike.png")
+        val wastelandDamageLocation = RepeatedTextureLocationData("wasteland.jpg", spikeTexture)
         val location1 =
             DefaultLocation(Vector2(300f, 300f), Vector2(0f, 0f), ::getFrostFireLocationOneObjects, DefaultLocationData())
         addLocation(location1, area)
@@ -34,6 +38,16 @@ class FrostFireInitializer():AreaInitializer {
             addLocationRelative(location6, Vector2(600f, 1700f), InsertDirection.UP, area, InsertDirection.RIGHT, ::getFrostFireLocationSevenObjects)
         val location8 =
             addLocationRelative(location7, Vector2(300f, 700f), InsertDirection.UP, area, InsertDirection.MIDDLE, objectCreationMethod = ::getFrostFireLocationEightObjects)
+        val location9 =
+            addLocationRelative(location3, Vector2(300f, 700f), InsertDirection.UP, area, InsertDirection.MIDDLE)
+        val location10 =
+            addLocationRelative(location9, Vector2(300f, 1500f), InsertDirection.UP, area, InsertDirection.MIDDLE,  locationDataStrategy = wastelandDamageLocation, objectCreationMethod = ::getFrostFireLocationTenObjects)
+        val location11 =
+            addLocationRelative(location10, Vector2(600f, 1500f), InsertDirection.LEFT, area, InsertDirection.MIDDLE, locationDataStrategy = DamageLocationData())
+        val location12 =
+            addLocationRelative(location10, Vector2(600f, 1500f), InsertDirection.RIGHT, area, InsertDirection.MIDDLE, locationDataStrategy = DamageLocationData("IceGround.png"))
+
+        location11.addAdjacentLocation(location12)
 
         location2.addAdjacentLocation(location4)
         location2.addAdjacentLocation(location5)

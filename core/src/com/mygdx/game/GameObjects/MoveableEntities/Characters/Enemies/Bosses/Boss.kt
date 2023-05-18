@@ -25,9 +25,6 @@ abstract class Boss(
     init {
         onLocationEnterActions.add(::resetArea)
     }
-    override fun frameTask() {
-        super.frameTask()
-    }
 
     override fun setAggroed(){
         adjacentLocations.forEach {it.removeAdjacentLocation(defaultLocation!!)}
