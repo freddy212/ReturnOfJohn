@@ -10,9 +10,9 @@ import com.mygdx.game.Locations.DefaultLocation
 import com.mygdx.game.Managers.LocationManager
 
 class Hydra(Position: Vector2, size: Vector2, location: DefaultLocation?) : Boss(Position, size, location) {
-    override val enemyStrategy = DefaultEnemyStrategy(listOf())
+    override val enemyStrategy = DefaultEnemyStrategy(listOf(HydraEarthHeadAttack(this)))
     override var baseSpeed = 5f
-    override val texture = DefaultTextureHandler.getTexture("hydra.png")
+    override var texture = DefaultTextureHandler.getTexture("hydra.png")
     override val layer = Layer.ONGROUND
     override var direction = Direction.RIGHT
     override var health = 150f
