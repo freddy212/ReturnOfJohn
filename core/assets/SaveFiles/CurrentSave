@@ -1,4 +1,4 @@
-{"playerXPos":-899.7158,"playerYPos":3823.0461,"areaIdentifier":"FROSTFIRE","entityId":0}
+{"playerXPos":327.72504,"playerYPos":2503.9182,"areaIdentifier":"FIRELANDS","entityId":0}
 {"signaltype":"ABILITY_GAINED","abilityId":"ICECLONE"}
 {"signaltype":"ABILITY_GAINED","abilityId":"SHIELD"}
 {"signaltype":"ABILITY_GAINED","abilityId":"DASH"}
@@ -14,3 +14,4 @@
 {"signaltype":"BUTTON_ACCEPTED","entityId":43}
 {"signaltype":"BUTTON_ACCEPTED","entityId":44}
 {"signaltype":"REMOVE_OBJECT","entityId":42}
+{"signaltype":"REMOVE_OBJECT","entityId":72}

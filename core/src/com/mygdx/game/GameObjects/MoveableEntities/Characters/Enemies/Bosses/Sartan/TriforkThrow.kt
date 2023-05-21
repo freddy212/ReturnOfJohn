@@ -55,8 +55,10 @@ class TriforkThrow(val sartan: Sartan, val trifork: Trifork): EnemyAction() {
     fun initTriforkThrow(){
         framesToBlock = 100
         prevPosition = trifork.currentPosition()
+        val currentPos = Vector2(75 * cos(Radians(sartan.angle)), 75 * sin(Radians(sartan.angle))) - Vector2(75f,50f)
         trifork.sprite.setOriginCenter()
         trifork.polygon.setOrigin(trifork.initPosition.x + trifork.sprite.originX, trifork.initPosition.y + trifork.sprite.originY)
+        trifork.setPosition(trifork.currentPosition() - currentPos)
         trifork.neutralState = false
         trifork.movingTowards = true
         returning = false
