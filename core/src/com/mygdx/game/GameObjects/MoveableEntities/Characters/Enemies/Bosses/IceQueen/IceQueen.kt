@@ -14,10 +14,11 @@ import com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Bosses.Bos
 import com.mygdx.game.GameObjects.MoveableEntities.Projectiles.Icicle
 import com.mygdx.game.GameObjects.Terrain.TeleportPad
 import com.mygdx.game.Locations.DefaultLocation
+import com.mygdx.game.Signal.Signal
 import com.mygdx.game.Timer.DefaultTimer
 import com.mygdx.game.minus
 
-class IceQueen(Position: Vector2, size: Vector2, location: DefaultLocation?, teleportPoints: List<TeleportPad>) : Boss(Position, size, location) {
+class IceQueen(Position: Vector2, size: Vector2, location: DefaultLocation?, teleportPoints: List<TeleportPad>, signal: Signal?) : Boss(Position, size, location, signal) {
     val halfPadSize = Vector2(teleportPoints[0].size.x / 4, teleportPoints[0].size.y)
     val bottomLeftMove = MoveTowardsPoint( this, teleportPoints[0].bottomleft - halfPadSize)
     val bottomRightMove = MoveTowardsPoint( this, teleportPoints[1].bottomleft - halfPadSize)

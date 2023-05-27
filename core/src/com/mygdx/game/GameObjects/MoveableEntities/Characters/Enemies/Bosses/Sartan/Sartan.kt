@@ -17,9 +17,10 @@ import com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Bosses.Bos
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Bosses.Sartan.Trifork
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Bosses.Sartan.TriforkThrow
 import com.mygdx.game.Saving.DefaultSaveStateHandler
+import com.mygdx.game.Signal.Signal
 
-class Sartan(Position: Vector2, size: Vector2 = Vector2(150f,150f),location: DefaultLocation?)
-    : Boss(Position, size, location),
+class Sartan(Position: Vector2, size: Vector2 = Vector2(150f,150f),location: DefaultLocation?, signal: Signal?)
+    : Boss(Position, size, location, signal),
     SaveStateEntity by DefaultSaveStateHandler() {
     override val texture = DefaultTextureHandler.getTexture("DefaultPerson.png")
     override val layer = Layer.PERSON
@@ -43,9 +44,8 @@ class Sartan(Position: Vector2, size: Vector2 = Vector2(150f,150f),location: Def
         //trifork.move(unitVectorDirection)
         return super.move(unitVectorDirection)
     }
-
-    override fun death() {
-        super.death()
+    override fun removeFromLocation() {
         trifork.removeFromLocation()
+        super.removeFromLocation()
     }
 }

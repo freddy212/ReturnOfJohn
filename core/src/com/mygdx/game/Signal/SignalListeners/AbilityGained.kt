@@ -18,6 +18,6 @@ class AbilityGained: SignaledEventListener {
         val abilityGainedSignal = signal as AbilityGainedSignal
         val abilityType = abilityGainedSignal.abilityId
         val ability = getAbility(abilityType)
-        player.addAbility(ability)
+        ability.handleAbilityGained()
     }
 }

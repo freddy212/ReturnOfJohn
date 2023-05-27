@@ -2,6 +2,7 @@ package com.mygdx.game.Areas.IceLands
 
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.*
+import com.mygdx.game.AbstractClasses.AbilityId
 import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.Collitions.ConveyerBeltStrength
 import com.mygdx.game.Events.ButtonEvent
@@ -29,6 +30,7 @@ import com.mygdx.game.GameObjects.Terrain.TeleportPad
 import com.mygdx.game.GameObjects.Terrain.WalkableTerrain
 import com.mygdx.game.Interfaces.AreaIdentifier
 import com.mygdx.game.Managers.LocationManager
+import com.mygdx.game.Signal.Signals.AddAbilityItemSignal
 
 fun getIceLandsLocationOneObjects(): List<GameObject>{
     val location1 = LocationManager.findLocation("location1",AreaIdentifier.ICELANDS)
@@ -163,7 +165,11 @@ fun getIceLandsLocationTwelveObjects(): List<GameObject>{
     teleportTopLeft.connectedTeleportPads.addAll(mutableListOf(teleportBottomRight, teleportBottomLeft, teleportTopRight))
     teleportTopRight.connectedTeleportPads.addAll(mutableListOf(teleportBottomRight, teleportTopLeft, teleportBottomLeft))
 
-    val iceQueen = IceQueen(walkableTerrain2.currentMiddle - Vector2(75f, 0f),Vector2(150f,150f), location5, listOf<TeleportPad>(teleportBottomLeft,teleportBottomRight, teleportTopLeft, teleportTopRight))
+    val iceQueenPosition = walkableTerrain2.currentMiddle - Vector2(75f, 0f)
+
+    val addAbilityItemSignal = AddAbilityItemSignal(abilityId = AbilityId.ICECLONEUPGRADE, area = AreaIdentifier.ICELANDS, x = iceQueenPosition.x, y = iceQueenPosition.y, locationName = location5.locationName)
+
+    val iceQueen = IceQueen(iceQueenPosition,Vector2(150f,150f), location5, listOf<TeleportPad>(teleportBottomLeft,teleportBottomRight, teleportTopLeft, teleportTopRight), addAbilityItemSignal)
 
     return listOf(walkableTerrain,walkableTerrain2, iceQueen, teleportBottomLeft, teleportBottomRight, teleportTopLeft, teleportTopRight)
 }

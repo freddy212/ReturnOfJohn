@@ -2,6 +2,7 @@ package com.mygdx.game.Areas.FireLands
 
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.*
+import com.mygdx.game.AbstractClasses.AbilityId
 import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.Collitions.DoorCollition
 import com.mygdx.game.Collitions.IllegalMoveCollition
@@ -23,6 +24,7 @@ import com.mygdx.game.Interfaces.AreaIdentifier
 import com.mygdx.game.Managers.LocationManager
 import com.mygdx.game.Managers.SignalManager
 import com.mygdx.game.Signal.SignalListeners.ADDMETHODS
+import com.mygdx.game.Signal.Signals.AddAbilityItemSignal
 import com.mygdx.game.Signal.Signals.AddObjectSignal
 import com.mygdx.game.Signal.Signals.RemoveObjectSignal
 
@@ -70,8 +72,10 @@ fun getFireLandsLocationFiveObjects(): List<GameObject>{
 
     val walkableTerrain = WalkableTerrain(Vector2(location5.originalMiddle.x - 100f,location5.bottomright.y),Vector2(200f,500f),location5)
     val walkableTerrain2 = WalkableTerrain(Vector2(walkableTerrain.topleft - Vector2(300f,0f)), Vector2(800f,600f),location5)
+    val sartanPos = Vector2(walkableTerrain2.currentMiddle - Vector2(75f, 0f))
 
-    val sartan = Sartan(walkableTerrain2.currentMiddle - Vector2(75f, 0f),Vector2(150f,150f), location5)
+    val addAbilityItemSignal = AddAbilityItemSignal("location5", AreaIdentifier.FIRELANDS, sartanPos.x, sartanPos.y, AbilityId.DASHUPGRADE)
+    val sartan = Sartan(sartanPos,Vector2(150f,150f), location5, addAbilityItemSignal)
 
     return listOf(walkableTerrain,walkableTerrain2, sartan)
 }

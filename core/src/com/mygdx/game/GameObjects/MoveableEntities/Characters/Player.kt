@@ -45,6 +45,13 @@ class Player(Position: Vector2, size: Vector2, modelHandler: ModelInstanceHandle
         TooltipManager.tooltipManager.add(toolTip)
         itemAbilities.add(characterAbility)
     }
+    fun removeAbility(characterAbility: CharacterAbility?){
+        if(characterAbility != null){
+            itemAbilities.remove(characterAbility)
+            val tooltipToRemove = TooltipManager.tooltipManager.List.filter { it.key == Input.Keys.toString(characterAbility.triggerKey)[0]}
+            TooltipManager.tooltipManager.remove(tooltipToRemove[0])
+        }
+    }
     //For test
     fun move(direction: Direction){
         player.move(getDirectionUnitVector(direction))

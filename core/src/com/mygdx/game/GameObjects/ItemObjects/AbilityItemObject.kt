@@ -10,9 +10,9 @@ import com.mygdx.game.Locations.DefaultLocation
 import com.mygdx.game.Saving.DefaultSaveStateHandler
 import com.mygdx.game.Saving.SaveStateEntity
 
-class AbilityItemObject(Position: Vector2, size: Vector2, defaultLocation: DefaultLocation, val ability: CharacterAbility,
-                                 override val texture: Texture)
+class AbilityItemObject(Position: Vector2, size: Vector2, defaultLocation: DefaultLocation, val ability: CharacterAbility, texture: Texture? = null)
                                  : GameObject(Position, size,defaultLocation), SaveStateEntity by DefaultSaveStateHandler(){
     override val layer: Layer = Layer.ONGROUND
     override val collition = AbilityGainedCollition(ability, this)
+    override val texture = texture ?: ability.texture
 }
