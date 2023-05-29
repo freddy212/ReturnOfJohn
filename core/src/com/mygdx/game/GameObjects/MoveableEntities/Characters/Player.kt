@@ -20,6 +20,7 @@ import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.Collitions.ProjectileCanPassCollition
 import com.mygdx.game.HealthStrategy.PlayerHealthStrategy
 import com.mygdx.game.Interfaces.FightableEntity
+import com.mygdx.game.ItemAbilities.ProjectileAbilityToggle
 import com.mygdx.game.Utils.ResourceList
 
 class Player(Position: Vector2, size: Vector2, modelHandler: ModelInstanceHandler = DefaultModelInstanceHandler("ManBlender.g3db",Position,size))
@@ -36,9 +37,8 @@ class Player(Position: Vector2, size: Vector2, modelHandler: ModelInstanceHandle
     override val healthStrategy = PlayerHealthStrategy()
     var hasMovedThisFrame = false
     val itemAbilities = ResourceList<CharacterAbility>()
-    fun die(){
-        val playerLocation = LocationManager.activeDefaultLocations.find{ x -> x.sprite.boundingRectangle.contains(Vector2(camera.position.x, camera.position.y))}!!
-        player.setPosition(playerLocation.initPosition)
+    init {
+        addAbility(ProjectileAbilityToggle)
     }
     fun addAbility(characterAbility: CharacterAbility) {
         val toolTip = ToolTip(Input.Keys.toString(characterAbility.triggerKey)[0],characterAbility)

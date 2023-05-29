@@ -48,3 +48,9 @@ fun getAbility(abilityId: AbilityId): CharacterAbility{
         AbilityId.ICECLONEUPGRADE -> IceCloneAbilityUpgraded()
     }
 }
+
+abstract class ToggleAbility(): CharacterAbility(){
+    override fun handleAbilityGained() {
+        ProjectileAbilityToggle.abilitiesToToggle.add(this)
+    }
+}

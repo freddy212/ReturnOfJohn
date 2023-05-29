@@ -30,13 +30,14 @@ import java.io.File
 import java.io.FileOutputStream
 
 
-val modelBatch by lazy{ModelBatch()}
-val environment by lazy{Environment()}
+val modelBatch by lazy { ModelBatch() }
+val environment by lazy { Environment() }
 val camera: OrthographicCamera = OrthographicCamera()
 lateinit var player: Player
 lateinit var playerSize: Vector2
 lateinit var playerSaveState: PlayerSaveState
 val logger = FPSLogger()
+
 class MainGame : ApplicationAdapter() {
     lateinit internal var batch: PolygonSpriteBatch
     lateinit var firstpoly: RectanglePolygon
@@ -56,58 +57,56 @@ class MainGame : ApplicationAdapter() {
             val s = FileOutputStream(f, false)
         }
 
-        Gdx.gl.glClearColor(0f,0f,0f,0f)
+        Gdx.gl.glClearColor(0f, 0f, 0f, 0f)
         DefaultAssetHandler.setAssetManager(InitAssets())
         batch = PolygonSpriteBatch()
-        player =  Player(Vector2(0f, 0f), Vector2(32f,40f))
-        firstpoly = RectanglePolygon(Vector2(50f,0f),500f,500f)
+        player = Player(Vector2(0f, 0f), Vector2(32f, 40f))
+        firstpoly = RectanglePolygon(Vector2(50f, 0f), 500f, 500f)
         firstpoly.vertices = firstpoly.vertices.map { x -> x * 1f }.toFloatArray()
         secondpoly = RectanglePolygon(
-                Vector2(700f,500f),
-                500f,
-                100f
+            Vector2(700f, 500f),
+            500f,
+            100f
         )
-        testRect = Rectangle(0f,0f,200f,200f)
-        thirdpoly = RectanglePolygon(Vector2(1000f,800f),100f,100f)
-        playerSize = Vector2(player.sprite.width,player.sprite.height)
+        testRect = Rectangle(0f, 0f, 200f, 200f)
+        thirdpoly = RectanglePolygon(Vector2(1000f, 800f), 100f, 100f)
+        playerSize = Vector2(player.sprite.width, player.sprite.height)
         AreaInitializerManager.init()
         shapeRenderer = ShapeRenderer()
         camera.setToOrtho(
-                false,
-                Gdx.graphics.width.toFloat(),
-                Gdx.graphics.height.toFloat())
+            false,
+            Gdx.graphics.width.toFloat(),
+            Gdx.graphics.height.toFloat()
+        )
 
-        if(!FileHandler.SaveFileEmpty()){
-            val savedState:String = FileHandler.readFromFile()[0]
-            val savedPlayerSaveState:PlayerSaveState = Json.decodeFromString(savedState)
-            playerSaveState = PlayerSaveState(savedPlayerSaveState.playerXPos,savedPlayerSaveState.playerYPos,
-                savedPlayerSaveState.areaIdentifier, player.entityId)
-        }else{
-            playerSaveState = PlayerSaveState(Center.x, Center.y,AreaIdentifier.MAINAREA, player.entityId)
+        if (!FileHandler.SaveFileEmpty()) {
+            val savedState: String = FileHandler.readFromFile()[0]
+            val savedPlayerSaveState: PlayerSaveState = Json.decodeFromString(savedState)
+            playerSaveState = PlayerSaveState(
+                savedPlayerSaveState.playerXPos, savedPlayerSaveState.playerYPos,
+                savedPlayerSaveState.areaIdentifier, player.entityId
+            )
+        } else {
+            playerSaveState = PlayerSaveState(Center.x, Center.y, AreaIdentifier.MAINAREA, player.entityId)
         }
         AreaManager.activeArea = AreaManager.getArea(playerSaveState.areaIdentifier)
         ResetPlayer(playerSaveState)
         font.data.setScale(2f)
         inventory = Inventory()
-        inputAdapter = ROJInputAdapter(camera,player)
+        inputAdapter = ROJInputAdapter(camera, player)
         initInputAdapter()
         initListeners()
         LocationManager.frameAction()
 
         val originalFile = FileHandler.readFromFile()
-        val saves = originalFile.subList(1,originalFile.size)
-        val savedSignals:List<Signal> = saves.map (::signalConvert)
-        savedSignals.forEach { SignalManager.emitSignal(it,false); SignalManager.pastSignals.add(it) }
+        val saves = originalFile.subList(1, originalFile.size)
+        val savedSignals: List<Signal> = saves.map(::signalConvert)
+        savedSignals.forEach { SignalManager.emitSignal(it, false); SignalManager.pastSignals.add(it) }
         //player.addAbility(IcicleAbility())
         //player.addAbility(AxeAbility())
         //player.addAbility(ShieldAbility())
         //player.addAbility(DashAbility())
-        val projectileAbility = ProjectileAbilityToggle
-        player.addAbility(projectileAbility)
-        projectileAbility.abilitiesToToggle.add(IcicleAbility())
-        projectileAbility.abilitiesToToggle.add(FireballAbility())
     }
-
 
 
     override fun render() {
@@ -122,19 +121,20 @@ class MainGame : ApplicationAdapter() {
         UIRendererManager.render()
         //logger.log()
         SignalManager.useSignals()
-        camera.position.set(player.sprite.x, player.sprite.y,0f)
+        camera.position.set(player.sprite.x, player.sprite.y, 0f)
         camera.update()
     }
 
-    fun drawrects(){
+    fun drawrects() {
         val gameObjects = LocationManager.ActiveGameObjects
-        gameObjects.forEach{x -> drawPolygonShape(x.polygon,shapeRenderer)}
+        gameObjects.forEach { x -> drawPolygonShape(x.polygon, shapeRenderer) }
     }
 
     override fun dispose() {
         batch.dispose()
     }
-    fun initInputAdapter(){
+
+    fun initInputAdapter() {
         Gdx.input.inputProcessor = inputAdapter
     }
 }

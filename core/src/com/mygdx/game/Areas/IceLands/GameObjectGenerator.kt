@@ -97,7 +97,11 @@ fun getIceLandsLocationSevenObjects(): List<GameObject> {
         location7
     )
 
-    val rockBoss = RockBoss(walkableTerrain.currentMiddle, Vector2(150f, 160f), location7, Element.ICE)
+    val iceRockBossPos = walkableTerrain.currentMiddle
+
+    val addAbilityItemSignal = AddAbilityItemSignal(abilityId = AbilityId.ICICLE, area = AreaIdentifier.ICELANDS,x = iceRockBossPos.x, y = iceRockBossPos.y, locationName = location7.locationName)
+
+    val rockBoss = RockBoss(iceRockBossPos, Vector2(150f, 160f), location7, Element.ICE, addAbilityItemSignal)
 
     return listOf(walkableTerrain, rockBoss)
 }

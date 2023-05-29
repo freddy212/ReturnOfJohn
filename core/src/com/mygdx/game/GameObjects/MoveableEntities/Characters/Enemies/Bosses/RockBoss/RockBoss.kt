@@ -17,9 +17,10 @@ import com.mygdx.game.GameObjects.MoveableEntities.Projectiles.SmallBoulder
 import com.mygdx.game.Locations.DefaultLocation
 import com.mygdx.game.ObjectProperties.Fire
 import com.mygdx.game.ObjectProperties.Ice
+import com.mygdx.game.Signal.Signal
 import com.mygdx.game.getUnitVectorTowardsPoint
 
-class RockBoss(Position: Vector2, size: Vector2, location: DefaultLocation?, element: Element) : Boss(Position, size, location) {
+class RockBoss(Position: Vector2, size: Vector2, location: DefaultLocation?, element: Element, signal: Signal?) : Boss(Position, size, location, signal) {
     override val texture = DefaultTextureHandler.getTexture("RockMan.png")
     override var baseSpeed = 2f
     override val layer = Layer.ONGROUND
