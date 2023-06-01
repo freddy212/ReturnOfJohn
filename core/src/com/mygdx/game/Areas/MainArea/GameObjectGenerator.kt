@@ -21,7 +21,11 @@ import com.mygdx.game.Saving.SaveStateEntity
 
 fun getLocationOneObjects(): List<GameObject>{
 
-    return listOf()
+    val location1= LocationManager.findLocation("location1", AreaIdentifier.MAINAREA)
+    val location2 = LocationManager.findLocation("location2", AreaIdentifier.MAINAREA)
+    val sign = Sign(location2.topright + Vector2(50f,-50f), Vector2(80f,80f), defaultLocation = location1, "Left - Firelands")
+
+    return listOf(sign)
 }
 
 fun getLocationGraveyard(): List<GameObject>{
