@@ -49,6 +49,13 @@ fun getWastelandLocationThreeObjects(): List<GameObject>{
     return listOf(Wood)
 }
 
+fun getWastelandLocationFourObjects(): List<GameObject>{
+    val location = LocationManager.findLocation("location4",AreaIdentifier.WASTELAND)
+
+    val sign = Sign(location.currentMiddle - Vector2(40f,60f), Vector2(80f,80f), location, "Press 1 - Fire Projectile")
+    return listOf(sign)
+}
+
 fun getWastelandLocationFiveObjects(): List<GameObject>{
     val location4 = LocationManager.findLocation("location4",AreaIdentifier.WASTELAND)
     val location5 = LocationManager.findLocation("location5",AreaIdentifier.WASTELAND)
@@ -64,6 +71,12 @@ fun getWastelandLocationSevenObjects(): List<GameObject>{
    // val sandGhost = SandGhost(walkableTerrain2.currentMiddle - Vector2(75f, 0f),Vector2(150f,150f), location7)
     val sandGhostSleeping = SandGhostSleeping(walkableTerrain2.currentMiddle - Vector2(75f, 0f),Vector2(150f,150f), location7)
     return listOf(walkableTerrain,walkableTerrain2, sandGhostSleeping)
+}
+fun getWastelandLocationEightObjects(): List<GameObject>{
+    val location = LocationManager.findLocation("location8",AreaIdentifier.WASTELAND)
+
+    val sign = Sign(location.bottomleft + Vector2(80f,120f), Vector2(80f,80f), location, "Hold 1 - Toggle Projectiles", "Space or Arrow Key - Toggle")
+    return listOf(sign)
 }
 fun getWastelandLocationTenObjects(): List<GameObject>{
     val location9 = LocationManager.findLocation("location9",AreaIdentifier.WASTELAND)

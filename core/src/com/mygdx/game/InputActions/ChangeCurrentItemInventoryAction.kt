@@ -9,11 +9,11 @@ import com.mygdx.game.Utils.RenderGraph
 import com.mygdx.game.player
 
 class ChangeCurrentItemInventoryAction(val renderInventory: RenderInventory): InputAction {
-    override val keycodes = listOf(Input.Keys.RIGHT, Input.Keys.LEFT)
+    override val keycodes = listOf(Input.Keys.RIGHT, Input.Keys.LEFT, Input.Keys.SPACE)
 
     override fun action(keycode: Int) {
        val amountOfItems = player.inventory.inventoryList.size
-       if(keycode == Input.Keys.RIGHT){
+       if(keycode == Input.Keys.RIGHT || keycode == Input.Keys.SPACE){
            if(renderInventory.currentIndex + 1 == amountOfItems){
                renderInventory.currentIndex = 0
            }

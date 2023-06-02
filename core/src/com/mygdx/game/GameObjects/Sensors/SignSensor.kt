@@ -20,10 +20,10 @@ import com.mygdx.game.UI.Sign.SignText
 import com.mygdx.game.Utils.RenderGraph
 import com.mygdx.game.player
 
-class SignSensor(initPosition: Vector2, size: Vector2, defaultLocation: DefaultLocation?, text: String) :
+class SignSensor(initPosition: Vector2, size: Vector2, defaultLocation: DefaultLocation?, text: String, text2: String? = null) :
     Sensor(initPosition, size, defaultLocation) {
 
-    val signText = SignText(text)
+    val signText = SignText(text, text2)
 
     val renderSignTextEvent = object: Event {
         override fun execute() {
@@ -32,9 +32,11 @@ class SignSensor(initPosition: Vector2, size: Vector2, defaultLocation: DefaultL
     }
 
     override val collition = SignSensorCollition(text, renderSignTextEvent)
+    override val collitionMask = OnlyPlayerCollitionMask
 }
 
 class SignSensorCollition(val text: String,val renderSignTextEvent: Event) : DefaultAreaEntranceCollition() {
+
     override fun movedInsideAction(objectEntered: GameObject) {
         EventManager.eventManager.add(renderSignTextEvent)
     }

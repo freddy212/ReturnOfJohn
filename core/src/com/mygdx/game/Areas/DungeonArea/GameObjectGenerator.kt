@@ -12,6 +12,7 @@ import com.mygdx.game.GameObjects.ItemObjects.AbilityItemObject
 import com.mygdx.game.GameObjects.Other.Door
 import com.mygdx.game.GameObjects.ItemObjects.GenericInventoryItemObject
 import com.mygdx.game.GameObjects.Gates.LockedDoor
+import com.mygdx.game.GameObjects.Other.Sign
 import com.mygdx.game.Interfaces.AreaIdentifier
 import com.mygdx.game.ItemAbilities.ShieldAbility
 import com.mygdx.game.ItemAbilities.WaterBallAbility
@@ -39,9 +40,9 @@ fun getLocationFourCaveObjects():List<GameObject>{
     val location = LocationManager.findLocation("location4",AreaIdentifier.DUNGEONAREA)
     val position = location.initPosition
     val door = LockedDoor(position, Vector2(location.size.x,100f),location)
-    val waterGunSize = Vector2(60f,40f)
-    val waterGun = AbilityItemObject(middleOfObject(location.originalMiddle,waterGunSize),waterGunSize,location,WaterBallAbility(),DefaultTextureHandler.getTexture("WaterBall.png"))
-    return listOf(door,waterGun)
+    val signSize = Vector2(80f,80f)
+    val sign = Sign(middleOfObject(location.originalMiddle,signSize), signSize, location, "Press I - View Inventory", "Space or Arrow Key - Toggle")
+    return listOf(door,sign)
 
 }
 fun getLocationNineCaveObjects():List<GameObject>{

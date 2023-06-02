@@ -12,3 +12,7 @@ interface CollitionMask {
 class DefaultCollitionMask(override val canCollideWith: (GameObject) -> Boolean = { _:GameObject -> true }): CollitionMask {
 
 }
+
+object OnlyPlayerCollitionMask: CollitionMask{
+    override val canCollideWith: (GameObject) -> Boolean = {other: GameObject -> other is Player}
+}

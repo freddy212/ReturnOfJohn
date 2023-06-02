@@ -11,7 +11,7 @@ import com.mygdx.game.Interfaces.Renderable
 import com.mygdx.game.font
 import com.mygdx.game.plus
 
-class SignText(val text: String): Renderable {
+class SignText(val text: String, val text2: String? = null): Renderable {
     override val layer = Layer.AIR
     val sprite = Sprite(DefaultTextureHandler.getTexture("SignText.png"))
 
@@ -23,7 +23,10 @@ class SignText(val text: String): Renderable {
         val boxPos = Center + Vector2(-50f, 145f)
         sprite.setPosition(boxPos.x, boxPos.y)
         sprite.draw(batch)
-        font.draw(batch, text, sprite.x - 150f, sprite.y + (sprite.height / 2))
+        font.draw(batch, text, sprite.x - 150f, sprite.y + (sprite.height * 2))
+        if(text2 != null){
+            font.draw(batch, text2, sprite.x - 150f, sprite.y)
+        }
     }
 
 

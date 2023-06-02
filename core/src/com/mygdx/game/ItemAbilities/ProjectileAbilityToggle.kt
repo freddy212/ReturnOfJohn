@@ -66,6 +66,7 @@ object ProjectileAbilityToggle: CharacterAbility() {
         EventManager.eventManager.remove(toggleEvent)
         showToolTip = true
         active = false
+        isToggle = false
     }
 
     fun abilityAction() {

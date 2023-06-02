@@ -11,7 +11,7 @@ import com.mygdx.game.Interfaces.Collition
 import com.mygdx.game.Locations.DefaultLocation
 import com.mygdx.game.minus
 
-class Sign(initPosition: Vector2, size: Vector2, defaultLocation: DefaultLocation?, text:String) :
+class Sign(initPosition: Vector2, size: Vector2, defaultLocation: DefaultLocation?, text:String, text2: String? = null) :
     GameObject(initPosition, size, defaultLocation) {
     override val texture = DefaultTextureHandler.getTexture("Sign.png")
     override val layer = Layer.ONGROUND
@@ -20,7 +20,7 @@ class Sign(initPosition: Vector2, size: Vector2, defaultLocation: DefaultLocatio
     lateinit var signSensor: SignSensor
 
     init {
-        signSensor = SignSensor(this.initPosition - Vector2(0f,40f), Vector2(size.x, size.y / 2), defaultLocation, text)
+        signSensor = SignSensor(this.initPosition - Vector2(0f,40f), Vector2(size.x, size.y / 2), defaultLocation, text, text2)
         signSensor.addToLocation(defaultLocation!!)
     }
 
