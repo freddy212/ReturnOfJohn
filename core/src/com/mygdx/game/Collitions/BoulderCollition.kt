@@ -22,10 +22,6 @@ class BoulderCollition(val boulder: Projectile) : ProjectileCollition(boulder) {
         if (collidedObject !is SandHand) {
             super.collitionHappened(collidedObject)
         }
-        if ((collidedObject is BoulderGenerator || collidedObject is Boulder)) {
-            collidedObject.removeFromLocation()
-            boulder.removeFromLocation()
-        }
 
         if(collidedObject is Projectile){
             if(collidedObject is Fireball && boulder.properties.List.filterIsInstance<Fire>().isEmpty()){

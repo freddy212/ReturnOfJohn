@@ -7,8 +7,8 @@ import com.mygdx.game.DefaultTextureHandler
 import com.mygdx.game.Enums.Layer
 import com.mygdx.game.Locations.DefaultLocation
 
-class WalkableTerrain(Position: Vector2, size: Vector2, defaultLocation: DefaultLocation) : GameObject(Position, size, defaultLocation) {
-    override val texture = DefaultTextureHandler.getTexture("MainB.jpg")
+class WalkableTerrain(Position: Vector2, size: Vector2, defaultLocation: DefaultLocation, var textureName: String = "MainB.jpg") : GameObject(Position, size, defaultLocation) {
+    override val texture = DefaultTextureHandler.getTexture(textureName)
     override val layer = Layer.GROUND
     override val collition = RemoveDotDamageCollition(defaultLocation.collition)
 }

@@ -1,8 +1,4 @@
-{"playerXPos":-674.6497,"playerYPos":894.72205,"areaIdentifier":"FIRELANDS","entityId":0}
-{"signaltype":"ABILITY_GAINED","abilityId":"ICECLONE"}
+{"playerXPos":-2316.0,"playerYPos":2272.0,"areaIdentifier":"WASTELAND","entityId":0}
 {"signaltype":"ABILITY_GAINED","abilityId":"SHIELD"}
-{"signaltype":"ABILITY_GAINED","abilityId":"DASH"}
-{"signaltype":"REMOVE_OBJECT","entityId":26}
-{"signaltype":"ADD_ABILITY_ITEM","locationName":"location7","area":"FIRELANDS","x":-750.0,"y":-100.0,"abilityId":"FIREBALL"}
-{"signaltype":"ABILITY_GAINED","abilityId":"FIREBALL"}
-{"signaltype":"REMOVE_OBJECT","entityId":90}
+{"signaltype":"REMOVE_OBJECT","entityId":8}
+{"signaltype":"REMOVE_OBJECT","entityId":4}
