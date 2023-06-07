@@ -1,14 +1,8 @@
-{"playerXPos":-2316.0,"playerYPos":2272.0,"areaIdentifier":"WASTELAND","entityId":0}
+{"playerXPos":-674.6497,"playerYPos":894.72205,"areaIdentifier":"FIRELANDS","entityId":0}
 {"signaltype":"ABILITY_GAINED","abilityId":"ICECLONE"}
 {"signaltype":"ABILITY_GAINED","abilityId":"SHIELD"}
 {"signaltype":"ABILITY_GAINED","abilityId":"DASH"}
-{"signaltype":"ITEM_PICKED_UP","itemType":"KEY"}
-{"signaltype":"REMOVE_OBJECT","entityId":12}
-{"signaltype":"USE_ITEMS","itemType":"KEY","amount":1}
-{"signaltype":"REMOVE_OBJECT","entityId":5}
 {"signaltype":"REMOVE_OBJECT","entityId":26}
 {"signaltype":"ADD_ABILITY_ITEM","locationName":"location7","area":"FIRELANDS","x":-750.0,"y":-100.0,"abilityId":"FIREBALL"}
 {"signaltype":"ABILITY_GAINED","abilityId":"FIREBALL"}
 {"signaltype":"REMOVE_OBJECT","entityId":90}
-{"signaltype":"ITEM_PICKED_UP","itemType":"FLUTEOFAWAKENING"}
-{"signaltype":"REMOVE_OBJECT","entityId":27}

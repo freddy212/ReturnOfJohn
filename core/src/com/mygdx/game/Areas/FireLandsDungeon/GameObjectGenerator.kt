@@ -65,7 +65,7 @@ fun getFireLandsDungeonLocationTwoObjects(): List<GameObject>{
 fun getFirelandsDungeonLocationSevenObjects(): List<GameObject>{
     val location7 = LocationManager.findLocation("location7", AreaIdentifier.FIRELANDSDUNGEON)
 
-    val conveyerBelt = ConveyerBelt(location7.initPosition,location7.size,location7,Direction.DOWN)
+    val conveyerBelt = ConveyerBelt(location7.initPosition + Vector2(0f,100f),location7.size - Vector2(100f,100f),location7,Direction.DOWN)
 
     return listOf(conveyerBelt)
 }
