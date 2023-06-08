@@ -1,11 +1,9 @@
 package com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Bosses.IceQueen
 
-import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.AI.EnemyActions.MoveTowardsPoint
 import com.mygdx.game.AI.EnemyActions.RandomAction
 import com.mygdx.game.AI.EnemyActions.ShootProjectile
-import com.mygdx.game.AI.EnemyActions.TeleportToPoint
 import com.mygdx.game.AbstractClasses.DefaultEnemyStrategy
 import com.mygdx.game.DefaultTextureHandler
 import com.mygdx.game.Enums.Direction
