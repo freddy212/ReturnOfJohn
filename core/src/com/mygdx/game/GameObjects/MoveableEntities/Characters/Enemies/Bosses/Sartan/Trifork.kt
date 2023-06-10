@@ -9,10 +9,15 @@ import com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Bosses.Bos
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Bosses.SandGhost.Sartan
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Player
 import com.mygdx.game.GameObjects.MoveableEntities.IceClone
+import com.mygdx.game.Interfaces.CollitionMask
 import com.mygdx.game.Interfaces.MoveCollition
 import com.mygdx.game.ItemAbilities.Shield
 import com.mygdx.game.Locations.DefaultLocation
 import com.mygdx.game.plus
+
+class TriforkCollitionMask: CollitionMask {
+    override val canCollideWith: (GameObject) -> Boolean = {it is Player || it is Shield || it is IceClone}
+}
 
 class Trifork(Position: Vector2, size: Vector2, defaultLocation: DefaultLocation?, private val sartan: Sartan) :
     MoveableObject(Position, size, defaultLocation), RotationalObject by DefaultRotationalObject() {
@@ -24,6 +29,7 @@ class Trifork(Position: Vector2, size: Vector2, defaultLocation: DefaultLocation
     override val collition = TriforkCollision(this)
     var neutralState = true;
     var movingTowards = false;
+    override val collitionMask = TriforkCollitionMask()
 
     val origOrigin = Vector2(sartan.sprite.originX, sartan.sprite.originY + 30f);
 
@@ -57,11 +63,6 @@ class TriforkCollision(val trifork: Trifork) : MoveCollition {
             collidedObject.removeFromLocation()
             trifork.movingTowards = false
         }
-    }
-
-    override fun filterCollitions(gameObjects: List<GameObject>): List<GameObject> {
-        val objects = gameObjects.filterIsInstance<Boss>()
-        return gameObjects.minus(objects.toSet())
     }
 
     override val canMoveAfterCollition = true
