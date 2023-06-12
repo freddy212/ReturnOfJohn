@@ -61,7 +61,7 @@ fun getWorldTreeObjects(): List<GameObject>{
     return listOf(WorldLeaf,WorldLeaf2)
 }
 fun getIceLandsGateWayLocation():List<GameObject>{
-    val location10 = LocationManager.findLocation("location10", AreaIdentifier.MAINAREA)
+    val location10 = LocationManager.findLocation("location6", AreaIdentifier.MAINAREA)
     val walkableTerrain = WalkableTerrain(location10.bottomleft +  Vector2(location10.width / 2 - 150f,0f), Vector2(300f,location10.height ), location10)
     val iceGrounds = ConstructObjects(::IceObject,walkableTerrain.bottomleft.x.toInt(),100,walkableTerrain.bottomleft.x.toInt() + 199,
         walkableTerrain.bottomleft.y.toInt() + 400,100,walkableTerrain.bottomleft.y.toInt(),location10)
@@ -89,7 +89,7 @@ fun getIceLandsGateWayLocation():List<GameObject>{
 }
 fun getFireLandsGateWayLocation(): List<GameObject> {
     val location2 = LocationManager.findLocation("location2", AreaIdentifier.MAINAREA)
-    val location9 = LocationManager.findLocation("location9", AreaIdentifier.MAINAREA)
+    val location9 = LocationManager.findLocation("location5", AreaIdentifier.MAINAREA)
     val walkableTerrain = WalkableTerrain(location2.bottomleft - Vector2(1000f, 0f), Vector2(1000f, location2.topleft.y - location2.bottomleft.y), location9)
 
     val texture = DefaultTextureHandler.getTexture("LavaFence.png")
@@ -119,7 +119,7 @@ fun getFireLandsGateWayLocation(): List<GameObject> {
 }
 
 fun getWastelandGatewayLocation(): List<GameObject>{
-    val location5 = LocationManager.findLocation("location5", AreaIdentifier.MAINAREA)
+    val location5 = LocationManager.findLocation("location4", AreaIdentifier.MAINAREA)
 
     val doorPosition = Vector2(location5.originalMiddle.x - (playerSize.x),location5.bottomleft.y)
 

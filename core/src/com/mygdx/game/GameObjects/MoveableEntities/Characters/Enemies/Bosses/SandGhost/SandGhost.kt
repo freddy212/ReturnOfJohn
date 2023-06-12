@@ -51,5 +51,5 @@ class SandGhost(Position: Vector2, size: Vector2 = Vector2(150f,150f),location: 
     override fun setRotation(unitVectorDirection: Vector2, gameObject: GameObject, angleModifier: Float) {
     }
 
-    override var baseSpeed = 3f
+    override var baseSpeed = 2f
 }

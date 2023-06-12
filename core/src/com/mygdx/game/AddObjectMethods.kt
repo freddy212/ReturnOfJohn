@@ -65,7 +65,7 @@ fun spawnFireLandsFrostFireDoor(location: DefaultLocation): List<GameObject> {
     val door = createDoor(
         DoorData(
             Vector2(location.currentMiddle.x - 100f, location.topleft.y),
-            AreaIdentifier.FIRELANDS, AreaIdentifier.FROSTFIRE, "location14",
+            AreaIdentifier.FIRELANDS, AreaIdentifier.FROSTFIRE, "location12",
             Direction.UP, "FirelandsFrostfire"
         )
     )

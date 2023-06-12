@@ -10,6 +10,7 @@ import com.mygdx.game.DataClasses.DoorData
 import com.mygdx.game.Enums.*
 import com.mygdx.game.GameObjects.Gates.FireGate
 import com.mygdx.game.GameObjects.Hazards.CircularPlatform
+import com.mygdx.game.GameObjects.Hazards.ConveyerBelt.ConveyerBelt
 import com.mygdx.game.GameObjects.Hazards.Generators.BoulderGenerator
 import com.mygdx.game.GameObjects.Other.Door
 import com.mygdx.game.GameObjects.Other.GenericGameObject
@@ -17,7 +18,6 @@ import com.mygdx.game.GameObjects.ItemObjects.GenericInventoryItemObject
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Bosses.RockBoss.RockBoss
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Bosses.SandGhost.Sartan
 import com.mygdx.game.GameObjects.Other.DefaultBreakableObject
-import com.mygdx.game.GameObjects.Other.Thorns
 import com.mygdx.game.GameObjects.Terrain.FireObject
 import com.mygdx.game.GameObjects.Terrain.WalkableTerrain
 import com.mygdx.game.Interfaces.AreaIdentifier
@@ -51,7 +51,9 @@ fun getFireLandsLocationTwoObjects(): List<GameObject>{
     return listOf(walkableTerrain1,walkableTerrain2, walkableTerrain3)
 }
 fun getFireLandsLocationThreeObjects(): List<GameObject>{
-    return listOf()
+    val location = LocationManager.findLocation("location3", AreaIdentifier.FIRELANDS)
+    val conveyerBelt = ConveyerBelt(location.bottomleft, Vector2(location.width, 140f), location, Direction.DOWN)
+    return listOf(conveyerBelt)
 }
 fun getFireLandsLocationFourObjects():List<GameObject>{
     val location4 = LocationManager.findLocation("location4",AreaIdentifier.FIRELANDS)
@@ -102,7 +104,7 @@ fun getFireLandsLocationSevenObjects(): List<GameObject>{
 }
 
 
-
+/*
 fun getFireLandsLocationNineObjects(): List<GameObject>{
     val location9 = LocationManager.findLocation("location9",AreaIdentifier.FIRELANDS)
 
@@ -111,40 +113,40 @@ fun getFireLandsLocationNineObjects(): List<GameObject>{
 
     return listOf(fluteItem)
 
-}
+}*/
 
-fun getFireLandsLocationElevenObjects(): List<GameObject>{
-    val location11 = LocationManager.findLocation("location11",AreaIdentifier.FIRELANDS)
+fun getFireLandsLocationNineObjects(): List<GameObject>{
+    val location9 = LocationManager.findLocation("location9",AreaIdentifier.FIRELANDS)
 
-    val circularPlatform = CircularPlatform(location11.bottomleft + Vector2(500f, 200f), Vector2(150f,100f), location11)
+    val circularPlatform = CircularPlatform(location9.bottomleft + Vector2(500f, 200f), Vector2(150f,100f), location9)
 
-    val circularPlatform2 = CircularPlatform(circularPlatform.bottomright + Vector2(300f, 0f), Vector2(150f,100f), location11, 180f)
+    val circularPlatform2 = CircularPlatform(circularPlatform.bottomright + Vector2(300f, 0f), Vector2(150f,100f), location9, 180f)
 
-    val circularPlatform3 = CircularPlatform(circularPlatform2.bottomright + Vector2(600f, 0f), Vector2(150f,100f), location11, 0f)
+    val circularPlatform3 = CircularPlatform(circularPlatform2.bottomright + Vector2(600f, 0f), Vector2(150f,100f), location9, 0f)
 
     return listOf(circularPlatform, circularPlatform2, circularPlatform3)
 }
 
 fun getFirelandsLocationFourteenObjects(): List<GameObject>{
-    val location13 = LocationManager.findLocation("location13",AreaIdentifier.FIRELANDS)
-    val location14 = LocationManager.findLocation("location14",AreaIdentifier.FIRELANDS)
+    val location11 = LocationManager.findLocation("location11",AreaIdentifier.FIRELANDS)
+    val location12 = LocationManager.findLocation("location12",AreaIdentifier.FIRELANDS)
 
-    val walkableTerrain = WalkableTerrain(location13.topleft, Vector2(location13.width, location14.height), location14)
+    val walkableTerrain = WalkableTerrain(location11.topleft, Vector2(location11.width, location12.height), location12)
 
-    val boulderGenerator1 = BoulderGenerator(location14.bottomleft + Vector2(0f,128f), Vector2(128f,128f), getDirectionUnitVector( Direction.RIGHT), location14, element = Element.FIRE)
+    val boulderGenerator1 = BoulderGenerator(location12.bottomleft + Vector2(0f,128f), Vector2(128f,128f), getDirectionUnitVector( Direction.RIGHT), location12, element = Element.FIRE)
 
-    val boulderGenerator2 = BoulderGenerator(location14.bottomright + Vector2(-128f,128 + 225f), Vector2(128f,128f), getDirectionUnitVector( Direction.LEFT), location14, element = Element.FIRE)
+    val boulderGenerator2 = BoulderGenerator(location12.bottomright + Vector2(-128f,128 + 225f), Vector2(128f,128f), getDirectionUnitVector( Direction.LEFT), location12, element = Element.FIRE)
 
-    val boulderGenerator3 = BoulderGenerator(location14.bottomleft + Vector2(0f,128 + 450f), Vector2(128f,128f), getDirectionUnitVector( Direction.RIGHT), location14, element = Element.FIRE)
+    val boulderGenerator3 = BoulderGenerator(location12.bottomleft + Vector2(0f,128 + 450f), Vector2(128f,128f), getDirectionUnitVector( Direction.RIGHT), location12, element = Element.FIRE)
 
-    val breakableObject = DefaultBreakableObject(Vector2(location14.currentMiddle.x - 100f, location14.topleft.y - 64f), Vector2(64f,64f), location14)
+    val breakableObject = DefaultBreakableObject(Vector2(location12.currentMiddle.x - 100f, location12.topleft.y - 64f), Vector2(64f,64f), location12)
     breakableObject.onRemoveAction.add {
         val removeEvents: List<RemoveObjectSignal> = SignalManager.pastSignals.List.filter { it is RemoveObjectSignal }.map { it as RemoveObjectSignal }
         val objectRemoved = removeEvents.find { it.entityId == breakableObject.entityId }
         if(objectRemoved == null){
             SignalManager.emitSignal(
                 AddObjectSignal(
-                    ADDMETHODS.FIRELANDSTOFROSTFIREDOOR,"location14",AreaIdentifier.FIRELANDS)
+                    ADDMETHODS.FIRELANDSTOFROSTFIREDOOR,"location12",AreaIdentifier.FIRELANDS)
             )
             SignalManager.emitSignal(
                 AddObjectSignal(

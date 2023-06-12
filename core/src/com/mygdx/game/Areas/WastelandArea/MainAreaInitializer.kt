@@ -13,12 +13,11 @@ import com.mygdx.game.Locations.RepeatedTextureLocationData
 import com.mygdx.game.addLocation
 import com.mygdx.game.addLocationRelative
 import getWastelandLocationEightObjects
-import getWastelandLocationFiveObjects
 import getWastelandLocationFourObjects
 import getWastelandLocationOneObjects
-import getWastelandLocationSevenObjects
-import getWastelandLocationTenObjects
+import getWastelandLocationSixObjects
 import getWastelandLocationThreeObjects
+import getWastelandLocationTwoObjects
 
 class WastelandAreaInitializer: AreaInitializer {
     override fun initializeArea(): Area {
@@ -26,19 +25,19 @@ class WastelandAreaInitializer: AreaInitializer {
         val spikeTexture = DefaultTextureHandler.getTexture("Spike.png")
         val wastelandLocationData =  DefaultLocationData("wasteland.jpg")
         val wastelandDamageLocation = RepeatedTextureLocationData("wasteland.jpg", spikeTexture)
-        val location1 = DefaultLocation(Vector2(1024f, 1024f), Vector2(0f, 0f),::getWastelandLocationOneObjects,
-            DefaultLocationData("WastelandLocation1.png"))
+        val location1 = DefaultLocation(Vector2(200f, 300f), Vector2(0f, 0f),::getWastelandLocationOneObjects,
+            wastelandLocationData)
         addLocation(location1, area)
-        val location2 = addLocationRelative(location1,Vector2(1000f, 300f), InsertDirection.RIGHT,area,InsertDirection.MIDDLE,{ listOf()}, wastelandLocationData)
-        val location3 = addLocationRelative(location2,Vector2(700f, 700f), InsertDirection.RIGHT,area,InsertDirection.MIDDLE,::getWastelandLocationThreeObjects, wastelandLocationData)
-        val location4 = addLocationRelative(location1,Vector2(1000f, 300f), InsertDirection.LEFT,area,InsertDirection.MIDDLE,  ::getWastelandLocationFourObjects, wastelandLocationData)
-        val location5 = addLocationRelative(location4,Vector2(1000f, 600f), InsertDirection.LEFT,area,InsertDirection.MIDDLE,::getWastelandLocationFiveObjects, wastelandDamageLocation)
-        val location6 = addLocationRelative(location1,Vector2(300f, 500f), InsertDirection.DOWN,area,InsertDirection.MIDDLE,{ listOf()}, wastelandLocationData)
-        val location7 = addLocationRelative(location6,Vector2(1500f, 1500f), InsertDirection.DOWN,area,InsertDirection.MIDDLE,::getWastelandLocationSevenObjects , wastelandDamageLocation)
-        val location8 = addLocationRelative(location5, Vector2(400f, 200f), InsertDirection.LEFT,area,InsertDirection.MIDDLE, ::getWastelandLocationEightObjects , wastelandLocationData)
-        val location9 = addLocationRelative(location8, Vector2(200f, 500f), InsertDirection.UP,area,InsertDirection.LEFT, { listOf()} , wastelandLocationData)
-        val location10 = addLocationRelative(location9, Vector2(1000f, 1200f), InsertDirection.UP,area,InsertDirection.MIDDLE,  ::getWastelandLocationTenObjects , wastelandDamageLocation)
-        location9.addAdjacentLocation(location5)
+        val location2 = addLocationRelative(location1,Vector2(1000f, 300f), InsertDirection.LEFT,area,InsertDirection.MIDDLE,  ::getWastelandLocationTwoObjects, wastelandLocationData)
+        val location3 = addLocationRelative(location2,Vector2(1000f, 600f), InsertDirection.LEFT,area,InsertDirection.MIDDLE,::getWastelandLocationThreeObjects, wastelandDamageLocation)
+        //val location7 = addLocationRelative(location6,Vector2(1500f, 1500f), InsertDirection.DOWN,area,InsertDirection.MIDDLE,::getWastelandLocationSevenObjects , wastelandDamageLocation)
+        val location4 = addLocationRelative(location3, Vector2(400f, 200f), InsertDirection.LEFT,area,InsertDirection.MIDDLE, ::getWastelandLocationFourObjects , wastelandLocationData)
+        val location5 = addLocationRelative(location4, Vector2(200f, 500f), InsertDirection.UP,area,InsertDirection.LEFT, { listOf()} , wastelandLocationData)
+        val location6 = addLocationRelative(location5, Vector2(1000f, 1200f), InsertDirection.UP,area,InsertDirection.MIDDLE,  ::getWastelandLocationSixObjects , wastelandDamageLocation)
+        val location7 = addLocationRelative(location6, Vector2(600f,200f), InsertDirection.LEFT, area, InsertDirection.UP, { listOf() }, wastelandLocationData)
+        val location8 = addLocationRelative(location7,Vector2(1500f, 1500f), InsertDirection.LEFT,area,InsertDirection.MIDDLE,::getWastelandLocationEightObjects, wastelandDamageLocation)
+
+       // location9.addAdjacentLocation(location5)
         return area
     }
 }

@@ -29,27 +29,23 @@ class FireLandsInitializer: AreaInitializer {
             InsertDirection.MIDDLE, ::getFireLandsLocationSixObjects,DefaultLocationData())
         val location7 = addLocationRelative(location6, Vector2(1000f, 1000f), InsertDirection.DOWN, area,
             InsertDirection.MIDDLE, ::getFireLandsLocationSevenObjects,DamageLocationData())
-
-        val location8 = addLocationRelative(location4, Vector2(800f,200f),InsertDirection.LEFT,area,InsertDirection.LEFT,{ listOf()})
-
-        val location9 = addLocationRelative(location8, Vector2(600f,600f),InsertDirection.LEFT,area,InsertDirection.LEFT,::getFireLandsLocationNineObjects)
-        val location10 = addLocationRelative(location2, Vector2(400f, 200f), InsertDirection.RIGHT, area,
+        val location8 = addLocationRelative(location2, Vector2(400f, 200f), InsertDirection.RIGHT, area,
             InsertDirection.MIDDLE, { listOf() }, DefaultLocationData(), Vector2(0f,100f)
         )
 
-        val location11 = addLocationRelative(location10, Vector2(2000f, 500f), InsertDirection.RIGHT, area,
-            InsertDirection.MIDDLE, ::getFireLandsLocationElevenObjects, DamageLocationData())
+        val location9 = addLocationRelative(location8, Vector2(2000f, 500f), InsertDirection.RIGHT, area,
+            InsertDirection.MIDDLE, ::getFireLandsLocationNineObjects, DamageLocationData())
 
-        val location12 = addLocationRelative(location11, Vector2(800f, 300f), InsertDirection.RIGHT, area,
+        val location10 = addLocationRelative(location9, Vector2(800f, 300f), InsertDirection.RIGHT, area,
             InsertDirection.MIDDLE)
 
-        val location13 = addLocationRelative(location12, Vector2(300f, 800f), InsertDirection.UP, area,
+        val location11 = addLocationRelative(location10, Vector2(300f, 800f), InsertDirection.UP, area,
             InsertDirection.RIGHT)
 
-        val location14 = addLocationRelative(location13, Vector2(1200f, 800f), InsertDirection.UP, area,
+        val location12 = addLocationRelative(location11, Vector2(1200f, 800f), InsertDirection.UP, area,
             InsertDirection.MIDDLE, ::getFirelandsLocationFourteenObjects, DamageLocationData())
 
-        location11.addAdjacentLocation(location2)
+        location9.addAdjacentLocation(location2)
 
 
         return area

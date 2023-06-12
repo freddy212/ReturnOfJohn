@@ -23,6 +23,11 @@ class SandGhostSleeping(initPosition: Vector2, size: Vector2, defaultLocation: D
 
     val handGhostDifference = texture.height - sandHandTexture.height
 
+    init {
+        polygon.setPosition(polygon.x, polygon.y - size.y / 2)
+        polygon.setScale(3.2f,1f)
+    }
+
     override val collition: KeyPressedCollition = object: KeyPressedCollition() {
         override val specificButton = Input.Keys.SPACE
         override fun renderKeyToUI(entity: GameObject, collidedObject: GameObject) {

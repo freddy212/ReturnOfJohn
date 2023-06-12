@@ -6,12 +6,14 @@ import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.Collitions.ConveyerBeltStrength
 import com.mygdx.game.Collitions.DoorCollition
 import com.mygdx.game.Enums.Direction
+import com.mygdx.game.Enums.ItemType
 import com.mygdx.game.Enums.getDirectionUnitVector
 import com.mygdx.game.GameObjects.Other.Door
 import com.mygdx.game.GameObjects.Hazards.ConveyerBelt.ConveyerBelt
 import com.mygdx.game.GameObjects.Hazards.Generators.BoulderGenerator
 import com.mygdx.game.ItemAbilities.DashAbility
 import com.mygdx.game.GameObjects.ItemObjects.AbilityItemObject
+import com.mygdx.game.GameObjects.ItemObjects.GenericInventoryItemObject
 import com.mygdx.game.GameObjects.Terrain.WalkableTerrain
 import com.mygdx.game.Interfaces.AreaIdentifier
 import com.mygdx.game.Managers.LocationManager
@@ -101,7 +103,10 @@ fun getFirelandsDungeonLocationFifteenObjects(): List<GameObject>{
         Vector2(location.width - 1, 50f),location,Direction.RIGHT, ConveyerBeltStrength.STRONG)
     val boulderGenerator = BoulderGenerator(Vector2(location.currentMiddle.x, location.topleft.y), Vector2(128f,128f), getDirectionUnitVector(Direction.DOWN), location, 0f, 1.0f)
     val boulderGenerator2 = BoulderGenerator(Vector2(location.currentMiddle.x - 156f, location.topleft.y), Vector2(128f,128f), getDirectionUnitVector(Direction.DOWN), location, 0f, 1.0f)
-    return listOf(conveyerBeltDown, conveyerBeltUp, boulderGenerator, boulderGenerator2)
+
+    val fluteItem  = GenericInventoryItemObject(location.bottomleft + Vector2(64f, location.height / 2 - 16f), Vector2(64f, 32f), location,
+        ItemType.FLUTEOFAWAKENING)
+    return listOf(conveyerBeltDown, conveyerBeltUp, boulderGenerator, boulderGenerator2, fluteItem)
 }
 
 fun getFirelandsDungeonLocationSixteenObjects(): List<GameObject>{
