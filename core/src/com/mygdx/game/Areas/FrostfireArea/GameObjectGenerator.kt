@@ -13,11 +13,9 @@ import com.mygdx.game.Events.RemoveObjectPermanentlyEvent
 import com.mygdx.game.GameObjects.Hazards.ConveyerBelt.ConveyerBelt
 import com.mygdx.game.GameObjects.Hazards.Generators.BoulderGenerator
 import com.mygdx.game.GameObjects.Buttons.DoorButton.DoorButtonDelayed
-import com.mygdx.game.GameObjects.Gates.Fence
 import com.mygdx.game.GameObjects.Buttons.IceButton
-import com.mygdx.game.GameObjects.Gates.HydraGate
-import com.mygdx.game.GameObjects.Gates.IceGate
-import com.mygdx.game.GameObjects.Gates.StopGate
+import com.mygdx.game.GameObjects.Gates.*
+import com.mygdx.game.GameObjects.Hazards.CircularPlatform
 import com.mygdx.game.GameObjects.Hazards.Generators.RocketGenerator
 import com.mygdx.game.GameObjects.ItemObjects.HealthObject
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Bosses.Hydra.Hydra
@@ -182,4 +180,31 @@ fun getFrostFireLocationTenObjects(): List<GameObject>{
     val hydra: Hydra = Hydra(walkableTerrain.topleft + Vector2(50f,100f), Vector2(165f,210f), location10)
 
     return listOf(walkableTerrain, walkableTerrain2, walkableTerrain3, walkableTerrain4,walkableTerrain5, walkableTerrain6, hydra)
+}
+
+fun getFrostFireLocationFourteenObjects(): List<GameObject>{
+    val location = LocationManager.findLocation("location14", AreaIdentifier.FROSTFIRE)
+    val conveyerBelt = ConveyerBelt(location.bottomleft, Vector2(location.width, location.height), location, Direction.DOWN)
+    val boulderGenerator = BoulderGenerator(location.bottomleft + Vector2(0f,200f), Vector2(128f,128f), getDirectionUnitVector(Direction.DOWN), location, element = Element.FIRE)
+    val boulderGenerator2 = BoulderGenerator(location.bottomleft + Vector2(130f,500f), Vector2(128f,128f), getDirectionUnitVector(Direction.DOWN), location, element = Element.FIRE)
+    return listOf(conveyerBelt, boulderGenerator2, boulderGenerator)
+}
+
+fun getFrostFireLocationFifteenObjects(): List<GameObject>{
+
+    val location15 = LocationManager.findLocation("location15", AreaIdentifier.FROSTFIRE)
+    val circularPlatform = CircularPlatform(Vector2(location15.currentMiddle.x, location15.bottomleft.y + 200f), Vector2(150f,100f), location15)
+    val circularPlatform2 = CircularPlatform(Vector2(location15.currentMiddle.x - 150f, location15.bottomleft.y + 700f), Vector2(150f,100f), location15, 180f)
+    val circularPlatform3 = CircularPlatform(Vector2(location15.currentMiddle.x, location15.bottomleft.y + 1150f), Vector2(150f,100f), location15)
+
+    return listOf(circularPlatform, circularPlatform2, circularPlatform3)
+}
+
+fun getFrostFireLocationSixteenObjects(): List<GameObject>{
+    val location = LocationManager.findLocation("location16", AreaIdentifier.FROSTFIRE)
+    val fireGate = FireGate(location.bottomleft, Vector2(location.width, 100f), location)
+
+    val healthObject = HealthObject(Vector2(location.currentMiddle.x - 30f, fireGate.y + 200f), Vector2(60f,60f), location)
+
+    return listOf(fireGate, healthObject)
 }

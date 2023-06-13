@@ -47,6 +47,13 @@ class FrostFireInitializer():AreaInitializer {
         val location12 =
             addLocationRelative(location10, Vector2(800f, 1500f), InsertDirection.RIGHT, area, InsertDirection.MIDDLE, locationDataStrategy = DamageLocationData("IceGround.png"))
 
+        val location13 = addLocationRelative(location4, Vector2(1000f, 200f), InsertDirection.LEFT, area, InsertDirection.MIDDLE)
+
+        val location14 = addLocationRelative(location13, Vector2(260f, 641f), InsertDirection.UP, area, InsertDirection.LEFT, ::getFrostFireLocationFourteenObjects)
+
+        val location15 = addLocationRelative(location14, Vector2(500f, 1500f), InsertDirection.UP, area, InsertDirection.MIDDLE, ::getFrostFireLocationFifteenObjects, locationDataStrategy = DamageLocationData())
+
+        val location16 = addLocationRelative(location15, Vector2(300f, 500f), InsertDirection.UP, area, InsertDirection.MIDDLE, ::getFrostFireLocationSixteenObjects)
         location11.addAdjacentLocation(location12)
 
         location2.addAdjacentLocation(location4)

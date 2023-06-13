@@ -18,8 +18,10 @@ import com.mygdx.game.Saving.SaveStateEntity
 import com.mygdx.game.AbstractClasses.DefaultCharacter
 import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.Collitions.ProjectileCanPassCollition
+import com.mygdx.game.Enums.CharacterState
 import com.mygdx.game.HealthStrategy.PlayerHealthStrategy
 import com.mygdx.game.Interfaces.FightableEntity
+import com.mygdx.game.ItemAbilities.DashAbilityUpgraded
 import com.mygdx.game.ItemAbilities.ProjectileAbilityToggle
 import com.mygdx.game.Utils.ResourceList
 
@@ -57,8 +59,10 @@ class Player(Position: Vector2, size: Vector2, modelHandler: ModelInstanceHandle
         player.move(getDirectionUnitVector(direction))
     }
     override fun isHit(other:GameObject){
-        itemAbilities.List.forEach { x -> if(x.active) x.inactiveAction() }
-        super.isHit(other)
+        if(!(player.characterState == CharacterState.DASHING && player.itemAbilities.List.filter { it is DashAbilityUpgraded }.isNotEmpty())){
+            itemAbilities.List.forEach { x -> if(x.active) x.inactiveAction() }
+            super.isHit(other)
+        }
     }
 
     override fun death() {
