@@ -103,7 +103,7 @@ fun getFrostFireLocationSevenObjects(): List<GameObject>{
 
     val conveyerBelt = ConveyerBelt(fenceBeforeGateLeft.bottomleft - Vector2(0f,100f), Vector2(location.width, 300f),location, Direction.UP)
 
-    val gateFence = Fence(Vector2(location.currentMiddle.x - 100f,location.topleft.y - 100f), Vector2(200f,100f),location, DefaultTextureHandler.getTexture("FenceGate.png"), false)
+    val gateFence = Fence(Vector2(location8.bottomleft.x,location.topleft.y - 100f), Vector2(location8.width,100f),location, DefaultTextureHandler.getTexture("FenceGate.png"), false)
     val removeFenceEvent = RemoveObjectPermanentlyEvent(gateFence)
     val buttonEvent = ButtonEvent(removeFenceEvent)
     val doorButton1 = DoorButtonDelayed(Vector2( location.topleft + Vector2(50f,0f)), Vector2(40f,30f),location,buttonEvent)
@@ -140,7 +140,7 @@ fun getFrostFireLocationEightObjects(): List<GameObject>{
 
     val iceButton1 = IceButton(Vector2(stopGate.bottomleft - Vector2(-100f, 100f)), Vector2(128f, 32f), location8,stopGate, dummyEvent)
 
-    val healthObject = HealthObject(iceButton1.initPosition - Vector2(0f,200f), Vector2(60f,60f), location8)
+    val healthObject = HealthObject(iceButton1.initPosition - Vector2(-30f,150f), Vector2(60f,60f), location8)
 
     teleportPad.onLocationEnterActions.add {
         val teleportPad2 = location6.gameObjects.List.firstOrNull { it is TeleportPad && it.id == "padBottom" }

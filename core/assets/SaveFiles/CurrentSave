@@ -1,4 +1,4 @@
-{"playerXPos":-743.0348,"playerYPos":1798.516,"areaIdentifier":"FROSTFIRE","entityId":0}
+{"playerXPos":-2.659769,"playerYPos":950.225,"areaIdentifier":"FROSTFIRE","entityId":0}
 {"signaltype":"ABILITY_GAINED","abilityId":"SHIELD"}
 {"signaltype":"REMOVE_OBJECT","entityId":9}
 {"signaltype":"REMOVE_OBJECT","entityId":4}
@@ -44,3 +44,11 @@
 {"signaltype":"USE_ITEMS","itemType":"FIRELANDSKEY","amount":1}
 {"signaltype":"USE_ITEMS","itemType":"WASTELANDSKEY","amount":1}
 {"signaltype":"REMOVE_OBJECT","entityId":81}
+{"signaltype":"REMOVE_OBJECT","entityId":68}
+{"signaltype":"REMOVE_OBJECT","entityId":64}
+{"signaltype":"BUTTON_ACCEPTED","entityId":65}
+{"signaltype":"BUTTON_ACCEPTED","entityId":66}
+{"signaltype":"REMOVE_OBJECT","entityId":72}
+{"signaltype":"BUTTON_ACCEPTED","entityId":77}
+{"signaltype":"BUTTON_ACCEPTED","entityId":76}
+{"signaltype":"REMOVE_OBJECT","entityId":75}
