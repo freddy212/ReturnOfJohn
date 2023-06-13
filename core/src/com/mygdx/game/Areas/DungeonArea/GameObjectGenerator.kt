@@ -18,6 +18,7 @@ import com.mygdx.game.GameObjects.Terrain.WalkableTerrain
 import com.mygdx.game.Interfaces.AreaIdentifier
 import com.mygdx.game.ItemAbilities.ShieldAbility
 import com.mygdx.game.Managers.LocationManager
+import com.mygdx.game.Signal.signalConvert
 
 fun getLocationOneCaveObjects(): List<GameObject>{
     val location1 = LocationManager.findLocation("location1",AreaIdentifier.DUNGEONAREA)
@@ -44,7 +45,9 @@ fun getLocationFourCaveObjects():List<GameObject>{
     val breakableObject = DefaultBreakableObject(position, Vector2(location.size.x,100f),location)
     val signSize = Vector2(80f,80f)
     val sign = Sign(middleOfObject(location.originalMiddle,signSize), signSize, location, "Press I - View Inventory", "Space or Arrow Key - Toggle")
-    return listOf(breakableObject,sign)
+    val WastelandKey = GenericInventoryItemObject(sign.topleft + Vector2(0f,200f), Vector2(80f, 40f), location, ItemType.WASTELANDSKEY)
+
+    return listOf(breakableObject,sign, WastelandKey)
 
 }
 fun getLocationFiveCaveObjects(): List<GameObject>{

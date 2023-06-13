@@ -14,6 +14,9 @@ fun getItemTexture(itemType: ItemType): Texture {
         ItemType.KEY -> DefaultTextureHandler.getTexture("Key.png")
         ItemType.WORLDLEAF -> DefaultTextureHandler.getTexture("WorldLeaf.png")
         ItemType.FLUTEOFAWAKENING -> DefaultTextureHandler.getTexture("FluteOfAwakening.png")
+        ItemType.FIRELANDSKEY -> DefaultTextureHandler.getTexture("FirelandsKey.png")
+        ItemType.ICELANDSKEY -> DefaultTextureHandler.getTexture("IcelandsKey.png")
+        ItemType.WASTELANDSKEY -> DefaultTextureHandler.getTexture("WastelandKey.png")
     }
 }
 
@@ -24,6 +27,9 @@ fun getItemDescription(itemType: ItemType): String {
         ItemType.KEY -> "Key"
         ItemType.WORLDLEAF -> "Leaf"
         ItemType.FLUTEOFAWAKENING -> "An ancient flute capable of awakening sleeping spirits"
+        ItemType.ICELANDSKEY -> "The master-key belonging to the icelands"
+        ItemType.WASTELANDSKEY -> "The master-key belonging to the wasteland"
+        ItemType.FIRELANDSKEY-> "The master-key belonging to the firelands"
     }
 }
 

@@ -6,10 +6,11 @@ import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.Collitions.CheckKeyCollition
 import com.mygdx.game.DefaultTextureHandler
 import com.mygdx.game.Enums.Layer
+import com.mygdx.game.GameObjects.Gates.HydraGate
 import com.mygdx.game.GameObjects.Gates.LockedDoor
 import com.mygdx.game.Locations.DefaultLocation
 
-class KeySensor(Position: Vector2, size: Vector2, defaultLocation: DefaultLocation, val lockedDoor: LockedDoor) : GameObject(Position, size,defaultLocation){
+class KeySensor(Position: Vector2, size: Vector2, defaultLocation: DefaultLocation, val lockedDoor: HydraGate) : GameObject(Position, size,defaultLocation){
     override val texture = DefaultTextureHandler.getTexture("sensor.png")
     override val layer = Layer.ONGROUND
     override fun render(batch: PolygonSpriteBatch){

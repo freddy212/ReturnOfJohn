@@ -15,6 +15,7 @@ import com.mygdx.game.GameObjects.Hazards.Generators.BoulderGenerator
 import com.mygdx.game.GameObjects.Buttons.DoorButton.DoorButtonDelayed
 import com.mygdx.game.GameObjects.Gates.Fence
 import com.mygdx.game.GameObjects.Buttons.IceButton
+import com.mygdx.game.GameObjects.Gates.HydraGate
 import com.mygdx.game.GameObjects.Gates.IceGate
 import com.mygdx.game.GameObjects.Gates.StopGate
 import com.mygdx.game.GameObjects.Hazards.Generators.RocketGenerator
@@ -153,6 +154,14 @@ fun getFrostFireLocationEightObjects(): List<GameObject>{
 
     }
     return listOf(teleportPad, stopGate, iceButton1, location6, healthObject)
+}
+
+fun getFrostFireLocationNineObjects(): List<GameObject>{
+    val location9 = LocationManager.findLocation("location9", AreaIdentifier.FROSTFIRE)
+
+    val hydraGate = HydraGate(location9.bottomleft, Vector2(location9.width, 200f), location9)
+
+    return listOf(hydraGate)
 }
 
 fun getFrostFireLocationTenObjects(): List<GameObject>{

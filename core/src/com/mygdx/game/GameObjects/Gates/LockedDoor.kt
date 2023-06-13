@@ -16,15 +16,15 @@ class LockedDoor(Position: Vector2, size: Vector2, defaultLocation: DefaultLocat
     override val layer = Layer.ONGROUND
 
     override val collition = IllegalMoveCollition
-    private var sensor: KeySensor
+    //private var sensor: KeySensor
 
     init {
-        sensor = KeySensor(Position,Vector2(100f,50f),defaultLocation!!,this)
-        defaultLocation.addGameObject(sensor)
+       // sensor = KeySensor(Position,Vector2(100f,50f),defaultLocation!!,this)
+        //defaultLocation.addGameObject(sensor)
     }
 
     override fun removeFromLocation() {
-        sensor.removeFromLocation()
+        //sensor.removeFromLocation()
         super.removeFromLocation()
     }
 }

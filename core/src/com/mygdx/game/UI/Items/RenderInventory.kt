@@ -28,22 +28,25 @@ class RenderInventory: Renderable {
 
     }
     fun drawItems(batch: PolygonSpriteBatch, displayItems: List<Item>){
+        val currentItem = displayItems[currentIndex]
+        val description = getItemDescription(currentItem.itemType)
+
+
         val startPos = Vector2(spriteBox.x, spriteBox.y + spriteBox.height - 64f)
         val uiCircleOffsetX = currentIndex.mod(3)
         val uiCircleOffsetY = currentIndex / 3
         uiCircleSprite.setPosition(startPos.x + (64f * uiCircleOffsetX),startPos.y - (64f * uiCircleOffsetY))
         uiCircleSprite.draw(batch)
-
-        val currentItem = displayItems[currentIndex]
-        val description = getItemDescription(currentItem.itemType)
         font.draw(batch,description,spriteBox.x - 200f, spriteBox.y + 300f)
 
         displayItems.forEachIndexed { index, item ->
+            val width = item.texture.width.toFloat()
+            val height = item.texture.height.toFloat()
             val column: Int = index / 3
             val row = index % 3
-            val pos = startPos + Vector2(row * 64f, - column * 64f)
-            val sprite = Sprite(item.texture,64,32)
-            font.draw(batch,item.amount.toString(),pos.x + 16f, pos.y + 64f)
+            val pos = startPos + Vector2(row * width, - column * width)
+            val sprite = Sprite(item.texture,width.toInt(),height.toInt())
+            font.draw(batch,item.amount.toString(),pos.x + height / 2, pos.y + width)
             sprite.setPosition(pos.x,pos.y)
             sprite.draw(batch)
         }

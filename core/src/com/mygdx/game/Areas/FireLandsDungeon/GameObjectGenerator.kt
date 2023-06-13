@@ -77,8 +77,9 @@ fun getFireLandsDungeonLocationNineObjects(): List<GameObject>{
 
     val walkableTerrain = WalkableTerrain(Vector2(location9.topright.x - 950f, location9.originalMiddle.y - 100f), Vector2(1000f,200f), location9)
     val walkableTerrain2 = WalkableTerrain(Vector2(walkableTerrain.bottomleft.x, location9.y), Vector2(400f, walkableTerrain.topright.y - location9.y), location9)
+    val FirelandsKey = GenericInventoryItemObject(walkableTerrain.bottomleft + Vector2(100f,100f), Vector2(80f, 40f), location9, ItemType.FIRELANDSKEY)
 
-    return listOf(walkableTerrain, walkableTerrain2)
+    return listOf(walkableTerrain, walkableTerrain2, FirelandsKey)
 }
 
 fun getFirelandsDungeonLocationFiveObjects(): List<GameObject>{
