@@ -21,6 +21,7 @@ object ProjectileAbilityToggle: CharacterAbility() {
     val sound = Gdx.audio.newSound(Gdx.files.local("Sound/SoundEffect/clicksound.mp3"));
     init {
         abilitiesToToggle.add(WaterBallAbility())
+        abilitiesToToggle.add(SmallBoulderAbility())
     }
     var activeIndex = 0
     set(newValue) {

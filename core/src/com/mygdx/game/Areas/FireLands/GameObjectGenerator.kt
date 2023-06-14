@@ -18,6 +18,7 @@ import com.mygdx.game.GameObjects.ItemObjects.GenericInventoryItemObject
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Bosses.RockBoss.RockBoss
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Bosses.SandGhost.Sartan
 import com.mygdx.game.GameObjects.Other.DefaultBreakableObject
+import com.mygdx.game.GameObjects.Other.Thorns
 import com.mygdx.game.GameObjects.Terrain.FireObject
 import com.mygdx.game.GameObjects.Terrain.WalkableTerrain
 import com.mygdx.game.Interfaces.AreaIdentifier
@@ -98,9 +99,22 @@ fun getFireLandsLocationSevenObjects(): List<GameObject>{
     val addAbilityItemSignal = AddAbilityItemSignal(abilityId = AbilityId.FIREBALL, area = AreaIdentifier.FIRELANDS,x = location7.currentMiddle.x, y = location7.currentMiddle.y, locationName = location7.locationName)
     val RockBoss = RockBoss(location7.currentMiddle, Vector2(150f,160f), location7, Element.FIRE, addAbilityItemSignal)
 
-    val door = createDoor(DoorData(Vector2(walkableTerrain.currentMiddle.x - 25f,location7.bottomleft.y),AreaIdentifier.FIRELANDS,AreaIdentifier.WASTELAND,
-    "location7",Direction.DOWN,"WastelandFirelands"))
-    return listOf(walkableTerrain, door, RockBoss)
+    val thorns = Thorns(Vector2(location7.currentMiddle.x - 25f,location7.bottomleft.y), Vector2(32f,64f), location7)
+    thorns.onRemoveAction.add {
+        val removeEvents: List<RemoveObjectSignal> = SignalManager.pastSignals.List.filter { it is RemoveObjectSignal }.map { it as RemoveObjectSignal }
+        val thornsRemoved = removeEvents.find { it.entityId == thorns.entityId }
+        if(thornsRemoved == null){
+            SignalManager.emitSignal(
+                AddObjectSignal(
+                    ADDMETHODS.FIRELANDSWASTELANDDOOR,"location7",AreaIdentifier.FIRELANDS)
+            )
+            SignalManager.emitSignal(
+                AddObjectSignal(
+                    ADDMETHODS.WASTELANDFIRELANDSDOOR,"location6",AreaIdentifier.WASTELAND)
+            )
+        }
+    }
+    return listOf(walkableTerrain, thorns, RockBoss)
 }
 
 

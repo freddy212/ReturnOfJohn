@@ -66,6 +66,7 @@ fun getIceLandsGateWayLocation():List<GameObject>{
     val iceGrounds = ConstructObjects(::IceObject,walkableTerrain.bottomleft.x.toInt(),100,walkableTerrain.bottomleft.x.toInt() + 199,
         walkableTerrain.bottomleft.y.toInt() + 400,100,walkableTerrain.bottomleft.y.toInt(),location10)
 
+
     val fence = Fence(Vector2(walkableTerrain.topleft.x,walkableTerrain.topleft.y - 130f), Vector2(walkableTerrain.width,150f),location10, DefaultTextureHandler.getTexture("FenceGate.png"), false)
     val removeFenceEvent = RemoveObjectPermanentlyEvent(fence)
     val buttonEvent = ButtonEvent(removeFenceEvent)
@@ -76,6 +77,8 @@ fun getIceLandsGateWayLocation():List<GameObject>{
         Vector2(75f,75f),location10
     )
     val iceObject2 = IceObject(Vector2(iceObject.bottomleft.x + 150f, iceObject.bottomleft.y),Vector2(75f,75f),location10)
+
+    val sign = Sign(iceObject.bottomleft - Vector2(0f, 250f), Vector2(80f,80f), location10, "Water freezes when cold")
     val doorPosition = Vector2(walkableTerrain.originalMiddle.x - (playerSize.x),walkableTerrain.topleft.y)
 
     val doorCollition = DoorCollition(doorPosition,
@@ -85,7 +88,7 @@ fun getIceLandsGateWayLocation():List<GameObject>{
     val door = Door(doorPosition, Vector2(32f * 2, 64f * 2), DefaultTextureHandler.getTexture("CaveDoor.png"),location10,
         Direction.UP,doorCollition)
 
-    return listOf(walkableTerrain,door) + iceGrounds + iceObject + iceObject2 + fence + doorButton1 + doorButton2
+    return listOf(walkableTerrain,door) + iceGrounds + iceObject + iceObject2 + fence + doorButton1 + doorButton2 + sign
 }
 fun getFireLandsGateWayLocation(): List<GameObject> {
     val location2 = LocationManager.findLocation("location2", AreaIdentifier.MAINAREA)

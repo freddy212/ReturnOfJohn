@@ -9,7 +9,7 @@ import com.mygdx.game.Signal.SignaledEventListener
 import com.mygdx.game.Signal.Signals.AddObjectSignal
 import com.mygdx.game.Signal.Signals.SIGNALTYPE
 
-enum class ADDMETHODS{ENGINEER,DOOR1,DOOR2, FROSTFIRETOFIRELANDSDOOR, FIRELANDSTOFROSTFIREDOOR}
+enum class ADDMETHODS{ENGINEER,DOOR1,DOOR2, FROSTFIRETOFIRELANDSDOOR, FIRELANDSTOFROSTFIREDOOR, FIRELANDSWASTELANDDOOR, WASTELANDFIRELANDSDOOR, ICELANDSFROSTFIREDOOR, FROSTFIREICELANDSDOOR}
 
 class AddGameObject(val objectCreationMethod: (DefaultLocation) -> List<GameObject>, val addMethod: ADDMETHODS): SignaledEventListener {
     override val signaltype = SIGNALTYPE.ADD_OBJECT

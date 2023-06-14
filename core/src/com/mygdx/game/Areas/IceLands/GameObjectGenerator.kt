@@ -30,7 +30,11 @@ import com.mygdx.game.GameObjects.Terrain.TeleportPad
 import com.mygdx.game.GameObjects.Terrain.WalkableTerrain
 import com.mygdx.game.Interfaces.AreaIdentifier
 import com.mygdx.game.Managers.LocationManager
+import com.mygdx.game.Managers.SignalManager
+import com.mygdx.game.Signal.SignalListeners.ADDMETHODS
 import com.mygdx.game.Signal.Signals.AddAbilityItemSignal
+import com.mygdx.game.Signal.Signals.AddObjectSignal
+import com.mygdx.game.Signal.Signals.RemoveObjectSignal
 
 fun getIceLandsLocationOneObjects(): List<GameObject>{
     val location1 = LocationManager.findLocation("location1",AreaIdentifier.ICELANDS)
@@ -72,7 +76,9 @@ fun getIceLandsLocationThreeObjects(): List<GameObject>{
     val doorButton2 = DoorButton(Vector2( door.currentMiddle.x - 100f,door.initPosition.y), Vector2(40f,30f),location3,buttonEvent)
     val iceObject = IceObject(door.initPosition - Vector2(0f,200f),Vector2(64f,64f),location3)
 
-    return listOf(cave,door,fence,doorButton1,doorButton2,iceObject)
+    val sign = Sign(iceObject.bottomleft - Vector2(300f,100f), Vector2(80f,80f), location3, "Hold right-click - Turn around")
+
+    return listOf(cave,door,fence,doorButton1,doorButton2,iceObject, sign)
 }
 fun getIceLandsLocationFiveObjects(): List<GameObject> {
     val location5 = LocationManager.findLocation("location5", AreaIdentifier.ICELANDS)
@@ -135,9 +141,23 @@ fun getIceLandsLocationNineObjects(): List<GameObject>{
 
     val conveyerBelt = ConveyerBelt(Vector2(location9.topright.x - 100f, location9.bottomright.y), Vector2(100f, location9.height), location9, Direction.DOWN, ConveyerBeltStrength.STRONG)
 
-    val door = createDoor(DoorData(Vector2(location9.originalMiddle.x - 32f, location9.topleft.y),AreaIdentifier.ICELANDS, AreaIdentifier.FROSTFIRE,"location9",Direction.UP,"IcelandsFrostfire"))
+    val thorns = Thorns(Vector2(location9.originalMiddle.x - 32f, location9.topleft.y - 64f), Vector2(32f,64f), location9)
+    thorns.onRemoveAction.add {
+        val removeEvents: List<RemoveObjectSignal> = SignalManager.pastSignals.List.filter { it is RemoveObjectSignal }.map { it as RemoveObjectSignal }
+        val thornsRemoved = removeEvents.find { it.entityId == thorns.entityId }
+        if(thornsRemoved == null){
+            SignalManager.emitSignal(
+                AddObjectSignal(
+                    ADDMETHODS.ICELANDSFROSTFIREDOOR,"location9",AreaIdentifier.ICELANDS)
+            )
+            SignalManager.emitSignal(
+                AddObjectSignal(
+                    ADDMETHODS.FROSTFIREICELANDSDOOR,"location1",AreaIdentifier.FROSTFIRE)
+            )
+        }
+    }
 
-    return listOf(stopGate, stopGate2, iceButton1, iceButton2, door, conveyerBelt)
+    return listOf(stopGate, stopGate2, iceButton1, iceButton2, thorns, conveyerBelt)
 }
 fun getIceLandsLocationElevenObjects(): List<GameObject>{
     val location11 = LocationManager.findLocation("location11",AreaIdentifier.ICELANDS)

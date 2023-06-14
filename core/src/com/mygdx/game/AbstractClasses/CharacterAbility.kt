@@ -6,7 +6,7 @@ import com.mygdx.game.ItemAbilities.*
 import com.mygdx.game.Interfaces.Timer
 import com.mygdx.game.player
 
-enum class AbilityId{AXE,ICECLONE,ICICLE,SHIELD,WATERBALL, FIREBALL, DASH, DASHUPGRADE, PROJECTILE, ICECLONEUPGRADE }
+enum class AbilityId{AXE,ICECLONE,ICICLE,SHIELD,WATERBALL, FIREBALL, DASH, DASHUPGRADE, PROJECTILE, ICECLONEUPGRADE, SMALLBOULDER}
 abstract class CharacterAbility(){
     abstract val abilityId: AbilityId
     abstract val triggerKey: Int
@@ -46,6 +46,7 @@ fun getAbility(abilityId: AbilityId): CharacterAbility{
         AbilityId.DASHUPGRADE -> DashAbilityUpgraded()
         AbilityId.PROJECTILE -> ProjectileAbilityToggle
         AbilityId.ICECLONEUPGRADE -> IceCloneAbilityUpgraded()
+        AbilityId.SMALLBOULDER -> SmallBoulderAbility()
     }
 }
 

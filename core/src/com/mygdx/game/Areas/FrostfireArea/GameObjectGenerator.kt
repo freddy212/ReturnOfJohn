@@ -29,13 +29,7 @@ import com.mygdx.game.plus
 import com.mygdx.game.minus
 fun getFrostFireLocationOneObjects(): List<GameObject>{
     val location = LocationManager.findLocation("location1", AreaIdentifier.FROSTFIRE)
-    val door = createDoor(
-        DoorData(
-            Vector2(location.originalMiddle.x - 32f, location.bottomleft.y),
-            AreaIdentifier.FROSTFIRE, AreaIdentifier.ICELANDS,"location1",
-            Direction.DOWN,"IcelandsFrostfire")
-    )
-    return listOf(door)
+    return listOf()
 }
 fun getFrostFireLocationFourObjects(): List<GameObject>{
     val location = LocationManager.findLocation("location4", AreaIdentifier.FROSTFIRE)

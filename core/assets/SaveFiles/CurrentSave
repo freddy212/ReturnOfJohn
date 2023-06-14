@@ -1,9 +1,0 @@
-{"playerXPos":-606.05005,"playerYPos":1083.7898,"areaIdentifier":"FROSTFIRE","entityId":0}
-{"signaltype":"ABILITY_GAINED","abilityId":"SHIELD"}
-{"signaltype":"ABILITY_GAINED","abilityId":"ICECLONEUPGRADE"}
-{"signaltype":"ABILITY_GAINED","abilityId":"DASHUPGRADE"}
-{"signaltype":"ABILITY_GAINED","abilityId":"ICECLONEUPGRADE"}
-{"signaltype":"ABILITY_GAINED","abilityId":"ICICLE"}
-{"signaltype":"REMOVE_OBJECT","entityId":85}
-{"signaltype":"MAX_HEALTH_GAINED","health":25}
-{"signaltype":"REMOVE_OBJECT","entityId":68}

@@ -72,6 +72,32 @@ fun spawnFireLandsFrostFireDoor(location: DefaultLocation): List<GameObject> {
     return listOf(door)
 }
 
+fun spawnFirelandsWastelandDoor(location: DefaultLocation): List<GameObject>{
+    val wastelandDoor = createDoor(DoorData(Vector2(location.currentMiddle.x - 25f,location.bottomleft.y),AreaIdentifier.FIRELANDS,AreaIdentifier.WASTELAND,
+        "location7",Direction.DOWN,"WastelandFirelands"))
+
+    return listOf(wastelandDoor)
+}
+fun spawnWastelandFirelandsDoor(location: DefaultLocation): List<GameObject>{
+    val firelandsDoor = createDoor(DoorData(location.topleft,AreaIdentifier.WASTELAND, AreaIdentifier.FIRELANDS,"location6",Direction.UP,"WastelandFirelands"))
+    return listOf(firelandsDoor)
+}
+
+fun spawnIceLandsFrostFireDoor(location: DefaultLocation): List<GameObject>{
+    val door = createDoor(DoorData(Vector2(location.originalMiddle.x - 64f, location.topleft.y),AreaIdentifier.ICELANDS, AreaIdentifier.FROSTFIRE,"location9",Direction.UP,"IcelandsFrostfire"))
+    return listOf(door)
+}
+
+fun spawnFrostFireIceLandsDoor(location: DefaultLocation): List<GameObject>{
+    val door = createDoor(
+        DoorData(
+            Vector2(location.originalMiddle.x - 32f, location.bottomleft.y),
+            AreaIdentifier.FROSTFIRE, AreaIdentifier.ICELANDS,"location1",
+            Direction.DOWN,"IcelandsFrostfire")
+    )
+    return listOf(door)
+}
+
 fun spawnDoorTwo(location: DefaultLocation): List<GameObject> {
     val mainAreaDoorPosition = Vector2(location.topright - Vector2(0f, 64f))
     val mainAreaDoorCollition = DoorCollition(
