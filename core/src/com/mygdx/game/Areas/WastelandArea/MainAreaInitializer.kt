@@ -38,6 +38,9 @@ class WastelandAreaInitializer: AreaInitializer {
         val location7 = addLocationRelative(location6, Vector2(600f,200f), InsertDirection.LEFT, area, InsertDirection.UP, ::getWastelandLocationSevenObjects, wastelandLocationData)
         val location8 = addLocationRelative(location7,Vector2(1500f, 1500f), InsertDirection.LEFT,area,InsertDirection.MIDDLE,::getWastelandLocationEightObjects, wastelandDamageLocation)
 
+        location5.addAdjacentLocation(location3)
+        location6.addAdjacentLocation(location3)
+
        // location9.addAdjacentLocation(location5)
         return area
     }

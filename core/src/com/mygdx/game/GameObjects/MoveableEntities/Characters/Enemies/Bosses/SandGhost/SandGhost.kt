@@ -12,10 +12,15 @@ import com.mygdx.game.getUnitVectorTowardsPoint
 import com.mygdx.game.*
 import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Bosses.Boss
+import com.mygdx.game.GameObjects.SensorObjects.SandGhostSleeping
+import com.mygdx.game.Managers.AreaManager
+import com.mygdx.game.Managers.SignalManager
 import com.mygdx.game.Saving.DefaultSaveStateHandler
+import com.mygdx.game.Signal.Signal
+import com.mygdx.game.Signal.Signals.RemoveObjectSignal
 
-class SandGhost(Position: Vector2, size: Vector2 = Vector2(150f,150f),location: DefaultLocation?)
-    : Boss(Position, size, location),
+class SandGhost(Position: Vector2, size: Vector2 = Vector2(150f,150f),location: DefaultLocation?, signal: Signal?, val entityIdToRemove: Int)
+    : Boss(Position, size, location, signal),
     SaveStateEntity by DefaultSaveStateHandler(){
     override val texture = DefaultTextureHandler.getTexture("BossFace.png")
     override val layer = Layer.PERSON
@@ -52,4 +57,9 @@ class SandGhost(Position: Vector2, size: Vector2 = Vector2(150f,150f),location: 
     }
 
     override var baseSpeed = 2f
+
+    override fun death() {
+        super.death()
+        SignalManager.emitSignal(RemoveObjectSignal(entityIdToRemove))
+    }
 }

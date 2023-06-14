@@ -7,11 +7,12 @@ import com.mygdx.game.Collitions.ShieldCollition
 import com.mygdx.game.Enums.Layer
 import com.mygdx.game.Events.ActionAfterFramesEvent
 import com.mygdx.game.Interfaces.DynamicEntity
+import com.mygdx.game.Interfaces.MoveCollition
 import com.mygdx.game.Managers.EventManager
 import com.mygdx.game.Managers.LocationManager
 import com.mygdx.game.Timer.DefaultTimer
 
-class ShieldAbility(): CharacterAbility(){
+open class ShieldAbility(): CharacterAbility(){
     override val abilityId = AbilityId.SHIELD
     override val triggerKey = com.badlogic.gdx.Input.Keys.NUM_2
     override val texture = DefaultTextureHandler.getTexture("shield-front.png")
@@ -37,7 +38,7 @@ class ShieldAbility(): CharacterAbility(){
 class Shield(Position: Vector2, size: Vector2): GameObject(Position, size),DynamicEntity by DefaultPositionChange,
     RotationalObject by DefaultRotationalObject() {
     override val texture = DefaultTextureHandler.getTexture("shield-side.png")
-    override val collition = ShieldCollition(this)
+    override var collition = ShieldCollition(this)
     override val layer = Layer.AIR
 
     fun getPos():Vector2{
