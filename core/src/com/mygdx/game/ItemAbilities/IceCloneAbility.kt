@@ -24,7 +24,7 @@ open class IceCloneAbility(): CharacterAbility(){
     override fun activeAction() {
         iceClone.removeFromLocation()
         iceClone.addToLocation(player.defaultLocation!!)
-        iceClone.setPosition(player.currentMiddle)
+        iceClone.setPosition(player.currentMiddle - Vector2(iceClone.width / 2, iceClone.height / 2))
         iceClone.move(Vector2(0f,0f))
     }
 }

@@ -65,9 +65,8 @@ fun getWastelandLocationEightObjects(): List<GameObject>{
     val location8 = LocationManager.findLocation("location8", AreaIdentifier.WASTELAND)
     val walkableTerrain = WalkableTerrain(location7.bottomleft - Vector2(250f,0f), Vector2(250f,200f),location8)
     val walkableTerrain2 = WalkableTerrain(location8.currentMiddle - Vector2(500f, 400f), Vector2(1000f,800f),location8)
-   // val sandGhost = SandGhost(walkableTerrain2.currentMiddle - Vector2(75f, 0f),Vector2(150f,150f), location7)
-        val sandGhostSleeping = SandGhostSleeping(walkableTerrain2.currentMiddle - Vector2(75f, 0f),Vector2(150f,150f), location8)
-    return listOf(walkableTerrain,walkableTerrain2) + sandGhostSleeping
+    val sandGhostSleeping = SandGhostSleeping(walkableTerrain2.currentMiddle - Vector2(75f, 0f),Vector2(150f,150f), location8)
+    return listOf(walkableTerrain,walkableTerrain2, sandGhostSleeping)
 }
 fun getWastelandLocationFourObjects(): List<GameObject>{
     val location = LocationManager.findLocation("location4",AreaIdentifier.WASTELAND)

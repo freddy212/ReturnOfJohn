@@ -23,6 +23,7 @@ class MainAreaInitializer: AreaInitializer {
         val location4 = addLocationRelative(location1, verticalHallway, InsertDirection.DOWN, area, InsertDirection.MIDDLE, ::getWastelandGatewayLocation, DefaultLocationData("wasteland.jpg"))
 
         location3.addAdjacentLocation(location2)
+        location4.addAdjacentLocation(location2)
         createFireLands(location2,area)
         createIceLands(location3,area)
         SetArea(area)

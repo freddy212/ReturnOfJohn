@@ -29,7 +29,7 @@ class ConveyerBelt(initPosition: Vector2, size: Vector2, defaultLocation: Defaul
     val start = initPosition + if(isVertical) Vector2(0f,size.y) else Vector2(0f,0f)
     val end = if(isVertical) initPosition + offsetStartBrick else bottomright - Vector2(brickLength,0f)
     val brickImageFileName = if(isVertical) "ConveyerBrick.png" else "ConveyerBrickDown.png"
-    val startBrick = ConveyerBrick(start + offsetStartBrick, if(isVertical) Vector2(size.x,brickLength) else Vector2(brickLength,size.y),speed,direction, DefaultTextureHandler.getTexture(brickImageFileName))
+    val startBrick = ConveyerBrick(if(isVertical) start + offsetStartBrick else start - offsetStartBrick, if(isVertical) Vector2(size.x,brickLength) else Vector2(brickLength,size.y),speed,direction, DefaultTextureHandler.getTexture(brickImageFileName))
     val endBrick = ConveyerBrick(end, if(isVertical) Vector2(size.x,brickLength) else Vector2(brickLength,size.y),speed,direction, DefaultTextureHandler.getTexture(brickImageFileName))
     val bricks = constructBricks()
     override val collition = ConveyerBeltCollition(direction, conveyerBeltStrength)

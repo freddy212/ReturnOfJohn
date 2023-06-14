@@ -41,8 +41,8 @@ fun getIceLandsDungeonLocationOneObjects(): List<GameObject>{
     val gateButton = IceButton(Vector2(iceGate.currentMiddle - Vector2(100f + 128f, 150f)),Vector2(128f,32f),location2,iceGate, removeGateEvent)
     val gateButton2 = IceButton(Vector2(iceGate.currentMiddle - Vector2(-100f, 150f)),Vector2(128f,32f),location2,iceGate, removeGateEvent)
 
-    val fence = Fence(Vector2(door.initPosition.x - 16f, location1.topright.y - 100f) , Vector2(100f,120f),location1, DefaultTextureHandler.getTexture("FenceGate.png"), false)
-    val IceKey = GenericInventoryItemObject(fence.currentMiddle - Vector2(32f,16f), Vector2(80f, 40f), location1, ItemType.ICELANDSKEY)
+    val fence = Fence(Vector2(door.initPosition.x - 16f, location1.topright.y - 100f) , Vector2(120f,120f),location1, DefaultTextureHandler.getTexture("FenceGate.png"), false)
+    val IceKey = GenericInventoryItemObject(fence.currentMiddle - Vector2(40f,16f), Vector2(80f, 40f), location1, ItemType.ICELANDSKEY)
     val removeFenceEvent = ButtonEvent(RemoveObjectPermanentlyEvent(fence))
     val doorButton = DoorButton( Vector2(iceGate.currentMiddle.x - 20f, location1.bottomleft.y - 30f), Vector2(40f,30f),location1,removeFenceEvent, Direction.DOWN)
     println(doorButton.currentPosition())

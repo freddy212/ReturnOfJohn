@@ -1,6 +1,7 @@
 package com.mygdx.game.Collitions
 
 import com.mygdx.game.AbstractClasses.GameObject
+import com.mygdx.game.AbstractClasses.Projectile
 import com.mygdx.game.GameObjects.Other.Axe
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Player
 import com.mygdx.game.GameObjects.MoveableEntities.Projectiles.Fireball
@@ -15,7 +16,7 @@ class ThornsCollition(val thorns: Thorns) : MoveCollition {
     override var canMoveAfterCollition = false
 
     override fun collitionHappened(collidedObject: GameObject) {
-        if (collidedObject is Icicle || collidedObject is SmallBoulder || collidedObject is Fireball) {
+        if (collidedObject is Projectile) {
             canMoveAfterCollition = true
             SignalManager.emitSignal(RemoveObjectSignal(thorns.entityId))
         }

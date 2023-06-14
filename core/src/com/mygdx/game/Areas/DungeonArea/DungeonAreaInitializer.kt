@@ -32,6 +32,8 @@ class DungeonAreaInitializer():AreaInitializer{
                 { listOf() }, DefaultLocationData("dungeonFloor.jpg"))
         val location7 = addLocationRelative(location6, Vector2(600f, 600f), InsertDirection.LEFT, dungeonArea, InsertDirection.MIDDLE,
                 ::getLocationSevenCaveObjects, DefaultLocationData("dungeonFloor.jpg"))
+
+        location4.addAdjacentLocation(location2)
         return dungeonArea
         //addLocationsToArea(dungeonArea)
     }

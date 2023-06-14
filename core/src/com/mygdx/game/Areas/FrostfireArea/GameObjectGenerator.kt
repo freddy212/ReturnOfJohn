@@ -56,6 +56,8 @@ fun getFrostFireLocationSevenObjects(): List<GameObject>{
 
     val teleportPad2 = TeleportPad(location6.bottomleft + Vector2(200f, 100f), Vector2(100f,50f), location, "padBottom")
 
+    val conveyerBeltStart = ConveyerBelt(location6.bottomleft, Vector2(101f, location6.height), location, Direction.LEFT)
+
     teleportPad2.onLocationEnterActions.add {
         val teleportPad = location8.gameObjects.List.firstOrNull { it is TeleportPad && it.id == "padTop" }
         if(teleportPad != null) {
@@ -120,7 +122,7 @@ fun getFrostFireLocationSevenObjects(): List<GameObject>{
     teleportRightConveyerBelt.connectedTeleportPads.add(teleportAboveFenceRight)
     teleportAboveFenceRight.connectedTeleportPads.add(teleportRightConveyerBelt)
     //teleportBelowFence.connectedTeleportPads.add(teleportAboveFence)
-    return listOf(iceGate, gateButton,gateButton2, fenceBeforeGateRight, fenceBeforeGateLeft, conveyerBelt, gateFence, doorButton1, doorButton2, teleportLeftConveyerBelt, teleportRightConveyerBelt, teleportFence, teleportAboveFenceLeft, teleportAboveFenceRight, rocketGenerator, breakableObject, teleportPadBreakableObject, fenceAfterTeleportPadBreakableObject, teleportPadAfterFence, fenceAfterBreakableObjectLeft, fenceAfterBreakableObjectRight, breakableObjectBeforeFence, teleportPad2)
+    return listOf(iceGate, gateButton,gateButton2, fenceBeforeGateRight, fenceBeforeGateLeft, conveyerBelt, gateFence, doorButton1, doorButton2, teleportLeftConveyerBelt, teleportRightConveyerBelt, teleportFence, teleportAboveFenceLeft, teleportAboveFenceRight, rocketGenerator, breakableObject, teleportPadBreakableObject, fenceAfterTeleportPadBreakableObject, teleportPadAfterFence, fenceAfterBreakableObjectLeft, fenceAfterBreakableObjectRight, breakableObjectBeforeFence, teleportPad2, conveyerBeltStart)
 }
 
 fun getFrostFireLocationEightObjects(): List<GameObject>{
