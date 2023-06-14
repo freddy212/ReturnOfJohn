@@ -59,6 +59,12 @@ class FrostFireInitializer():AreaInitializer {
         location2.addAdjacentLocation(location4)
         location2.addAdjacentLocation(location5)
         location4.addAdjacentLocation(location5)
+        location1.addAdjacentLocation(location5)
+        location5.addAdjacentLocation(location7)
+        location9.addAdjacentLocation(location5)
+        location9.addAdjacentLocation(location4)
+        location9.addAdjacentLocation(location11)
+        location9.addAdjacentLocation(location12)
 
         return area
     }

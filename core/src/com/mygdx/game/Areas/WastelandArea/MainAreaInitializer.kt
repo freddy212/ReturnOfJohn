@@ -30,7 +30,7 @@ class WastelandAreaInitializer: AreaInitializer {
             wastelandLocationData)
         addLocation(location1, area)
         val location2 = addLocationRelative(location1,Vector2(1000f, 300f), InsertDirection.LEFT,area,InsertDirection.MIDDLE,  ::getWastelandLocationTwoObjects, wastelandLocationData)
-        val location3 = addLocationRelative(location2,Vector2(1000f, 600f), InsertDirection.LEFT,area,InsertDirection.MIDDLE,::getWastelandLocationThreeObjects, wastelandDamageLocation)
+        val location3 = addLocationRelative(location2,Vector2(1000f, 1000f), InsertDirection.LEFT,area,InsertDirection.MIDDLE,::getWastelandLocationThreeObjects, wastelandDamageLocation)
         //val location7 = addLocationRelative(location6,Vector2(1500f, 1500f), InsertDirection.DOWN,area,InsertDirection.MIDDLE,::getWastelandLocationSevenObjects , wastelandDamageLocation)
         val location4 = addLocationRelative(location3, Vector2(400f, 200f), InsertDirection.LEFT,area,InsertDirection.MIDDLE, ::getWastelandLocationFourObjects , wastelandLocationData)
         val location5 = addLocationRelative(location4, Vector2(200f, 500f), InsertDirection.UP,area,InsertDirection.LEFT, { listOf()} , wastelandLocationData)

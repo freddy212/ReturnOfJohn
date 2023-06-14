@@ -15,7 +15,7 @@ class SmallBoulder(Position: Vector2, size: Vector2, defaultLocation: DefaultLoc
     Projectile(middleOfObject(Position,size),size,defaultLocation,unitVectorDirection, shooter){
     override val movementStrategy = DefaultMovement(RemoveObject())
     override val texture = DefaultTextureHandler.getTexture("Boulder.png")
-    override var baseSpeed = 5f
+    override var baseSpeed = 8f
     override val layer = Layer.AIR
     override val collition = BoulderCollition(this)
 }

@@ -35,16 +35,18 @@ fun getFrostFireLocationFourObjects(): List<GameObject>{
     val location = LocationManager.findLocation("location4", AreaIdentifier.FROSTFIRE)
     val boulderGenerator = BoulderGenerator(location.bottomleft + Vector2(0f,100f), Vector2(128f,128f), getDirectionUnitVector(Direction.RIGHT), location, element = Element.FIRE)
     val walkableTerrain = WalkableTerrain(location.bottomleft + Vector2(0f,650f), Vector2(location.width, 200f), location)
+    val boulderGenerator2 = BoulderGenerator(walkableTerrain.topleft + Vector2(0f,100f), Vector2(128f,128f), getDirectionUnitVector(Direction.RIGHT), location, element = Element.FIRE)
     //val walkableTerrain = WalkableTerrain(location.bottomleft + Vector2(0f,650f), Vector2(location.width, 200f), location)
-    return listOf(boulderGenerator, walkableTerrain)
+    return listOf(boulderGenerator, walkableTerrain, boulderGenerator2)
 }
 
 fun getFrostFireLocationFiveObjects(): List<GameObject>{
     val location = LocationManager.findLocation("location5", AreaIdentifier.FROSTFIRE)
     val boulderGenerator = BoulderGenerator(location.bottomright + Vector2(0f,300f), Vector2(128f,128f), getDirectionUnitVector(Direction.LEFT), location, element = Element.ICE)
     val walkableTerrain = WalkableTerrain(location.bottomleft + Vector2(0f,650f), Vector2(location.width, 200f), location)
+    val boulderGenerator2 = BoulderGenerator(walkableTerrain.topright + Vector2(0f,300f), Vector2(128f,128f), getDirectionUnitVector(Direction.LEFT), location, element = Element.ICE)
     //val walkableTerrain = WalkableTerrain(location.bottomleft + Vector2(0f,650f), Vector2(location.width, 200f), location)
-    return listOf(boulderGenerator, walkableTerrain)
+    return listOf(boulderGenerator, walkableTerrain, boulderGenerator2)
 }
 
 fun getFrostFireLocationSevenObjects(): List<GameObject>{

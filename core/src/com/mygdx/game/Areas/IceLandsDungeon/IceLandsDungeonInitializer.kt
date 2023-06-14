@@ -20,12 +20,13 @@ class IceLandsDungeonInitializer: AreaInitializer {
         addLocation(location1,area)
         val location2 = addLocationRelative(location1, Vector2(100f,1700f),UP,area,MIDDLE, ::getIceLandsDungeonLocationTwoObjects)
         val location3 = addLocationRelative(location1, Vector2(400f,800f),UP,area,LEFT, ::getIceLandsDungeonLocationThreeObjects)
-        val location4 = addLocationRelative(location3, Vector2(2000f,400f),RIGHT,area,UP, ::getIceLandsDungeonLocationFourObjects)
-        val location5 = addLocationRelative(location4, Vector2(400f,800f),UP,area,RIGHT, ::getIceLandsDungeonLocationFiveObjects)
-        val location6 = addLocationRelative(location5, Vector2(1600f,400f),LEFT,area,UP,  { listOf()})
+        val location4 = addLocationRelative(location3, Vector2(1200f,400f),RIGHT,area,UP, ::getIceLandsDungeonLocationFourObjects)
+        val location5 = addLocationRelative(location4, Vector2(100f,800f),UP,area,RIGHT)
+        val location6 = addLocationRelative(location5, Vector2(1200f,400f),LEFT,area,UP,  { listOf()})
         location4.addAdjacentLocation(location2)
         location6.addAdjacentLocation(location2)
         location3.addAdjacentLocation(location2)
+        location5.addAdjacentLocation(location2)
         return area
     }
 }

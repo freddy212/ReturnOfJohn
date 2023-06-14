@@ -68,17 +68,9 @@ fun getIceLandsDungeonLocationThreeObjects(): List<GameObject>{
     val rocketGenerator = RocketGenerator(location3.topleft - Vector2(0f,250f), Vector2(100f,100f), getDirectionUnitVector(Direction.RIGHT), location3, 0f,3f,400f,4.5f)
     return listOf(rocketGenerator)
 }
-
-fun getIceLandsDungeonLocationFiveObjects(): List<GameObject>{
-    val location5 = LocationManager.findLocation("location5",AreaIdentifier.ICELANDSDUNGEON)
-    val rocketGenerator = RocketGenerator(location5.topright - Vector2(200f,100f), Vector2(100f,100f), getDirectionUnitVector(Direction.DOWN), location5)
-    return listOf(rocketGenerator)
-}
-
 fun getIceLandsDungeonLocationFourObjects(): List<GameObject>{
     val location4 = LocationManager.findLocation("location4",AreaIdentifier.ICELANDSDUNGEON)
-    val breakableWall = object : GenericGameObject(Vector2(location4.bottomright.x - 300f, location4.bottomleft.y),Vector2(100f,100f),"FireGate.png", Layer.ONGROUND,location4), SaveStateEntity by DefaultSaveStateHandler(){}
-    val breakeAbleCollition = BreakableCollition(breakableWall)
-    breakableWall.collition = breakeAbleCollition
-    return listOf(breakableWall)
+    val breakableObject = DefaultBreakableObject(Vector2(location4.bottomright.x - 300f, location4.currentMiddle.y),Vector2(100f,100f),location4)
+    val vest = GenericInventoryItemObject(breakableObject.currentMiddle - Vector2(32f, 0f), Vector2(64f,32f), location4, ItemType.VEST)
+    return listOf(vest, breakableObject)
 }

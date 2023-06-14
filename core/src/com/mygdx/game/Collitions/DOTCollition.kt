@@ -1,6 +1,7 @@
 package com.mygdx.game.Collitions
 
 import com.mygdx.game.AbstractClasses.GameObject
+import com.mygdx.game.Enums.ItemType
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Player
 import com.mygdx.game.Interfaces.AreaEntranceCollition
 import com.mygdx.game.Interfaces.DefaultAreaEntranceCollition
@@ -10,7 +11,12 @@ import com.mygdx.game.player
 
 class InsideAreaEvent() : Event {
     override fun execute() {
-        player.loseHealth(1f, false)
+        if (player.inventory.inventoryList.containsKey(ItemType.VEST)){
+            player.loseHealth(0.5f, false)
+        }
+        else{
+            player.loseHealth(1f, false)
+        }
     }
 
 }
