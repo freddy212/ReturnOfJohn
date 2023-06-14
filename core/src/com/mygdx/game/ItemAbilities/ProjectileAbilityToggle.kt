@@ -19,10 +19,7 @@ object ProjectileAbilityToggle: CharacterAbility() {
 
     val abilitiesToToggle = ResourceList<CharacterAbility>()
     val sound = Gdx.audio.newSound(Gdx.files.local("Sound/SoundEffect/clicksound.mp3"));
-    init {
-        abilitiesToToggle.add(WaterBallAbility())
-        abilitiesToToggle.add(SmallBoulderAbility())
-    }
+    val dummyWaterBallAbility = WaterBallAbility()
     var activeIndex = 0
     set(newValue) {
         if(field != newValue){
@@ -30,7 +27,7 @@ object ProjectileAbilityToggle: CharacterAbility() {
         }
         field = newValue
     }
-    private val activeAbility get() = abilitiesToToggle.List[activeIndex]
+    private val activeAbility get() = if(abilitiesToToggle.List.isEmpty()) dummyWaterBallAbility else abilitiesToToggle.List[activeIndex]
     override val abilityId = AbilityId.PROJECTILE
     override val triggerKey = Input.Keys.NUM_1
     override val texture = activeAbility.texture

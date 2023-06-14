@@ -53,5 +53,8 @@ fun getAbility(abilityId: AbilityId): CharacterAbility{
 abstract class ToggleAbility(): CharacterAbility(){
     override fun handleAbilityGained() {
         ProjectileAbilityToggle.abilitiesToToggle.add(this)
+        if(ProjectileAbilityToggle.abilitiesToToggle.List.size == 1){
+            player.addAbility(ProjectileAbilityToggle)
+        }
     }
 }

@@ -29,7 +29,9 @@ fun getLocationOneObjects(): List<GameObject>{
 
     val sign3 = Sign(location2.topright + Vector2(350f,-500f), Vector2(80f,80f), defaultLocation = location1, "Down - Wastelands")
 
-    return listOf(sign, sign2, sign3)
+    val sign4 = Sign(Center + Vector2(0f,player.height + 10f), Vector2(80f,80f), location1, "Left click - Move")
+
+    return listOf(sign, sign2, sign3, sign4)
 }
 
 fun getLocationGraveyard(): List<GameObject>{

@@ -1,0 +1,7 @@
+{"playerXPos":-2392.2102,"playerYPos":253.74796,"areaIdentifier":"WASTELAND","entityId":0}
+{"signaltype":"ABILITY_GAINED","abilityId":"WATERBALL"}
+{"signaltype":"REMOVE_OBJECT","entityId":59}
+{"signaltype":"REMOVE_OBJECT","entityId":60}
+{"signaltype":"ADD_ABILITY_ITEM","locationName":"location3","area":"WASTELAND","x":-1500.0,"y":150.0,"abilityId":"SMALLBOULDER"}
+{"signaltype":"ABILITY_GAINED","abilityId":"SMALLBOULDER"}
+{"signaltype":"REMOVE_OBJECT","entityId":90}

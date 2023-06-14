@@ -39,9 +39,6 @@ class Player(Position: Vector2, size: Vector2, modelHandler: ModelInstanceHandle
     override val healthStrategy = PlayerHealthStrategy()
     var hasMovedThisFrame = false
     val itemAbilities = ResourceList<CharacterAbility>()
-    init {
-        addAbility(ProjectileAbilityToggle)
-    }
     fun addAbility(characterAbility: CharacterAbility) {
         val toolTip = ToolTip(Input.Keys.toString(characterAbility.triggerKey)[0],characterAbility)
         TooltipManager.tooltipManager.add(toolTip)

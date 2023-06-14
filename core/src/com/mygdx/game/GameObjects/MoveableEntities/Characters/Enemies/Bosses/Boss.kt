@@ -28,12 +28,14 @@ abstract class Boss(
     val adjacentLocations = location?.adjacentDefaultLocations!!
     override val healthStrategy: HealthStrategy by lazy {BossHealthStrategy(this)}
     override val collitionMask by lazy { BossCollitionMask(this) }
+    var isRolling = false
     init {
         onLocationEnterActions.add(::resetArea)
     }
 
     override fun setAggroed(){
-        adjacentLocations.forEach {it.removeAdjacentLocation(defaultLocation!!)}
+        defaultLocation!!.adjacentDefaultLocations.forEach {it.removeAdjacentLocation(defaultLocation!!)}
+        println(defaultLocation!!.adjacentDefaultLocations)
         LocationManager.changeLocation()
         super.setAggroed()
     }

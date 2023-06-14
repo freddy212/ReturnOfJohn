@@ -1,21 +1,28 @@
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.*
+import com.mygdx.game.AbstractClasses.AbilityId
 import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.Collitions.DoorCollition
 import com.mygdx.game.DataClasses.DoorData
 import com.mygdx.game.Enums.Direction
+import com.mygdx.game.Enums.Element
 import com.mygdx.game.Enums.ItemType
 import com.mygdx.game.Enums.Layer
+import com.mygdx.game.GameObjects.ItemObjects.AbilityItemObject
 import com.mygdx.game.GameObjects.ItemObjects.GenericInventoryItemObject
+import com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Bosses.RockBoss.RockBoss
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.NPC
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Mobs.RockMonster
 import com.mygdx.game.GameObjects.Other.*
 import com.mygdx.game.GameObjects.SensorObjects.SandGhostSleeping
 import com.mygdx.game.GameObjects.Terrain.WalkableTerrain
 import com.mygdx.game.Interfaces.AreaIdentifier
+import com.mygdx.game.ItemAbilities.DashAbility
+import com.mygdx.game.ItemAbilities.WaterBallAbility
 import com.mygdx.game.Managers.LocationManager
 import com.mygdx.game.Managers.SignalManager
 import com.mygdx.game.Signal.SignalListeners.ADDMETHODS
+import com.mygdx.game.Signal.Signals.AddAbilityItemSignal
 import com.mygdx.game.Signal.Signals.AddObjectSignal
 import com.mygdx.game.Signal.Signals.RemoveObjectSignal
 import com.mygdx.game.UI.Dialogue.Conversations.*
@@ -38,7 +45,9 @@ fun getWastelandLocationTwoObjects(): List<GameObject>{
     val location = LocationManager.findLocation("location2",AreaIdentifier.WASTELAND)
 
     val sign = Sign(location.currentMiddle - Vector2(40f,60f), Vector2(80f,80f), location, "Press 1 - Fire Projectile")
-    return listOf(sign)
+    val abilityItem = AbilityItemObject(sign.bottomleft - Vector2(100f,0f), Vector2(60f,60f), location,
+        WaterBallAbility(),DefaultTextureHandler.getTexture("WaterBall.png"))
+    return listOf(sign, abilityItem)
 }
 
 fun getWastelandLocationThreeObjects(): List<GameObject>{
@@ -46,7 +55,9 @@ fun getWastelandLocationThreeObjects(): List<GameObject>{
     val location5 = LocationManager.findLocation("location3",AreaIdentifier.WASTELAND)
 
     val walkableTerrain = WalkableTerrain(Vector2(location5.x,location4.y), Vector2(location5.width,location4.height),location5)
-    return listOf(walkableTerrain)
+    val addAbilityItemSignal = AddAbilityItemSignal(abilityId = AbilityId.SMALLBOULDER, area = AreaIdentifier.WASTELAND,x = location5.currentMiddle.x, y = location5.currentMiddle.y, locationName = location5.locationName)
+    val RockBoss = RockBoss(location5.currentMiddle, Vector2(150f,160f), location5, Element.EARTH, addAbilityItemSignal)
+    return listOf(walkableTerrain, RockBoss)
 }
 fun getWastelandLocationEightObjects(): List<GameObject>{
     val location7 = LocationManager.findLocation("location7",AreaIdentifier.WASTELAND)
@@ -63,6 +74,13 @@ fun getWastelandLocationFourObjects(): List<GameObject>{
     val sign = Sign(location.bottomleft + Vector2(80f,120f), Vector2(80f,80f), location, "Hold 1 - Toggle Projectiles", "Space or Arrow Key - Toggle")
     return listOf(sign)
 }
+
+fun getWastelandLocationSevenObjects(): List<GameObject>{
+    val location = LocationManager.findLocation("location7", AreaIdentifier.WASTELAND)
+    val sign = Sign(location.currentMiddle, Vector2(80f,80f), location, "A  sleeping spirit rests beyond")
+
+    return listOf(sign)
+}
 fun getWastelandLocationSixObjects(): List<GameObject>{
     val location9 = LocationManager.findLocation("location5",AreaIdentifier.WASTELAND)
     val location10 = LocationManager.findLocation("location6", AreaIdentifier.WASTELAND)
@@ -74,7 +92,6 @@ fun getWastelandLocationSixObjects(): List<GameObject>{
     val doorCollition = DoorCollition(doorPosition,AreaIdentifier.DUNGEONAREA, doorWastelandAndDungeonConnection,Direction.UP)
     val door = Door(doorPosition, Vector2(32f * 2,36f * 2),
         DefaultTextureHandler.getTexture("CaveDoor.png"),location10,Direction.UP,doorCollition)
-    val firelandsDoor = createDoor(DoorData(location10.topleft,AreaIdentifier.WASTELAND, AreaIdentifier.FIRELANDS,"location6",Direction.UP,"WastelandFirelands"))
 
     val thorns = Thorns(location10.topright - Vector2(32f,64f), Vector2(32f,64f), location10)
     thorns.onRemoveAction.add {
@@ -91,5 +108,5 @@ fun getWastelandLocationSixObjects(): List<GameObject>{
             )
         }
     }
-    return listOf(walkableTerrain, walkableTerrain2, cave,door, thorns, firelandsDoor)
+    return listOf(walkableTerrain, walkableTerrain2, cave,door, thorns)
 }
