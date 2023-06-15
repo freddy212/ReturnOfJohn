@@ -61,5 +61,7 @@ fun getLocationSevenCaveObjects(): List<GameObject> {
     val location = LocationManager.findLocation("location7",AreaIdentifier.DUNGEONAREA)
     val size = Vector2(80f,80f)
     val shieldItem = AbilityItemObject(middleOfObject(location.originalMiddle,size),size,location, ShieldAbility(), DefaultTextureHandler.getTexture("shield-front.png"))
-    return listOf(shieldItem)
+
+    val sign = Sign(shieldItem.bottomleft - Vector2(200f, 0f), Vector2(80f,80f), location, "Wooden Shield - 2", "Weak to Ice and Fire")
+    return listOf(shieldItem, sign)
 }

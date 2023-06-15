@@ -18,7 +18,7 @@ class WaterBallAbility: ToggleAbility(){
     override val cooldownTimer = DefaultTimer(1f)
 
     override fun activeAction(){
-        val waterBall = WaterBall(player.currentMiddle,Vector2(96f,120f),LocationManager.newDefaultLocation, player.unitVectorDirection, player)
+        val waterBall = WaterBall(player.currentMiddle,Vector2(96 / 1.5f,120f / 1.5f),LocationManager.newDefaultLocation, player.unitVectorDirection, player)
         waterBall.defaultLocation!!.addGameObject(waterBall)
     }
 }

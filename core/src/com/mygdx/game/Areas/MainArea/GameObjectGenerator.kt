@@ -52,7 +52,7 @@ fun getIceLandsGateWayLocation():List<GameObject>{
     val iceObject2 = IceObject(Vector2(iceObject.bottomleft.x + 150f, iceObject.bottomleft.y),Vector2(75f,75f),location10)
 
     val sign = Sign(iceObject.bottomleft - Vector2(0f, 250f), Vector2(80f,80f), location10, "Water freezes when cold")
-    val doorPosition = Vector2(walkableTerrain.originalMiddle.x - (playerSize.x),walkableTerrain.topleft.y)
+    val doorPosition = Vector2(doorButton1.x + ((doorButton2.x - doorButton1.x) / 2) - 12f,walkableTerrain.topleft.y)
 
     val doorCollition = DoorCollition(doorPosition,
         AreaIdentifier.ICELANDS, doorMainAreaAndIceLands,

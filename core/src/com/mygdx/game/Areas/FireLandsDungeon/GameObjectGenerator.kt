@@ -14,6 +14,7 @@ import com.mygdx.game.GameObjects.Hazards.Generators.BoulderGenerator
 import com.mygdx.game.ItemAbilities.DashAbility
 import com.mygdx.game.GameObjects.ItemObjects.AbilityItemObject
 import com.mygdx.game.GameObjects.ItemObjects.GenericInventoryItemObject
+import com.mygdx.game.GameObjects.Other.Sign
 import com.mygdx.game.GameObjects.Terrain.WalkableTerrain
 import com.mygdx.game.Interfaces.AreaIdentifier
 import com.mygdx.game.Managers.LocationManager
@@ -85,7 +86,9 @@ fun getFireLandsDungeonLocationNineObjects(): List<GameObject>{
 fun getFirelandsDungeonLocationFiveObjects(): List<GameObject>{
     val location5 = LocationManager.findLocation("location5", AreaIdentifier.FIRELANDSDUNGEON)
     val abilityItem = AbilityItemObject(location5.originalMiddle, Vector2(60f,60f), location5,DashAbility(),DefaultTextureHandler.getTexture("fireball.png"))
-    return listOf(abilityItem)
+
+    val sign = Sign(abilityItem.bottomleft - Vector2(200f, 0f), Vector2(80f,80f), location5, "Fire Dash - 3", "Use to gain momentum")
+    return listOf(abilityItem, sign)
 }
 
 

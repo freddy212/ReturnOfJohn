@@ -60,7 +60,7 @@ class MainGame : ApplicationAdapter() {
         Gdx.gl.glClearColor(0f, 0f, 0f, 0f)
         DefaultAssetHandler.setAssetManager(InitAssets())
         batch = PolygonSpriteBatch()
-        player = Player(Vector2(0f, 0f), Vector2(32f, 40f))
+        player = Player(Vector2(0f, 0f), Vector2(48f, 56f))
         firstpoly = RectanglePolygon(Vector2(50f, 0f), 500f, 500f)
         firstpoly.vertices = firstpoly.vertices.map { x -> x * 1f }.toFloatArray()
         secondpoly = RectanglePolygon(
@@ -116,7 +116,7 @@ class MainGame : ApplicationAdapter() {
         LocationManager.frameAction()
         RenderGraph.render(batch)
         inputAdapter.handleInput(player)
-       // drawrects()
+        drawrects()
         EventManager.executeEvents()
         UIRendererManager.render()
         //logger.log()

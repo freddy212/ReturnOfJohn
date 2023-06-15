@@ -12,12 +12,12 @@ import com.mygdx.game.Timer.DefaultTimer
 open class IceCloneAbility(): CharacterAbility(){
     override val abilityId = AbilityId.ICECLONE
     override val triggerKey = com.badlogic.gdx.Input.Keys.NUM_4
-    override val texture = DefaultTextureHandler.getTexture("man.png")
+    override val texture = DefaultTextureHandler.getTexture("player.png")
 
     override val cooldownTimer = DefaultTimer(1f)
     val iceClone = IceClone(
         player.currentMiddle,
-        Vector2(35f, 65f),
+        Vector2(player.width * 1.2f, player.height * 1.2f),
         null
     )
 

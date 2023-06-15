@@ -45,7 +45,7 @@ class FireGate(initPosition: Vector2, size: Vector2, defaultLocation: DefaultLoc
     }
 
     init {
-        polygon.setScale(1f, 7f)
+        polygon.setScale(1f, 6.5f)
     }
 
         override fun render(batch: PolygonSpriteBatch) {

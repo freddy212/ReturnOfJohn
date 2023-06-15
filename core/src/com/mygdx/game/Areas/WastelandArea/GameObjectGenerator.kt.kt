@@ -45,8 +45,8 @@ fun getWastelandLocationOneObjects(): List<GameObject>{
 fun getWastelandLocationTwoObjects(): List<GameObject>{
     val location = LocationManager.findLocation("location2",AreaIdentifier.WASTELAND)
 
-    val sign = Sign(location.currentMiddle - Vector2(40f,60f), Vector2(80f,80f), location, "Press 1 - Fire Projectile")
-    val abilityItem = AbilityItemObject(sign.bottomleft - Vector2(100f,0f), Vector2(60f,60f), location,
+    val sign = Sign(location.currentMiddle - Vector2(40f,60f), Vector2(80f,80f), location, "Water Ball",  "Press 1 - Fire Projectile")
+    val abilityItem = AbilityItemObject(sign.bottomright + Vector2(100f,0f), Vector2(60f,60f), location,
         WaterBallAbility(),DefaultTextureHandler.getTexture("WaterBall.png"))
     return listOf(sign, abilityItem)
 }

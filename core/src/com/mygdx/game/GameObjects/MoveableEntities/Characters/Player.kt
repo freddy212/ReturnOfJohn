@@ -28,7 +28,7 @@ import com.mygdx.game.Utils.ResourceList
 class Player(Position: Vector2, size: Vector2, modelHandler: ModelInstanceHandler = DefaultModelInstanceHandler("ManBlender.g3db",Position,size))
              : DefaultCharacter(Position, size,null),SaveStateEntity by DefaultSaveStateHandler(),
                                                                          FightableEntity{
-    override val texture = DefaultTextureHandler.getTexture("man.png")
+    override val texture = DefaultTextureHandler.getTexture("player.png")
     override var baseSpeed: Float = 7f
     override val layer = Layer.PERSON
     val inventory = Inventory()

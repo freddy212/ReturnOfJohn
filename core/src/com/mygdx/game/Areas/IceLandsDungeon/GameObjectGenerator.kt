@@ -59,8 +59,10 @@ fun getIceLandsDungeonLocationTwoObjects(): List<GameObject>{
                                            IceCloneAbility(),
                                            DefaultTextureHandler.getTexture("IceClone.png")
 
+
     )
-    return listOf(iceGenerator,iceCloneAbility)
+    val sign = Sign(iceCloneAbility.bottomleft - Vector2(100f, 100f), Vector2(80f,80f), location2, "Ice Clone - 4", "A frozen clone of yourself")
+    return listOf(iceGenerator,iceCloneAbility, sign)
 }
 
 fun getIceLandsDungeonLocationThreeObjects(): List<GameObject>{

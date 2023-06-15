@@ -42,11 +42,11 @@ class Shield(Position: Vector2, size: Vector2): GameObject(Position, size),Dynam
     override val layer = Layer.AIR
 
     fun getPos():Vector2{
-        return Vector2(player.sprite.x + player.sprite.width - 10f,player.sprite.y)
+        return Vector2(player.sprite.x + player.sprite.width - 10f,player.sprite.y + 5f)
     }
     init {
-        polygon.setOrigin(- player.sprite.width / 2 + 10f, player.sprite.height / 2)
-        sprite.setOrigin(- player.sprite.width / 2 + 10f, player.sprite.height / 2)
+        polygon.setOrigin(- player.sprite.width / 2 + 10f, player.sprite.height / 2 - 5f)
+        sprite.setOrigin(- player.sprite.width / 2 + 10f, player.sprite.height / 2 - 5f)
     }
     fun setActiveSide(){
         setRotation(player.unitVectorDirection,this,0f)

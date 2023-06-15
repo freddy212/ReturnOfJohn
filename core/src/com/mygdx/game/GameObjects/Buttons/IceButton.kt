@@ -32,6 +32,7 @@ class IceButton(
 
     init {
         iceButtonEvent.addButton(this)
+        polygon.setScale(0.5f, 1f)
     }
 
     override fun render(batch: PolygonSpriteBatch) {
