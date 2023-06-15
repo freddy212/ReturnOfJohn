@@ -54,7 +54,7 @@ class IceQueenClone(Position: Vector2, size: Vector2, location: DefaultLocation?
     }
 
     init {
-        sprite.setAlpha(0.8f)
+        sprite.setAlpha(0.5f)
     }
 
     override fun render(batch: PolygonSpriteBatch) {

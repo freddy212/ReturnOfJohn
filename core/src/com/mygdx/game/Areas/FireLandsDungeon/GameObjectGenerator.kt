@@ -85,7 +85,7 @@ fun getFireLandsDungeonLocationNineObjects(): List<GameObject>{
 
 fun getFirelandsDungeonLocationFiveObjects(): List<GameObject>{
     val location5 = LocationManager.findLocation("location5", AreaIdentifier.FIRELANDSDUNGEON)
-    val abilityItem = AbilityItemObject(location5.originalMiddle, Vector2(60f,60f), location5,DashAbility(),DefaultTextureHandler.getTexture("fireball.png"))
+    val abilityItem = AbilityItemObject(location5.originalMiddle, Vector2(60f,60f), location5,DashAbility(),DefaultTextureHandler.getTexture("Dash.png"))
 
     val sign = Sign(abilityItem.bottomleft - Vector2(200f, 0f), Vector2(80f,80f), location5, "Fire Dash - 3", "Use to gain momentum")
     return listOf(abilityItem, sign)

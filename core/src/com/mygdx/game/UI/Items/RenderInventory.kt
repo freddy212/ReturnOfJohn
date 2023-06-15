@@ -11,14 +11,14 @@ import com.mygdx.game.Interfaces.Renderable
 class RenderInventory: Renderable {
     override val layer = Layer.FOREGROUND
     val box = DefaultTextureHandler.getTexture("ItemDisplay.png")
-    val spriteBox = Sprite(box,200,400)
+    val spriteBox = Sprite(box,200,130)
     val uiCircle = DefaultTextureHandler.getTexture("UICircle.png")
     val uiCircleSprite = Sprite(uiCircle)
     var currentIndex = 0
     //val sprites = items.map { Sprite(it.texture,64,32) }
 
     override fun render(batch: PolygonSpriteBatch) {
-        spriteBox.setPosition(player.sprite.x+ 50f, player.sprite.y - 100f)
+        spriteBox.setPosition(player.sprite.x -  200f, player.sprite.y - 50f)
         spriteBox.draw(batch)
         //Could be optimized sometime
         val displayItems: List<Item> = player.inventory.inventoryList.entries.map {Item(it.key,it.value, getItemTexture(it.key))}
@@ -37,7 +37,6 @@ class RenderInventory: Renderable {
         val uiCircleOffsetY = currentIndex / 3
         uiCircleSprite.setPosition(startPos.x + (64f * uiCircleOffsetX),startPos.y - (64f * uiCircleOffsetY))
         uiCircleSprite.draw(batch)
-        font.draw(batch,description,spriteBox.x - 200f, spriteBox.y + 300f)
 
         displayItems.forEachIndexed { index, item ->
             val width = item.texture.width.toFloat()
@@ -46,10 +45,11 @@ class RenderInventory: Renderable {
             val row = index % 3
             val pos = startPos + Vector2(row * width, - column * width)
             val sprite = Sprite(item.texture,width.toInt(),height.toInt())
-            font.draw(batch,item.amount.toString(),pos.x + height / 2, pos.y + width)
+ //           font.draw(batch,item.amount.toString(),pos.x + height / 2, pos.y + width)
             sprite.setPosition(pos.x,pos.y)
             sprite.draw(batch)
         }
+        font.draw(batch,description,spriteBox.x - 200f, spriteBox.y + 180f)
     }
 
 }
