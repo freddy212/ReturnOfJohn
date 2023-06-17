@@ -9,6 +9,7 @@ class AreaManager{
     companion object{
         private val areaManager  = ResourceList<Area>()
         lateinit var activeArea: Area
+            private set
         fun addArea(area:Area){
             areaManager.add(area)
         }
@@ -23,6 +24,9 @@ class AreaManager{
         }
         fun SetArea(area: Area){
             activeArea = area
+            area.onAreaChangedActions.forEach {
+                it()
+            }
         }
     }
 }

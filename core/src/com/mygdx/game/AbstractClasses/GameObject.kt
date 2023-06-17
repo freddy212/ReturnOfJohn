@@ -45,8 +45,8 @@ abstract class GameObject  (val initPosition: Vector2, val size: Vector2, var de
             addToSceneGraph(property)
         }
     }
-    val onLocationEnterActions: MutableList<()-> Unit> = mutableListOf({})
-    val onLocationExitActions: MutableList<(newLocation: DefaultLocation)->Unit> = mutableListOf({})
+    val onLocationEnterActions: MutableList<()-> Unit> = mutableListOf()
+    val onLocationExitActions: MutableList<(newLocation: DefaultLocation)->Unit> = mutableListOf()
     val onRemoveAction: MutableList<()->Unit> = mutableListOf({})
     open val collitionMask: CollitionMask = DefaultCollitionMask()
     constructor(Position: Vector2, size: Vector2): this(Position,size,null)

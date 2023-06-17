@@ -8,4 +8,6 @@ interface Area {
     fun addLocation(defaultLocation: DefaultLocation)
     val defaultLocations: List<DefaultLocation>
     val identifier: AreaIdentifier
+    val onAreaChangedActions: MutableList<()-> Unit>
+
 }

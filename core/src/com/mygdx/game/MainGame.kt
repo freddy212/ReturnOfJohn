@@ -89,7 +89,7 @@ class MainGame : ApplicationAdapter() {
         } else {
             playerSaveState = PlayerSaveState(Center.x, Center.y, AreaIdentifier.MAINAREA, player.entityId)
         }
-        AreaManager.activeArea = AreaManager.getArea(playerSaveState.areaIdentifier)
+        AreaManager.SetArea(AreaManager.getArea(playerSaveState.areaIdentifier))
         ResetPlayer(playerSaveState)
         font.data.setScale(2f)
         inventory = Inventory()

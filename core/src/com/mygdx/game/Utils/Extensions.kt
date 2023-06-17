@@ -36,6 +36,10 @@ operator fun Vector2.times(scalar: Float): Vector2{
     return Vector2(this.x * scalar,this.y * scalar)
 }
 
+operator fun Vector2.div(scalar: Float): Vector2{
+    return Vector2(this.x / scalar,this.y / scalar)
+}
+
 operator fun FloatArray.plus(vector2: Vector2): FloatArray{
     val result = this.mapIndexed { index,x -> if(index % 2 == 0) x + vector2.x else x + vector2.y}.toFloatArray()
     return result

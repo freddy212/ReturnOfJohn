@@ -8,21 +8,19 @@ import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.math.Vector3
 import com.mygdx.game.Enums.CharacterState
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Player
-import com.mygdx.game.InputActions.ChangeCurrentItemInventoryAction
-import com.mygdx.game.InputActions.ChangeDialogueOption
-import com.mygdx.game.InputActions.ChangeProjectileAction
-import com.mygdx.game.InputActions.RenderInventoryAction
+import com.mygdx.game.InputActions.*
 import com.mygdx.game.Interfaces.KeyPressedCollition
 import com.mygdx.game.Managers.InputActionManager
 import com.mygdx.game.Managers.LocationManager
 import com.mygdx.game.UI.Items.RenderInventory
+import com.mygdx.game.UI.Map.Map
 
 class ROJInputAdapter(private val camera : OrthographicCamera, val player: Player) : InputAdapter(){
     var clickPosition = Vector3(0f,0f,0f)
 
     init {
         val renderInventory = RenderInventory()
-        InputActionManager.InputActionManager.addAll(listOf(ChangeDialogueOption(), RenderInventoryAction(renderInventory), ChangeCurrentItemInventoryAction(renderInventory), ChangeProjectileAction()))
+        InputActionManager.InputActionManager.addAll(listOf(ChangeDialogueOption(), RenderInventoryAction(renderInventory), ChangeCurrentItemInventoryAction(renderInventory), ChangeProjectileAction(), RenderEventAction(Map, Input.Keys.M)))
     }
 
     override fun keyDown(keycode: Int): Boolean {

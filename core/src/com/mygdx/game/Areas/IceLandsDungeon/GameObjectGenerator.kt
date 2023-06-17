@@ -45,8 +45,6 @@ fun getIceLandsDungeonLocationOneObjects(): List<GameObject>{
     val IceKey = GenericInventoryItemObject(fence.currentMiddle - Vector2(40f,16f), Vector2(80f, 40f), location1, ItemType.ICELANDSKEY)
     val removeFenceEvent = ButtonEvent(RemoveObjectPermanentlyEvent(fence))
     val doorButton = DoorButton( Vector2(iceGate.currentMiddle.x - 20f, location1.bottomleft.y - 30f), Vector2(40f,30f),location1,removeFenceEvent, Direction.DOWN)
-    println(doorButton.currentPosition())
-    println(door.currentPosition())
     return listOf(door, iceGate, gateButton, gateButton2, fence, doorButton, IceKey)
 }
 
