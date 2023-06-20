@@ -38,6 +38,7 @@ import kotlin.random.Random
 
 
 var font: BitmapFont = BitmapFont()
+val mapTitleFont = BitmapFont()
 
 fun distance(point1: Vector2, point2: Vector2): Float {
     val first = (point2.x - point1.x).pow(2) + (point2.y - point1.y).pow(2)

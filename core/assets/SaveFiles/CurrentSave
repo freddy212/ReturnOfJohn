@@ -1,4 +1,4 @@
-{"playerXPos":56.0,"playerYPos":14.0,"areaIdentifier":"MAINAREA","entityId":0}
+{"playerXPos":276.03915,"playerYPos":1.8558769,"areaIdentifier":"MAINAREA","entityId":0}
 {"signaltype":"ABILITY_GAINED","abilityId":"WATERBALL"}
 {"signaltype":"REMOVE_OBJECT","entityId":61}
 {"signaltype":"REMOVE_OBJECT","entityId":62}
@@ -11,3 +11,18 @@
 {"signaltype":"ADD_OBJECT","addMethod":"DOOR1","location":"location1","areaIdentifier":"MAINAREA"}
 {"signaltype":"ADD_OBJECT","addMethod":"DOOR2","location":"location6","areaIdentifier":"WASTELAND"}
 {"signaltype":"REMOVE_OBJECT","entityId":14}
+{"signaltype":"BUTTON_ACCEPTED","entityId":18}
+{"signaltype":"BUTTON_ACCEPTED","entityId":17}
+{"signaltype":"REMOVE_OBJECT","entityId":16}
+{"signaltype":"BUTTON_ACCEPTED","entityId":37}
+{"signaltype":"BUTTON_ACCEPTED","entityId":38}
+{"signaltype":"REMOVE_OBJECT","entityId":36}
+{"signaltype":"ABILITY_GAINED","abilityId":"SMALLBOULDER"}
+{"signaltype":"REMOVE_OBJECT","entityId":95}
+{"signaltype":"ABILITY_GAINED","abilityId":"DASH"}
+{"signaltype":"REMOVE_OBJECT","entityId":28}
+{"signaltype":"ITEM_PICKED_UP","itemType":"FIRELANDSKEY"}
+{"signaltype":"REMOVE_OBJECT","entityId":29}
+{"signaltype":"REMOVE_OBJECT","entityId":27}
+{"signaltype":"ADD_OBJECT","addMethod":"FIRELANDSTOFROSTFIREDOOR","location":"location12","areaIdentifier":"FIRELANDS"}
+{"signaltype":"ADD_OBJECT","addMethod":"FROSTFIRETOFIRELANDSDOOR","location":"location2","areaIdentifier":"FROSTFIRE"}
