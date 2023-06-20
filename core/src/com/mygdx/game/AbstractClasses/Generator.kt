@@ -1,18 +1,17 @@
 package com.mygdx.game.AbstractClasses
 
 import com.badlogic.gdx.math.Vector2
+import com.mygdx.game.*
+import com.mygdx.game.Animation.GeneratorAnimation
 import com.mygdx.game.Collitions.IllegalMoveCollition
-import com.mygdx.game.DefaultTextureHandler
 import com.mygdx.game.Enums.Layer
 import com.mygdx.game.Locations.DefaultLocation
+import com.mygdx.game.Managers.AnimationManager
 import com.mygdx.game.Saving.DefaultSaveStateHandler
 import com.mygdx.game.Saving.SaveStateEntity
 import com.mygdx.game.Timer.DefaultTimer
 import com.mygdx.game.Trimer.DelayTimer
 import com.mygdx.game.Utils.RectanglePolygon
-import com.mygdx.game.isPolygonsColliding
-import com.mygdx.game.plus
-import com.mygdx.game.times
 
 abstract class Generator(Position: Vector2, size: Vector2, defaultLocation: DefaultLocation?, val unitVectorDirection: Vector2, timeUntilFire: Float = 0f, shootCoolDown:Float = 3f) :
     GameObject(Position, size, defaultLocation),
@@ -49,7 +48,10 @@ abstract class Generator(Position: Vector2, size: Vector2, defaultLocation: Defa
         if(delayTimer.getTimeHasPassed() && shouldFire){
             if(projectileTimer.tryUseCooldown()){
                 val projectile = generateProjectile()
-                projectile.defaultLocation!!.addGameObject(projectile)
+                val offset = (projectile.bottomleft - this.bottomleft) / 4f
+
+                val generatorAnimation =  GeneratorAnimation({projectile.defaultLocation!!.addGameObject(projectile)}, this, offset)
+                AnimationManager.animationManager.add(generatorAnimation)
             }
         }
     }

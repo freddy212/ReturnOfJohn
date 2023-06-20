@@ -106,6 +106,7 @@ class MainGame : ApplicationAdapter() {
         //player.addAbility(AxeAbility())
         //player.addAbility(ShieldAbility())
         //player.addAbility(DashAbility())
+        player.move(Vector2(0f,0f))
     }
 
 
@@ -114,6 +115,7 @@ class MainGame : ApplicationAdapter() {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT or GL20.GL_DEPTH_BUFFER_BIT)
         batch.projectionMatrix = camera.combined
         LocationManager.frameAction()
+        AnimationManager.addAnimationsToRender()
         RenderGraph.render(batch)
         inputAdapter.handleInput(player)
         //drawrects()

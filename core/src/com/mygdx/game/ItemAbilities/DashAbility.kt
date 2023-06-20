@@ -35,7 +35,6 @@ open class DashAbility: CharacterAbility() {
         EventManager.eventManager.add(actionBeforeFramesEvent)
         EventManager.eventManager.add(actionAfterFramesEvent)
         player.properties.add(fireDashEffect)
-        fireDashEffect.particleEffect.reset()
         fireDashEffect.start()
         sound.play(0.25f)
     }

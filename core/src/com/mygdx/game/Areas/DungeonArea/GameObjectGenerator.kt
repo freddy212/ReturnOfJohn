@@ -12,6 +12,7 @@ import com.mygdx.game.GameObjects.ItemObjects.AbilityItemObject
 import com.mygdx.game.GameObjects.Other.Door
 import com.mygdx.game.GameObjects.ItemObjects.GenericInventoryItemObject
 import com.mygdx.game.GameObjects.Gates.LockedDoor
+import com.mygdx.game.GameObjects.Hazards.ConveyerBelt.ConveyerBelt
 import com.mygdx.game.GameObjects.Other.DefaultBreakableObject
 import com.mygdx.game.GameObjects.Other.Sign
 import com.mygdx.game.GameObjects.Terrain.WalkableTerrain
@@ -58,10 +59,15 @@ fun getLocationFiveCaveObjects(): List<GameObject>{
     return listOf(boulderGenerator1,boulderGenerator2,boulderGenerator3)
 }
 fun getLocationSevenCaveObjects(): List<GameObject> {
+    val location6 = LocationManager.findLocation("location6",AreaIdentifier.DUNGEONAREA)
     val location = LocationManager.findLocation("location7",AreaIdentifier.DUNGEONAREA)
     val size = Vector2(80f,80f)
+
+    val conveyerBelt = ConveyerBelt(location6.bottomleft, Vector2(200f, location6.height / 2), location,Direction.LEFT)
+    val breakableObject = DefaultBreakableObject(conveyerBelt.topleft, Vector2(200f, location6.height / 2), location)
+    val boulderGenerator = BoulderGenerator(location.topright - Vector2(200f,0f), Vector2(128f,128f), getDirectionUnitVector(Direction.DOWN), location)
     val shieldItem = AbilityItemObject(middleOfObject(location.originalMiddle,size),size,location, ShieldAbility(), DefaultTextureHandler.getTexture("shield-front.png"))
 
     val sign = Sign(shieldItem.bottomleft - Vector2(200f, 0f), Vector2(80f,80f), location, "Wooden Shield - 2", "Weak to Ice and Fire")
-    return listOf(shieldItem, sign)
+    return listOf(shieldItem, sign, conveyerBelt, breakableObject, boulderGenerator)
 }

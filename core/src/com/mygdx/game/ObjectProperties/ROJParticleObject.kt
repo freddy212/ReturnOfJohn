@@ -11,12 +11,14 @@ import com.mygdx.game.Utils.RenderGraph.Companion.addToSceneGraph
 
 abstract class ROJParticleObject(val particleEffect: ParticleEffect, val objectAttached: GameObject,val posModifier: Vector2 = Vector2(0f,0f)):
     Renderable, ObjectProperty {
+
     override fun render(batch: PolygonSpriteBatch){
         particleEffect.emitters.forEach {it.setPosition(objectAttached.sprite.x + posModifier.x,objectAttached.sprite.y + posModifier.y) }
         particleEffect.update(Gdx.graphics.deltaTime)
         particleEffect.draw(batch)
     }
     fun start(){
+        particleEffect.reset()
         particleEffect.start()
     }
 }

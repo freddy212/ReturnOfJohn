@@ -25,7 +25,6 @@ class Dash(val enemy: Enemy, val dashCondition: () -> Boolean = { true }) : Enem
             enemy.setCurrentSpeed(enemy.getCurrentSpeed() * 3.0f)
             enemy.characterState = CharacterState.DASHING
             enemy.properties.add(fireDashEffect)
-            fireDashEffect.particleEffect.reset()
             fireDashEffect.start()
             sound.play(0.25f)
         }
