@@ -54,7 +54,6 @@ class ConveyerBeltCollition(val direction: Direction, val conveyerBeltStrength: 
         if(objectEntered is Player){
             EventManager.eventManager.add(handleConveyerBeltEvent)
         } else if (objectEntered is IceClone){
-            println("is ice clone")
             handleIceCloneConveyerBeltEvent = HandleConveyerBeltEvent(direction, objectEntered, conveyerBeltStrength)
             EventManager.eventManager.add(handleIceCloneConveyerBeltEvent!!)
         }

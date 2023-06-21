@@ -69,7 +69,6 @@ class RockBoss(Position: Vector2, size: Vector2, location: DefaultLocation?, ele
 class RockBossCollition(val rockBoss: RockBoss): EnemyCollition(rockBoss){
     override fun collitionHappened(collidedObject: GameObject) {
         if(collidedObject is Player && rockBoss.isRolling){
-            println("hellooo")
             rockBoss.isRolling = false
         }
         super.collitionHappened(collidedObject)

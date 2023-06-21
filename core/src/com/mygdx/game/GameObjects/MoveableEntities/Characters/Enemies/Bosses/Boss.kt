@@ -35,7 +35,6 @@ abstract class Boss(
 
     override fun setAggroed(){
         defaultLocation!!.adjacentDefaultLocations.forEach {it.removeAdjacentLocation(defaultLocation!!)}
-        println(defaultLocation!!.adjacentDefaultLocations)
         LocationManager.changeLocation()
         super.setAggroed()
     }

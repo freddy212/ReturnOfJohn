@@ -37,7 +37,6 @@ class AreaTitleTextAnimation(val identifier: AreaIdentifier): DefaultAnimation()
         }
 
         color.a = alpha
-        println(alpha)
         areaChangeTitleFont.color = color
         areaChangeTitleFont.draw(batch,areaText, player.currentPosition().x - 300f , player.currentPosition().y + 250f)
     }

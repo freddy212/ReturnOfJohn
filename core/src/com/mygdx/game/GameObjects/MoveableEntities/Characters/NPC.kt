@@ -58,7 +58,6 @@ class NPC(Position: Vector2, size: Vector2 = Vector2(128f,128f),location: Defaul
 
     override fun setPosition(position: Vector2) {
         val prevPos = Vector2(sprite.x,sprite.y)
-        println(position)
         startingPosition = position;
         super.setPosition(position)
         sensors.forEach {
