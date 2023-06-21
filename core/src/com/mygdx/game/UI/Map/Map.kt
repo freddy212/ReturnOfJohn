@@ -1,6 +1,7 @@
 package com.mygdx.game.UI.Map
 
 import com.badlogic.gdx.graphics.Color
+import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.math.Polygon
@@ -14,9 +15,9 @@ import com.mygdx.game.Locations.DefaultLocation
 import com.mygdx.game.Managers.AreaManager
 
 object Map: Renderable {
-
+    val mapTitleFont = BitmapFont()
     init {
-        mapTitleFont.data.setScale(2f)
+        mapTitleFont.data.setScale(3f)
     }
 
     override val layer = Layer.FOREGROUND
@@ -34,7 +35,7 @@ object Map: Renderable {
         mapTitleFont.color = getAreaColor(currentIdentifier)
 
         val playerOffset = Vector2(player.currentPosition().x - offset.x, player.currentPosition().y - offset.y)
-        mapTitleFont.draw(batch,areaName, player.currentPosition().x - 150f, player.currentPosition().y + 150f)
+        mapTitleFont.draw(batch,areaName, player.currentPosition().x - 150f, player.currentPosition().y + 200f)
 
         batch.end()
         currentMap.forEach {

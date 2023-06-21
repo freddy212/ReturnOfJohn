@@ -32,13 +32,13 @@ import com.mygdx.game.Saving.PlayerSaveState
 import com.mygdx.game.Saving.SaveStateEntity
 import com.mygdx.game.Signal.Signals.ItemPickedUpSignal
 import com.mygdx.game.Signal.Signals.RemoveObjectSignal
+import com.mygdx.game.UI.Map.Map
 import com.mygdx.game.Utils.RectanglePolygon
 import kotlin.math.*
 import kotlin.random.Random
 
 
 var font: BitmapFont = BitmapFont()
-val mapTitleFont = BitmapFont()
 
 fun distance(point1: Vector2, point2: Vector2): Float {
     val first = (point2.x - point1.x).pow(2) + (point2.y - point1.y).pow(2)
@@ -271,8 +271,6 @@ fun isPolygonsColliding(polygon1: Polygon, polygon2: Polygon): Boolean {
 
 fun InitAssets(): AssetManager {
     val assetManager = AssetManager()
-    assetManager.load("ManBlender.g3db", Model::class.java)
-    assetManager.finishLoading()
     return assetManager
 }
 
@@ -428,4 +426,22 @@ fun getPropertyBasedOnElement(element: Element, gameObject: GameObject): ROJPart
         Element.ICE -> Ice(gameObject)
         Element.EARTH -> null
     }
+}
+fun updateMap(area: Area){
+
+    val locations = area.defaultLocations
+
+    val polygons = locations.map {
+        val newVertices = it.polygon.transformedVertices.map { vertice -> vertice / 20 }
+        Polygon(newVertices.toFloatArray())
+    }
+
+    val cumuPos: Vector2 = polygons.fold(Vector2(0f,0f)) { vec, pol ->
+        vec + Vector2(pol.vertices[0], pol.vertices[1])
+    }
+    val middlePos = cumuPos / polygons.size.toFloat()
+
+    Map.offset = middlePos
+
+    Map.currentMap = polygons.zip(locations).toMutableList()
 }

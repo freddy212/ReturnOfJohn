@@ -24,7 +24,7 @@ class AreaManager{
         }
         fun SetArea(area: Area){
             activeArea = area
-            area.onAreaChangedActions.forEach {
+            area.onAreaChangedActions.toMutableList().forEach {
                 it()
             }
         }

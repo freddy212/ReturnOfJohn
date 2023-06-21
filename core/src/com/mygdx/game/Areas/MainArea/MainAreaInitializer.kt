@@ -26,7 +26,6 @@ class MainAreaInitializer: AreaInitializer {
         location4.addAdjacentLocation(location2)
         createFireLands(location2,area)
         createIceLands(location3,area)
-        SetArea(area)
         return area
     }
     private fun createFireLands(defaultLocation2: DefaultLocation, area: Area){

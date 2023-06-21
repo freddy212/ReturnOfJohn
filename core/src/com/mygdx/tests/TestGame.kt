@@ -48,7 +48,7 @@ open class TestGame :ApplicationAdapter() {
         Mockito.`when`(assetsMock.get<Texture>(any(), any())).thenReturn(textureMock)
         DefaultAssetHandler.setAssetManager(assetsMock)
 
-        player = Player(Vector2(0f,0f),Vector2(32f,64f),modelInstanceHandlerMock)
+        player = Player(Vector2(0f,0f),Vector2(32f,64f))
         player.setPosition(Vector2(300f,300f))
         val area = DefaultArea(AreaIdentifier.NOTIMPLEMENTED)
         location = DefaultLocation(Vector2(1024f,1024f), Vector2(0f,0f))

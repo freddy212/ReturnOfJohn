@@ -4,7 +4,7 @@ import com.mygdx.game.*
 import com.mygdx.game.Managers.SignalManager
 import com.mygdx.game.Signal.SignalListeners.*
 
-fun initListeners() {
+fun inistSignalListeners() {
     SignalManager.addSignalListeners(
         listOf(
             RemoveObject(),

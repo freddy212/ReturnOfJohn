@@ -25,7 +25,7 @@ import com.mygdx.game.ItemAbilities.DashAbilityUpgraded
 import com.mygdx.game.ItemAbilities.ProjectileAbilityToggle
 import com.mygdx.game.Utils.ResourceList
 
-class Player(Position: Vector2, size: Vector2, modelHandler: ModelInstanceHandler = DefaultModelInstanceHandler("ManBlender.g3db",Position,size))
+class Player(Position: Vector2, size: Vector2)
              : DefaultCharacter(Position, size,null),SaveStateEntity by DefaultSaveStateHandler(),
                                                                          FightableEntity{
     override val texture = DefaultTextureHandler.getTexture("player.png")
