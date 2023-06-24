@@ -1,2 +1,16 @@
-{"playerXPos":338.94437,"playerYPos":-5.539167,"areaIdentifier":"MAINAREA","entityId":0}
+{"playerXPos":945.00446,"playerYPos":1764.5723,"areaIdentifier":"ICELANDSDUNGEON","entityId":0}
 {"signaltype":"AREA_CHANGE","areaIdentifier":"MAINAREA"}
+{"signaltype":"AREA_CHANGE","areaIdentifier":"WASTELAND"}
+{"signaltype":"ABILITY_GAINED","abilityId":"WATERBALL"}
+{"signaltype":"REMOVE_OBJECT","entityId":63}
+{"signaltype":"BUTTON_ACCEPTED","entityId":18}
+{"signaltype":"BUTTON_ACCEPTED","entityId":17}
+{"signaltype":"REMOVE_OBJECT","entityId":16}
+{"signaltype":"AREA_CHANGE","areaIdentifier":"ICELANDS"}
+{"signaltype":"BUTTON_ACCEPTED","entityId":37}
+{"signaltype":"BUTTON_ACCEPTED","entityId":38}
+{"signaltype":"REMOVE_OBJECT","entityId":36}
+{"signaltype":"AREA_CHANGE","areaIdentifier":"ICELANDSDUNGEON"}
+{"signaltype":"REMOVE_OBJECT","entityId":60}
+{"signaltype":"ABILITY_GAINED","abilityId":"ICECLONE"}
+{"signaltype":"REMOVE_OBJECT","entityId":58}

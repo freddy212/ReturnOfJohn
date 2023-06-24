@@ -45,7 +45,9 @@ fun getIceLandsDungeonLocationOneObjects(): List<GameObject>{
     val IceKey = GenericInventoryItemObject(fence.currentMiddle - Vector2(40f,16f), Vector2(80f, 40f), location1, ItemType.ICELANDSKEY)
     val removeFenceEvent = ButtonEvent(RemoveObjectPermanentlyEvent(fence))
     val doorButton = DoorButton( Vector2(iceGate.currentMiddle.x - 20f, location1.bottomleft.y - 30f), Vector2(40f,30f),location1,removeFenceEvent, Direction.DOWN)
-    return listOf(door, iceGate, gateButton, gateButton2, fence, doorButton, IceKey)
+
+    val rocketGenerator = RocketGenerator(location1.topleft - Vector2(0f,250f), Vector2(100f,100f), getDirectionUnitVector(Direction.RIGHT), location1, 0f,3f,400f,4.5f)
+    return listOf(door, iceGate, gateButton, gateButton2, fence, doorButton, IceKey, rocketGenerator)
 }
 
 fun getIceLandsDungeonLocationTwoObjects(): List<GameObject>{
@@ -59,14 +61,15 @@ fun getIceLandsDungeonLocationTwoObjects(): List<GameObject>{
 
 
     )
-    val sign = Sign(iceCloneAbility.bottomleft - Vector2(100f, 100f), Vector2(80f,80f), location2, "Ice Clone - 4", "A frozen clone of yourself")
+    val sign = Sign(iceCloneAbility.bottomleft - Vector2(0f, 100f), Vector2(80f,80f), location2, "Ice Clone - 4", "A frozen clone of yourself")
     return listOf(iceGenerator,iceCloneAbility, sign)
 }
 
 fun getIceLandsDungeonLocationThreeObjects(): List<GameObject>{
     val location3 = LocationManager.findLocation("location3",AreaIdentifier.ICELANDSDUNGEON)
     val rocketGenerator = RocketGenerator(location3.topleft - Vector2(0f,250f), Vector2(100f,100f), getDirectionUnitVector(Direction.RIGHT), location3, 0f,3f,400f,4.5f)
-    return listOf(rocketGenerator)
+    val defaultBreakableObject = DefaultBreakableObject(location3.bottomleft - Vector2(0f,100f), Vector2(100f, 200f), location3)
+    return listOf(rocketGenerator, defaultBreakableObject)
 }
 fun getIceLandsDungeonLocationFourObjects(): List<GameObject>{
     val location4 = LocationManager.findLocation("location4",AreaIdentifier.ICELANDSDUNGEON)

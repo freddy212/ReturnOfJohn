@@ -89,6 +89,8 @@ class MainGame : ApplicationAdapter() {
 
         LocationManager.frameAction()
         player.move(Vector2(0f,0f))
+      // DefaultSoundHandler.mainAreaMusic.isLooping = true
+      //  DefaultSoundHandler.mainAreaMusic.play()
     }
 
 
@@ -100,7 +102,7 @@ class MainGame : ApplicationAdapter() {
         AnimationManager.addAnimationsToRender()
         RenderGraph.render(batch)
         inputAdapter.handleInput(player)
-        //drawrects()
+        drawrects()
         EventManager.executeEvents()
         UIRendererManager.render()
         SignalManager.useSignals()

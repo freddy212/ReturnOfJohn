@@ -30,6 +30,7 @@ class DefaultLocation(size: Vector2, Position: Vector2, private val initGameObje
     }
     override fun render(batch: PolygonSpriteBatch){
         locationStrategy.render(batch,sprite)
+        font.draw(batch,this.locationName, this.topleft.x + 50f, this.topleft.y - 50f)
     }
 
     fun addGameObject(gameObject: GameObject){
