@@ -48,9 +48,9 @@ class RockBoss(Position: Vector2, size: Vector2, location: DefaultLocation?, ele
     val moveDown = MoveDirection(this, Vector2(-0.5f, 0.5f))
     val moveRight = MoveDirection(this, Vector2(-0.5f, -0.5f))
 
-    val roll =  Roll(MoveBasedOnPlayer(0f,::getUnitVectorTowardsPoint, this), this)
+  // val roll =  Roll(MoveBasedOnPlayer(0f,::getUnitVectorTowardsPoint, this), this)
     val randomAction = RandomAction(listOf(moveDown, moveUp, moveLeft, moveRight), DefaultTimer(1f), this, false)
-    override val enemyStrategy =  DefaultEnemyStrategy(listOf(ShootProjectile(projectile,projSize,this), randomAction, roll
+    override val enemyStrategy =  DefaultEnemyStrategy(listOf(ShootProjectile(projectile,projSize,this), randomAction
     ))
 
     init {

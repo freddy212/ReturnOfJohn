@@ -27,6 +27,7 @@ class IceLandsDungeonInitializer: AreaInitializer {
         location6.addAdjacentLocation(location2)
         location3.addAdjacentLocation(location2)
         location5.addAdjacentLocation(location2)
+        location6.addAdjacentLocation(location4)
         return area
     }
 }

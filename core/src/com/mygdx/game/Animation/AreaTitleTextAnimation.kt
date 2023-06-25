@@ -1,5 +1,6 @@
 package com.mygdx.game.Animation
 
+import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch
 import com.mygdx.game.Enums.Layer
@@ -19,7 +20,7 @@ class AreaTitleTextAnimation(val identifier: AreaIdentifier): DefaultAnimation()
     var alpha = 0f
 
     val areaText = getAreaTitleText(identifier)
-    val color = getAreaColor(identifier)
+    val color = Color(getAreaColor(identifier))
 
     val areaChangeTitleFont = BitmapFont()
 
