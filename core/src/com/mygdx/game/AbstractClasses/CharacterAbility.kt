@@ -26,11 +26,13 @@ abstract class CharacterAbility(){
         player.addAbility(this)
     }
 
-    open fun tryUseAction() {
+    open fun tryUseAction(): Boolean {
         if(cooldownTimer.tryUseCooldown()){
             this.activeAction()
             active = true
+            return true
         }
+        return false
     }
 }
 

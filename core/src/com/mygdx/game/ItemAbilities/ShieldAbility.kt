@@ -16,7 +16,7 @@ open class ShieldAbility(): CharacterAbility(){
     override val abilityId = AbilityId.SHIELD
     override val triggerKey = com.badlogic.gdx.Input.Keys.NUM_2
     override val texture = DefaultTextureHandler.getTexture("shield-front.png")
-    override val cooldownTimer = DefaultTimer(3f)
+    override val cooldownTimer = DefaultTimer(2f)
     val shield = Shield(Vector2(0f,0f),
         Vector2(20f,40f))
 

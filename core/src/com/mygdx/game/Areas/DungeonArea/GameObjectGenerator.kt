@@ -64,8 +64,8 @@ fun getLocationSevenCaveObjects(): List<GameObject> {
     val size = Vector2(80f,80f)
 
     val conveyerBelt = ConveyerBelt(location6.bottomleft, Vector2(200f, location6.height / 2), location,Direction.LEFT)
-    val breakableObject = DefaultBreakableObject(conveyerBelt.topleft, Vector2(200f, location6.height / 2), location)
-    val boulderGenerator = BoulderGenerator(location.topright - Vector2(200f,0f), Vector2(128f,128f), getDirectionUnitVector(Direction.DOWN), location)
+    val breakableObject = DefaultBreakableObject(conveyerBelt.topleft - Vector2(100f,0f), Vector2(300f, location6.height / 2), location)
+    val boulderGenerator = BoulderGenerator(location.topright - Vector2(600f,60f), Vector2(128f,128f), Vector2(0.5f,-0.5f), location)
     val shieldItem = AbilityItemObject(middleOfObject(location.originalMiddle,size),size,location, ShieldAbility(), DefaultTextureHandler.getTexture("shield-front.png"))
 
     val sign = Sign(shieldItem.bottomleft - Vector2(200f, 0f), Vector2(80f,80f), location, "Wooden Shield - 2", "Weak to Ice and Fire")

@@ -328,13 +328,7 @@ fun GameObject.getOppositeDirection(
 }
 
 fun ResetPlayer(playerSaveState: PlayerSaveState) {
-    LocationManager.ActiveGameObjects.forEach {
-        it.onLocationEnterActions.forEach { it() }
-        val collition = it.collition
-        if (collition is AreaEntranceCollition) {
-            collition.movedOutside(player)
-        }
-    }
+    ResetAreaEnteredCollitions()
     player.setPosition(Vector2(playerSaveState.playerXPos, playerSaveState.playerYPos))
     player.health = player.maxHealth
 }
@@ -444,4 +438,16 @@ fun updateMap(area: Area){
     Map.offset = middlePos
 
     Map.currentMap = polygons.zip(locations).toMutableList()
+}
+
+fun ResetAreaEnteredCollitions() {
+    LocationManager.ActiveGameObjects.forEach {
+        it.onLocationEnterActions.forEach { it() }
+        val collition = it.collition
+        if (collition is AreaEntranceCollition) {
+            collition.insideCollition.forEach {pair ->
+                collition.movedOutside(pair.key)
+            }
+        }
+    }
 }

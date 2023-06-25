@@ -71,7 +71,8 @@ object ProjectileAbilityToggle: CharacterAbility() {
         activeAbility.activeAction()
     }
 
-    override fun tryUseAction() {
+    override fun tryUseAction(): Boolean {
         this.activeAction()
+        return true
     }
 }
