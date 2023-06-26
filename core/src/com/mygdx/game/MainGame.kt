@@ -57,6 +57,7 @@ class MainGame : ApplicationAdapter() {
         player = Player(Vector2(0f, 0f), Vector2(48f, 56f))
         playerSize = Vector2(player.sprite.width, player.sprite.height)
         AreaInitializerManager.init()
+        FontManager.initFonts()
         shapeRenderer = ShapeRenderer()
         camera.setToOrtho(
             false,

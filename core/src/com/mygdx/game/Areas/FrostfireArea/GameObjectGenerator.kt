@@ -78,7 +78,7 @@ fun getFrostFireLocationSevenObjects(): List<GameObject>{
 
     val rocketGenerator = RocketGenerator(location.bottomleft + Vector2(0f,200f), Vector2(100f,100f), getDirectionUnitVector(Direction.RIGHT), location, 0f,3f,500f,4.5f)
 
-    val breakableObject = DefaultBreakableObject(rocketGenerator.bottomright + Vector2(250f, -25f), Vector2(150f,150f), location)
+    val breakableObject = DefaultBreakableObject(rocketGenerator.bottomright + Vector2(200f, -25f), Vector2(150f,150f), location)
 
     val fenceAfterTeleportPadBreakableObject = Fence(rocketGenerator.bottomleft + Vector2(0f,150f), Vector2(location.width, 100f), location)
 
@@ -175,7 +175,7 @@ fun getFrostFireLocationTenObjects(): List<GameObject>{
 
     val walkableTerrain6 = WalkableTerrain(walkableTerrain3.topright - Vector2(350f, 0f), Vector2(350f, walkableTerrain4.bottomleft.y - walkableTerrain3.topleft.y), location10)
 
-    val hydra: Hydra = Hydra(walkableTerrain.topleft + Vector2(50f,100f), Vector2(165f,210f), location10)
+    val hydra = Hydra(walkableTerrain.topleft + Vector2(50f,100f), Vector2(165f,210f), location10)
 
     return listOf(walkableTerrain, walkableTerrain2, walkableTerrain3, walkableTerrain4,walkableTerrain5, walkableTerrain6, hydra)
 }

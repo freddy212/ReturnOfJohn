@@ -1,14 +1,12 @@
 Untitled
 - Delay -
-active: true
-lowMin: 0.0
-lowMax: 0.0
+active: false
 - Duration - 
-lowMin: 1500.0
-lowMax: 1500.0
+lowMin: 2000.0
+lowMax: 2000.0
 - Count - 
 min: 0
-max: 500
+max: 200
 - Emission - 
 lowMin: 0.0
 lowMax: 0.0
@@ -16,33 +14,33 @@ highMin: 500.0
 highMax: 500.0
 relative: false
 scalingCount: 3
-scaling0: 0.98039216
-scaling1: 1.0
-scaling2: 1.0
-timelineCount: 3
-timeline0: 0.0
-timeline1: 0.32876712
-timeline2: 0.60958904
-- Life - 
-lowMin: 0.0
-lowMax: 0.0
-highMin: 200.0
-highMax: 300.0
-relative: false
-scalingCount: 3
-scaling0: 1.0
+scaling0: 0.0
 scaling1: 1.0
 scaling2: 0.0
 timelineCount: 3
 timeline0: 0.0
-timeline1: 0.65813375
-timeline2: 0.65913373
+timeline1: 0.48964217
+timeline2: 1.0
+- Life - 
+lowMin: 0.0
+lowMax: 0.0
+highMin: 500.0
+highMax: 1000.0
+relative: false
+scalingCount: 3
+scaling0: 1.0
+scaling1: 1.0
+scaling2: 0.3
+timelineCount: 3
+timeline0: 0.0
+timeline1: 0.66
+timeline2: 1.0
 - Life Offset - 
 active: false
 - X Offset - 
 active: true
 lowMin: 0.0
-lowMax: 48.0
+lowMax: 32.0
 highMin: 0.0
 highMax: 0.0
 relative: false
@@ -53,7 +51,7 @@ timeline0: 0.0
 - Y Offset - 
 active: true
 lowMin: 0.0
-lowMax: 48.0
+lowMax: 32.0
 highMin: 0.0
 highMax: 0.0
 relative: false
@@ -86,28 +84,41 @@ timeline0: 0.0
 - X Scale - 
 lowMin: 0.0
 lowMax: 0.0
-highMin: 24.0
-highMax: 24.0
+highMin: 32.0
+highMax: 32.0
 relative: false
 scalingCount: 1
 scaling0: 1.0
 timelineCount: 1
 timeline0: 0.0
 - Y Scale - 
+active: false
+- Velocity - 
 active: true
 lowMin: 0.0
 lowMax: 0.0
-highMin: 24.0
-highMax: 24.0
+highMin: 0.0
+highMax: 0.0
 relative: false
 scalingCount: 1
 scaling0: 1.0
 timelineCount: 1
 timeline0: 0.0
-- Velocity - 
-active: false
 - Angle - 
-active: false
+active: true
+lowMin: 90.0
+lowMax: 90.0
+highMin: 45.0
+highMax: 135.0
+relative: false
+scalingCount: 3
+scaling0: 1.0
+scaling1: 0.0
+scaling2: 0.0
+timelineCount: 3
+timeline0: 0.0
+timeline1: 0.5
+timeline2: 1.0
 - Rotation - 
 active: false
 - Wind - 
@@ -115,20 +126,16 @@ active: false
 - Gravity - 
 active: false
 - Tint - 
-colorsCount: 9
+colorsCount: 6
 colors0: 1.0
-colors1: 0.4509804
-colors2: 0.24705882
+colors1: 0.90588236
+colors2: 0.7294118
 colors3: 1.0
-colors4: 0.8901961
-colors5: 0.84705883
-colors6: 0.7058824
-colors7: 0.7058824
-colors8: 0.7058824
-timelineCount: 3
+colors4: 0.5529412
+colors5: 0.0
+timelineCount: 2
 timeline0: 0.0
-timeline1: 0.99
-timeline2: 1.0
+timeline1: 1.0
 - Transparency - 
 lowMin: 0.0
 lowMax: 0.0
@@ -137,16 +144,16 @@ highMax: 1.0
 relative: false
 scalingCount: 4
 scaling0: 0.0
-scaling1: 0.9649123
-scaling2: 0.6315789
+scaling1: 1.0
+scaling2: 0.75
 scaling3: 0.0
 timelineCount: 4
 timeline0: 0.0
-timeline1: 0.23287672
-timeline2: 0.7328767
+timeline1: 0.2
+timeline2: 0.8
 timeline3: 1.0
 - Options - 
-attached: false
+attached: true
 continuous: true
 aligned: false
 additive: false

@@ -1,13 +1,16 @@
 package com.mygdx.game.Animation
 
+import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator
 import com.mygdx.game.Enums.Layer
 import com.mygdx.game.Interfaces.AreaIdentifier
 import com.mygdx.game.Interfaces.getAreaColor
 import com.mygdx.game.Interfaces.getAreaTitleText
 import com.mygdx.game.Managers.AreaManager
+import com.mygdx.game.Managers.FontManager.Companion.areaChangeTitleFont
 import com.mygdx.game.font
 import com.mygdx.game.player
 
@@ -21,12 +24,6 @@ class AreaTitleTextAnimation(val identifier: AreaIdentifier): DefaultAnimation()
 
     val areaText = getAreaTitleText(identifier)
     val color = Color(getAreaColor(identifier))
-
-    val areaChangeTitleFont = BitmapFont()
-
-    init {
-        areaChangeTitleFont.data.setScale(5f, 4f)
-    }
 
     override fun render(batch: PolygonSpriteBatch) {
         if (currentFrame <= alphaTime + 1) {

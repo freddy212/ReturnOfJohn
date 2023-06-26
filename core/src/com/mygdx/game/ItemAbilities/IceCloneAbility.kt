@@ -16,7 +16,7 @@ open class IceCloneAbility(): CharacterAbility(){
 
     override val cooldownTimer = DefaultTimer(1f)
     val iceClone = IceClone(
-        player.currentMiddle,
+        Vector2(-100000f, -100000f),
         Vector2(player.width * 1.2f, player.height * 1.2f),
         null
     )

@@ -132,11 +132,12 @@ fun getFireLandsLocationNineObjects(): List<GameObject>{
 fun getFireLandsLocationNineObjects(): List<GameObject>{
     val location9 = LocationManager.findLocation("location9",AreaIdentifier.FIRELANDS)
 
-    val circularPlatform = CircularPlatform(location9.bottomleft + Vector2(500f, 200f), Vector2(150f,100f), location9)
+    val circularPlatform = CircularPlatform(location9.bottomleft + Vector2(300f, 200f), Vector2(150f,100f), location9)
 
     val circularPlatform2 = CircularPlatform(circularPlatform.bottomright + Vector2(300f, 0f), Vector2(150f,100f), location9, 180f)
 
-    val circularPlatform3 = CircularPlatform(circularPlatform2.bottomright + Vector2(600f, 0f), Vector2(150f,100f), location9, 0f)
+    val circularPlatform3 = CircularPlatform(circularPlatform2.bottomright + Vector2(700f, 0f), Vector2(150f,100f), location9, 0f)
+
 
     return listOf(circularPlatform, circularPlatform2, circularPlatform3)
 }
