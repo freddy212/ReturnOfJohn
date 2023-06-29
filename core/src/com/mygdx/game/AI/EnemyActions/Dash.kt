@@ -11,7 +11,9 @@ import com.mygdx.game.Interfaces.EnemyAction
 import com.mygdx.game.Managers.EventManager
 import com.mygdx.game.ObjectProperties.FireDashEffect
 import com.mygdx.game.camera
+import com.mygdx.game.getCloneOrPlayer
 import com.mygdx.game.getUnitVectorTowardsPoint
+import com.mygdx.game.player
 
 class Dash(val enemy: Enemy, val dashCondition: () -> Boolean = { true }) : EnemyAction() {
 
@@ -22,6 +24,7 @@ class Dash(val enemy: Enemy, val dashCondition: () -> Boolean = { true }) : Enem
     private var counter = 0
     override fun executeEnemyAction() {
         if (counter == 0) {
+            enemy.unitVectorDirection = getUnitVectorTowardsPoint(this.enemy.currentPosition(), getCloneOrPlayer().currentPosition())
             enemy.setCurrentSpeed(enemy.getCurrentSpeed() * 3.0f)
             enemy.characterState = CharacterState.DASHING
             enemy.properties.add(fireDashEffect)

@@ -9,6 +9,8 @@ import com.mygdx.game.Interfaces.AreaIdentifier
 import com.mygdx.game.Interfaces.MoveCollition
 import com.mygdx.game.Managers.AreaManager
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Player
+import com.mygdx.game.Managers.AnimationManager
+import com.mygdx.game.Managers.LocationManager.Companion.ActiveGameObjects
 
 class DoorCollition(doorPosition: Vector2,val areaId: AreaIdentifier, val connection: DoorConnection,
                     val triggerDirection: Direction): MoveCollition{
@@ -33,6 +35,8 @@ class DoorCollition(doorPosition: Vector2,val areaId: AreaIdentifier, val connec
                     player.setPosition(playerPosMiddle)
                     AreaManager.SetArea(AreaManager.getArea(areaId))
                     ResetAreaEnteredCollitions()
+                    ActiveGameObjects = listOf()
+                    AnimationManager.animationManager.clear()
                     canMoveAfterCollition = false
                 }
             }

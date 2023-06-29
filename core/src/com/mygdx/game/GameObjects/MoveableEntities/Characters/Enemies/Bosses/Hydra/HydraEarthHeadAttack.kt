@@ -48,4 +48,8 @@ class HydraEarthHeadAttack(val hydra: Hydra): EnemyAction() {
         hydra.sprite.texture = DefaultTextureHandler.getTexture("hydra.png")
         framesToBlock = 300
     }
+
+    override fun condition(): Boolean {
+        return hydra.health * 2 <= hydra.maxHealth
+    }
 }

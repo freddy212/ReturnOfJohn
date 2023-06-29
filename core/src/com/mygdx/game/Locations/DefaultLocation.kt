@@ -14,9 +14,9 @@ import java.util.concurrent.locks.Condition
 class DefaultLocation(size: Vector2, Position: Vector2, private val initGameObjectsFunction: () -> List<GameObject> = {listOf()},
                      val locationStrategy: LocationDataStrategy = DefaultLocationData()): GameObject(Position,size){
     override val texture: Texture = locationStrategy.texture
-    private val AdjacentLocations = mutableListOf<DefaultLocation>()
-    val adjacentDefaultLocations : List<DefaultLocation>
-        get() = AdjacentLocations.toList()
+    private val AdjacentLocations = mutableSetOf<DefaultLocation>()
+    val adjacentDefaultLocations : Set<DefaultLocation>
+        get() = AdjacentLocations.toSet()
     val gameObjects = ResourceList<GameObject>()
     override val layer = Layer.BEFOREGROUND
     override val collition = locationStrategy.collition

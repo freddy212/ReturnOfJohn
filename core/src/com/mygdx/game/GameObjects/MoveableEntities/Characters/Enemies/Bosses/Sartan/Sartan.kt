@@ -15,6 +15,7 @@ import com.mygdx.game.getUnitVectorTowardsPoint
 import com.mygdx.game.*
 import com.mygdx.game.AI.EnemyActions.Dash
 import com.mygdx.game.AI.EnemyActions.MoveTowardsPoint
+import com.mygdx.game.AbstractClasses.Enemy
 import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.Enums.CharacterState
 import com.mygdx.game.Enums.getDirectionUnitVector
@@ -36,7 +37,7 @@ class Sartan(Position: Vector2, size: Vector2 = Vector2(150f, 150f), location: D
     override val stunDuration = 3
     override var baseSpeed = 4f
     override var unitVectorDirection = getDirectionUnitVector(Direction.DOWN)
-    override val collition = SartanCollition(this)
+    override val collition = DashCollition(this)
     val trifork = Trifork(currentPosition() + Vector2(0f, -30f), Vector2(40f, 100f), defaultLocation, this)
     private val randomAction = RandomAction(
         listOf(
@@ -62,7 +63,7 @@ class Sartan(Position: Vector2, size: Vector2 = Vector2(150f, 150f), location: D
     }
 }
 
-class SartanCollition(val sartan: Sartan) : EnemyCollition(sartan) {
+class DashCollition(val sartan: Enemy) : EnemyCollition(sartan) {
 
     override fun collitionHappened(collidedObject: GameObject) {
         super.collitionHappened(collidedObject)

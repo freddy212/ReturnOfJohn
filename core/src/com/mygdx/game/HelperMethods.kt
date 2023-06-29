@@ -358,10 +358,13 @@ fun generateEnemyProjectile(
 fun getCloneOrPlayer(): GameObject{
     var result: GameObject = player
     val random = Random.nextInt(2)
-    val clone = LocationManager.newDefaultLocation.gameObjects.List.find { it is IceClone }
+    val clone = LocationManager.ActiveGameObjects.firstOrNull(){ it is IceClone }
     if (random == 1 && clone != null) {
         result = clone
     }
+
+    //println("result is player: " + (result is Player) + "random is " + random)
+    println("iceclone is null ? " + (clone == null))
     return result
 }
 

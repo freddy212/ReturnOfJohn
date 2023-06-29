@@ -39,7 +39,7 @@ abstract class Boss(
         super.setAggroed()
     }
 
-    fun resetArea() {
+    open fun resetArea() {
         if(!LocationManager.activeDefaultLocations.containsAll(adjacentLocations)){
             adjacentLocations.forEach {it.addAdjacentLocation(defaultLocation!!)}
             LocationManager.changeLocation()
@@ -47,6 +47,7 @@ abstract class Boss(
     }
 
     override fun death() {
+        enemyStrategy.actionList.forEach { it.cleanUp() }
         resetArea()
         SignalManager.emitSignal(RemoveObjectSignal(entityId))
         if(onDeathSignal != null){
