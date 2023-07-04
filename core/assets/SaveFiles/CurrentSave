@@ -1,4 +1,4 @@
-{"playerXPos":-759.3391,"playerYPos":2498.1829,"areaIdentifier":"FROSTFIRE","entityId":0}
+{"playerXPos":-794.2764,"playerYPos":2499.1157,"areaIdentifier":"FROSTFIRE","entityId":0}
 {"signaltype":"AREA_CHANGE","areaIdentifier":"MAINAREA"}
 {"signaltype":"AREA_CHANGE","areaIdentifier":"WASTELAND"}
 {"signaltype":"ABILITY_GAINED","abilityId":"WATERBALL"}
@@ -63,3 +63,4 @@
 {"signaltype":"USE_ITEMS","itemType":"FIRELANDSKEY","amount":1}
 {"signaltype":"USE_ITEMS","itemType":"WASTELANDSKEY","amount":1}
 {"signaltype":"REMOVE_OBJECT","entityId":92}
+{"signaltype":"REMOVE_OBJECT","entityId":93}

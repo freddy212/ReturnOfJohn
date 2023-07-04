@@ -10,7 +10,7 @@ import com.mygdx.game.Locations.DefaultLocation
 import com.mygdx.game.Timer.DefaultTimer
 
 class ShootProjectile(val projectileFactory: (Position: Vector2, Size: Vector2, defaultLocation: DefaultLocation, unitVectorDirection:Vector2, shooter:GameObject) -> Projectile, val size:Vector2, val enemy:Enemy, probability: Double = 0.1): EnemyAction() {
-    val timer = DefaultTimer(0.5f)
+    val timer = DefaultTimer(2f)
     override fun executeEnemyAction() {
         generateEnemyProjectile(projectileFactory,enemy,size)
     }

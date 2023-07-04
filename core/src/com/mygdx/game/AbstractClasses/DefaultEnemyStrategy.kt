@@ -64,15 +64,12 @@ open class DefaultEnemyStrategy(override val actionList: List<EnemyAction>) : En
     }
 
     override fun getActions(enemy: Enemy): List<EnemyAction> {
-        val validActions = actionList.filter { it.condition() }
-        val random = Random.nextDouble(0.0, 1.0)
-        var current = 0.0
         var actions = mutableListOf<EnemyAction>()
+        val random = Random.nextDouble(0.0, 1.0)
+        val randomlySelectedActions = actionList.filter { it.probability >= random }
 
-        for (action in validActions.shuffled()) {
-            current = action.probability
-
-            if (current >= random && (lockedAction == null || action == lockedAction)) {
+        for (action in randomlySelectedActions.shuffled()) {
+            if (action.condition() && (lockedAction == null || action == lockedAction)) {
                 if (action.shouldBlock && lockedAction == null) {
                     action.active = true
                     lockAction(action)

@@ -27,8 +27,11 @@ class BossClone(val boss: Boss): Enemy(boss.currentPosition(), boss.size, boss.d
     override val healthStrategy: HealthStrategy by lazy { BossHealthStrategy(this) }
     override var enemyStrategy = DefaultEnemyStrategy(listOf())
 
+    var cleanup: () -> Unit = {}
+
     override fun isHit(other: GameObject) {
         death()
+        cleanup()
     }
 
     init {

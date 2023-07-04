@@ -10,6 +10,7 @@ import com.mygdx.game.Events.ActionBeforeFramesEvent
 import com.mygdx.game.Interfaces.EnemyAction
 import com.mygdx.game.Managers.EventManager
 import com.mygdx.game.ObjectProperties.FireDashEffect
+import com.mygdx.game.Timer.DefaultTimer
 import com.mygdx.game.camera
 import com.mygdx.game.getCloneOrPlayer
 import com.mygdx.game.getUnitVectorTowardsPoint
@@ -20,12 +21,14 @@ class Dash(val enemy: Enemy, val dashCondition: () -> Boolean = { true }) : Enem
     val fireDashEffect = FireDashEffect(enemy)
     val dashFrames = 40
     val sound = Gdx.audio.newSound(Gdx.files.internal("Sound/SoundEffect/fireworks.mp3"));
+    val timer = DefaultTimer(1f)
+    var isDashStarted = false
 
     private var counter = 0
     override fun executeEnemyAction() {
         if (counter == 0) {
             enemy.unitVectorDirection = getUnitVectorTowardsPoint(this.enemy.currentPosition(), getCloneOrPlayer().currentPosition())
-            enemy.setCurrentSpeed(enemy.getCurrentSpeed() * 3.0f)
+            enemy.setCurrentSpeed(enemy.baseSpeed * 2.5f)
             enemy.characterState = CharacterState.DASHING
             enemy.properties.add(fireDashEffect)
             fireDashEffect.start()
@@ -48,7 +51,11 @@ class Dash(val enemy: Enemy, val dashCondition: () -> Boolean = { true }) : Enem
     }
 
     override fun condition(): Boolean {
-        return dashCondition()
+        val timerReady = timer.tryUseCooldown()
+        if(timerReady && !isDashStarted){
+            isDashStarted = true
+        }
+        return isDashStarted && dashCondition()
     }
 
     override val probability: Double
@@ -56,6 +63,8 @@ class Dash(val enemy: Enemy, val dashCondition: () -> Boolean = { true }) : Enem
 
     override fun cleanUp() {
         counter = 0
+        timer.reset()
+        isDashStarted = false
         if (enemy.characterState == CharacterState.DASHING) {
             enemy.setCurrentSpeed(enemy.baseSpeed)
             enemy.characterState = CharacterState.FREE
