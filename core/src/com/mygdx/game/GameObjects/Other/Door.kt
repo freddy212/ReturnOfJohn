@@ -20,7 +20,7 @@ class Door(Position: Vector2, size: Vector2, texture: Texture, defaultLocation: 
 
     init {
         if(direction == Direction.UP){
-            polygon.vertices = floatArrayOf(x + size.x / 4, y, x + size.x - size.x / 4, y, x + size.x - size.x / 4, y - 20f, x + size.x / 4, y - 20f)
+            polygon.vertices = floatArrayOf(x, y, x + size.x, y, x + size.x, y - 20f, x, y - 20f)
         }
         if(direction == Direction.DOWN) {
             sprite.setPosition(sprite.x,sprite.y - 64f)

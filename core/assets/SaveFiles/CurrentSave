@@ -1,4 +1,4 @@
-{"playerXPos":-3401.1978,"playerYPos":1789.5492,"areaIdentifier":"WASTELAND","entityId":0}
+{"playerXPos":-995.3713,"playerYPos":343.6757,"areaIdentifier":"MAINAREA","entityId":0}
 {"signaltype":"AREA_CHANGE","areaIdentifier":"MAINAREA"}
 {"signaltype":"AREA_CHANGE","areaIdentifier":"WASTELAND"}
 {"signaltype":"ABILITY_GAINED","abilityId":"WATERBALL"}
