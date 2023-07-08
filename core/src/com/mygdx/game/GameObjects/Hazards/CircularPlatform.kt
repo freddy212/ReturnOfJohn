@@ -25,7 +25,7 @@ class CircularMovementEvent(val platform: CircularPlatform) : Event {
         if (!player.hasMovedThisFrame) {
             player.move(Vector2(0f, 0f))
         }
-        player.moveModifier = Vector2(0f,0f)
+        player.moveModifier = Vector2(0f, 0f)
     }
 
 }
@@ -35,7 +35,7 @@ class CircularPlatform(Position: Vector2, size: Vector2, defaultLocation: Defaul
     override var baseSpeed = 1f
     override val movementStrategy = DefaultMovement(MoveRegardless())
     override var unitVectorDirection = Vector2(0f, 0f)
-    override val texture = DefaultTextureHandler.getTexture("MainB.jpg")
+    override val texture = DefaultTextureHandler.getTexture(defaultLocation.getAreaSpecificTextureName("MainB.jpg"))
     override val layer = Layer.ONGROUND
 
     val removeDotDamageCollition = RemoveDotDamageCollition(defaultLocation.collition)
@@ -47,14 +47,15 @@ class CircularPlatform(Position: Vector2, size: Vector2, defaultLocation: Defaul
     init {
         onLocationEnterActions.add(::resetPlatform)
     }
+
     override fun frameTask() {
         val oldAngle = angle
         angle = (angle + increment) % 360
-        circularMove(100f,  oldAngle, angle)
+        circularMove(100f, oldAngle, angle)
         super.frameTask()
     }
 
-    fun resetPlatform(){
+    fun resetPlatform() {
         setPosition(initPosition)
         angle = startAngle
     }

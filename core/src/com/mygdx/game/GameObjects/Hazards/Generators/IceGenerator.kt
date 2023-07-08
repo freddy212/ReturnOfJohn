@@ -8,7 +8,7 @@ import com.mygdx.game.Locations.DefaultLocation
 
 class IceGenerator(Position: Vector2, size: Vector2, unitVectorDirection: Vector2, defaultLocation: DefaultLocation,
                        timeUntilFire: Float = 0f, shootCoolDown:Float = 3f):
-    Generator(Position, size,defaultLocation,unitVectorDirection,timeUntilFire,shootCoolDown){
+    Generator(Position, size,defaultLocation,unitVectorDirection,timeUntilFire,shootCoolDown,false){
 
     override fun generateProjectile(): Projectile{
         val Position = Vector2(this.sprite.x,this.sprite.y) + getDistanceFromGenerator(unitVectorDirection)

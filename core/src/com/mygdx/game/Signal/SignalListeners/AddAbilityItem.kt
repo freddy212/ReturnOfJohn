@@ -39,9 +39,9 @@ class AddAbilityItem: SignaledEventListener {
     fun getSign(characterAbility: CharacterAbility, abilityObject: GameObject): Sign{
 
         val signText = when(characterAbility){
-            is ShieldAbilityUpgraded -> Pair("Shield Upgraded", "Shield is now fire and ice resistant")
-            is IceCloneAbilityUpgraded -> Pair("Ice Clone Upgraded", "Press twice to create ice explotion")
-            is DashAbilityUpgraded -> Pair("Dash Upgraded", "Invulnerable while dashing")
+            is ShieldAbilityUpgraded -> Pair("Shield Upgrade", "Shield is now fire and ice resistant")
+            is IceCloneAbilityUpgraded -> Pair("Ice Clone Upgrade", "Press twice to create ice explosion")
+            is DashAbilityUpgraded -> Pair("Dash Upgrade", "Invulnerable while dashing")
             else ->  Pair("Random", "Random")
         }
 

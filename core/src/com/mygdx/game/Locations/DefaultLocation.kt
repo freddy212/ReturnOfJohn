@@ -13,7 +13,7 @@ import java.util.concurrent.locks.Condition
 
 class DefaultLocation(size: Vector2, Position: Vector2, private val initGameObjectsFunction: () -> List<GameObject> = {listOf()},
                      val locationStrategy: LocationDataStrategy = DefaultLocationData()): GameObject(Position,size){
-    override val texture: Texture = locationStrategy.texture
+    override var texture: Texture = locationStrategy.texture
     private val AdjacentLocations = mutableSetOf<DefaultLocation>()
     val adjacentDefaultLocations : Set<DefaultLocation>
         get() = AdjacentLocations.toSet()
@@ -52,5 +52,21 @@ class DefaultLocation(size: Vector2, Position: Vector2, private val initGameObje
         AdjacentLocations.remove(defaultLocation)
         defaultLocation.AdjacentLocations.remove(this)
     }
+
+    fun getAreaSpecificTextureName(defaultTextureName: String = "MainB.jpg"): String{
+        return when(this.areaIdentifier){
+            AreaIdentifier.FIRELANDSDUNGEON -> "firedungeonfloor.jpg"
+            AreaIdentifier.WASTELAND -> "LightSand.jpg"
+            AreaIdentifier.FIRELANDS -> "FirelandsFloor.jpg"
+            AreaIdentifier.DUNGEONAREA -> "dungeonFloor.jpg"
+            AreaIdentifier.ICELANDSDUNGEON -> "IceDungeonFloor.jpg"
+            AreaIdentifier.ICELANDS -> "IceLandsFloor.jpg"
+            else -> defaultTextureName
+        }
+    }
+
+    //Credits
+
+    //<a href="https://www.freepik.com/free-photo/detailed-orange-grunge-background-with-splats-stains_10167167.htm#query=ice%20texture&position=1&from_view=keyword&track=ais">Image by kjpargeter</a> on Freepik
 
 }

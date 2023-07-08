@@ -13,7 +13,7 @@ import com.mygdx.game.Locations.DefaultLocationData
 
 class IceLandsInitializer: AreaInitializer {
     override fun initializeArea(): Area {
-        val iceTexture = "IceGround.png"
+        val iceTexture = "IceDamage.jpg"
         val area = DefaultArea(AreaIdentifier.ICELANDS)
         val location1 = DefaultLocation(
             Vector2(1500f, 1500f), Vector2(0f, 0f), ::getIceLandsLocationOneObjects, DamageLocationData(iceTexture)

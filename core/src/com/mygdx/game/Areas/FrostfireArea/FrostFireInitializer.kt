@@ -31,7 +31,7 @@ class FrostFireInitializer():AreaInitializer {
         val location4 =
             addLocationRelative(location3, Vector2(600f, 1500f), InsertDirection.LEFT, area, InsertDirection.MIDDLE, ::getFrostFireLocationFourObjects, DamageLocationData())
         val location5 =
-            addLocationRelative(location3, Vector2(600f, 1500f), InsertDirection.RIGHT, area, InsertDirection.MIDDLE, ::getFrostFireLocationFiveObjects, DamageLocationData("IceGround.png"))
+            addLocationRelative(location3, Vector2(600f, 1500f), InsertDirection.RIGHT, area, InsertDirection.MIDDLE, ::getFrostFireLocationFiveObjects, DamageLocationData("IceDamage.jpg"))
         val location6 =
             addLocationRelative(location5, Vector2(1000f, 200f), InsertDirection.RIGHT, area, InsertDirection.MIDDLE, { listOf()})
         val location7 =
@@ -45,7 +45,7 @@ class FrostFireInitializer():AreaInitializer {
         val location11 =
             addLocationRelative(location10, Vector2(800f, 1500f), InsertDirection.LEFT, area, InsertDirection.MIDDLE, locationDataStrategy = DamageLocationData())
         val location12 =
-            addLocationRelative(location10, Vector2(800f, 1500f), InsertDirection.RIGHT, area, InsertDirection.MIDDLE, locationDataStrategy = DamageLocationData("IceGround.png"))
+            addLocationRelative(location10, Vector2(800f, 1500f), InsertDirection.RIGHT, area, InsertDirection.MIDDLE, locationDataStrategy = DamageLocationData("IceDamage.jpg"))
 
         val location13 = addLocationRelative(location4, Vector2(1000f, 200f), InsertDirection.LEFT, area, InsertDirection.MIDDLE)
 

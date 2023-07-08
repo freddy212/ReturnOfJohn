@@ -32,7 +32,7 @@ class MainAreaInitializer: AreaInitializer {
         val location5 = addLocationRelative(defaultLocation2, Vector2(2000f, 1500f), InsertDirection.LEFT, area, InsertDirection.MIDDLE,::getFireLandsGateWayLocation,DamageLocationData())
     }
     private fun createIceLands(defaultLocation3: DefaultLocation, area: Area){
-        val iceLandsMainGround = "IceGround.png"
+        val iceLandsMainGround = "IceDamage.jpg"
         val location6 = addLocationRelative(defaultLocation3, Vector2(1500f, 1100f), InsertDirection.UP, area, InsertDirection.MIDDLE,::getIceLandsGateWayLocation,DamageLocationData(iceLandsMainGround))
     }
 }
