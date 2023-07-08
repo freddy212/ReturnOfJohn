@@ -44,6 +44,8 @@ class MainGame : ApplicationAdapter() {
 
     override fun create() {
 
+        camera.zoom = 0.6f
+
         val f = File("SaveFiles/CurrentSave")
         if (!f.exists()) {
             f.parentFile.mkdir()
