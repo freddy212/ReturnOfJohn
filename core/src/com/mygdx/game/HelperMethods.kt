@@ -362,9 +362,6 @@ fun getCloneOrPlayer(): GameObject{
     if (random == 1 && clone != null) {
         result = clone
     }
-
-    //println("result is player: " + (result is Player) + "random is " + random)
-    println("iceclone is null ? " + (clone == null))
     return result
 }
 

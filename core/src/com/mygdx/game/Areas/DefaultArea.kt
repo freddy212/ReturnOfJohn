@@ -1,14 +1,11 @@
 package com.mygdx.game.Areas
 
 import com.badlogic.gdx.audio.Music
-import com.badlogic.gdx.math.Polygon
-import com.badlogic.gdx.math.Vector2
+import com.badlogic.gdx.graphics.Color
 import com.mygdx.game.*
-import com.mygdx.game.Animation.AreaTitleTextAnimation
+import com.mygdx.game.Animation.FadingTextAnimation
 import com.mygdx.game.Events.DelayEvent
-import com.mygdx.game.Interfaces.Area
-import com.mygdx.game.Interfaces.AreaIdentifier
-import com.mygdx.game.Interfaces.Event
+import com.mygdx.game.Interfaces.*
 import com.mygdx.game.Locations.DefaultLocation
 import com.mygdx.game.Locations.DefaultLocationData
 import com.mygdx.game.Managers.AnimationManager
@@ -16,7 +13,6 @@ import com.mygdx.game.Managers.AreaManager
 import com.mygdx.game.Managers.EventManager
 import com.mygdx.game.Managers.SignalManager
 import com.mygdx.game.Signal.Signals.AreaChangeSignal
-import com.mygdx.game.UI.Map.Map
 
 class DefaultArea(override val identifier: AreaIdentifier) : Area {
     override val defaultLocations: List<DefaultLocation>
@@ -60,7 +56,9 @@ class DefaultArea(override val identifier: AreaIdentifier) : Area {
 
         if (areaChangeSignals.isEmpty()) {
             SignalManager.emitSignal(AreaChangeSignal(this.identifier))
-            AnimationManager.animationManager.add(AreaTitleTextAnimation(this.identifier))
+            val text = getAreaTitleText(this.identifier)
+            val color = Color(getAreaColor(this.identifier))
+            AnimationManager.animationManager.add(FadingTextAnimation(text, color))
             onAreaChangedActions.remove(::addShowTitleEvent)
         }
     }

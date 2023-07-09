@@ -1,12 +1,19 @@
 package com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Bosses
 
+import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.AbstractClasses.Enemy
 import com.mygdx.game.AbstractClasses.GameObject
+import com.mygdx.game.Animation.FadingTextAnimation
+import com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Bosses.Hydra.Hydra
+import com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Bosses.IceQueen.IceQueen
+import com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Bosses.SandGhost.SandGhost
+import com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Bosses.SandGhost.Sartan
 import com.mygdx.game.HealthStrategy.BossHealthStrategy
 import com.mygdx.game.Interfaces.CollitionMask
 import com.mygdx.game.Interfaces.HealthStrategy
 import com.mygdx.game.Locations.DefaultLocation
+import com.mygdx.game.Managers.AnimationManager
 import com.mygdx.game.Managers.LocationManager
 import com.mygdx.game.Managers.SignalManager
 import com.mygdx.game.Saving.DefaultSaveStateHandler
@@ -36,6 +43,9 @@ abstract class Boss(
     override fun setAggroed(){
         defaultLocation!!.adjacentDefaultLocations.forEach {it.removeAdjacentLocation(defaultLocation!!)}
         LocationManager.changeLocation()
+        val animationText = getTextBasedOnBoss()
+        val animationColor = Color(getColorBasedOnBoss())
+        AnimationManager.animationManager.add(FadingTextAnimation(animationText, animationColor))
         super.setAggroed()
     }
 
@@ -52,6 +62,26 @@ abstract class Boss(
         SignalManager.emitSignal(RemoveObjectSignal(entityId))
         if(onDeathSignal != null){
             SignalManager.emitSignal(onDeathSignal)
+        }
+    }
+
+    fun getColorBasedOnBoss(): Color {
+        return when(this){
+            is Hydra -> Color.PURPLE
+            is IceQueen -> Color.TEAL
+            is Sartan -> Color.RED
+            is SandGhost -> Color.BROWN
+            else -> Color.WHITE
+        }
+    }
+
+    fun getTextBasedOnBoss(): String {
+        return when(this){
+            is Hydra -> "Elemental God"
+            is IceQueen -> "Ice Queen"
+            is Sartan -> "Sartan"
+            is SandGhost -> "Sand Ghost"
+            else -> "Rock Monster"
         }
     }
 }

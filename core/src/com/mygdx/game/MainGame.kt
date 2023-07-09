@@ -75,7 +75,7 @@ class MainGame : ApplicationAdapter() {
                 savedPlayerSaveState.areaIdentifier, player.entityId
             )
         } else {
-            playerSaveState = PlayerSaveState(Center.x, Center.y, AreaIdentifier.MAINAREA, player.entityId)
+            playerSaveState = PlayerSaveState(Center.x / 2, Center.y / 2, AreaIdentifier.MAINAREA, player.entityId)
             FileHandler.writeToFile(playerSaveState.entityId,playerSaveState.encode())
         }
         ResetPlayer(playerSaveState)

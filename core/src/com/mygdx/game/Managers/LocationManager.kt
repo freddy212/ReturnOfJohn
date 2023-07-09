@@ -12,7 +12,7 @@ class LocationManager {
     companion object{
         lateinit var defaultLocations : List<DefaultLocation>
         var oldDefaultLocation: DefaultLocation
-        lateinit var activeDefaultLocations: Set<DefaultLocation>
+        var activeDefaultLocations: Set<DefaultLocation> = setOf()
         lateinit var MoveCollitionGameObjects: List<GameObject>
         lateinit var ButtonCollitionGameObjects: List<GameObject>
         lateinit var newDefaultLocation: DefaultLocation
