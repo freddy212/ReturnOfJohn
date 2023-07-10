@@ -96,8 +96,6 @@ fun getFireLandsLocationSevenObjects(): List<GameObject>{
     val location6 = LocationManager.findLocation("location6",AreaIdentifier.FIRELANDS)
 
     val walkableTerrain = WalkableTerrain(Vector2(location6.bottomleft.x,location7.bottomleft.y),Vector2(location6.width,location7.height),location7)
-    val addAbilityItemSignal = AddAbilityItemSignal(abilityId = AbilityId.FIREBALL, area = AreaIdentifier.FIRELANDS,x = location7.currentMiddle.x, y = location7.currentMiddle.y, locationName = location7.locationName)
-    val RockBoss = RockBoss(location7.currentMiddle, Vector2(150f,160f), location7, Element.FIRE, addAbilityItemSignal)
 
     val thorns = Thorns(Vector2(location7.currentMiddle.x - 25f,location7.bottomleft.y), Vector2(32f,64f), location7)
     thorns.onRemoveAction.add {
@@ -114,7 +112,7 @@ fun getFireLandsLocationSevenObjects(): List<GameObject>{
             )
         }
     }
-    return listOf(walkableTerrain, thorns, RockBoss)
+    return listOf(walkableTerrain, thorns)
 }
 
 

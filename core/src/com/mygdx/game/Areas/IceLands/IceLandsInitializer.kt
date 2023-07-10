@@ -24,31 +24,18 @@ class IceLandsInitializer: AreaInitializer {
         val location3 = addLocationRelative(location1,Vector2(1200f,400f),InsertDirection.RIGHT,area,
             InsertDirection.MIDDLE, ::getIceLandsLocationThreeObjects,DefaultLocationData(), Vector2(0f,150f)
         )
-        val location4 = addLocationRelative(location3,Vector2(200f,500f),InsertDirection.UP,area,
-            InsertDirection.LEFT, { listOf()},DefaultLocationData(), Vector2(200f,0f)
-        )
-        val location5 = addLocationRelative(location4,Vector2(1000f,1000f),InsertDirection.UP,area,
-            InsertDirection.MIDDLE, ::getIceLandsLocationFiveObjects,DamageLocationData(iceTexture)
-        )
-        val location6 = addLocationRelative(location5,Vector2(200f,500f),InsertDirection.UP,area,
-            InsertDirection.MIDDLE
-        )
-        val location7 = addLocationRelative(location6,Vector2(1000f,1000f),InsertDirection.UP,area,
-            InsertDirection.MIDDLE, ::getIceLandsLocationSevenObjects,DamageLocationData(iceTexture)
-        )
-        location7.addAdjacentLocation(location5)
-        val location8 = addLocationRelative(location1, Vector2(800f, 300f), InsertDirection.LEFT, area, InsertDirection.MIDDLE, ::getIceLandsLocationEightObjects, DefaultLocationData(), Vector2(0f,150f))
-        val location9 = addLocationRelative(location8, Vector2(400f, 1200f), InsertDirection.UP, area, InsertDirection.LEFT, ::getIceLandsLocationNineObjects)
-        val location10 = addLocationRelative(location2, Vector2(800f, 300f), InsertDirection.LEFT, area,
+        val location4 = addLocationRelative(location1, Vector2(800f, 300f), InsertDirection.LEFT, area, InsertDirection.MIDDLE, ::getIceLandsLocationEightObjects, DefaultLocationData(), Vector2(0f,150f))
+        val location5 = addLocationRelative(location4, Vector2(400f, 1200f), InsertDirection.UP, area, InsertDirection.LEFT, ::getIceLandsLocationNineObjects)
+        val location6 = addLocationRelative(location2, Vector2(800f, 300f), InsertDirection.LEFT, area,
             InsertDirection.UP)
-        val location11 = addLocationRelative(location10, Vector2(300f, 500f), InsertDirection.UP, area,
+        val location7 = addLocationRelative(location6, Vector2(300f, 500f), InsertDirection.UP, area,
             InsertDirection.LEFT, ::getIceLandsLocationElevenObjects)
-        val location12 = addLocationRelative(location11, Vector2(1500f, 1500f), InsertDirection.UP, area,
+        val location8 = addLocationRelative(location7, Vector2(1500f, 1500f), InsertDirection.UP, area,
             InsertDirection.MIDDLE, ::getIceLandsLocationTwelveObjects,DamageLocationData(iceTexture))
         location4.addAdjacentLocation(location1)
         location5.addAdjacentLocation(location1)
         location5.addAdjacentLocation(location3)
-        location1.addAdjacentLocation(location9)
+        location1.addAdjacentLocation(location5)
         return area
         //addLocationsToArea(area)
 

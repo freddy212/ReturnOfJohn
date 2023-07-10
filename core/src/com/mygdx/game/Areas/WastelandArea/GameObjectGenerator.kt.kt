@@ -54,11 +54,10 @@ fun getWastelandLocationTwoObjects(): List<GameObject>{
 fun getWastelandLocationThreeObjects(): List<GameObject>{
     val location4 = LocationManager.findLocation("location2",AreaIdentifier.WASTELAND)
     val location5 = LocationManager.findLocation("location3",AreaIdentifier.WASTELAND)
-
     val walkableTerrain = WalkableTerrain(Vector2(location5.x,location4.y), Vector2(location5.width,location4.height),location5)
-    val addAbilityItemSignal = AddAbilityItemSignal(abilityId = AbilityId.SMALLBOULDER, area = AreaIdentifier.WASTELAND,x = location5.currentMiddle.x, y = location5.currentMiddle.y, locationName = location5.locationName)
-    val RockBoss = RockBoss(location5.currentMiddle, Vector2(150f,160f), location5, Element.EARTH, addAbilityItemSignal)
-    return listOf(walkableTerrain, RockBoss)
+    val incrementY = ((walkableTerrain.topleft.y - walkableTerrain.bottomleft.y) / 6).toInt()
+    val thorns = ConstructObjects(::Thorns, walkableTerrain.currentMiddle.x.toInt(), 32, walkableTerrain.currentMiddle.x.toInt() + 1, walkableTerrain.topleft.y.toInt() - incrementY, incrementY , walkableTerrain.bottomleft.y.toInt(), location5)
+    return listOf(walkableTerrain) + thorns
 }
 fun getWastelandLocationEightObjects(): List<GameObject>{
     val location7 = LocationManager.findLocation("location7",AreaIdentifier.WASTELAND)
@@ -71,7 +70,7 @@ fun getWastelandLocationEightObjects(): List<GameObject>{
 fun getWastelandLocationFourObjects(): List<GameObject>{
     val location = LocationManager.findLocation("location4",AreaIdentifier.WASTELAND)
 
-    val sign = Sign(location.bottomleft + Vector2(80f,120f), Vector2(80f,80f), location, "Hold 1 - Toggle Projectiles", "Space or Arrow Key - Toggle")
+    val sign = Sign(location.bottomleft + Vector2(80f,120f), Vector2(80f,80f), location, "Press M - View Map")
     return listOf(sign)
 }
 

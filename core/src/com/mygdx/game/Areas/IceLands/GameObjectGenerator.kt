@@ -95,26 +95,10 @@ fun getIceLandsLocationFiveObjects(): List<GameObject> {
 
     return listOf(walkableTerrain, rocketGenerator, rocketGenerator2)
 }
-fun getIceLandsLocationSevenObjects(): List<GameObject> {
-    val location7 = LocationManager.findLocation("location7", AreaIdentifier.ICELANDS)
-    val walkableTerrain = WalkableTerrain(
-        Vector2(location7.originalMiddle.x - 100f, location7.bottomleft.y),
-        Vector2(200f, location7.topleft.y - location7.bottomleft.y),
-        location7
-    )
-
-    val iceRockBossPos = walkableTerrain.currentMiddle
-
-    val addAbilityItemSignal = AddAbilityItemSignal(abilityId = AbilityId.ICICLE, area = AreaIdentifier.ICELANDS,x = iceRockBossPos.x, y = iceRockBossPos.y, locationName = location7.locationName)
-
-    val rockBoss = RockBoss(iceRockBossPos, Vector2(150f, 160f), location7, Element.ICE, addAbilityItemSignal)
-
-    return listOf(walkableTerrain, rockBoss)
-}
 
 fun getIceLandsLocationEightObjects(): List<GameObject> {
-    val location8 = LocationManager.findLocation("location8", AreaIdentifier.ICELANDS)
-    val location9 = LocationManager.findLocation("location9", AreaIdentifier.ICELANDS)
+    val location8 = LocationManager.findLocation("location4", AreaIdentifier.ICELANDS)
+    val location9 = LocationManager.findLocation("location5", AreaIdentifier.ICELANDS)
 
     val fence = Fence(location9.bottomleft, Vector2(location9.width - 100f,100f),location8, DefaultTextureHandler.getTexture("FenceGate.png"), false)
     val removeFenceEvent = RemoveObjectPermanentlyEvent(fence)
@@ -130,7 +114,7 @@ fun getIceLandsLocationEightObjects(): List<GameObject> {
 
 
 fun getIceLandsLocationNineObjects(): List<GameObject>{
-    val location9 = LocationManager.findLocation("location9", AreaIdentifier.ICELANDS)
+    val location9 = LocationManager.findLocation("location5", AreaIdentifier.ICELANDS)
 
     val dummyEvent = ButtonEvent(DefaultEvent())
     val stopGate = StopGate(location9.bottomleft + Vector2(0f,300f), Vector2(location9.width - 100f, 82f * 2), location9)
@@ -148,7 +132,7 @@ fun getIceLandsLocationNineObjects(): List<GameObject>{
         if(thornsRemoved == null){
             SignalManager.emitSignal(
                 AddObjectSignal(
-                    ADDMETHODS.ICELANDSFROSTFIREDOOR,"location9",AreaIdentifier.ICELANDS)
+                    ADDMETHODS.ICELANDSFROSTFIREDOOR,"location5",AreaIdentifier.ICELANDS)
             )
             SignalManager.emitSignal(
                 AddObjectSignal(
@@ -160,7 +144,7 @@ fun getIceLandsLocationNineObjects(): List<GameObject>{
     return listOf(stopGate, stopGate2, iceButton1, iceButton2, thorns, conveyerBelt)
 }
 fun getIceLandsLocationElevenObjects(): List<GameObject>{
-    val location11 = LocationManager.findLocation("location11",AreaIdentifier.ICELANDS)
+    val location11 = LocationManager.findLocation("location7",AreaIdentifier.ICELANDS)
 
     val fence = Fence(location11.bottomleft + Vector2(0f,200f), Vector2(location11.width, 100f), location11)
 
@@ -174,7 +158,7 @@ fun getIceLandsLocationElevenObjects(): List<GameObject>{
 }
 
 fun getIceLandsLocationTwelveObjects(): List<GameObject>{
-    val location5 = LocationManager.findLocation("location12",AreaIdentifier.ICELANDS)
+    val location5 = LocationManager.findLocation("location8",AreaIdentifier.ICELANDS)
 
     val walkableTerrain = WalkableTerrain(Vector2(location5.originalMiddle.x - 100f,location5.bottomright.y),Vector2(200f,500f),location5)
     val walkableTerrain2 = WalkableTerrain(Vector2(walkableTerrain.topleft - Vector2(300f,0f)), Vector2(800f,600f),location5)

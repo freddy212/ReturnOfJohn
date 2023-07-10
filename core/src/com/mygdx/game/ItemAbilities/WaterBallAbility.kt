@@ -10,7 +10,7 @@ import com.mygdx.game.Managers.LocationManager
 import com.mygdx.game.Timer.DefaultTimer
 import com.mygdx.game.player
 
-class WaterBallAbility: ToggleAbility(){
+class WaterBallAbility: CharacterAbility(){
     override val abilityId = AbilityId.WATERBALL
     override val triggerKey = com.badlogic.gdx.Input.Keys.NUM_1
     override val texture = DefaultTextureHandler.getTexture("WaterBall.png")
