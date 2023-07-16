@@ -84,7 +84,7 @@ fun spawnWastelandFirelandsDoor(location: DefaultLocation): List<GameObject>{
 }
 
 fun spawnIceLandsFrostFireDoor(location: DefaultLocation): List<GameObject>{
-    val door = createDoor(DoorData(Vector2(location.originalMiddle.x - 64f, location.topleft.y),AreaIdentifier.ICELANDS, AreaIdentifier.FROSTFIRE,"location9",Direction.UP,"IcelandsFrostfire"))
+    val door = createDoor(DoorData(Vector2(location.originalMiddle.x - 64f, location.topleft.y),AreaIdentifier.ICELANDS, AreaIdentifier.FROSTFIRE,"location5",Direction.UP,"IcelandsFrostfire"))
     return listOf(door)
 }
 

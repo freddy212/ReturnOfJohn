@@ -26,10 +26,10 @@ import com.mygdx.game.ItemAbilities.Shield
 import com.mygdx.game.Saving.DefaultSaveStateHandler
 import com.mygdx.game.Signal.Signal
 
-class Sartan(Position: Vector2, size: Vector2 = Vector2(150f, 150f), location: DefaultLocation?, signal: Signal?) :
+class Sartan(Position: Vector2, size: Vector2 = Vector2(210f, 165f), location: DefaultLocation?, signal: Signal?) :
     Boss(Position, size, location, signal),
     SaveStateEntity by DefaultSaveStateHandler() {
-    override val texture = DefaultTextureHandler.getTexture("DefaultPerson.png")
+    override val texture = DefaultTextureHandler.getTexture("Sartan.png")
     override val layer = Layer.PERSON
     override var direction = Direction.DOWN
     override var health = 100f
@@ -39,6 +39,11 @@ class Sartan(Position: Vector2, size: Vector2 = Vector2(150f, 150f), location: D
     override var unitVectorDirection = getDirectionUnitVector(Direction.DOWN)
     override val collition = DashCollition(this)
     val trifork = Trifork(currentPosition() + Vector2(0f, -30f), Vector2(40f, 100f), defaultLocation, this)
+
+    init {
+        this.attachedMusic = MusicLoader.SartanMusic
+    }
+
     private val randomAction = RandomAction(
         listOf(
             MoveBasedOnPlayer(250f, ::getUnitVectorTowardsPoint, this),

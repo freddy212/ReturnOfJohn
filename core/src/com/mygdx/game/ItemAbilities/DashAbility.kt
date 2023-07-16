@@ -4,18 +4,15 @@ import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.Input
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.math.Vector3
+import com.mygdx.game.*
 import com.mygdx.game.AbstractClasses.AbilityId
 import com.mygdx.game.AbstractClasses.CharacterAbility
-import com.mygdx.game.DefaultTextureHandler
 import com.mygdx.game.Enums.CharacterState
 import com.mygdx.game.Events.ActionAfterFramesEvent
 import com.mygdx.game.Events.ActionBeforeFramesEvent
 import com.mygdx.game.Managers.EventManager
 import com.mygdx.game.ObjectProperties.FireDashEffect
 import com.mygdx.game.Timer.DefaultTimer
-import com.mygdx.game.camera
-import com.mygdx.game.getUnitVectorTowardsPoint
-import com.mygdx.game.player
 
 open class DashAbility: CharacterAbility() {
     override val abilityId = AbilityId.DASH
@@ -36,7 +33,7 @@ open class DashAbility: CharacterAbility() {
         EventManager.eventManager.add(actionAfterFramesEvent)
         player.properties.add(fireDashEffect)
         fireDashEffect.start()
-        sound.play(0.25f)
+        DefaultSoundHandler.playSound(sound)
     }
 
    fun inDashAction(){

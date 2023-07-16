@@ -34,6 +34,7 @@ class SandGhost(Position: Vector2, size: Vector2 = Vector2(150f,150f),location: 
 
     init{
         polygon.setScale(0.8f,0.8f)
+        attachedMusic = MusicLoader.sandGhostMusic
     }
 
     override fun addToLocation(location: DefaultLocation) {

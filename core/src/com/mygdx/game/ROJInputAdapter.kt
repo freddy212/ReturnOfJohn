@@ -30,14 +30,13 @@ class ROJInputAdapter(private val camera : OrthographicCamera, val player: Playe
         if(player.characterState == CharacterState.FREE && player.canMove()) {
             for (itemAbility in player.itemAbilities.List) {
                 if (keycode == itemAbility.triggerKey) {
-                    if(itemAbility.tryUseAction()){
-                        val cursorPos = camera.unproject(Vector3(Gdx.input.x.toFloat(), Gdx.input.y.toFloat(), 0f))
-                        val unitVectorTowardsPoint = getUnitVectorTowardsPoint(
-                            Vector2(player.sprite.x, player.sprite.y),
-                            Vector2(cursorPos.x, cursorPos.y)
-                        )
-                        player.setCharacterRotation(unitVectorTowardsPoint)
-                    }
+                    val cursorPos = camera.unproject(Vector3(Gdx.input.x.toFloat(), Gdx.input.y.toFloat(), 0f))
+                    val unitVectorTowardsPoint = getUnitVectorTowardsPoint(
+                        Vector2(player.sprite.x, player.sprite.y),
+                        Vector2(cursorPos.x, cursorPos.y)
+                    )
+                    player.setCharacterRotation(unitVectorTowardsPoint)
+                    itemAbility.tryUseAction()
                 }
             }
         }

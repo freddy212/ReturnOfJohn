@@ -13,6 +13,7 @@ import com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Bosses.bos
 import com.mygdx.game.GameObjects.MoveableEntities.Projectiles.Icicle
 import com.mygdx.game.GameObjects.Terrain.TeleportPad
 import com.mygdx.game.Locations.DefaultLocation
+import com.mygdx.game.MusicLoader
 import com.mygdx.game.Signal.Signal
 import com.mygdx.game.Timer.DefaultTimer
 import com.mygdx.game.minus
@@ -46,4 +47,8 @@ class IceQueen(Position: Vector2, size: Vector2, location: DefaultLocation?, tel
 
     val iceQueenCloneAction = BossCloneAction(this, bossClone, listOf(randomMoveActionClone))
     override val enemyStrategy = DefaultEnemyStrategy(listOf(randomMoveAction,  ShootProjectile(::Icicle, Vector2(100f, 34f),this),iceQueenCloneAction))
+
+    init {
+        this.attachedMusic = MusicLoader.iceQueenMusic
+    }
 }

@@ -22,7 +22,7 @@ import com.mygdx.game.Managers.LocationManager
 
 fun getFireLandsDungeonLocationOneObjects(): List<GameObject>{
     val location1 = LocationManager.findLocation("location1",AreaIdentifier.FIRELANDSDUNGEON)
-    val doorPosition = Vector2(location1.originalMiddle.x,location1.bottomleft.y)
+    val doorPosition = Vector2(location1.originalMiddle.x - 250f,location1.bottomleft.y)
     val doorCollition = DoorCollition(doorPosition,
         AreaIdentifier.FIRELANDS, doorFireLandsAndDungeonConnection,
         Direction.DOWN)
