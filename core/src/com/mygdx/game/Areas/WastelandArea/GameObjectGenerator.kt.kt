@@ -70,7 +70,7 @@ fun getWastelandLocationEightObjects(): List<GameObject>{
 fun getWastelandLocationFourObjects(): List<GameObject>{
     val location = LocationManager.findLocation("location4",AreaIdentifier.WASTELAND)
 
-    val sign = Sign(location.bottomleft + Vector2(80f,120f), Vector2(80f,80f), location, "Press M - View Map")
+    val sign = Sign(location.bottomleft + Vector2(80f,120f), Vector2(80f,80f), location, "Hold M - View Map")
     return listOf(sign)
 }
 

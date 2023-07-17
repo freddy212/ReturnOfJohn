@@ -28,8 +28,7 @@ open class ShieldCollition(val shield: Shield) : MoveCollition {
                 }
             } else {
                 val fire: Fire? = collidedObject.properties.List.find { it is Fire } as Fire?
-                val ice: Ice? = collidedObject.properties.List.find { it is Ice } as Ice?
-                if (fire == null && ice == null) {
+                if (fire == null) {
                     val delayTimer = DelayTimer(1f)
                     delayMap.put(collidedObject, delayTimer)
                     val centerBoulder = Vector2(
@@ -47,7 +46,7 @@ open class ShieldCollition(val shield: Shield) : MoveCollition {
             }
         }
 
-        if(collidedObject is Icicle || collidedObject is Fireball || collidedObject is Rocket){
+        if(collidedObject is Fireball){
             BoulderCollition(collidedObject as Projectile).collitionHappened(player)
         }
     }

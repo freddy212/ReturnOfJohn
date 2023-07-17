@@ -39,6 +39,10 @@ class Player(Position: Vector2, size: Vector2)
     override val healthStrategy = PlayerHealthStrategy()
     var hasMovedThisFrame = false
     val itemAbilities = ResourceList<CharacterAbility>()
+
+    init {
+        polygon.setScale(0.8f,0.8f)
+    }
     fun addAbility(characterAbility: CharacterAbility) {
         val toolTip = ToolTip(Input.Keys.toString(characterAbility.triggerKey)[0],characterAbility)
         TooltipManager.tooltipManager.add(toolTip)

@@ -33,15 +33,13 @@ class IceButton(
     init {
         iceButtonEvent.addButton(this)
         polygon.setScale(0.5f, 1f)
+        this.iceGate.buttons.add(this)
     }
 
     override fun render(batch: PolygonSpriteBatch) {
         sprite.color = if (activated) Color.GREEN else Color.RED
         super.render(batch)
     }
-
-    //PERFORMANCE!! THIS CAN BE OPTIMISED
-    //OPTIMIZING TIME
 }
 
 class IceButtonCollition(val iceButton: IceButton, val gate: ButtonGate, val event: ButtonEvent) :

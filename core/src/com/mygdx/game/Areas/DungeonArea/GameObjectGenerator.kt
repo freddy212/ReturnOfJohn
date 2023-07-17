@@ -45,7 +45,7 @@ fun getLocationFourCaveObjects():List<GameObject>{
     val position = location.initPosition
     val breakableObject = DefaultBreakableObject(position, Vector2(location.size.x,100f),location)
     val signSize = Vector2(80f,80f)
-    val sign = Sign(middleOfObject(location.originalMiddle,signSize), signSize, location, "Press I - View Inventory", "Space or Arrow Key - Toggle")
+    val sign = Sign(middleOfObject(location.originalMiddle,signSize), signSize, location, "Hold I - View Inventory", "Space or Arrow Key - Toggle")
     val WastelandKey = GenericInventoryItemObject(sign.topleft + Vector2(0f,200f), Vector2(80f, 40f), location, ItemType.WASTELANDSKEY)
 
     return listOf(breakableObject,sign, WastelandKey)
@@ -64,10 +64,10 @@ fun getLocationSevenCaveObjects(): List<GameObject> {
     val size = Vector2(80f,80f)
 
     val conveyerBelt = ConveyerBelt(location6.bottomleft, Vector2(200f, location6.height / 2), location,Direction.LEFT)
-    val breakableObject = DefaultBreakableObject(conveyerBelt.topleft - Vector2(100f,0f), Vector2(300f, location6.height / 2), location)
-    val boulderGenerator = BoulderGenerator(location.topright - Vector2(600f,60f), Vector2(128f,128f), Vector2(0.5f,-0.5f), location)
+    val breakableObject = DefaultBreakableObject(conveyerBelt.topleft - Vector2(200f,0f), Vector2(400f, location6.height / 2), location)
+    val boulderGenerator = BoulderGenerator(location.topright - Vector2(350f,60f), Vector2(128f,128f), Vector2(0f,-1f), location)
     val shieldItem = AbilityItemObject(middleOfObject(location.originalMiddle,size),size,location, ShieldAbility(), DefaultTextureHandler.getTexture("shield-front.png"))
 
-    val sign = Sign(shieldItem.bottomleft - Vector2(200f, 0f), Vector2(80f,80f), location, "Wooden Shield - 2", "Weak to Ice and Fire")
+    val sign = Sign(shieldItem.bottomleft - Vector2(200f, 0f), Vector2(80f,80f), location, "Wooden Shield - 2", "Block objects. Weak to fire")
     return listOf(shieldItem, sign, conveyerBelt, breakableObject, boulderGenerator)
 }

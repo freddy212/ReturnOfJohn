@@ -76,7 +76,7 @@ fun getIceLandsLocationThreeObjects(): List<GameObject>{
     val doorButton2 = DoorButton(Vector2( door.currentMiddle.x - 100f,door.initPosition.y), Vector2(40f,30f),location3,buttonEvent)
     val iceObject = IceObject(door.initPosition - Vector2(0f,200f),Vector2(64f,64f),location3)
 
-    val sign = Sign(iceObject.bottomleft - Vector2(300f,100f), Vector2(80f,80f), location3, "Hold right-click - Turn around")
+    val sign = Sign(iceObject.bottomleft - Vector2(300f,100f), Vector2(80f,80f), location3, "Water follows cursor position")
 
     return listOf(cave,door,fence,doorButton1,doorButton2,iceObject, sign)
 }
@@ -100,7 +100,7 @@ fun getIceLandsLocationEightObjects(): List<GameObject> {
     val location8 = LocationManager.findLocation("location4", AreaIdentifier.ICELANDS)
     val location9 = LocationManager.findLocation("location5", AreaIdentifier.ICELANDS)
 
-    val fence = Fence(location9.bottomleft, Vector2(location9.width - 100f,100f),location8, DefaultTextureHandler.getTexture("FenceGate.png"), false)
+    val fence = Fence(location9.bottomleft, Vector2(location9.width,100f),location8, DefaultTextureHandler.getTexture("FenceGate.png"), false)
     val removeFenceEvent = RemoveObjectPermanentlyEvent(fence)
     val buttonEvent = ButtonEvent(removeFenceEvent)
     val doorButton1 = DoorButtonDelayed(Vector2( location8.topright.x - 80f, location8.topright.y), Vector2(40f,30f),location8,buttonEvent)
@@ -117,13 +117,14 @@ fun getIceLandsLocationNineObjects(): List<GameObject>{
     val location9 = LocationManager.findLocation("location5", AreaIdentifier.ICELANDS)
 
     val dummyEvent = ButtonEvent(DefaultEvent())
-    val stopGate = StopGate(location9.bottomleft + Vector2(0f,300f), Vector2(location9.width - 100f, 82f * 2), location9)
-    val stopGate2 = StopGate(location9.bottomleft + Vector2(0f,600f), Vector2(location9.width - 100f, 82f * 2), location9)
+    val dummyEvent2 = ButtonEvent(DefaultEvent())
+    val stopGate = StopGate(location9.bottomleft + Vector2(0f,300f), Vector2(location9.width, 160f), location9)
+    val stopGate2 = StopGate(location9.bottomleft + Vector2(0f,800f), Vector2(location9.width, 160f), location9)
 
-    val iceButton1 = IceButton(Vector2(location9.currentMiddle.x - 114f, location9.bottomleft.y + 150f), Vector2(128f, 32f), location9,stopGate, dummyEvent)
-    val iceButton2 = IceButton(Vector2(location9.currentMiddle.x - 114f, location9.bottomleft.y + 500f), Vector2(128f, 32f), location9,stopGate2, dummyEvent)
-
-    val conveyerBelt = ConveyerBelt(Vector2(location9.topright.x - 100f, location9.bottomright.y), Vector2(100f, location9.height), location9, Direction.DOWN, ConveyerBeltStrength.STRONG)
+    val iceButton1 = IceButton(Vector2(location9.currentMiddle.x - 64f, stopGate.currentMiddle.y - 160f), Vector2(128f, 32f), location9,stopGate, dummyEvent)
+    val iceButton1Return = IceButton(Vector2(location9.currentMiddle.x - 64f, stopGate.currentMiddle.y +  120f), Vector2(128f, 32f), location9,stopGate, dummyEvent)
+    val iceButton2 = IceButton(Vector2(location9.currentMiddle.x - 64f, stopGate2.currentMiddle.y - 160f), Vector2(128f, 32f), location9,stopGate2, dummyEvent2)
+    val iceButton2Return = IceButton(Vector2(location9.currentMiddle.x - 64f, stopGate2.currentMiddle.y + 120f), Vector2(128f, 32f), location9,stopGate2, dummyEvent2)
 
     val thorns = Thorns(Vector2(location9.originalMiddle.x - 32f, location9.topleft.y - 64f), Vector2(32f,64f), location9)
     thorns.onRemoveAction.add {
@@ -141,7 +142,7 @@ fun getIceLandsLocationNineObjects(): List<GameObject>{
         }
     }
 
-    return listOf(stopGate, stopGate2, iceButton1, iceButton2, thorns, conveyerBelt)
+    return listOf(stopGate, stopGate2, iceButton1, iceButton1Return, iceButton2,iceButton2Return, thorns)
 }
 fun getIceLandsLocationElevenObjects(): List<GameObject>{
     val location11 = LocationManager.findLocation("location7",AreaIdentifier.ICELANDS)
