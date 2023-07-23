@@ -14,7 +14,7 @@ class BossHealthStrategy(val enemy: Enemy): HealthStrategy{
         if(enemy.isAggroed()){
             val pos = Vector3(sprite.x,sprite.y,0f)
             camera.project(pos)
-            drawHealthBar(Vector2(pos.x - sprite.width / 4,pos.y + sprite.height - 10f),Vector2(sprite.width * 1.5f,30f),health,maxHealth)
+            drawHealthBar(Vector2(pos.x,pos.y + sprite.height + 50f),Vector2(sprite.width * 1.5f,30f),health,maxHealth)
         }
     }
 }

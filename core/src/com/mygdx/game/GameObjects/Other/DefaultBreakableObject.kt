@@ -1,5 +1,6 @@
 package com.mygdx.game.GameObjects.Other
 
+import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.AbstractClasses.GameObject
@@ -22,12 +23,14 @@ class DefaultBreakableObject(initPosition: Vector2, size: Vector2, defaultLocati
     override val layer = Layer.ONGROUND
     override val collition = BreakableCollition(this)
     val breakableObjectAnimation = BreakableObjectAnimation(this)
+    val sound = Gdx.audio.newSound(Gdx.files.internal("Sound/SoundEffect/Explode.mp3"));
 
     override fun removeFromLocation() {
         super.removeFromLocation()
         val removeEvents: List<RemoveObjectSignal> = SignalManager.pastSignals.List.filter { it is RemoveObjectSignal }.map { it as RemoveObjectSignal }
         val thisEventOrNull = removeEvents.find { it.entityId == this.entityId }
         if(thisEventOrNull == null){
+            sound.play(0.25f)
             AnimationManager.animationManager.add(breakableObjectAnimation)
         }
     }

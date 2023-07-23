@@ -18,6 +18,7 @@ import com.mygdx.game.plus
 class IceCloneAbilityUpgraded: IceCloneAbility() {
 
     override val abilityId = AbilityId.ICECLONEUPGRADE
+    val sound = Gdx.audio.newSound(Gdx.files.internal("Sound/SoundEffect/IceExplotion.mp3"));
     override fun activeAction() {
         if(iceClone in LocationManager.ActiveGameObjects){
             val icicle = Icicle(iceClone.currentPosition() + Vector2(-50f, 25f), Vector2(100f,34f),iceClone.defaultLocation!!,
@@ -28,6 +29,7 @@ class IceCloneAbilityUpgraded: IceCloneAbility() {
             icicle2.addToLocation(iceClone.defaultLocation!!)
             iceClone.removeFromLocation()
             AnimationManager.animationManager.add(IceCloneExplotionAnimation(iceClone))
+            sound.play(0.25f)
         }else{
             super.activeAction()
         }

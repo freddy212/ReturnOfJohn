@@ -426,7 +426,7 @@ fun updateMap(area: Area){
     val locations = area.defaultLocations
 
     val polygons = locations.map {
-        val newVertices = it.polygon.transformedVertices.map { vertice -> vertice / 20 }
+        val newVertices = it.polygon.transformedVertices.map { vertice -> vertice / 10 }
         Polygon(newVertices.toFloatArray())
     }
 

@@ -2,8 +2,6 @@ package com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Bosses.Sa
 
 import EnemyCollition
 import com.badlogic.gdx.math.Vector2
-import com.mygdx.game.AI.EnemyActions.MoveBasedOnPlayer
-import com.mygdx.game.AI.EnemyActions.RandomAction
 import com.mygdx.game.AbstractClasses.DefaultEnemyStrategy
 import com.mygdx.game.DefaultTextureHandler
 import com.mygdx.game.Enums.Direction
@@ -13,8 +11,7 @@ import com.mygdx.game.Saving.SaveStateEntity
 import com.mygdx.game.Timer.DefaultTimer
 import com.mygdx.game.getUnitVectorTowardsPoint
 import com.mygdx.game.*
-import com.mygdx.game.AI.EnemyActions.Dash
-import com.mygdx.game.AI.EnemyActions.MoveTowardsPoint
+import com.mygdx.game.AI.EnemyActions.*
 import com.mygdx.game.AbstractClasses.Enemy
 import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.Enums.CharacterState
@@ -22,6 +19,7 @@ import com.mygdx.game.Enums.getDirectionUnitVector
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Bosses.Boss
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Bosses.Sartan.Trifork
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Bosses.Sartan.TriforkThrow
+import com.mygdx.game.GameObjects.MoveableEntities.Projectiles.Fireball
 import com.mygdx.game.ItemAbilities.Shield
 import com.mygdx.game.Saving.DefaultSaveStateHandler
 import com.mygdx.game.Signal.Signal
@@ -50,10 +48,12 @@ class Sartan(Position: Vector2, size: Vector2 = Vector2(210f, 165f), location: D
             MoveTowardsPoint(this, this.defaultLocation!!.currentMiddle - Vector2(size.x / 2, 0f))
         ), DefaultTimer(0.5f), this
     )
+
     override val enemyStrategy = DefaultEnemyStrategy(
         listOf(randomAction,
             TriforkThrow(this, trifork),
-            Dash(this) { this.health * 2 <= this.maxHealth })
+            Dash(this) { this.health * 2 <= this.maxHealth },
+            ShootProjectile(::Fireball, Vector2(100f, 50f), this))
     )
 
 

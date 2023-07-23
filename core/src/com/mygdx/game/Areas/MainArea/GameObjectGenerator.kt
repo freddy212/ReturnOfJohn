@@ -25,11 +25,11 @@ fun getLocationOneObjects(): List<GameObject>{
     val location2 = LocationManager.findLocation("location2", AreaIdentifier.MAINAREA)
     val sign = Sign(location2.topright + Vector2(50f,-150f), Vector2(80f,80f), defaultLocation = location1, "West - Firelands")
 
-    val sign2 = Sign(location2.topright + Vector2(350f,150f), Vector2(80f,80f), defaultLocation = location1, "North - IceLands")
+    val sign2 = Sign(location2.topright + Vector2(350f,150f), Vector2(80f,80f), defaultLocation = location1, "North - Icelands")
 
     val sign3 = Sign(location2.topright + Vector2(350f,-500f), Vector2(80f,80f), defaultLocation = location1, "South - Wastelands")
 
-    val sign4 = Sign(Center + Vector2(0f,player.height + 10f), Vector2(80f,80f), location1, "Left click - Move")
+    val sign4 = Sign(Vector2(Center.x / 2, Center.y / 2) + Vector2(0f,player.height + 10f), Vector2(80f,80f), location1, "Left click - Move")
 
     return listOf(sign, sign2, sign3, sign4)
 }
