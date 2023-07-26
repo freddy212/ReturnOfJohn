@@ -30,7 +30,7 @@ class DefaultLocation(size: Vector2, Position: Vector2, private val initGameObje
     }
     override fun render(batch: PolygonSpriteBatch){
         locationStrategy.render(batch,sprite)
-        font.draw(batch,this.locationName, this.topleft.x + 50f, this.topleft.y - 50f)
+      //  font.draw(batch,this.locationName, this.topleft.x + 50f, this.topleft.y - 50f)
     }
 
     fun addGameObject(gameObject: GameObject){
@@ -69,4 +69,4 @@ class DefaultLocation(size: Vector2, Position: Vector2, private val initGameObje
 
     //<a href="https://www.freepik.com/free-photo/detailed-orange-grunge-background-with-splats-stains_10167167.htm#query=ice%20texture&position=1&from_view=keyword&track=ais">Image by kjpargeter</a> on Freepik
 
-}
+}   //<a href="https://www.freepik.com/free-vector/red-cracked-ground-texture-pattern-background_37674363.htm#query=Lava%20ground&position=8&from_view=search&track=ais">Image by vector_corp</a> on Freepik

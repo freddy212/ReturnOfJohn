@@ -58,6 +58,15 @@ class FireLandsDungeonInitializer: AreaInitializer {
         location15.addAdjacentLocation(location1)
 
         location9.addAdjacentLocation(location1)
+
+        location5.addAdjacentLocation(location7)
+
+        location7.addAdjacentLocation(location9)
+
+        location10.addAdjacentLocation(location2)
+
+        location9.addAdjacentLocation(location2)
+
         return area
         //addLocationsToArea(area)
 

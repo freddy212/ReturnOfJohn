@@ -57,7 +57,7 @@ fun getIceLandsDungeonLocationTwoObjects(): List<GameObject>{
                                            Vector2(80f,80f),
                                            location2,
                                            IceCloneAbility(),
-                                           DefaultTextureHandler.getTexture("IceClone.png")
+                                           DefaultTextureHandler.getTexture("player.png")
 
 
     )

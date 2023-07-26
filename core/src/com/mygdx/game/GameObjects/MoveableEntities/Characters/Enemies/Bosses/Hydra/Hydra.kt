@@ -1,9 +1,12 @@
 package com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Bosses.Hydra
 
+import com.badlogic.gdx.Gdx
+import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.math.Vector2
+import com.mygdx.game.*
 import com.mygdx.game.AI.EnemyActions.*
 import com.mygdx.game.AbstractClasses.DefaultEnemyStrategy
-import com.mygdx.game.DefaultTextureHandler
+import com.mygdx.game.Animation.FadingTextAnimation
 import com.mygdx.game.Enums.Direction
 import com.mygdx.game.Enums.Layer
 import com.mygdx.game.GameObjects.MoveableEntities.Characters.Enemies.Bosses.Boss
@@ -15,11 +18,9 @@ import com.mygdx.game.GameObjects.MoveableEntities.Projectiles.Icicle
 import com.mygdx.game.GameObjects.MoveableEntities.Projectiles.SmallBoulder
 import com.mygdx.game.Interfaces.AreaIdentifier
 import com.mygdx.game.Locations.DefaultLocation
+import com.mygdx.game.Managers.AnimationManager
 import com.mygdx.game.Managers.LocationManager
 import com.mygdx.game.Timer.DefaultTimer
-import com.mygdx.game.getOppositeUnitVector
-import com.mygdx.game.getUnitVectorTowardsPoint
-import com.mygdx.game.minus
 
 class Hydra(Position: Vector2, size: Vector2, location: DefaultLocation?) : Boss(Position, size, location) {
     override var baseSpeed = 5f
@@ -29,6 +30,7 @@ class Hydra(Position: Vector2, size: Vector2, location: DefaultLocation?) : Boss
     override var health = 150f
     override val maxHealth = 150f
     override val collition = DashCollition(this)
+    val victoryTheme = Gdx.audio.newSound(Gdx.files.internal("Sound/SoundEffect/VictoryTheme.mp3"))
 
     var bossClone = BossClone(this)
 
@@ -59,6 +61,10 @@ class Hydra(Position: Vector2, size: Vector2, location: DefaultLocation?) : Boss
     override val enemyStrategy =
         DefaultEnemyStrategy(listOf(HydraEarthHeadAttack(this), Dash(this), randomAction,randomShootAction, bossCloneAction))
 
+    init {
+        this.attachedMusic = MusicLoader.HydraMusic
+    }
+
     override fun setAggroed() {
         val location9 = LocationManager.findLocation("location9", AreaIdentifier.FROSTFIRE)
         defaultLocation!!.adjacentDefaultLocations.forEach {
@@ -69,6 +75,23 @@ class Hydra(Position: Vector2, size: Vector2, location: DefaultLocation?) : Boss
         defaultLocation!!.removeAdjacentLocation(location9)
         LocationManager.changeLocation()
         aggroed = true
+
+
+        if (attachedMusic != null) {
+            previousMusic = DefaultMusicHandler.currentlyTrack
+            DefaultMusicHandler.changeAndPlay(attachedMusic!!)
+        }
+
+        val animationText = getTextBasedOnBoss()
+        val animationColor = Color(getColorBasedOnBoss())
+        AnimationManager.animationManager.add(FadingTextAnimation(animationText, animationColor))
+    }
+
+    override fun death() {
+        victoryTheme.play(0.25f)
+        val fadingTextAnimation = FadingTextAnimation("Victory!", Color.GREEN)
+        AnimationManager.animationManager.add(fadingTextAnimation)
+        super.death()
     }
 
     override fun resetArea() {
@@ -82,5 +105,9 @@ class Hydra(Position: Vector2, size: Vector2, location: DefaultLocation?) : Boss
             defaultLocation!!.addAdjacentLocation(location9)
         }
         LocationManager.changeLocation()
+
+        if (previousMusic != null){
+            DefaultMusicHandler.changeAndPlay(previousMusic!!)
+        }
     }
 }

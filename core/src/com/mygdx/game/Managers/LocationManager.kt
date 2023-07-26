@@ -27,7 +27,7 @@ class LocationManager {
         }
         fun LocationFrameTasks(){
             defaultLocations = activeArea.defaultLocations
-            newDefaultLocation = defaultLocations.find{ x -> x.sprite.boundingRectangle.contains(Vector2(player.sprite.x, player.sprite.y)) } ?: oldDefaultLocation
+            newDefaultLocation = defaultLocations.find{ x -> x.sprite.boundingRectangle.contains(Vector2(player.sprite.x + player.width / 2, player.sprite.y + player.height / 2)) } ?: oldDefaultLocation
 
             if(oldDefaultLocation != newDefaultLocation) {
                 changeLocation()

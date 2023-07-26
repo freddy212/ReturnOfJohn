@@ -40,6 +40,7 @@ class WastelandAreaInitializer: AreaInitializer {
 
         location5.addAdjacentLocation(location3)
         location6.addAdjacentLocation(location3)
+        location6.addAdjacentLocation(location8)
 
        // location9.addAdjacentLocation(location5)
         return area

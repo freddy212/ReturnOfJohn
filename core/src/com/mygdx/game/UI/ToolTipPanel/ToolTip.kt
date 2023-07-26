@@ -14,7 +14,6 @@ import com.mygdx.game.Timer.DefaultTimer
 import com.mygdx.game.font
 
 class ToolTip (val key: Char, val characterAbility: CharacterAbility) {
-    var show = true
     val shapeRenderer = UIRendererManager.uiShapeRenderer
     fun render(position: Vector2,UIbatch: PolygonSpriteBatch){
         if(characterAbility.showToolTip){

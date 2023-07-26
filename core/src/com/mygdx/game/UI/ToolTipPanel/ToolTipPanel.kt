@@ -10,7 +10,7 @@ class ToolTipPanel(val batch: PolygonSpriteBatch) {
     val offset = Vector2(75f,0f)
     fun renderToolTips(){
         var startPoint = Vector2(0f + 50f, Gdx.graphics.height - 100f)
-        for(tooltip in TooltipManager.tooltipManager.List){
+        for(tooltip in TooltipManager.tooltipManager.List.sortedBy { it.key }){
             tooltip.render(startPoint,batch)
             startPoint += offset
         }

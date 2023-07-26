@@ -68,7 +68,7 @@ fun getFireLandsGateWayLocation(): List<GameObject> {
     val location9 = LocationManager.findLocation("location5", AreaIdentifier.MAINAREA)
     val walkableTerrain = WalkableTerrain(location2.bottomleft - Vector2(1000f, 0f), Vector2(1000f, location2.topleft.y - location2.bottomleft.y), location9)
 
-    val texture = DefaultTextureHandler.getTexture("LavaFence.png")
+    val texture = DefaultTextureHandler.getTexture("Fence-End.png")
     val fence = Fence(Vector2(walkableTerrain.x - texture.width, location9.bottomright.y), Vector2(texture.width.toFloat(), walkableTerrain.bottomleft.y - location9.bottomright.y), location9, texture)
     val fence2 = Fence(Vector2(walkableTerrain.x - texture.width, walkableTerrain.topleft.y), Vector2(texture.width.toFloat(),location9.topright.y - walkableTerrain.topleft.y ), location9, texture)
 
@@ -77,7 +77,7 @@ fun getFireLandsGateWayLocation(): List<GameObject> {
     val walkableTerrain2 = WalkableTerrain(Vector2(location9.bottomleft.x,fireGate.y),Vector2(fireGate.x - location9.bottomleft.x, location2.topleft.y - location2.bottomleft.y) + Vector2(fireGate.size.x,0f), location9)
 
     val boulderGenSize = Vector2(128f,128f)
-    val boulderGenerator1 = BoulderGenerator(Vector2(fireGate.bottomright -  Vector2(0f,300f)),boulderGenSize, getDirectionUnitVector(Direction.RIGHT) + Vector2(-0.8f,0.5f),location9,1f)
+    val boulderGenerator1 = BoulderGenerator(Vector2( Vector2(fireGate.bottomright.x + 128f, location9.bottomleft.y)),boulderGenSize, getDirectionUnitVector(Direction.UP),location9,1f)
 
     val walkableTerrain3 = WalkableTerrain(walkableTerrain2.topleft, Vector2(300f,location9.topleft.y - walkableTerrain2.topleft.y), location9)
     val doorPosition = Vector2(walkableTerrain3.originalMiddle.x - 64 / 2,walkableTerrain3.topleft.y)

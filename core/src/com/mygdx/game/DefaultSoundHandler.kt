@@ -20,6 +20,7 @@ object MusicLoader {
     val sandGhostMusic = Gdx.audio.newMusic(Gdx.files.internal("Sound/Music/SandGhost.mp3"))
     val iceQueenMusic = Gdx.audio.newMusic(Gdx.files.internal("Sound/Music/IceQueen.mp3"))
     val SartanMusic = Gdx.audio.newMusic(Gdx.files.internal("Sound/Music/Sartan.mp3"))
+    val HydraMusic = Gdx.audio.newMusic(Gdx.files.internal("Sound/Music/Hydra.mp3"))
 }
 
 class DefaultMusicHandler{

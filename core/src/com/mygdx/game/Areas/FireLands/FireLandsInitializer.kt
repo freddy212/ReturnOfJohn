@@ -50,7 +50,7 @@ class FireLandsInitializer: AreaInitializer {
         location2.addAdjacentLocation(location6)
 
         location10.addAdjacentLocation(location11)
-
+        location9.addAdjacentLocation(location11)
 
         return area
         //addLocationsToArea(area)
