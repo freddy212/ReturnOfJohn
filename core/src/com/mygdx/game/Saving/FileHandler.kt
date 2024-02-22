@@ -1,6 +1,5 @@
 package com.mygdx.game.Saving
 
-import com.badlogic.gdx.Files
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.files.FileHandle
 import com.mygdx.game.Signal.Signal
@@ -8,14 +7,16 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.serializer
 import java.io.BufferedWriter
 import java.io.File
-import java.io.IOException
-import kotlin.system.exitProcess
 
 
 class FileHandler {
     companion object{
 
-        val handle: FileHandle = Gdx.files.local("SaveFiles/CurrentSave")
+        val userHome = System.getProperty("user.home")
+        val dirPath = userHome + File.separator + "ElenemtalBrawl" + File.separator + "SaveFiles"
+        val savePath = "CurrentSave"
+
+        val handle: FileHandle = Gdx.files.absolute(dirPath + File.separator + savePath)
         private val file: File = handle.file()
         private lateinit var fileWriter: BufferedWriter
         fun writeToFile(entityId : Int,content: String){
@@ -28,7 +29,7 @@ class FileHandler {
             }
             fileWriter = file.bufferedWriter()
             fileWriter.use { writer -> lines.forEach { writer.write(it)
-                                                      writer.newLine()}}
+                writer.newLine()}}
         }
         fun writeSignalToFile(signal: Signal){
             val lines = readFromFile().toMutableList()
@@ -41,10 +42,11 @@ class FileHandler {
 
         }
         fun readFromFile(): List<String>{
-           return file.useLines { it.toList() }
+            return file.useLines { it.toList() }
         }
         fun SaveFileEmpty(): Boolean{
             return file.length() == 0L
         }
     }
 }
+

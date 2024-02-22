@@ -13,14 +13,14 @@ object DefaultSoundHandler {
 }
 
 object MusicLoader {
-    val mainAreaMusic = Gdx.audio.newMusic(Gdx.files.internal("Sound/Music/MainAreaTheme.mp3"))
-    val icelandsAreaMusic = Gdx.audio.newMusic(Gdx.files.internal("Sound/Music/IceLandsTheme.mp3"))
-    val firelandsAreaMusic = Gdx.audio.newMusic(Gdx.files.internal("Sound/Music/FirelandsTheme.mp3"))
+    val mainAreaMusic = Gdx.audio.newMusic(Gdx.files.internal("Sound/Music/mainareatheme.mp3"))
+    val icelandsAreaMusic = Gdx.audio.newMusic(Gdx.files.internal("Sound/Music/icelandstheme.mp3"))
+    val firelandsAreaMusic = Gdx.audio.newMusic(Gdx.files.internal("Sound/Music/firelandstheme.mp3"))
     val dummyMusic = Gdx.audio.newMusic(Gdx.files.internal("Sound/Music/music.mp3"))
-    val sandGhostMusic = Gdx.audio.newMusic(Gdx.files.internal("Sound/Music/SandGhost.mp3"))
-    val iceQueenMusic = Gdx.audio.newMusic(Gdx.files.internal("Sound/Music/IceQueen.mp3"))
-    val SartanMusic = Gdx.audio.newMusic(Gdx.files.internal("Sound/Music/Sartan.mp3"))
-    val HydraMusic = Gdx.audio.newMusic(Gdx.files.internal("Sound/Music/Hydra.mp3"))
+    val sandGhostMusic = Gdx.audio.newMusic(Gdx.files.internal("Sound/Music/sandghost.mp3"))
+    val iceQueenMusic = Gdx.audio.newMusic(Gdx.files.internal("Sound/Music/icequeen.mp3"))
+    val SartanMusic = Gdx.audio.newMusic(Gdx.files.internal("Sound/Music/sartan.mp3"))
+    val HydraMusic = Gdx.audio.newMusic(Gdx.files.internal("Sound/Music/hydra.mp3"))
 }
 
 class DefaultMusicHandler{

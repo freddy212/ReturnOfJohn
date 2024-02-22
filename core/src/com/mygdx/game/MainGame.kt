@@ -2,12 +2,11 @@ package com.mygdx.game
 
 import com.badlogic.gdx.ApplicationAdapter
 import com.badlogic.gdx.Gdx
-import com.badlogic.gdx.graphics.FPSLogger
 import com.badlogic.gdx.graphics.GL20
 import com.badlogic.gdx.graphics.OrthographicCamera
+import com.badlogic.gdx.graphics.Pixmap
 import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch
-import com.badlogic.gdx.graphics.g3d.Environment
-import com.badlogic.gdx.graphics.g3d.ModelBatch
+import com.badlogic.gdx.graphics.glutils.FrameBuffer
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.math.Vector2
@@ -15,6 +14,8 @@ import com.mygdx.game.GameObjects.MoveableEntities.Characters.Player
 import com.mygdx.game.Interfaces.AreaIdentifier
 import com.mygdx.game.Managers.*
 import com.mygdx.game.Saving.FileHandler
+import com.mygdx.game.Saving.FileHandler.Companion.dirPath
+import com.mygdx.game.Saving.FileHandler.Companion.savePath
 import com.mygdx.game.Saving.PlayerSaveState
 import com.mygdx.game.Signal.Signal
 import com.mygdx.game.Signal.inistSignalListeners
@@ -24,7 +25,6 @@ import com.mygdx.game.Utils.RenderGraph
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import java.io.File
-import java.io.FileOutputStream
 
 val camera: OrthographicCamera = OrthographicCamera()
 lateinit var player: Player
@@ -45,12 +45,11 @@ class MainGame : ApplicationAdapter() {
     override fun create() {
 
         camera.zoom = 0.6f
-
-        val f = File("SaveFiles/CurrentSave")
-        if (!f.exists()) {
-            f.parentFile.mkdir()
-            f.createNewFile()
-            val s = FileOutputStream(f, false)
+        println("path: " + dirPath + File.separator + savePath)
+        val file = File(dirPath + File.separator + savePath)
+        if (!file.exists()) {
+            file.parentFile.mkdirs()
+            file.createNewFile()
         }
 
         Gdx.gl.glClearColor(0f, 0f, 0f, 0f)
@@ -92,8 +91,8 @@ class MainGame : ApplicationAdapter() {
 
         LocationManager.frameAction()
         player.move(Vector2(0f,0f))
-      // DefaultSoundHandler.mainAreaMusic.isLooping = true
-      //  DefaultSoundHandler.mainAreaMusic.play()
+        // DefaultSoundHandler.mainAreaMusic.isLooping = true
+        //  DefaultSoundHandler.mainAreaMusic.play()
     }
 
 
@@ -105,7 +104,7 @@ class MainGame : ApplicationAdapter() {
         AnimationManager.addAnimationsToRender()
         RenderGraph.render(batch)
         inputAdapter.handleInput(player)
-       // drawrects()
+        // drawrects()
         EventManager.executeEvents()
         UIRendererManager.render()
         SignalManager.useSignals()

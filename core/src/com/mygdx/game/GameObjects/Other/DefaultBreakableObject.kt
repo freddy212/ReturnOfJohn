@@ -23,7 +23,7 @@ class DefaultBreakableObject(initPosition: Vector2, size: Vector2, defaultLocati
     override val layer = Layer.ONGROUND
     override val collition = BreakableCollition(this)
     val breakableObjectAnimation = BreakableObjectAnimation(this)
-    val sound = Gdx.audio.newSound(Gdx.files.internal("Sound/SoundEffect/Explode.mp3"));
+    val sound = Gdx.audio.newSound(Gdx.files.internal("Sound/SoundEffect/explode.mp3"));
 
     override fun removeFromLocation() {
         super.removeFromLocation()

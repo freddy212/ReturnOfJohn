@@ -1,5 +1,6 @@
 package com.mygdx.game.GameObjects.Gates
 
+import com.badlogic.gdx.math.Polygon
 import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.AbstractClasses.GameObject
 import com.mygdx.game.Collitions.IllegalMoveCollition
@@ -9,6 +10,7 @@ import com.mygdx.game.GameObjects.Sensors.KeySensor
 import com.mygdx.game.Locations.DefaultLocation
 import com.mygdx.game.Saving.DefaultSaveStateHandler
 import com.mygdx.game.Saving.SaveStateEntity
+import com.mygdx.game.Utils.RectanglePolygon
 
 class LockedDoor(Position: Vector2, size: Vector2, defaultLocation: DefaultLocation?) : GameObject(Position, size, defaultLocation),
                                                                              SaveStateEntity by DefaultSaveStateHandler(){

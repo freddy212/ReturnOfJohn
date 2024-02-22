@@ -30,7 +30,7 @@ class Hydra(Position: Vector2, size: Vector2, location: DefaultLocation?) : Boss
     override var health = 150f
     override val maxHealth = 150f
     override val collition = DashCollition(this)
-    val victoryTheme = Gdx.audio.newSound(Gdx.files.internal("Sound/SoundEffect/VictoryTheme.mp3"))
+    val victoryTheme = Gdx.audio.newSound(Gdx.files.internal("Sound/SoundEffect/victorytheme.mp3"))
 
     var bossClone = BossClone(this)
 

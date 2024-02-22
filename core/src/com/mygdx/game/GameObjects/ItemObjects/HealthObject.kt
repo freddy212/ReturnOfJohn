@@ -17,7 +17,7 @@ import com.mygdx.game.Signal.Signals.RemoveObjectSignal
 
 class HealthObject(initPosition: Vector2, size: Vector2, defaultLocation: DefaultLocation?,val maxHealthGained: Int = 25) :
     GameObject(initPosition, size, defaultLocation), SaveStateEntity by DefaultSaveStateHandler() {
-    override val texture = DefaultTextureHandler.getTexture("healthGainedObject.png")
+    override val texture = DefaultTextureHandler.getTexture("HealthGainedObject.png")
     override val layer = Layer.ONGROUND
     override val collition = HealthObjectCollition(this)
 }
