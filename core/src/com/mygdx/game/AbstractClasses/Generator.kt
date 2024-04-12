@@ -14,6 +14,7 @@ import com.mygdx.game.Saving.SaveStateEntity
 import com.mygdx.game.Timer.DefaultTimer
 import com.mygdx.game.Trimer.DelayTimer
 import com.mygdx.game.Utils.RectanglePolygon
+import kotlinx.serialization.Serializable
 
 abstract class Generator(
     Position: Vector2,

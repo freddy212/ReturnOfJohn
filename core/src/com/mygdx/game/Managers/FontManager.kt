@@ -15,7 +15,7 @@ class FontManager {
         lateinit var areaChangeTitleFont: BitmapFont
 
         fun initFonts() {
-            parameter.size = 100;
+            parameter.size = 12;
             areaChangeTitleFont = generator.generateFont(parameter) // font size is in pixels
             generator.dispose() // avoid memory leaks, dispose the generator when done using it
         }
